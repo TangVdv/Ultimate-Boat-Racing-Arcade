@@ -535,8 +535,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e27cc1d78f2914cbff649ac03a5775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 0.1
-  backwardSpeed: 0.05
-  rotationSpeed: 0.001
-  inertia: 0.1
-  rotationInertia: 0.1
+  forwardAcceleration: 0.0001
+  backwardAcceleration: 0.00005
+  rotationAcceleration: 0.0001
+  maxSpeed: 0.1
+  maxRotationSpeed: 0.1
+  inertia: 0.001
+  rotationInertia: 0.001
