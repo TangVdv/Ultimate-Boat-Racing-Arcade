@@ -56,7 +56,7 @@ public class BoatControls : MonoBehaviour
         else if (Input.GetKey(right)) currentRotation += rotationAcceleration;
         else
         {
-            currentRotation *= inertia * (1-rotationInertia);
+            currentRotation *= (1-rotationInertia);
 
             if (Mathf.Abs(currentRotation) < 0.0001f) currentRotation = 0.0f;
         }
@@ -72,7 +72,7 @@ public class BoatControls : MonoBehaviour
         else
         {
             // If no key is pressed, slow down using inertia
-            currentSpeed = currentSpeed * (1-inertia);
+            currentSpeed *= (1-inertia);
 
             //Snap to 0 if the speed is too low
             if (Mathf.Abs(currentSpeed) < 0.00001f) currentSpeed = 0;
