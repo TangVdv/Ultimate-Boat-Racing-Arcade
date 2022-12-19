@@ -11,13 +11,13 @@ public class BoatControls : MonoBehaviour
     KeyCode left = KeyCode.Q;
     KeyCode right = KeyCode.D;
 
-    public float forwardAcceleration = 0.001f;
-    public float backwardAcceleration = 0.0005f;
+    public float forwardAcceleration = 10f;
+    public float backwardAcceleration = 5f;
     
     //Also balance using rigidbody's angular drag
     public float rotationAcceleration = 0.5f;
 
-    public float maxSpeed = 1f;
+    public float maxSpeed = 100f;
 
     // Must be below 1.0f
     public float inertia = 0.01f;
@@ -62,8 +62,8 @@ public class BoatControls : MonoBehaviour
 
         GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
 
-        // Move the boat by finding the middle vector between the velocity and the forward vector
-        transform.position += transform.forward * currentSpeed;
+        // Apply the speed to the boat
+        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
     }
 }
     
