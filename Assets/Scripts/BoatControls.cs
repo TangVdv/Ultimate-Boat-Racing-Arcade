@@ -20,7 +20,7 @@ public class BoatControls : MonoBehaviour
     public float maxSpeed = 100f;
 
     // Must be below 1.0f
-    public float inertia = 0.01f;
+    public float decceleration = 0.01f;
 
     public float currentSpeed = 0.0f;
 
@@ -40,7 +40,7 @@ public class BoatControls : MonoBehaviour
         else
         {
             //Apply inertia if not pressing keys
-            currentSpeed *= Mathf.Sign(currentSpeed) * (1 - inertia);
+            currentSpeed *= Mathf.Sign(currentSpeed) * (1 - decceleration);
 
             // If the speed is too low, set it to 0
             if (Mathf.Abs(currentSpeed) < 0.00001f) currentSpeed = 0;
