@@ -40,14 +40,16 @@ public class BoatControls : MonoBehaviour
         else
         {
             //Apply inertia if not pressing keys
-            currentSpeed *= Mathf.Sign(currentSpeed) * (1 - decceleration);
+            currentSpeed *=  (1 - decceleration);
+            
+            Debug.Log(currentSpeed);
 
             // If the speed is too low, set it to 0
-            if (Mathf.Abs(currentSpeed) < 0.00001f) currentSpeed = 0;
+            if (Mathf.Abs(currentSpeed) < 0.5f) currentSpeed = 0;
         }
 
         if (Mathf.Abs(currentSpeed) > maxSpeed) currentSpeed = Mathf.Sign(currentSpeed) * maxSpeed;
-
+        
         // Rotate the boat
 
         int rotationDirection = 0;
