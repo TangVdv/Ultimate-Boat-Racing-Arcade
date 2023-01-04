@@ -2,33 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class RotateCannonView : MonoBehaviour
 {
     [SerializeField] private Transform bodyCannon;
     [SerializeField] private Transform cameraCannon;
+    [SerializeField] private Transform barrels;
 
     private Vector3 _localRotation;
-    private float _cameraDistance = 6f;
+    private float scrollAmount;
+    private float _cameraDistance = 5f;
+    private int _cameraRotation = 15;
 
     public float mouseSensitivity = 10.0f;
+    public float scrollSensitivity = .01f;
     public float rotationSideSpeed = 100f;
-    public float rotationUpDownSpeed = 50f;
     public float orbitDampening = 10f;
 
     public float topClamp = 25.0f;
+
+    public bool cameraEnabled = false;
 
     private void Start()
     {
         cameraCannon.position = bodyCannon.position;
         cameraCannon.Translate(new Vector3(0, _cameraDistance, -_cameraDistance));
-        cameraCannon.Rotate(new Vector3(25, 0, 0));
+        cameraCannon.Rotate(new Vector3(_cameraRotation, 0, 0));
     }
 
     // Update is called once per frame
     private void Update()
     {
         BodyCannonRotation();
+        BarrelCannonRotation();
     }
 
     // LateUpdate is called once per frame, after Update() on every game object in the scene
@@ -40,15 +45,19 @@ public class RotateCannonView : MonoBehaviour
     // Rotation of the camera on the X axis based on Mouse Coordinates
     private void CameraRotation()
     {
-        if (Input.GetAxis("Mouse X") != 0)
+        if (cameraEnabled)
         {
-            _localRotation.x += Input.GetAxis("Mouse X") * mouseSensitivity;
-        }
+            if (Input.GetAxis("Mouse X") != 0)
+            {
+                _localRotation.x += Input.GetAxis("Mouse X") * mouseSensitivity;
+            }
         
-        Quaternion QT = Quaternion.Euler(0, _localRotation.x, 0);
-        cameraCannon.parent.rotation = Quaternion.Lerp(cameraCannon.parent.rotation, QT, Time.deltaTime * orbitDampening);
+            Quaternion QT = Quaternion.Euler(0, _localRotation.x, 0);
+            cameraCannon.parent.rotation = Quaternion.Lerp(cameraCannon.parent.rotation, QT, Time.deltaTime * orbitDampening);   
+        }
     }
 
+    // Smooth rotation of the cannon on the X axis based on the Camera Rotation Coordinates
     private void BodyCannonRotation()
     {
         Quaternion targetRotation = Quaternion.Euler(0, _localRotation.x, 0);
@@ -56,8 +65,19 @@ public class RotateCannonView : MonoBehaviour
 
         if (targetRotation != actualRotation)
         {
-            Debug.Log("call");
             bodyCannon.rotation = actualRotation;
+        }
+    }
+
+    private void BarrelCannonRotation()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+        {
+            scrollAmount += Input.GetAxis("Mouse ScrollWheel") * scrollSensitivity; // [0.1 / -0.1] * scrollSensitivity
+            scrollAmount = Mathf.Clamp(scrollAmount, 0, topClamp);
+
+            Quaternion QT = Quaternion.Euler(scrollAmount, 0, 0);
+            barrels.localRotation = Quaternion.Lerp(barrels.localRotation, QT, Time.deltaTime * orbitDampening);
         }
     }
 }
