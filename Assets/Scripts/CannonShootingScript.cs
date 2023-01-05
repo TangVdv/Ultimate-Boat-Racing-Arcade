@@ -25,7 +25,6 @@ public class CannonShootingScript : MonoBehaviour
                 );
                 cannonBall.transform.localScale = localScale;
                 GameObject bullet = Instantiate(cannonBall, barrels[i].position, barrels[i].rotation);
-                //bullet.GetComponent<Rigidbody>().velocity = barrels[i].forward * (force * Time.deltaTime);
                 bullet.GetComponent<Rigidbody>().AddForce(barrels[i].forward * force, ForceMode.Impulse);
             }
         }
