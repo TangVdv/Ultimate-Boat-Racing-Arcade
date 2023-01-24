@@ -43,8 +43,6 @@ public class CheckpointManager : MonoBehaviour
     public void CheckPointPassed(int checkpoint, GameObject player)
     {
         PlayerProgress progress = playerProgress.Find(x => x.player == player);
-
-        Debug.Log("Checkpoint " + checkpoint + " passed lap " + progress.lap + " checkpoint " + progress.checkpoint);
         
         // Ignore if same checkpoint
         if (progress.checkpoint == checkpoint) return;
@@ -63,12 +61,12 @@ public class CheckpointManager : MonoBehaviour
         }
         
 
-        if (checkpoint == 0 && progress.checkpoint == checkpoints.Length - 1)
+        if ( checkpoint == 0 && ( (progress.checkpoint == checkpoints.Length - 1) || (progress.checkpoint + grace >= checkpoints.Length) ) )
         {
             progress.lap++;
             progress.checkpoint = 0;
             
-            Debug.Log("Lap "+ progress.lap +" completed by !");
+            Debug.Log("Lap "+ progress.lap +" completed !");
             updateVisuals(progress);
         }
         else
@@ -80,11 +78,12 @@ public class CheckpointManager : MonoBehaviour
 
     public void updateVisuals(PlayerProgress progress)
     {
+		Debug.Log("Checkpoint " + progress.checkpoint + " passed, lap " + progress.lap);
         foreach (Checkpoint checkpoint in checkpoints)
         {
             // Match id with progress.checkpoint
-            // Current: Green, in grace: Yellow, else: Red, checkpoint 0: Blue
-            
+            // Current: Green, in grace: Yellow, else: Red, checkpoint 0: Blue            
+
             int id = checkpoint.ID;
             
             //Get the material of the checkpoint
