@@ -42,6 +42,10 @@ public class CheckpointManager : MonoBehaviour
         
     }
 
+	public int getCheckpointCount(){
+		return checkpoints.Length;
+	}
+
     public void CheckPointPassed(int checkpoint, GameObject player)
     {
         PlayerProgress progress = playerProgress.Find(x => x.player == player);

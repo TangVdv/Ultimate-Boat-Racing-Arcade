@@ -6,6 +6,7 @@ public class BoatControls : MonoBehaviour
 {
 
 
+    public bool DEBUG_IS_CURRENT = false;
     KeyCode forward = KeyCode.Z;
     KeyCode backward = KeyCode.S;
     KeyCode left = KeyCode.Q;
@@ -34,6 +35,8 @@ public class BoatControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!DEBUG_IS_CURRENT) return;
+        
         // If forward or backwards key is pressed, accelerate in the corresponding direction
         if (Input.GetKey(forward)) currentSpeed += forwardAcceleration;
         else if (Input.GetKey(backward)) currentSpeed -= backwardAcceleration;

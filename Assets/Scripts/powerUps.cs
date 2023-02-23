@@ -33,17 +33,24 @@ public class powerUps : MonoBehaviour
 		gameObject.GetComponent<Renderer>().enabled = false;
         cooldowm = cooldownTime;
         active = false;	
+		evaluatePowerUp(other);
 	}
 
 	private void evaluatePowerUp(Collider other){
 		var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
-		(int, int) playerProgress = manager.getPlayerProgress(other.gameObject);
-		(int, int) averageProgress = manager.getAverageProgress();
-		(int, int) highestProgress = manager.getHighestProgress();
-		(int, int) lowestProgress = manager.getLowestProgress();
 
-		//Evaluate PowerUp with some randomness and by weighing the percentile of the player from highest, lowest and average
-		int score = 0;
-		//TODO: create a formula for this
+		//(lap, checkpoint)
+		(int, int) playerProgress = manager.getPlayerProgress(other.gameObject);
+		(int, int) highestProgress = manager.getHighestProgress();
+
+		int checkpointCount = manager.getCheckpointCount();
+		int score = (highestProgress.Item1 - playerProgress.Item1) * checkpointCount + (highestProgress.Item2 - playerProgress.Item2);
+		//Randomize score by X
+		int x = 3;
+		score += (int) Random.Range(-x, x);
+
+	    Debug.Log("Placement Score: " + score);
+
+		//TODO: Evaluate powerup using score value
     }
 }
