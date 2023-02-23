@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class BoatControls : MonoBehaviour
 {
-
-
-    public bool DEBUG_IS_CURRENT = false;
     KeyCode forward = KeyCode.Z;
     KeyCode backward = KeyCode.S;
     KeyCode left = KeyCode.Q;
@@ -25,19 +22,29 @@ public class BoatControls : MonoBehaviour
 
     public float currentSpeed = 0.0f;
 
+	public bool isBot = false;
+
+	private GameObject body;
+
 
     // Start is called before the first frame update
     void Start()
     {
+		//Find children element with Player tag
+		foreach (Transform child in transform)
+	        if(child.gameObject.tag == "Player") body = child.gameObject;
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!DEBUG_IS_CURRENT) return;
-        
-        // If forward or backwards key is pressed, accelerate in the corresponding direction
+     	if(isBot) BotBehavior();
+		else ManualBehavior();   
+    }
+
+	void ManualBehavior(){
+		// If forward or backwards key is pressed, accelerate in the corresponding direction
         if (Input.GetKey(forward)) currentSpeed += forwardAcceleration;
         else if (Input.GetKey(backward)) currentSpeed -= backwardAcceleration;
         else
@@ -54,18 +61,44 @@ public class BoatControls : MonoBehaviour
         // Rotate the boat
 
         int rotationDirection = 0;
-        if (Input.GetKey(left))
-        {
-            rotationDirection = -1;
-        }
-        else if (Input.GetKey(right))
-        {
-            rotationDirection = 1;
-        }
+        if (Input.GetKey(left)) rotationDirection = -1;
+        else if (Input.GetKey(right))rotationDirection = 1;
 
-        GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
+		GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
+        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
+	}
 
-        // Apply the speed to the boat
+	
+	void BotBehavior(){
+		//Locate next checkpoint
+		//Calculate direction to next checkpoint
+	    //Calculate angle to next checkpoint
+		//If angle is too big, rotate towards it
+		//If angle is small enough, accelerate
+		
+		var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
+
+		Vector3 nextCheckpoint = manager.getNextCheckpointCoordinates(body);
+
+		Vector3 direction = nextCheckpoint - transform.position;
+		
+		//If not facing the right direction, rotate towards it
+		int rotationDirection = 0;
+		if(Vector3.Angle(transform.forward, direction) > 10){
+			rotationDirection = Vector3.Cross(transform.forward, direction).y > 0 ? 1 : -1;
+		}
+
+		//If facing the right direction, accelerate
+		if(rotationDirection == 0) currentSpeed += forwardAcceleration;
+        else{
+	        //apply inertia 
+			currentSpeed *=  (1 - decceleration);
+			if (Mathf.Abs(currentSpeed) < 0.5f) currentSpeed = 0;
+		}
+		    
+        if (Mathf.Abs(currentSpeed) > maxSpeed) currentSpeed = Mathf.Sign(currentSpeed) * maxSpeed;
+            
+	    GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
         GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
     }
 }

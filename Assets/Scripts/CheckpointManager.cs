@@ -42,6 +42,13 @@ public class CheckpointManager : MonoBehaviour
         
     }
 
+	public Vector3 getNextCheckpointCoordinates(GameObject player){
+        PlayerProgress progress = playerProgress.Find(x => x.player == player);
+		int index = progress.checkpoint + 1;
+		if (index >= checkpoints.Length) index = 0;
+		return checkpoints[index].transform.position;
+    }
+
 	public int getCheckpointCount(){
 		return checkpoints.Length;
 	}
