@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Use tuples
+
 public class CheckpointManager : MonoBehaviour
 {
 
@@ -100,5 +102,50 @@ public class CheckpointManager : MonoBehaviour
             else if (id == 0) material.color = blue;
             else material.color = red;
         }
+    }
+
+	public (int,int) getPlayerProgress(GameObject player){
+        PlayerProgress progress = playerProgress.Find(x => x.player == player);
+        return (progress.lap, progress.checkpoint);
+    }
+
+	public (int,int) getAverageProgress(){
+        int lap = 0;
+        int checkpoint = 0;
+        foreach (PlayerProgress progress in playerProgress){
+            lap += progress.lap;
+            checkpoint += progress.checkpoint;
+        }
+        lap /= playerProgress.Count;
+        checkpoint /= playerProgress.Count;
+        return (lap, checkpoint);
+    }
+
+	public (int, int) getLowestProgress(){
+        int lap = 0;
+        int checkpoint = 0;
+        foreach (PlayerProgress progress in playerProgress){
+            //Lap takes precedence oer checkpoint
+			if (progress.lap < lap) {
+                lap = progress.lap;
+                checkpoint = progress.checkpoint;
+            }
+            else if (progress.lap == lap && progress.checkpoint < checkpoint) checkpoint = progress.checkpoint;
+        }
+        return (lap, checkpoint);
+    }
+
+	public (int, int) getHighestProgress(){
+        int lap = 0;
+        int checkpoint = 0;
+        foreach (PlayerProgress progress in playerProgress){
+            //Lap takes precedence oer checkpoint
+            if (progress.lap > lap) {
+                lap = progress.lap;
+                checkpoint = progress.checkpoint;
+            }
+            else if (progress.lap == lap && progress.checkpoint > checkpoint) checkpoint = progress.checkpoint;
+        }
+        return (lap, checkpoint);
     }
 }

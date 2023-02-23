@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boat
+  - CheckpointController
+  - Crate
   layers:
   - Default
   - TransparentFX
