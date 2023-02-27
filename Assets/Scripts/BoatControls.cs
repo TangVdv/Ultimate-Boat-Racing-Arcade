@@ -26,6 +26,7 @@ public class BoatControls : MonoBehaviour
 
 	private GameObject body;
 
+	public List<(string, int)> effects = new List<(string, int)>(); // (effectName, effectTime)
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,24 @@ public class BoatControls : MonoBehaviour
     void FixedUpdate()
     {
      	if(isBot) BotBehavior();
-		else ManualBehavior();   
+		else ManualBehavior();
+
+
+		List<int> newTimes = new List<int>();
+		foreach((string, int) effect in effects) newTimes.Add(effect.Item2 - 1);
+		foreach(int time in newTimes) {
+			if(time == 0) effects.RemoveAt(newTimes.IndexOf(time));
+			else effects[newTimes.IndexOf(time)] = (effects[newTimes.IndexOf(time)].Item1, time);
+		}
+    }
+
+	public void TriggerEffect(string effectName, int effectTime){
+		effects.Add((effectName, effectTime));
+	}
+
+	public bool hasEffect(string effectName){
+        foreach((string, int) effect in effects) if(effect.Item1 == effectName) return true;
+        return false;
     }
 
 	void ManualBehavior(){
@@ -64,8 +82,13 @@ public class BoatControls : MonoBehaviour
         if (Input.GetKey(left)) rotationDirection = -1;
         else if (Input.GetKey(right))rotationDirection = 1;
 
+		float speedModifier = 1;
+		
+		if(hasEffect("Slow")) speedModifier = 0.5f;
+		else if(hasEffect("Fast")) speedModifier = 2.0f;
+
 		GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
-        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
+        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed * speedModifier);
 	}
 
 	private int currentCheckpoint = 0;
@@ -94,6 +117,11 @@ public class BoatControls : MonoBehaviour
 		
 		double angularDifference = Vector3.Angle(transform.forward, direction);
 		angularDifference = Mathf.Abs((float) angularDifference);
+
+		//If has effect Blind, change angularDifference randomly
+		if(hasEffect("Blind")){
+			angularDifference += Random.Range(-10, 10);
+		}
 
 		var angularVelocity = GetComponent<Rigidbody>().angularVelocity;
 
@@ -137,8 +165,13 @@ public class BoatControls : MonoBehaviour
 		    
         if (Mathf.Abs(currentSpeed) > maxSpeed) currentSpeed = Mathf.Sign(currentSpeed) * maxSpeed;
 
+		float speedModifier = 1;
+		
+		if(hasEffect("Slow")) speedModifier = 0.5f;
+		else if(hasEffect("Fast")) speedModifier = 2.0f;
+
 	    GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
-        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
+        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed * speedModifier);
     }
 }
     
