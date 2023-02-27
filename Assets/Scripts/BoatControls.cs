@@ -68,7 +68,10 @@ public class BoatControls : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
 	}
 
-	
+	private int currentCheckpoint = 0;
+	private Vector3 direction;
+	private double initialAngularDifference = 0.0;
+	private int nextCheckpoint = 0;
 	void BotBehavior(){
 		//Locate next checkpoint
 		//Calculate direction to next checkpoint
@@ -78,10 +81,45 @@ public class BoatControls : MonoBehaviour
 		
 		var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
 
-		Vector3 nextCheckpoint = manager.getNextCheckpointCoordinates(body);
+		int passedCheckpoint = manager.getPlayerProgress(body).Item2;
 
-		Vector3 direction = nextCheckpoint - transform.position;
+		var direction = manager.getNextCheckpointCoordinates(body) - transform.position;
+
+		if(nextCheckpoint == currentCheckpoint || passedCheckpoint == nextCheckpoint){
+			currentCheckpoint = nextCheckpoint;
+			nextCheckpoint = (nextCheckpoint + 1) % manager.getCheckpointCount();
+
+			initialAngularDifference = Vector3.Angle(transform.forward, direction);
+        }
 		
+		double angularDifference = Vector3.Angle(transform.forward, direction);
+		angularDifference = Mathf.Abs((float) angularDifference);
+
+		var angularVelocity = GetComponent<Rigidbody>().angularVelocity;
+
+		int rotationDirection = 0;
+		if(initialAngularDifference > 10f){
+			if(angularDifference > initialAngularDifference / 2) {
+				Debug.Log("Rotating");
+				rotationDirection = Vector3.Cross(transform.forward, direction).y > 0 ? 1 : -1;
+				currentSpeed *=  (1 - decceleration);
+				if(Mathf.Abs(currentSpeed) < 0.5f) currentSpeed = 0;
+			}
+        	else if(angularDifference < initialAngularDifference / 2 && angularVelocity.magnitude > 0.5f) {
+				Debug.Log("Undoing rotation");
+				rotationDirection = Vector3.Cross(transform.forward, direction).y > 0 ? -1 : 1;
+				currentSpeed += forwardAcceleration;
+			} else {
+				Debug.Log("Accelerating");
+            	currentSpeed += forwardAcceleration;
+        	}
+		}else{
+            Debug.Log("Accelerating");
+            currentSpeed += forwardAcceleration;
+        }
+		
+		
+		/*
 		//If not facing the right direction, rotate towards it
 		int rotationDirection = 0;
 		if(Vector3.Angle(transform.forward, direction) > 10){
@@ -95,9 +133,10 @@ public class BoatControls : MonoBehaviour
 			currentSpeed *=  (1 - decceleration);
 			if (Mathf.Abs(currentSpeed) < 0.5f) currentSpeed = 0;
 		}
+		*/
 		    
         if (Mathf.Abs(currentSpeed) > maxSpeed) currentSpeed = Mathf.Sign(currentSpeed) * maxSpeed;
-            
+
 	    GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
         GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed);
     }

@@ -91,7 +91,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void updateVisuals(PlayerProgress progress)
     {
-		Debug.Log("Checkpoint " + progress.checkpoint + " passed, lap " + progress.lap);
+		//Debug.Log("Checkpoint " + progress.checkpoint + " passed, lap " + progress.lap);
         foreach (Checkpoint checkpoint in checkpoints)
         {
             // Match id with progress.checkpoint

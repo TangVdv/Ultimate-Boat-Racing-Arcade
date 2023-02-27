@@ -49,7 +49,7 @@ public class powerUps : MonoBehaviour
 		int x = 3;
 		score += (int) Random.Range(-x, x);
 
-	    Debug.Log("Placement Score: " + score);
+	    //Debug.Log("Placement Score: " + score);
 
 		//TODO: Evaluate powerup using score value
     }
