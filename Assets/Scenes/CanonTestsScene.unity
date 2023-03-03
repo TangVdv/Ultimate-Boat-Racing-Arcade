@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonBall: {fileID: 5172596327934063441, guid: e4eb2ded1912dd64193eca3fc0dff6c4, type: 3}
+  bullet: {fileID: 0}
   barrels:
   - {fileID: 7177548072482263540}
   - {fileID: 7177548072482263539}
@@ -345,9 +346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d7335566a9b35488bae29cb3faa332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point1: {fileID: 371467613}
+  point1: {fileID: 7177548072482263544}
   point2: {fileID: 7177548072482263543}
   point3: {fileID: 7177548072482263542}
+  barrel: {fileID: 371467613}
   vertexCount: 50
   debug: 0
   mat: {fileID: 2100000, guid: bc9e36f088e72714b91ee05be3475ad9, type: 2}
@@ -827,5 +829,10 @@ Transform:
 --- !u!4 &7177548072482263543 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7121477524511464497, guid: dda5958829840b04183f2972abb70a2f, type: 3}
+  m_PrefabInstance: {fileID: 7177548072482263538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7177548072482263544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5350733164504037886, guid: dda5958829840b04183f2972abb70a2f, type: 3}
   m_PrefabInstance: {fileID: 7177548072482263538}
   m_PrefabAsset: {fileID: 0}

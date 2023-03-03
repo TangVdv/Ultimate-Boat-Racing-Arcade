@@ -5,7 +5,7 @@ using UnityEngine;
 public class CannonShootingScript : MonoBehaviour
 {
     public GameObject cannonBall;
-    
+    public GameObject bullet;
     public Transform [] barrels;
 
     public float force;
@@ -24,7 +24,7 @@ public class CannonShootingScript : MonoBehaviour
                     barrels[i].parent.lossyScale.z
                 );
                 cannonBall.transform.localScale = localScale;
-                GameObject bullet = Instantiate(cannonBall, barrels[i].position, barrels[i].rotation);
+                bullet = Instantiate(cannonBall, barrels[i].position, barrels[i].rotation);
                 bullet.GetComponent<Rigidbody>().AddForce(barrels[i].forward * force, ForceMode.Impulse);
             }
         }

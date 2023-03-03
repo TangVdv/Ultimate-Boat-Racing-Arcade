@@ -2,29 +2,58 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking.Match;
+
 public class SightCurveScript : MonoBehaviour
 {
     [SerializeField] private Transform point1;
+    //TODO : change x0 and y0 to specific transform axis from point1
+    [SerializeField] private float x0;
+    [SerializeField] private float h0;
     [SerializeField] private Transform point2;
     [SerializeField] private Transform point3;
+    [SerializeField] private Transform barrel;
     public int vertexCount = 12;
     public bool debug = false;
     public Material mat;
-
+    
     private LineRenderer _lineRenderer;
 
+    private float g = -Physics.gravity.y;
+    private float v0 = 1000 / 50;
+    
     private void Start()
     {
         _lineRenderer = gameObject.GetComponent<LineRenderer>();
         _lineRenderer.material = mat;
-        point2.position = new Vector3(point1.position.x, point1.position.y + 50, point1.position.z - 50);
-        point3.position = new Vector3(point1.position.x, point1.position.y, point1.position.z - 100);
     }
 
     private void Update()
     {
-        point2.RotateAround(point1.position, Vector3.up, 0);
-        point3.RotateAround(point1.position, Vector3.up, 0);
+        double alpha = barrel.localEulerAngles.x * Math.PI / 180;
+
+        if (alpha > 0)
+        {
+            DrawLineRenderer(alpha);   
+        }
+        else
+        {
+            _lineRenderer.positionCount = 0;
+            _lineRenderer.SetPositions(Array.Empty<Vector3>());
+        }
+    }
+
+    private void DrawLineRenderer(double alpha)
+    {
+        double hmax =  Mathf.Pow(v0 * (float)alpha, 2) / (2*g);
+        double dmax = dmaxCalcul(alpha);
+        print("x : "+x0+" ; h0 : "+h0);
+        print("dmax : "+dmax+" ; hmax : "+hmax);
+        
+        point2.localPosition = new Vector3(x0, (float)hmax, (float)dmax/2);
+        point3.localPosition = new Vector3(x0, h0, (float)dmax);
+        
+        transform.RotateAround(point1.position, Vector3.up, 0);
         
         var pointList = new List<Vector3>();
         for (float ratio = 0; ratio <= 1; ratio+= 1.0f / vertexCount)
@@ -57,6 +86,29 @@ public class SightCurveScript : MonoBehaviour
                     Vector3.Lerp(point2.position, point3.position, ratio));
             }
         }
+    }
 
+    private double dmaxCalcul(double alpha)
+    {
+        double dmax = 0;
+        double a = g / 2;
+        double b = v0 * Math.Sin(alpha);
+        float delta = Mathf.Pow((float)b,2);
+        if (delta > 0)
+        {
+            double t1 = (-b + Mathf.Sqrt(delta)) / (2 * a);
+            double t2 = (-b - Mathf.Sqrt(delta)) / (2 * a);
+            double txmax;
+            if (Mathf.Cos((float)alpha) > 0)
+                txmax = t2;
+            else if (Mathf.Cos((float)alpha) < 0)
+                txmax = t1;
+            else
+                txmax = 0;
+
+            dmax = v0 * Mathf.Cos((float)alpha) * txmax;
+        }
+
+        return dmax;
     }
 }
