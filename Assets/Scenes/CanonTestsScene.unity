@@ -334,11 +334,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonBall: {fileID: 5172596327934063441, guid: e4eb2ded1912dd64193eca3fc0dff6c4, type: 3}
-  bullet: {fileID: 0}
   barrels:
   - {fileID: 7177548072482263540}
   - {fileID: 7177548072482263539}
   force: 1000
+  reloadTime: 1
+  ammo: 10
 --- !u!114 &1236347269
 MonoBehaviour:
   m_ObjectHideFlags: 0
