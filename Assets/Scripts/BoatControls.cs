@@ -28,9 +28,13 @@ public class BoatControls : MonoBehaviour
 
 	public List<(string, int)> effects = new List<(string, int)>(); // (effectName, effectTime)
 
+	private Quaternion initialRotation;
+
     // Start is called before the first frame update
     void Start()
     {
+		initialRotation = transform.rotation;
+		
 		//Find children element with Player tag
 		foreach (Transform child in transform)
 	        if(child.gameObject.tag == "Player") body = child.gameObject;
@@ -40,6 +44,11 @@ public class BoatControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+		//If rotation x or z are different from initial rotation, reset them
+		if(transform.rotation.x != initialRotation.x || transform.rotation.z != initialRotation.z) {
+			transform.rotation = new Quaternion(initialRotation.x, transform.rotation.y, initialRotation.z, transform.rotation.w);
+		}
+
      	if(isBot) BotBehavior();
 		else ManualBehavior();
 
