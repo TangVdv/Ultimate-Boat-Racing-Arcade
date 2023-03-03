@@ -6,8 +6,13 @@ using UnityEngine;
 public class DestroyGameObject : MonoBehaviour
 {
     public float floorLevel = -20.0f;
+    public float delayTimeDestroy = 1f;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        StartCoroutine(DelayBeforeDestroy());
+    }
+
     void Update()
     {
         if (transform.position.y < floorLevel)
@@ -18,11 +23,17 @@ public class DestroyGameObject : MonoBehaviour
     
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision);
         if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
+    }
+    
+    IEnumerator DelayBeforeDestroy()
+    {
+        yield return new WaitForSeconds(delayTimeDestroy);
+        
+        Destroy(gameObject);
     }
     
     

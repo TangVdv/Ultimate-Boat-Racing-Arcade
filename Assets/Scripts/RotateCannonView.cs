@@ -7,20 +7,17 @@ public class RotateCannonView : MonoBehaviour
     [SerializeField] private Transform bodyCannon;
     [SerializeField] private Transform cameraCannon;
     [SerializeField] private Transform barrels;
-
-    private Vector3 _localRotation;
-    private float scrollAmount;
-    private float _cameraDistance = 5f;
-    private int _cameraRotation = 15;
-
     public float mouseSensitivity = 10.0f;
     public float scrollSensitivity = .01f;
     public float rotationSideSpeed = 100f;
     public float orbitDampening = 10f;
-
     public float topClamp = 25.0f;
-
     public bool cameraEnabled = false;
+    
+    private Vector3 _localRotation;
+    private float _scrollAmount;
+    private float _cameraDistance = 5f;
+    private int _cameraRotation = 15;
 
     private void Start()
     {
@@ -73,10 +70,10 @@ public class RotateCannonView : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
-            scrollAmount += Input.GetAxis("Mouse ScrollWheel") * scrollSensitivity; // [0.1 / -0.1] * scrollSensitivity
-            scrollAmount = Mathf.Clamp(scrollAmount, 0, topClamp);
+            _scrollAmount += Input.GetAxis("Mouse ScrollWheel") * scrollSensitivity; // [0.1 / -0.1] * scrollSensitivity
+            _scrollAmount = Mathf.Clamp(_scrollAmount, 0, topClamp);
 
-            Quaternion QT = Quaternion.Euler(scrollAmount, 0, 0);
+            Quaternion QT = Quaternion.Euler(_scrollAmount, 0, 0);
             barrels.localRotation = Quaternion.Lerp(barrels.localRotation, QT, Time.deltaTime * orbitDampening);
         }
     }

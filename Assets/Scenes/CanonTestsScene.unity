@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -216,6 +216,11 @@ Transform:
   m_Father: {fileID: 7177548072482263541}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!4 &791388444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5702874576242875107, guid: dda5958829840b04183f2972abb70a2f, type: 3}
+  m_PrefabInstance: {fileID: 7177548072482263538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &971254144
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971254144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.1052656, y: -0.61, z: -23.38}
+  m_LocalPosition: {x: -7.1052656, y: -0.61, z: 17.35}
   m_LocalScale: {x: 13.645366, y: 7.5303307, z: 0.47955}
   m_Children: []
   m_Father: {fileID: 0}
@@ -333,7 +338,7 @@ MonoBehaviour:
   barrels:
   - {fileID: 7177548072482263540}
   - {fileID: 7177548072482263539}
-  force: 4000
+  force: 1000
 --- !u!114 &1236347269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,13 +351,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d7335566a9b35488bae29cb3faa332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point1: {fileID: 7177548072482263544}
-  point2: {fileID: 7177548072482263543}
-  point3: {fileID: 7177548072482263542}
+  bodyCannon: {fileID: 690325125}
   barrel: {fileID: 371467613}
+  point1: {fileID: 7177548072482263544}
+  point2: {fileID: 1840828594}
+  point3: {fileID: 791388444}
+  bullet: {fileID: 5172596327934063441, guid: e4eb2ded1912dd64193eca3fc0dff6c4, type: 3}
   vertexCount: 50
   debug: 0
   mat: {fileID: 2100000, guid: bc9e36f088e72714b91ee05be3475ad9, type: 2}
+  force: 1000
 --- !u!120 &1236347270
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -709,6 +717,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &1840828594 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4619908661736677931, guid: dda5958829840b04183f2972abb70a2f, type: 3}
+  m_PrefabInstance: {fileID: 7177548072482263538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7177548072482263538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -727,6 +740,10 @@ PrefabInstance:
     - target: {fileID: 620133899831037567, guid: dda5958829840b04183f2972abb70a2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207341278104167402, guid: dda5958829840b04183f2972abb70a2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2404729838249547534, guid: dda5958829840b04183f2972abb70a2f, type: 3}
       propertyPath: m_RootOrder
@@ -819,16 +836,6 @@ Transform:
 --- !u!4 &7177548072482263541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2404729838249547534, guid: dda5958829840b04183f2972abb70a2f, type: 3}
-  m_PrefabInstance: {fileID: 7177548072482263538}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7177548072482263542 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7796651851768988111, guid: dda5958829840b04183f2972abb70a2f, type: 3}
-  m_PrefabInstance: {fileID: 7177548072482263538}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7177548072482263543 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7121477524511464497, guid: dda5958829840b04183f2972abb70a2f, type: 3}
   m_PrefabInstance: {fileID: 7177548072482263538}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7177548072482263544 stripped

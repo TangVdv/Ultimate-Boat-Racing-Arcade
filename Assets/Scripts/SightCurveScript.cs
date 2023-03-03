@@ -2,28 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking.Match;
-
 public class SightCurveScript : MonoBehaviour
 {
+    [SerializeField] private Transform bodyCannon;
+    [SerializeField] private Transform barrel;
     [SerializeField] private Transform point1;
-    //TODO : change x0 and y0 to specific transform axis from point1
-    [SerializeField] private float x0;
-    [SerializeField] private float h0;
     [SerializeField] private Transform point2;
     [SerializeField] private Transform point3;
-    [SerializeField] private Transform barrel;
-    public int vertexCount = 12;
+    [SerializeField] private GameObject bullet;
+    [Range(0, 50)] public int vertexCount;
     public bool debug = false;
     public Material mat;
+    public float force;
     
     private LineRenderer _lineRenderer;
+    private float _gravity;
+    private float _initialVelocity;
+    private float _x0;
+    private float _h0;
 
-    private float g = -Physics.gravity.y;
-    private float v0 = 1000 / 50;
-    
     private void Start()
     {
+        //TODO : Change calcul _initialVelocity (currently : acceleration calcul)
+        _initialVelocity = force / bullet.GetComponent<Rigidbody>().mass;
+        _gravity = -Physics.gravity.y;
+        _x0 = point1.position.x;
+        _h0 = point1.position.y;
         _lineRenderer = gameObject.GetComponent<LineRenderer>();
         _lineRenderer.material = mat;
     }
@@ -42,19 +46,29 @@ public class SightCurveScript : MonoBehaviour
             _lineRenderer.SetPositions(Array.Empty<Vector3>());
         }
     }
-
     private void DrawLineRenderer(double alpha)
     {
-        double hmax =  Mathf.Pow(v0 * (float)alpha, 2) / (2*g);
+        // Calculate the max height of the trajectory
+        float hmax =  Mathf.Pow((float)(_initialVelocity * Math.Sin(alpha)), 2) / (2*_gravity);
+        // Calculate the max distance of the trajectory
         double dmax = dmaxCalcul(alpha);
-        print("x : "+x0+" ; h0 : "+h0);
-        print("dmax : "+dmax+" ; hmax : "+hmax);
         
-        point2.localPosition = new Vector3(x0, (float)hmax, (float)dmax/2);
-        point3.localPosition = new Vector3(x0, h0, (float)dmax);
+        point2.position = new Vector3(_x0, hmax, (float)dmax/2);
+        point3.position = new Vector3(_x0, _h0, (float)dmax);
+
+        // Calculate the rotation angle based on the body cannon
+        float rotationAngle = bodyCannon.localEulerAngles.y;
+
+        // Rotate point2 and point3 around point1
+        Vector3 relativePos2 = point2.position - point1.position;
+        Vector3 rotatedPos2 = Quaternion.AngleAxis(rotationAngle, Vector3.up) * relativePos2;
+        point2.position = point1.position + rotatedPos2;
+
+        Vector3 relativePos3 = point3.position - point1.position;
+        Vector3 rotatedPos3 = Quaternion.AngleAxis(rotationAngle, Vector3.up) * relativePos3;
+        point3.position = point1.position + rotatedPos3;
         
-        transform.RotateAround(point1.position, Vector3.up, 0);
-        
+        // Create a list of points for the bezier curve
         var pointList = new List<Vector3>();
         for (float ratio = 0; ratio <= 1; ratio+= 1.0f / vertexCount)
         {
@@ -68,6 +82,7 @@ public class SightCurveScript : MonoBehaviour
         _lineRenderer.SetPositions(pointList.ToArray());
     }
 
+    // This method is used to draw Gizmos for debugging purpose
     private void OnDrawGizmos()
     {
         if (debug)
@@ -87,12 +102,13 @@ public class SightCurveScript : MonoBehaviour
             }
         }
     }
-
+    
+    // This method is used to calculate the max distance of the trajectory
     private double dmaxCalcul(double alpha)
     {
         double dmax = 0;
-        double a = g / 2;
-        double b = v0 * Math.Sin(alpha);
+        double a = _gravity / 2;
+        double b = _initialVelocity* Math.Sin(alpha);
         float delta = Mathf.Pow((float)b,2);
         if (delta > 0)
         {
@@ -106,7 +122,7 @@ public class SightCurveScript : MonoBehaviour
             else
                 txmax = 0;
 
-            dmax = v0 * Mathf.Cos((float)alpha) * txmax;
+            dmax = _initialVelocity * Mathf.Cos((float)alpha) * txmax;
         }
 
         return dmax;

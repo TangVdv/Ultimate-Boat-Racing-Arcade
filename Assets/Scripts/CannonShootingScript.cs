@@ -12,7 +12,7 @@ public class CannonShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // FIRE CANNONBALL WHEN LEFT CLICK IS DOWN
+        // Fire bullet when left click mouse is down
         if (Input.GetMouseButtonDown(0))
         {
             for (int i = 0; i < barrels.Length; i++)
@@ -28,5 +28,7 @@ public class CannonShootingScript : MonoBehaviour
                 bullet.GetComponent<Rigidbody>().AddForce(barrels[i].forward * force, ForceMode.Impulse);
             }
         }
+        
+        
     }
 }
