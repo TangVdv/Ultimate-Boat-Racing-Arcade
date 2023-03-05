@@ -357,6 +357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Controllable boat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9a809780e50cd5a40af2c70b3a098369, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a809780e50cd5a40af2c70b3a098369, type: 3}
 --- !u!1 &5092645920935075678 stripped
@@ -395,7 +399,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &508368856
+--- !u!114 &5988658285248343250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,11 +408,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5092645920935075678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 818f86f35e551b047aa44bb1790200df, type: 3}
+  m_Script: {fileID: 11500000, guid: 35e27cc1d78f2914cbff649ac03a5775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propellers:
-  - {fileID: 1602907669}
-  - {fileID: 785713489}
-  propulsionForce: 500
-  rigidBody: {fileID: 508368855}
+  forwardAcceleration: 10
+  backwardAcceleration: 5
+  rotationAcceleration: 0.5
+  maxSpeed: 100
+  decceleration: 0.01
+  currentSpeed: 0
+  isBot: 0

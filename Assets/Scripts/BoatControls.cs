@@ -9,6 +9,8 @@ public class BoatControls : MonoBehaviour
     KeyCode left = KeyCode.Q;
     KeyCode right = KeyCode.D;
 
+    public CheckpointManager manager;
+    
     public float forwardAcceleration = 10f;
     public float backwardAcceleration = 5f;
     
@@ -24,32 +26,27 @@ public class BoatControls : MonoBehaviour
 
 	public bool isBot = false;
 
-	private GameObject body;
+	public GameObject body;
 
 	public List<(string, int)> effects = new List<(string, int)>(); // (effectName, effectTime)
 
 	private Quaternion initialRotation;
+	
+	public Rigidbody rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
 		initialRotation = transform.rotation;
 		
-		//Find children element with Player tag
-		foreach (Transform child in transform)
-	        if(child.gameObject.tag == "Player") body = child.gameObject;
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-		//If rotation x or z are different from initial rotation, reset them
-		if(transform.rotation.x != initialRotation.x || transform.rotation.z != initialRotation.z) {
-			transform.rotation = new Quaternion(initialRotation.x, transform.rotation.y, initialRotation.z, transform.rotation.w);
-		}
 
-     	if(isBot) BotBehavior();
+	    if(isBot) BotBehavior();
 		else ManualBehavior();
 
 
@@ -59,6 +56,9 @@ public class BoatControls : MonoBehaviour
 			if(time == 0) effects.RemoveAt(newTimes.IndexOf(time));
 			else effects[newTimes.IndexOf(time)] = (effects[newTimes.IndexOf(time)].Item1, time);
 		}
+
+		var progress = manager.getPlayerProgress(body);
+		Debug.Log(progress);
     }
 
 	public void TriggerEffect(string effectName, int effectTime){
@@ -96,8 +96,8 @@ public class BoatControls : MonoBehaviour
 		if(hasEffect("Slow")) speedModifier = 0.5f;
 		else if(hasEffect("Fast")) speedModifier = 2.0f;
 
-		GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
-        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed * speedModifier);
+		rigidBody.AddTorque(transform.up * rotationDirection * rotationAcceleration);
+        rigidBody.AddForce(transform.forward * currentSpeed * speedModifier);
 	}
 
 	private int currentCheckpoint = 0;
@@ -111,7 +111,7 @@ public class BoatControls : MonoBehaviour
 		//If angle is too big, rotate towards it
 		//If angle is small enough, accelerate
 		
-		var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
+		//var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
 
 		int passedCheckpoint = manager.getPlayerProgress(body).Item2;
 
@@ -132,7 +132,7 @@ public class BoatControls : MonoBehaviour
 			angularDifference += Random.Range(-10, 10);
 		}
 
-		var angularVelocity = GetComponent<Rigidbody>().angularVelocity;
+		var angularVelocity = rigidBody.angularVelocity;
 
 		int rotationDirection = 0;
 		if(initialAngularDifference > 10f){
@@ -179,8 +179,8 @@ public class BoatControls : MonoBehaviour
 		if(hasEffect("Slow")) speedModifier = 0.5f;
 		else if(hasEffect("Fast")) speedModifier = 2.0f;
 
-	    GetComponent<Rigidbody>().AddTorque(transform.up * rotationDirection * rotationAcceleration);
-        GetComponent<Rigidbody>().AddForce(transform.forward * currentSpeed * speedModifier);
+		rigidBody.AddTorque(transform.up * rotationDirection * rotationAcceleration);
+		rigidBody.AddForce(transform.forward * currentSpeed * speedModifier);
     }
 }
     

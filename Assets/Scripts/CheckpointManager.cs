@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
 
+    public GameObject[] boats;
+    
     public class PlayerProgress
     {
         public GameObject player;
@@ -28,8 +31,9 @@ public class CheckpointManager : MonoBehaviour
 
     void Start()
     {
-        GameObject[] boats = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject boat in boats) playerProgress.Add(new PlayerProgress(boat));
+
+        Debug.Log(playerProgress);
         
         checkpoints = new Checkpoint[transform.childCount];
         foreach (Transform child in transform)
