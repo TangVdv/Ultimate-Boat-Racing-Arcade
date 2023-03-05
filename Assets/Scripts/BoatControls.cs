@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoatControls : MonoBehaviour
 {
-    KeyCode forward = KeyCode.Z;
-    KeyCode backward = KeyCode.S;
-    KeyCode left = KeyCode.Q;
-    KeyCode right = KeyCode.D;
+    KeyCode _forward = KeyCode.Z;
+    KeyCode _backward = KeyCode.S;
+    KeyCode _left = KeyCode.Q;
+    KeyCode _right = KeyCode.D;
 
     public CheckpointManager manager;
     
@@ -22,9 +21,9 @@ public class BoatControls : MonoBehaviour
     // Must be below 1.0f
     public float decceleration = 0.01f;
 
-    public float currentSpeed = 0.0f;
+    public float currentSpeed;
 
-	public bool isBot = false;
+	public bool isBot;
 
 	public GameObject body;
 
@@ -72,8 +71,8 @@ public class BoatControls : MonoBehaviour
 
 	void ManualBehavior(){
 		// If forward or backwards key is pressed, accelerate in the corresponding direction
-        if (Input.GetKey(forward)) currentSpeed += forwardAcceleration;
-        else if (Input.GetKey(backward)) currentSpeed -= backwardAcceleration;
+        if (Input.GetKey(_forward)) currentSpeed += forwardAcceleration;
+        else if (Input.GetKey(_backward)) currentSpeed -= backwardAcceleration;
         else
         {
             //Apply inertia if not pressing keys
@@ -88,8 +87,8 @@ public class BoatControls : MonoBehaviour
         // Rotate the boat
 
         int rotationDirection = 0;
-        if (Input.GetKey(left)) rotationDirection = -1;
-        else if (Input.GetKey(right))rotationDirection = 1;
+        if (Input.GetKey(_left)) rotationDirection = -1;
+        else if (Input.GetKey(_right))rotationDirection = 1;
 
 		float speedModifier = 1;
 		

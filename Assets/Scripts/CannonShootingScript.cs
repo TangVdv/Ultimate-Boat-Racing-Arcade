@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonShootingScript : MonoBehaviour
@@ -11,8 +9,8 @@ public class CannonShootingScript : MonoBehaviour
     public float reloadTime = 5f;
     public int ammo = 2;
 
-    private bool _isReloading = false;
-    private bool _isLoaded = false;
+    private bool _isReloading;
+    private bool _isLoaded;
     private GameObject _bullet;
 
     void Start()
@@ -26,7 +24,7 @@ public class CannonShootingScript : MonoBehaviour
     void Update()
     {
         // Fire bullet when left click mouse is down
-        if (_isLoaded == true)
+        if (_isLoaded)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -43,7 +41,7 @@ public class CannonShootingScript : MonoBehaviour
     {
         for (int i = 0; i < barrels.Length; i++) 
         {
-            var localScale = cannonBall.transform.localScale; 
+            Vector3 localScale; 
             localScale = new Vector3(
                 barrels[i].parent.lossyScale.x, 
                 barrels[i].parent.lossyScale.x, 
