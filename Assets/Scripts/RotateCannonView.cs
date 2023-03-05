@@ -11,7 +11,7 @@ public class RotateCannonView : MonoBehaviour
     public float topClamp = 25.0f;
     public bool cameraEnabled;
     
-    private Vector3 _localRotation;
+    private float _localRotation;
     private float _scrollAmount;
     //private float _cameraDistance = 20f;
     //private int _cameraRotation = 15;
@@ -39,17 +39,15 @@ public class RotateCannonView : MonoBehaviour
     // Rotation of the camera on the X axis based on Mouse Coordinates
     private void CameraRotation()
     {
-        if (cameraEnabled)
+        if (!cameraEnabled) return;
+        if (Input.GetAxis("Mouse X") != 0)
         {
-            if (Input.GetAxis("Mouse X") != 0)
-            {
-                _localRotation.x += Input.GetAxis("Mouse X") * mouseSensitivity;
-            }
-        
-            Quaternion qt = Quaternion.Euler(0, _localRotation.x, 0);
-            var parent = cameraCannon.parent;
-            parent.localRotation = Quaternion.Lerp(parent.localRotation, qt, Time.deltaTime * orbitDampening);   
+            _localRotation += Input.GetAxis("Mouse X") * mouseSensitivity;
         }
+        
+        Quaternion qt = Quaternion.Euler(0, _localRotation, 0);
+        var parent = cameraCannon.parent;
+        parent.localRotation = Quaternion.Lerp(parent.localRotation, qt, Time.deltaTime * orbitDampening);
     }
 
     // Smooth rotation of the cannon on the X axis based on the Camera Rotation Coordinates
@@ -62,7 +60,7 @@ public class RotateCannonView : MonoBehaviour
         {
             bodyCannon.localRotation = actualRotation;
         }*/
-        bodyCannon.localRotation = Quaternion.Euler(0, _localRotation.x, 0);
+        bodyCannon.localRotation = Quaternion.Euler(0, _localRotation, 0);
     }
 
     private void BarrelCannonRotation()

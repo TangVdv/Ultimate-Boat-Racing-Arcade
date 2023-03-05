@@ -802,7 +802,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   forwardAcceleration: 10
   backwardAcceleration: 5
-  rotationAcceleration: 3
+  rotationAcceleration: 10
   maxSpeed: 100
   decceleration: 0.01
   currentSpeed: 0
@@ -1025,7 +1025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2185025505831783044, guid: f20a53fd0a75954478bd6d662009a7a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.22
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 6671609934998385153, guid: f20a53fd0a75954478bd6d662009a7a6, type: 3}
       propertyPath: m_LocalPosition.x
