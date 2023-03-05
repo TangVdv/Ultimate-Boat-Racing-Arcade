@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SightCurveScript : MonoBehaviour
 {
-    [SerializeField] private Transform bodyCannon;
     [SerializeField] private Transform barrel;
     [SerializeField] private Transform point1;
     [SerializeField] private Transform point2;
     [SerializeField] private Transform point3;
-    [SerializeField] private GameObject bullet;
     [Range(0, 50)] public int vertexCount;
     public bool debug;
     public Material mat;
-    public float force;
+    public float initialVelocity = 20;
+    public float sightCurveWidth = .1f;
     
     private LineRenderer _lineRenderer;
     private float _gravity;
-    private float _initialVelocity;
     private float _x0;
     private float _h0;
 
     private void Start()
     {
-        //TODO : Change calcul _initialVelocity (currently : acceleration calcul)
-        _initialVelocity = force / bullet.GetComponent<Rigidbody>().mass;
         _gravity = -Physics.gravity.y;
         var position = point1.position;
         _x0 = position.x;
         _h0 = position.y;
         _lineRenderer = gameObject.GetComponent<LineRenderer>();
+        _lineRenderer.startWidth = sightCurveWidth;
         _lineRenderer.material = mat;
     }
 
@@ -49,35 +46,18 @@ public class SightCurveScript : MonoBehaviour
     private void DrawLineRenderer(double alpha)
     {
         // Calculate the max height of the trajectory
-        float hmax =  Mathf.Pow((float)(_initialVelocity * Math.Sin(alpha)), 2) / (2*_gravity);
+        float hmax =  Mathf.Pow((float)(initialVelocity * Math.Sin(alpha)), 2) / (2*_gravity);
         // Calculate the max distance of the trajectory
         double dmax = DmaxCalcul(alpha);
 
-        Vector3 position2;
-        position2 = new Vector3(_x0, hmax, (float)dmax/2);
-        Vector3 position3;
-        position3 = new Vector3(_x0, _h0, (float)dmax);
-
-        // Calculate the rotation angle based on the body cannon
-        float rotationAngle = bodyCannon.localEulerAngles.y;
-
-        // Rotate point2 and point3 around point1
-        var position1 = point1.position;
-        Vector3 relativePos2 = position2 - position1;
-        Vector3 rotatedPos2 = Quaternion.AngleAxis(rotationAngle, Vector3.up) * relativePos2;
-        position2 = position1 + rotatedPos2;
-        point2.position = position2;
-
-        Vector3 relativePos3 = position3 - position1;
-        Vector3 rotatedPos3 = Quaternion.AngleAxis(rotationAngle, Vector3.up) * relativePos3;
-        position3 = position1 + rotatedPos3;
-        point3.position = position3;
-
+        point2.localPosition = new Vector3(_x0, hmax, (float)dmax/2);
+        point3.localPosition = new Vector3(_x0, _h0, (float)dmax);
+        
         // Create a list of points for the bezier curve
         var pointList = new List<Vector3>();
         for (float ratio = 0; ratio <= 1; ratio+= 1.0f / vertexCount)
         {
-            position2 = point2.position;
+            var position2 = point2.position;
             var tangentLineVertex1 = Vector3.Lerp(point1.position, position2, ratio);
             var tangentLineVertex2 = Vector3.Lerp(position2, point3.position, ratio);
             var bezierPoint = Vector3.Lerp(tangentLineVertex1, tangentLineVertex2, ratio);
@@ -116,7 +96,7 @@ public class SightCurveScript : MonoBehaviour
     {
         double dmax = 0;
         double a = _gravity / 2;
-        double b = _initialVelocity* Math.Sin(alpha);
+        double b = initialVelocity* Math.Sin(alpha);
         float delta = Mathf.Pow((float)b,2);
         if (delta > 0)
         {
@@ -130,7 +110,7 @@ public class SightCurveScript : MonoBehaviour
             else
                 txmax = 0;
 
-            dmax = _initialVelocity * Mathf.Cos((float)alpha) * txmax;
+            dmax = initialVelocity * Mathf.Cos((float)alpha) * txmax;
         }
 
         return dmax;

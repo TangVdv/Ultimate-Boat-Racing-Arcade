@@ -5,7 +5,7 @@ public class CannonShootingScript : MonoBehaviour
 {
     [SerializeField] private GameObject cannonBall;
     [SerializeField] private Transform [] barrels;
-    public float force;
+    public float initialVelocity = 20;
     public float reloadTime = 5f;
     public int ammo = 2;
 
@@ -41,15 +41,14 @@ public class CannonShootingScript : MonoBehaviour
     {
         for (int i = 0; i < barrels.Length; i++) 
         {
-            Vector3 localScale; 
-            localScale = new Vector3(
+            var localScale = new Vector3(
                 barrels[i].parent.lossyScale.x, 
                 barrels[i].parent.lossyScale.x, 
                 barrels[i].parent.lossyScale.z
             );
             cannonBall.transform.localScale = localScale;
-            _bullet = Instantiate(cannonBall, barrels[i].position, barrels[i].rotation);
-            _bullet.GetComponent<Rigidbody>().AddForce(barrels[i].forward * force, ForceMode.Impulse);   
+            _bullet = Instantiate(cannonBall, barrels[i].position, barrels[i].rotation);  
+            _bullet.GetComponent<Rigidbody>().velocity = barrels[i].forward * initialVelocity;
         }
         print("fire !");
         _isLoaded = false;
