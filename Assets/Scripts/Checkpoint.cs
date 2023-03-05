@@ -9,9 +9,9 @@ public class Checkpoint : MonoBehaviour
 
     private CheckpointManager _checkpointManager;
     
-    public int ID; 
-    
-    void OnTriggerEnter(Collider other)
+    public int ID;
+
+    private void OnTriggerEnter(Collider other)
     {
         if (Array.Exists(_checkpointManager.boats, boat => boat == other.gameObject)) _checkpointManager.CheckPointPassed(ID, other.gameObject);
     }

@@ -31,7 +31,7 @@ public class CheckpointManager : MonoBehaviour
 
     void Start()
     {
-        foreach (GameObject boat in boats) playerProgress.Add(new PlayerProgress(boat));
+        foreach (GameObject boat in boats)playerProgress.Add(new PlayerProgress(boat));
 
         Debug.Log(playerProgress);
         
@@ -76,21 +76,24 @@ public class CheckpointManager : MonoBehaviour
             // UpdateVisuals(progress);
             return;
         }
-        
 
-        if ( checkpoint == 0 && ( (progress.checkpoint == checkpoints.Length - 1) || (progress.checkpoint + grace >= checkpoints.Length) ) )
+
+        if (checkpoint == 0)
         {
-            progress.lap++;
-            progress.checkpoint = 0;
-            
-            Debug.Log("Lap "+ progress.lap +" completed !");
-            UpdateVisuals(progress);
+            if ( (progress.checkpoint == checkpoints.Length - 1) || (progress.checkpoint + grace >= checkpoints.Length) )
+            {
+                progress.lap++;
+                Debug.Log("Lap "+ progress.lap +" completed !");
+            }
+            else
+            {
+                return;
+            }
+
+
         }
-        else
-        {
-            progress.checkpoint = checkpoint;
-            UpdateVisuals(progress);
-        }
+        progress.checkpoint = checkpoint;
+        UpdateVisuals(progress);
     }
 
     public void UpdateVisuals(PlayerProgress progress)
