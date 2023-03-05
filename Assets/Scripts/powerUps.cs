@@ -40,10 +40,10 @@ public class powerUps : MonoBehaviour
 		var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
 
 		//(lap, checkpoint)
-		(int, int) playerProgress = manager.getPlayerProgress(other.gameObject);
-		(int, int) highestProgress = manager.getHighestProgress();
+		(int, int) playerProgress = manager.GetPlayerProgress(other.gameObject);
+		(int, int) highestProgress = manager.GetHighestProgress();
 
-		int checkpointCount = manager.getCheckpointCount();
+		int checkpointCount = manager.GetCheckpointCount();
 		int score = (highestProgress.Item1 - playerProgress.Item1) * checkpointCount + (highestProgress.Item2 - playerProgress.Item2);
 		//Randomize score by X
 		int x = 3;

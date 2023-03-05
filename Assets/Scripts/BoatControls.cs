@@ -56,7 +56,7 @@ public class BoatControls : MonoBehaviour
 			else effects[newTimes.IndexOf(time)] = (effects[newTimes.IndexOf(time)].Item1, time);
 		}
 
-		var progress = manager.getPlayerProgress(body);
+		var progress = manager.GetPlayerProgress(body);
 		Debug.Log(progress);
     }
 
@@ -95,8 +95,8 @@ public class BoatControls : MonoBehaviour
 		if(hasEffect("Slow")) speedModifier = 0.5f;
 		else if(hasEffect("Fast")) speedModifier = 2.0f;
 
-		rigidBody.AddTorque(transform.up * rotationDirection * rotationAcceleration);
-        rigidBody.AddForce(transform.forward * currentSpeed * speedModifier);
+		rigidBody.AddTorque(transform.up * (rotationDirection * rotationAcceleration));
+        rigidBody.AddForce(transform.forward * (currentSpeed * speedModifier));
 	}
 
 	private int currentCheckpoint = 0;
@@ -112,13 +112,13 @@ public class BoatControls : MonoBehaviour
 		
 		//var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
 
-		int passedCheckpoint = manager.getPlayerProgress(body).Item2;
+		int passedCheckpoint = manager.GetPlayerProgress(body).Item2;
 
-		var direction = manager.getNextCheckpointCoordinates(body) - transform.position;
+		var direction = manager.GetNextCheckpointCoordinates(body) - transform.position;
 
 		if(nextCheckpoint == currentCheckpoint || passedCheckpoint == nextCheckpoint){
 			currentCheckpoint = nextCheckpoint;
-			nextCheckpoint = (nextCheckpoint + 1) % manager.getCheckpointCount();
+			nextCheckpoint = (nextCheckpoint + 1) % manager.GetCheckpointCount();
 
 			initialAngularDifference = Vector3.Angle(transform.forward, direction);
         }
@@ -136,21 +136,21 @@ public class BoatControls : MonoBehaviour
 		int rotationDirection = 0;
 		if(initialAngularDifference > 10f){
 			if(angularDifference > initialAngularDifference / 2) {
-				Debug.Log("Rotating");
+				//Debug.Log("Rotating");
 				rotationDirection = Vector3.Cross(transform.forward, direction).y > 0 ? 1 : -1;
 				currentSpeed *=  (1 - decceleration);
 				if(Mathf.Abs(currentSpeed) < 0.5f) currentSpeed = 0;
 			}
         	else if(angularDifference < initialAngularDifference / 2 && angularVelocity.magnitude > 0.5f) {
-				Debug.Log("Undoing rotation");
+				//Debug.Log("Undoing rotation");
 				rotationDirection = Vector3.Cross(transform.forward, direction).y > 0 ? -1 : 1;
 				currentSpeed += forwardAcceleration;
 			} else {
-				Debug.Log("Accelerating");
+				//Debug.Log("Accelerating");
             	currentSpeed += forwardAcceleration;
         	}
 		}else{
-            Debug.Log("Accelerating");
+            //Debug.Log("Accelerating");
             currentSpeed += forwardAcceleration;
         }
 		
@@ -178,8 +178,8 @@ public class BoatControls : MonoBehaviour
 		if(hasEffect("Slow")) speedModifier = 0.5f;
 		else if(hasEffect("Fast")) speedModifier = 2.0f;
 
-		rigidBody.AddTorque(transform.up * rotationDirection * rotationAcceleration);
-		rigidBody.AddForce(transform.forward * currentSpeed * speedModifier);
+		rigidBody.AddTorque(transform.up * (rotationDirection * rotationAcceleration));
+		rigidBody.AddForce(transform.forward * (currentSpeed * speedModifier));
     }
 }
     

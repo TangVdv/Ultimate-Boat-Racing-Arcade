@@ -7,17 +7,17 @@ using UnityEngine.Events;
 public class Checkpoint : MonoBehaviour
 {
 
-    private CheckpointManager checkpointManager;
+    private CheckpointManager _checkpointManager;
     
     public int ID; 
     
     void OnTriggerEnter(Collider other)
     {
-        if (Array.Exists(checkpointManager.boats, boat => boat == other.gameObject)) checkpointManager.CheckPointPassed(ID, other.gameObject);
+        if (Array.Exists(_checkpointManager.boats, boat => boat == other.gameObject)) _checkpointManager.CheckPointPassed(ID, other.gameObject);
     }
     
     public void SetCheckpointManager(CheckpointManager checkpointManager)
     {
-        this.checkpointManager = checkpointManager;
+       _checkpointManager = checkpointManager;
     }
 }

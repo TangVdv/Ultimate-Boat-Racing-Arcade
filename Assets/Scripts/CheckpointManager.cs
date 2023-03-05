@@ -46,14 +46,14 @@ public class CheckpointManager : MonoBehaviour
         
     }
 
-	public Vector3 getNextCheckpointCoordinates(GameObject player){
+	public Vector3 GetNextCheckpointCoordinates(GameObject player){
         PlayerProgress progress = playerProgress.Find(x => x.player == player);
 		int index = progress.checkpoint + 1;
 		if (index >= checkpoints.Length) index = 0;
 		return checkpoints[index].transform.position;
     }
 
-	public int getCheckpointCount(){
+	public int GetCheckpointCount(){
 		return checkpoints.Length;
 	}
 
@@ -69,11 +69,11 @@ public class CheckpointManager : MonoBehaviour
         if (progress.checkpoint + grace < checkpoint) return;
         
         
-        // If checkpoint is a previous checkpoint, lower checkpoint
+        // If checkpoint is a previous checkpoint, ignore
         if (progress.checkpoint > checkpoint && checkpoint != 0)
         {
-            progress.checkpoint = checkpoint;
-            updateVisuals(progress);
+            // progress.checkpoint = checkpoint;
+            // UpdateVisuals(progress);
             return;
         }
         
@@ -84,16 +84,16 @@ public class CheckpointManager : MonoBehaviour
             progress.checkpoint = 0;
             
             Debug.Log("Lap "+ progress.lap +" completed !");
-            updateVisuals(progress);
+            UpdateVisuals(progress);
         }
         else
         {
             progress.checkpoint = checkpoint;
-            updateVisuals(progress);
+            UpdateVisuals(progress);
         }
     }
 
-    public void updateVisuals(PlayerProgress progress)
+    public void UpdateVisuals(PlayerProgress progress)
     {
 		//Debug.Log("Checkpoint " + progress.checkpoint + " passed, lap " + progress.lap);
         foreach (Checkpoint checkpoint in checkpoints)
@@ -119,12 +119,12 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-	public (int,int) getPlayerProgress(GameObject player){
+	public (int,int) GetPlayerProgress(GameObject player){
         PlayerProgress progress = playerProgress.Find(x => x.player == player);
         return (progress.lap, progress.checkpoint);
     }
 
-	public (int,int) getAverageProgress(){
+	public (int,int) GetAverageProgress(){
         int lap = 0;
         int checkpoint = 0;
         foreach (PlayerProgress progress in playerProgress){
@@ -136,7 +136,7 @@ public class CheckpointManager : MonoBehaviour
         return (lap, checkpoint);
     }
 
-	public (int, int) getLowestProgress(){
+	public (int, int) GetLowestProgress(){
         int lap = 0;
         int checkpoint = 0;
         foreach (PlayerProgress progress in playerProgress){
@@ -150,7 +150,7 @@ public class CheckpointManager : MonoBehaviour
         return (lap, checkpoint);
     }
 
-	public (int, int) getHighestProgress(){
+	public (int, int) GetHighestProgress(){
         int lap = 0;
         int checkpoint = 0;
         foreach (PlayerProgress progress in playerProgress){
