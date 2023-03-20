@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class BoatControls : MonoBehaviour
 {
@@ -37,18 +40,10 @@ public class BoatControls : MonoBehaviour
     void Start()
     {
 		initialRotation = transform.rotation;
-		
-
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
 
-	    if(isBot) BotBehavior();
-		else ManualBehavior();
-
-
+	void update(){
 		List<int> newTimes = new List<int>();
 		foreach((string, int) effect in effects) newTimes.Add(effect.Item2 - 1);
 		foreach(int time in newTimes) {
@@ -57,7 +52,25 @@ public class BoatControls : MonoBehaviour
 		}
 
 		var progress = manager.GetPlayerProgress(body);
-		Debug.Log(progress);
+	}
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+		short directionZ = 0;
+		short directionX = 0;
+
+		if(isBot){
+
+		}
+		else{
+			directionZ += (short) (Input.GetKey(_forward) ? 1 : 0);
+			directionZ -= (short) (Input.GetKey(_backward) ? 1 : 0);
+			directionX -= (short) (Input.GetKey(_left) ? 1 : 0);
+			directionX += (short) (Input.GetKey(_right) ? 1 : 0);
+		}
+
+	    PhysicalBehavior(directionZ, directionX);
     }
 
 	public void TriggerEffect(string effectName, int effectTime){
@@ -69,10 +82,10 @@ public class BoatControls : MonoBehaviour
         return false;
     }
 
-	void ManualBehavior(){
+	void PhysicalBehavior(short directionZ, short directionX){
 		// If forward or backwards key is pressed, accelerate in the corresponding direction
-        if (Input.GetKey(_forward)) currentSpeed += forwardAcceleration;
-        else if (Input.GetKey(_backward)) currentSpeed -= backwardAcceleration;
+        if (directionZ < 0) currentSpeed -= backwardAcceleration;
+        else if (directionZ > 0) currentSpeed += forwardAcceleration;
         else
         {
             //Apply inertia if not pressing keys
@@ -87,8 +100,8 @@ public class BoatControls : MonoBehaviour
         // Rotate the boat
 
         int rotationDirection = 0;
-        if (Input.GetKey(_left)) rotationDirection = -1;
-        else if (Input.GetKey(_right))rotationDirection = 1;
+        if (directionX < 0) rotationDirection = -1;
+        else if (directionX > 0) rotationDirection = 1;
 
 		float speedModifier = 1;
 		
@@ -99,6 +112,16 @@ public class BoatControls : MonoBehaviour
         rigidBody.AddForce(transform.forward * (currentSpeed * speedModifier));
 	}
 
+	//private Transform target = Vector3.zero;
+	Tuple<short, short> BotBehavor(){
+		short directionZ = 0;
+		short directionX = 0;
+
+
+		return new Tuple<short, short>(directionZ, directionX);
+	}
+
+/*
 	private int currentCheckpoint = 0;
 	private Vector3 direction;
 	private double initialAngularDifference = 0.0;
@@ -156,5 +179,6 @@ public class BoatControls : MonoBehaviour
 		rigidBody.AddTorque(transform.up * (rotationDirection * rotationAcceleration));
 		rigidBody.AddForce(transform.forward * (currentSpeed * speedModifier));
     }
+*/
 }
     
