@@ -61,7 +61,10 @@ public class BoatControls : MonoBehaviour
 		short directionX = 0;
 
 		if(isBot){
+			Tuple<short, short> botDirection = BotBehavior();
 
+	        directionZ = botDirection.Item1;
+			directionX = botDirection.Item2;
 		}
 		else{
 			directionZ += (short) (Input.GetKey(_forward) ? 1 : 0);
@@ -112,11 +115,50 @@ public class BoatControls : MonoBehaviour
         rigidBody.AddForce(transform.forward * (currentSpeed * speedModifier));
 	}
 
-	//private Transform target = Vector3.zero;
-	Tuple<short, short> BotBehavor(){
+	private Vector3 botTargetPosition = Vector3.zero;
+	private int nextCheckpoint = 0;
+	Tuple<short, short> BotBehavior(){
 		short directionZ = 0;
 		short directionX = 0;
 
+		if(botTargetPosition == Vector3.zero){
+            botTargetPosition = manager.GetNextCheckpointCoordinates(body);
+        }
+
+		int passedCheckpoint = manager.GetPlayerProgress(body).Item2;
+		if(passedCheckpoint == nextCheckpoint){
+            nextCheckpoint = (nextCheckpoint + 1) % manager.GetCheckpointCount();
+            botTargetPosition = manager.GetNextCheckpointCoordinates(body);
+        }
+
+		Vector2 direction = new Vector2(botTargetPosition.x - transform.position.x, botTargetPosition.z - transform.position.z);
+		direction.Normalize();
+		float angularDifference = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), direction);
+		angularDifference /= 45.0f;
+
+		if(angularDifference >= 2.0f) directionZ = -1;
+
+	    //float angularDifference = Vector2.Angle(up, targetDirection);
+
+		float angularSpeed = rigidBody.angularVelocity.y;
+		float steer = Mathf.Clamp(angularDifference - angularSpeed, -1.0f, 1.0f);
+
+		if (steer > 0.3f) directionX = 1;
+        else if (steer < -0.3f) directionX = -1;
+	
+	    //If has effect Blind, change directionX randomly
+		if(hasEffect("Blind")){
+		    directionX = (short) UnityEngine.Random.Range(-1, 1);
+        }
+
+		if(Mathf.Abs(angularDifference) < 0.3f) directionZ = 1;
+
+		Debug.Log(
+		"Angular speed: " + angularSpeed + "\n" +
+		"Angular difference: " + angularDifference + "\n" +
+		"Direction X: " + directionX + "\n" +
+		"Direction Z: " + directionZ + "\n" 
+		);
 
 		return new Tuple<short, short>(directionZ, directionX);
 	}
