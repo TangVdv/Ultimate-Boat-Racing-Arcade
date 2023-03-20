@@ -104,14 +104,6 @@ public class BoatControls : MonoBehaviour
 	private double initialAngularDifference = 0.0;
 	private int nextCheckpoint = 0;
 	void BotBehavior(){
-		//Locate next checkpoint
-		//Calculate direction to next checkpoint
-	    //Calculate angle to next checkpoint
-		//If angle is too big, rotate towards it
-		//If angle is small enough, accelerate
-		
-		//var manager = GameObject.FindWithTag("CheckpointController").GetComponent<CheckpointManager>();
-
 		int passedCheckpoint = manager.GetPlayerProgress(body).Item2;
 
 		var direction = manager.GetNextCheckpointCoordinates(body) - transform.position;
@@ -153,23 +145,6 @@ public class BoatControls : MonoBehaviour
             //Debug.Log("Accelerating");
             currentSpeed += forwardAcceleration;
         }
-		
-		
-		/*
-		//If not facing the right direction, rotate towards it
-		int rotationDirection = 0;
-		if(Vector3.Angle(transform.forward, direction) > 10){
-			rotationDirection = Vector3.Cross(transform.forward, direction).y > 0 ? 1 : -1;
-		}
-
-		//If facing the right direction, accelerate
-		if(rotationDirection == 0) currentSpeed += forwardAcceleration;
-        else{
-	        //apply inertia 
-			currentSpeed *=  (1 - decceleration);
-			if (Mathf.Abs(currentSpeed) < 0.5f) currentSpeed = 0;
-		}
-		*/
 		    
         if (Mathf.Abs(currentSpeed) > maxSpeed) currentSpeed = Mathf.Sign(currentSpeed) * maxSpeed;
 
