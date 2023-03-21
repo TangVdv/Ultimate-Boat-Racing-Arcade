@@ -151,9 +151,49 @@ public class BoatControls : MonoBehaviour
 		    directionX = (short) UnityEngine.Random.Range(-1, 1);
         }
 
-		if(Mathf.Abs(angularDifference) < 0.3f) directionZ = 1;
+		float percentOfMaxSpeed = currentSpeed / maxSpeed;
+		float absolutePercentOfMaxSpeed = Mathf.Abs(percentOfMaxSpeed);
+		if(angularDifference >= 1.5f){
+			if(percentOfMaxSpeed >= 0.10f) {
+				directionZ = -1;
+				directionX = 0;
+			} else if (absolutePercentOfMaxSpeed >= 0.50f) {
+                directionZ = 1;
+            }
+			else directionZ = 0;
+		}else if(angularDifference >= 1.0f){
+			directionZ = -1;
+            if(percentOfMaxSpeed >= 0.25f){
+				directionZ = -1;
+				directionX = 0;
+			} else if (absolutePercentOfMaxSpeed >= 0.25f) {
+                directionZ = 1;
+            }
+            else directionZ = 0;
+		}else if(angularDifference >= 0.5f){
+			directionZ = -1;
+			if(percentOfMaxSpeed >= 0.50f){
+				directionZ = -1;
+				directionX = 0;
+			} else if (absolutePercentOfMaxSpeed >= 0.10f) {
+                directionZ = 1;
+            }
+            else directionZ = 0;
+		}else if(angularDifference >= 0.25f){
+			directionZ = -1;
+            if(percentOfMaxSpeed >= 0.75f){
+				directionZ = -1;
+				directionX = 0;
+			}
+            else directionZ = 0;
+		}else{
+		    if(percentOfMaxSpeed >= 0.90f) directionZ = 0;
+            else directionZ = 1;
+        }
 
 		Debug.Log(
+		"Current speed: " + currentSpeed + "\n" +
+		"Percent of max speed: " + percentOfMaxSpeed + "\n" +
 		"Angular speed: " + angularSpeed + "\n" +
 		"Angular difference: " + angularDifference + "\n" +
 		"Direction X: " + directionX + "\n" +
