@@ -9,6 +9,7 @@ TagManager:
   - Boat
   - CheckpointController
   - Crate
+  - Hightlight
   layers:
   - Default
   - TransparentFX
