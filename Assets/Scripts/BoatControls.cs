@@ -88,7 +88,8 @@ public class BoatControls : MonoBehaviour
 	void PhysicalBehavior(short directionZ, short directionX){
 		// If forward or backwards key is pressed, accelerate in the corresponding direction
         if (directionZ < 0) currentSpeed -= backwardAcceleration;
-        else if (directionZ > 0) currentSpeed += forwardAcceleration;
+
+        if (directionZ > 0) currentSpeed += forwardAcceleration;
         else
         {
             //Apply inertia if not pressing keys
@@ -131,6 +132,15 @@ public class BoatControls : MonoBehaviour
             botTargetPosition = manager.GetNextCheckpointCoordinates(body);
         }
 
+		RaycastHit hit;
+		if(Physics.Raycast(transform.position, transform.forward, out hit, 100.0f)){
+            //If object hit has same coordinates as next checkpoint, change target to straight ahead
+			if(hit.transform.position == botTargetPosition){
+                //Get exact coordinates of raycast hit
+				botTargetPosition = hit.point;
+            }
+        }
+
 		Vector2 direction = new Vector2(botTargetPosition.x - transform.position.x, botTargetPosition.z - transform.position.z);
 		direction.Normalize();
 		float angularDifference = Vector2.Angle(new Vector2(transform.forward.x, transform.forward.z), direction);
@@ -153,52 +163,28 @@ public class BoatControls : MonoBehaviour
 
 		float percentOfMaxSpeed = currentSpeed / maxSpeed;
 		float absolutePercentOfMaxSpeed = Mathf.Abs(percentOfMaxSpeed);
-		if(angularDifference >= 1.5f){
-			if(percentOfMaxSpeed >= 0.10f) {
-				directionZ = -1;
-				directionX = 0;
-			} else if (absolutePercentOfMaxSpeed >= 0.50f) {
-                directionZ = 1;
-            }
+		if (angularDifference >= 3.0f){
+			if(absolutePercentOfMaxSpeed >= 0.20f) directionZ = -1;
+		}
+		else if(angularDifference >= 1.5f){
+			if(percentOfMaxSpeed >= 0.10f) directionZ = -1;
+			else if (absolutePercentOfMaxSpeed >= 0.50f) directionZ = 1;
 			else directionZ = 0;
 		}else if(angularDifference >= 1.0f){
-			directionZ = -1;
-            if(percentOfMaxSpeed >= 0.25f){
-				directionZ = -1;
-				directionX = 0;
-			} else if (absolutePercentOfMaxSpeed >= 0.25f) {
-                directionZ = 1;
-            }
+            if(percentOfMaxSpeed >= 0.25f) directionZ = -1;
+			else if (absolutePercentOfMaxSpeed >= 0.25f)directionZ = 1;
             else directionZ = 0;
 		}else if(angularDifference >= 0.5f){
-			directionZ = -1;
-			if(percentOfMaxSpeed >= 0.50f){
-				directionZ = -1;
-				directionX = 0;
-			} else if (absolutePercentOfMaxSpeed >= 0.10f) {
-                directionZ = 1;
-            }
+			if(percentOfMaxSpeed >= 0.50f)directionZ = -1;
+			else if (absolutePercentOfMaxSpeed >= 0.10f) directionZ = 1;
             else directionZ = 0;
 		}else if(angularDifference >= 0.25f){
-			directionZ = -1;
-            if(percentOfMaxSpeed >= 0.75f){
-				directionZ = -1;
-				directionX = 0;
-			}
-            else directionZ = 0;
+            if(percentOfMaxSpeed >= 0.75f) directionZ = -1;
+            else directionZ = 1;
 		}else{
 		    if(percentOfMaxSpeed >= 0.90f) directionZ = 0;
             else directionZ = 1;
         }
-
-		Debug.Log(
-		"Current speed: " + currentSpeed + "\n" +
-		"Percent of max speed: " + percentOfMaxSpeed + "\n" +
-		"Angular speed: " + angularSpeed + "\n" +
-		"Angular difference: " + angularDifference + "\n" +
-		"Direction X: " + directionX + "\n" +
-		"Direction Z: " + directionZ + "\n" 
-		);
 
 		return new Tuple<short, short>(directionZ, directionX);
 	}
