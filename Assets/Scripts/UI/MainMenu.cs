@@ -15,4 +15,9 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GithubButton()
+    {
+        Application.OpenURL("https://github.com/TangVdv/Ultimate-Boat-Racing-Arcade");
+    }
 }
