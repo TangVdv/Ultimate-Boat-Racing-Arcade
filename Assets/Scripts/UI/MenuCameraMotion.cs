@@ -10,6 +10,7 @@ public class MenuCameraMotion : MonoBehaviour
     [SerializeField] private GameObject settingsMenuPoint;
 
     private GameObject positions;
+    
     private void Awake()
     {
         positions = mainMenuPoint;
