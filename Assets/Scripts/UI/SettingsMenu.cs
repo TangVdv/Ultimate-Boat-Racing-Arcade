@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject eventSystem;
     [SerializeField] private Text languageText;
     [SerializeField] private Text resolutionText;
     [SerializeField] private Text windowModeText;
@@ -19,6 +20,8 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider effectVolumeSlider;
     [SerializeField] private Slider lookSensitivitySlider;
 
+    private GameSettings _gameSettings;
+    
     private int _languageIndex = 0;
     private string[] _languageArray = {"FRANÇAIS", "ENGLISH"};
     
@@ -45,6 +48,8 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
+        _gameSettings = eventSystem.GetComponent<GameSettings>();
+        
         GenerateResolutions();
         Apply();
         SetText();
@@ -192,10 +197,12 @@ public class SettingsMenu : MonoBehaviour
     public void FPSToggle(bool value)
     {
         _showFPS = value;
+        _gameSettings.ShowFPS = value;
     }
 
     public void HUDToggle(bool value)
     {
         _showHUD = value;
+        _gameSettings.ShowHUD = value;
     }
 }
