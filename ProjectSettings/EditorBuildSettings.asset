@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/AI tests/AI testing.unity
+    path: Assets/Scenes/AI tests/AI Checkpoint Tests.unity
     guid: 7afe9df9a9907b949b28e2892b8780d6
   m_configObjects: {}
