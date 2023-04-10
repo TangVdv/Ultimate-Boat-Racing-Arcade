@@ -3263,5 +3263,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoatObject
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7274940342337123551, guid: 2a9582069325bd640aac970a521233e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a9582069325bd640aac970a521233e0, type: 3}

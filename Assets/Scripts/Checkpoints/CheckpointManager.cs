@@ -37,12 +37,14 @@ public class CheckpointManager : MonoBehaviour
         
         checkpoints = new Checkpoint[transform.childCount];
         foreach (Transform child in transform)
-         {
-             Checkpoint checkpoint = child.GetComponent<Checkpoint>();
-             checkpoints[checkpoint.ID] = checkpoint;
-             checkpoint.SetCheckpointManager(this);
+        {
+            Checkpoint checkpoint = child.GetComponent<Checkpoint>();
+            checkpoints[checkpoint.ID] = checkpoint;
+            checkpoint.SetCheckpointManager(this);
              
-         }
+        }
+        
+        UpdateVisuals(playerProgress[0]);
         
     }
 
