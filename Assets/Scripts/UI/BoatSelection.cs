@@ -7,13 +7,11 @@ using Color = System.Drawing.Color;
 
 public class BoatSelection : MonoBehaviour
 {
-    [SerializeField] private GameObject eventSystem;
+    [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject[] locations;
     [SerializeField] private GameObject[] boats;
     [SerializeField] private Text PlayboatNameText;
     [SerializeField] private Text CustomboatNameText;
-    
-    private GameSettings _gameSettings;
 
     public float travelDuration = 1;
 
@@ -25,8 +23,6 @@ public class BoatSelection : MonoBehaviour
 
     private void Start()
     {
-        _gameSettings = eventSystem.GetComponent<GameSettings>();
-        
         if (boats.Length > 0)
         {
             _currentBoat = Instantiate( boats[_indexSelection], locations[1].transform.position, locations[1].transform.rotation);
@@ -92,7 +88,7 @@ public class BoatSelection : MonoBehaviour
 
     public void Select()
     {
-        _gameSettings.Boat = _currentBoat;
+        config.Boat = _currentBoat;
     }
 
     public void ColorSelect(Button button)

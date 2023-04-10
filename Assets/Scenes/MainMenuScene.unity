@@ -383,7 +383,7 @@ Transform:
   - {fileID: 789474083}
   - {fileID: 842969741}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &36897962
 PrefabInstance:
@@ -8038,7 +8038,6 @@ GameObject:
   - component: {fileID: 1373251075}
   - component: {fileID: 1373251074}
   - component: {fileID: 1373251073}
-  - component: {fileID: 1373251076}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -8092,20 +8091,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1373251076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373251072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a4b1822f46033e4d843f74e9f867222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1394214087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12569,6 +12556,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 386388833145397188, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1205246835408250828, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_MaxValue
       value: 100
@@ -12600,7 +12591,7 @@ PrefabInstance:
     - target: {fileID: 1569661308996251839, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: eventSystem
       value: 
-      objectReference: {fileID: 1373251072}
+      objectReference: {fileID: 0}
     - target: {fileID: 1833156133051903887, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12736,7 +12727,7 @@ PrefabInstance:
     - target: {fileID: 4974752420684623417, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: eventSystem
       value: 
-      objectReference: {fileID: 1373251072}
+      objectReference: {fileID: 0}
     - target: {fileID: 4974752420684623417, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: musicVolumeSlider
       value: 
@@ -12769,10 +12760,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5547812620613028800, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5601238304207963336, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: eventSystem
       value: 
-      objectReference: {fileID: 1373251072}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601238304207963336, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: boats.Array.size
       value: 4

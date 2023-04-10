@@ -1,12 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSettings : MonoBehaviour
+[CreateAssetMenu(fileName = "Config", menuName = "ConfigScript", order = 0)]
+public class ConfigScript : ScriptableObject
 {
     private GameObject _boat;
-    private string[] _circuit = {"ProtoScene"};
+    private string[] _circuit = {"AlphaScene"};
     private int _gameMode;
     private int _aiAmount;
     private int _playerAmount;
@@ -14,6 +14,8 @@ public class GameSettings : MonoBehaviour
 
     private bool _showHUD;
     private bool _showFPS;
+
+    private int _fpsIndex;
 
     public GameObject Boat
     {
@@ -61,5 +63,11 @@ public class GameSettings : MonoBehaviour
     {
         get => _showFPS;
         set => _showFPS = value;
+    }
+    
+    public int FPSIndex
+    {
+        get => _fpsIndex;
+        set => _fpsIndex = value;
     }
 }

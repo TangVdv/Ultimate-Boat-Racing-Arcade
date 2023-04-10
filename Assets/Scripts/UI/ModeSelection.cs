@@ -11,7 +11,7 @@ using Button = UnityEngine.UI.Button;
 
 public class ModeSelection : MonoBehaviour
 {
-    [SerializeField] private GameObject eventSystem;
+    [SerializeField] private ConfigScript config;
     [SerializeField] private Button playButton;
     [SerializeField] private GameObject detailsPanel;
     [SerializeField] private Text playerAmountText;
@@ -25,12 +25,9 @@ public class ModeSelection : MonoBehaviour
     private int _difficultyIndex = 0;
     private string[] _difficulty = {"EASY", "MEDIUM", "HARD"};
 
-    private GameSettings _gameSettings;
-
     private void Start()
     {
         DisableButton();
-        _gameSettings = eventSystem.GetComponent<GameSettings>();
         SetText();
     }
 
@@ -43,11 +40,11 @@ public class ModeSelection : MonoBehaviour
 
     public void PlayGame()
     {
-        _gameSettings.Difficulty = _difficultyIndex;
-        _gameSettings.AIAmount = _aiAmount;
-        _gameSettings.PlayerAmount = _playerAmount;
-        _gameSettings.GameMode = _modeSelect;
-        SceneManager.LoadScene(_gameSettings.Circuit[_circuitIndex]);
+        config.Difficulty = _difficultyIndex;
+        config.AIAmount = _aiAmount;
+        config.PlayerAmount = _playerAmount;
+        config.GameMode = _modeSelect;
+        SceneManager.LoadScene("AlphaScene");
     }
 
     public void DisableButton()
@@ -63,7 +60,7 @@ public class ModeSelection : MonoBehaviour
         detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + value;
         detailsPanel.transform.GetChild(1).GetComponent<Text>().text = "Best time : 00:00:00";
         detailsPanel.transform.GetChild(2).GetComponent<Text>().text = "Boat : None";
-        detailsPanel.transform.GetChild(3).GetComponent<Text>().text = "Current boat : " + _gameSettings.Boat.name;
+        detailsPanel.transform.GetChild(3).GetComponent<Text>().text = "Current boat : " + config.Boat.name;
     }
 
     public void SetMode(int value)

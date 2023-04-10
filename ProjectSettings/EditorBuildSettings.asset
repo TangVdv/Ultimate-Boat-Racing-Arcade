@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProtoScene.unity
     guid: 7afe9df9a9907b949b28e2892b8780d6
+  - enabled: 1
+    path: Assets/Scenes/AlphaScene.unity
+    guid: b4aa12310dea3cf4391205b2c44e42de
   m_configObjects: {}

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject eventSystem;
+    [SerializeField] private ConfigScript config;
     [SerializeField] private Text languageText;
     [SerializeField] private Text resolutionText;
     [SerializeField] private Text windowModeText;
@@ -20,8 +20,6 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider effectVolumeSlider;
     [SerializeField] private Slider lookSensitivitySlider;
 
-    private GameSettings _gameSettings;
-    
     private int _languageIndex = 0;
     private string[] _languageArray = {"FRANÇAIS", "ENGLISH"};
     
@@ -48,8 +46,6 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        _gameSettings = eventSystem.GetComponent<GameSettings>();
-        
         GenerateResolutions();
         Apply();
         SetText();
@@ -79,22 +75,6 @@ public class SettingsMenu : MonoBehaviour
         });
     }
 
-    private void Update()
-    {
-        if (_showFPS)
-        {
-            // calcul current framerate
-            timelapse = Time.smoothDeltaTime;
-            timer = timer <= 0 ? 0 : timer -= timelapse;
-            if (timer <= 0)
-                avgFramerate = (int)(1f / timelapse);
-
-            currentFPSText.text = avgFramerate.ToString();
-        }
-        else
-            currentFPSText.text = "";
-    }
-
     public void Apply()
     {
         // set resolution
@@ -105,6 +85,7 @@ public class SettingsMenu : MonoBehaviour
         
         // set framerate
         Application.targetFrameRate = _fpsArray[_fpsIndex];
+        config.FPSIndex = _fpsIndex;
         masterVolumeSlider.value = _masterVolume;
         musicVolumeSlider.value = _musicVolume;
         effectVolumeSlider.value = _effectVolume;
@@ -197,12 +178,12 @@ public class SettingsMenu : MonoBehaviour
     public void FPSToggle(bool value)
     {
         _showFPS = value;
-        _gameSettings.ShowFPS = value;
+        config.ShowFPS = value;
     }
 
     public void HUDToggle(bool value)
     {
         _showHUD = value;
-        _gameSettings.ShowHUD = value;
+        config.ShowHUD = value;
     }
 }
