@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -760,8 +760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boats:
-  - {fileID: 1704011965}
-  - {fileID: 1340095544}
+  - {fileID: 0}
+  - {fileID: 0}
   grace: 3
 --- !u!4 &292134617
 Transform:
@@ -2052,11 +2052,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f41a74affb5ed5041aa3485b142c2669, type: 3}
---- !u!1 &1340095544 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 255489496731752520, guid: 3a3ff84de196bf8418228806aa541bde, type: 3}
-  m_PrefabInstance: {fileID: 364383687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1376459124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2540,11 +2535,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8142990103292359015, guid: f41a74affb5ed5041aa3485b142c2669, type: 3}
   m_PrefabInstance: {fileID: 1091318279}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1704011965 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 255489496731752520, guid: 9352d0e40b08a3c47aba12ab84ef6d6e, type: 3}
-  m_PrefabInstance: {fileID: 1559683827}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1709754142
 PrefabInstance:

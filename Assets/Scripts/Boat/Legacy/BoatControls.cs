@@ -36,6 +36,7 @@ public class BoatControls : MonoBehaviour
     {
 		initialRotation = transform.rotation;
 		inputManager.setController(this);
+		manager.AddPlayer(body);
     }
 
 

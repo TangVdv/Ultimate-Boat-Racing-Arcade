@@ -8,11 +8,11 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
 
-    public GameObject[] boats;
+    public List<GameObject> boats;
     
     public class PlayerProgress
     {
-        public GameObject player;
+        public readonly GameObject player;
         public int lap;
         public int checkpoint; 
         public PlayerProgress(GameObject player)
@@ -41,11 +41,16 @@ public class CheckpointManager : MonoBehaviour
             Checkpoint checkpoint = child.GetComponent<Checkpoint>();
             checkpoints[checkpoint.ID] = checkpoint;
             checkpoint.SetCheckpointManager(this);
-             
         }
         
         UpdateVisuals(playerProgress[0]);
         
+    }
+    
+    public void AddPlayer(GameObject player)
+    {
+        boats.Add(player);
+        playerProgress.Add(new PlayerProgress(player));
     }
 
 	public Vector3 GetNextCheckpointCoordinates(GameObject player){
