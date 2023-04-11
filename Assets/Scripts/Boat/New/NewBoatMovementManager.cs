@@ -14,6 +14,10 @@ namespace Boat.New
         public float fastModifier = 1.5f;
 
         public float rotationSpeed = 5f;
+        
+        //TODO
+        public float maxSpeed = 20f;
+        
         public void FixedUpdate()
         {
             float speedModifier = 1f;
@@ -31,7 +35,9 @@ namespace Boat.New
 
             speedModifier *= manager.movementZ;
             
-            rigidBody.AddForce(transform.forward * speedModifier);
+            float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
+            if (forwardSpeed < maxSpeed) rigidBody.AddForce(transform.forward * speedModifier);
+            
             rigidBody.AddTorque(transform.up * (manager.movementX * rotationSpeed));
             
         }

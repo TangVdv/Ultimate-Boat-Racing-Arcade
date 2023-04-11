@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Boat.New
@@ -12,12 +13,51 @@ namespace Boat.New
         public Rigidbody rigidBody;
         
         public CheckpointManager manager;
+        private NewBoatMovementManager _newBoatMovementManager;
+        
+        //TODO: mettre dans un fichier séparé
+        public class AIDecision
+        {
+	        public float angularThreshold;
+	        public float maxSpeed;
+	        public float minSpeed;
+
+	        public AIDecision(float angularThreshold, float maxSpeed, float minSpeed)
+	        {
+		        this.angularThreshold = angularThreshold;
+		        this.maxSpeed = maxSpeed;
+		        this.minSpeed = minSpeed;
+	        }
+	        
+	        public bool IsApplicable(float angularDifference)
+	        {
+		        return angularDifference >= angularThreshold;
+	        }
+
+	        public int DecisionTree(float speed)
+	        {
+		        if(speed >= maxSpeed) return -1;
+		        return speed <= minSpeed ? 1 : 0;
+	        }
+        }
+        
+        public List<AIDecision> decisionTree = new List<AIDecision>();
 
         private new void Start()
         {
+	        _newBoatMovementManager = boat.GetComponent<NewBoatMovementManager>();
 	        base.Start();
 	        _botTargetPosition = Vector3.zero;
 	        _nextCheckpoint = 0;
+	        
+	        float maxSpeed = _newBoatMovementManager.maxSpeed;
+	        
+	        decisionTree.Add(new AIDecision(2.0f, maxSpeed * 0.05f, maxSpeed * 0.00f));
+	        decisionTree.Add(new AIDecision(1.5f, maxSpeed * 0.10f, maxSpeed * 0.05f));
+	        decisionTree.Add(new AIDecision(1.0f, maxSpeed * 0.25f, maxSpeed * 0.10f));
+	        decisionTree.Add(new AIDecision(0.5f, maxSpeed * 0.50f, maxSpeed * 0.25f));
+	        decisionTree.Add(new AIDecision(0.25f, maxSpeed * 0.70f, maxSpeed * 0.50f));
+	        decisionTree.Add(new AIDecision(0.0f, maxSpeed * 1.00f, maxSpeed * 0.90f));
         }
 
         private void Update()
@@ -55,10 +95,6 @@ namespace Boat.New
 	        float angularDifference = Vector2.Angle(new Vector2(forward.x, forward.z), movement);
 	        angularDifference /= 45.0f;
 
-	        if (angularDifference >= 2.0f) movementZ = -1;
-
-	        //float angularDifference = Vector2.Angle(up, targetmovement);
-
 	        float angularSpeed = rigidBody.angularVelocity.y;
 	        float steer = Mathf.Clamp(angularDifference - angularSpeed, -1.0f, 1.0f);
 
@@ -75,31 +111,18 @@ namespace Boat.New
 	        
 	        movementZ = movement.y;
 
-	        /*
-	        float percentOfMaxSpeed = boat.currentSpeed / boat.maxSpeed;
-	        float absolutePercentOfMaxSpeed = Mathf.Abs(percentOfMaxSpeed);
-	        if (angularDifference >= 3.0f){
-		        if(absolutePercentOfMaxSpeed >= 0.20f) movementZ = -1;
+	        float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
+
+	        foreach (var decision in decisionTree)
+	        {
+		        if (decision.IsApplicable(angularDifference))
+		        {
+			        Debug.Log("Decision applicable: "+decision.angularThreshold + "Speed: " + forwardSpeed);
+			        movementZ = decision.DecisionTree(forwardSpeed);
+			        break;
+		        }
 	        }
-	        else if(angularDifference >= 1.5f){
-		        if(percentOfMaxSpeed >= 0.10f) movementZ = -1;
-		        else if (absolutePercentOfMaxSpeed >= 0.50f) movementZ = 1;
-		        else movementZ = 0;
-	        }else if(angularDifference >= 1.0f){
-                if(percentOfMaxSpeed >= 0.25f) movementZ = -1;
-		        else if (absolutePercentOfMaxSpeed >= 0.25f)movementZ = 1;
-                else movementZ = 0;
-	        }else if(angularDifference >= 0.5f){
-		        if(percentOfMaxSpeed >= 0.50f)movementZ = -1;
-		        else if (absolutePercentOfMaxSpeed >= 0.10f) movementZ = 1;
-                else movementZ = 0;
-	        }else if(angularDifference >= 0.25f){
-                if(percentOfMaxSpeed >= 0.75f) movementZ = -1;
-                else movementZ = 1;
-	        }else{
-	            if(percentOfMaxSpeed >= 0.90f) movementZ = 0;
-                else movementZ = 1;
-            }*/
         }
+
     }
 }
