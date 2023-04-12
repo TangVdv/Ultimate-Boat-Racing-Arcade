@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Checkpoints;
 using UnityEngine;
 
 namespace Boat.New
@@ -117,7 +118,6 @@ namespace Boat.New
 	        {
 		        if (decision.IsApplicable(angularDifference))
 		        {
-			        Debug.Log("Decision applicable: "+decision.angularThreshold + "Speed: " + forwardSpeed);
 			        movementZ = decision.DecisionTree(forwardSpeed);
 			        break;
 		        }

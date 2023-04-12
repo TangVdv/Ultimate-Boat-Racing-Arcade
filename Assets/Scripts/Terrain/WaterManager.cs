@@ -1,29 +1,29 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshRenderer))]
-
-public class WaterManager : MonoBehaviour
+namespace Terrain
 {
-    private MeshFilter _meshFilter;
+    [RequireComponent(typeof(MeshFilter))]
+    [RequireComponent(typeof(MeshRenderer))]
 
-    private void Awake()
+    public class WaterManager : MonoBehaviour
     {
-        _meshFilter = GetComponent<MeshFilter>();
-    }
+        private MeshFilter _meshFilter;
 
-    private void Update()
-    {
-        var vertices = _meshFilter.mesh.vertices;
-        for (var i = 0; i < vertices.Length; ++i)
+        private void Awake()
         {
-            vertices[i].y = WaveManager.instance.GetWaveHeight(transform.position.x + vertices[i].x);
+            _meshFilter = GetComponent<MeshFilter>();
         }
 
-        _meshFilter.mesh.vertices = vertices;
-        _meshFilter.mesh.RecalculateNormals();
+        private void Update()
+        {
+            var vertices = _meshFilter.mesh.vertices;
+            for (var i = 0; i < vertices.Length; ++i)
+            {
+                vertices[i].y = WaveManager.instance.GetWaveHeight(transform.position.x + vertices[i].x);
+            }
+
+            _meshFilter.mesh.vertices = vertices;
+            _meshFilter.mesh.RecalculateNormals();
+        }
     }
 }

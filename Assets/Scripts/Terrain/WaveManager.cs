@@ -1,38 +1,37 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+namespace Terrain
 {
-    public static WaveManager instance;
-
-    public float amplitude = 1f;
-    public float length = 2f;
-    public float speed = 1f;
-    public float offset = 0f;
-
-    private void Awake()
+    public class WaveManager : MonoBehaviour
     {
-        if (instance == null)
+        public static WaveManager instance;
+
+        public float amplitude = 1f;
+        public float length = 2f;
+        public float speed = 1f;
+        public float offset = 0f;
+
+        private void Awake()
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if(instance != this)
+            {
+                Debug.Log("Instance already exists, destroying object!");
+                Destroy(this);
+            }
         }
-        else if(instance != this)
+
+        private void Update()
         {
-            Debug.Log("Instance already exists, destroying object!");
-            Destroy(this);
+            offset += Time.deltaTime * speed;
         }
-    }
 
-    private void Update()
-    {
-        offset += Time.deltaTime * speed;
-    }
-
-    public float GetWaveHeight(float _x)
-    {
-        return amplitude * Mathf.Sin(_x / length + offset);
+        public float GetWaveHeight(float _x)
+        {
+            return amplitude * Mathf.Sin(_x / length + offset);
+        }
     }
 }

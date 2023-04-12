@@ -1,23 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Checkpoint : MonoBehaviour
+namespace Checkpoints
 {
-
-    private CheckpointManager _checkpointManager;
-    
-    public int ID;
-
-    private void OnTriggerEnter(Collider other)
+    public class Checkpoint : MonoBehaviour
     {
-        if (_checkpointManager.boats.Contains(other.gameObject)) _checkpointManager.CheckPointPassed(ID, other.gameObject);
-    }
+
+        private CheckpointManager _checkpointManager;
     
-    public void SetCheckpointManager(CheckpointManager checkpointManager)
-    {
-       _checkpointManager = checkpointManager;
+        public int ID;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (_checkpointManager.boats.Contains(other.gameObject)) _checkpointManager.CheckPointPassed(ID, other.gameObject);
+        }
+    
+        public void SetCheckpointManager(CheckpointManager checkpointManager)
+        {
+            _checkpointManager = checkpointManager;
+        }
     }
 }

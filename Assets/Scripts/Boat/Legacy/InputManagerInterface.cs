@@ -1,30 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-public class InputManagerInterface : MonoBehaviour
+namespace Boat.Legacy
 {
-    protected BoatControls boat;
-
-    protected short directionX = 0;
-    protected short directionZ = 0;
-    
-    // Start is called before the first frame update
-    public void setController(BoatControls b)
+    public class InputManagerInterface : MonoBehaviour
     {
-        boat = b;
-    }
+        protected BoatControls boat;
 
-   protected virtual void setMovement()
-   {
-       Debug.Log("Parent");
-   }
+        protected short directionX = 0;
+        protected short directionZ = 0;
     
-    void FixedUpdate()
-    {
-        setMovement();
+        // Start is called before the first frame update
+        public void setController(BoatControls b)
+        {
+            boat = b;
+        }
 
-        boat.Movement(directionZ, directionX);
+        protected virtual void setMovement()
+        {
+            Debug.Log("Parent");
+        }
+    
+        void FixedUpdate()
+        {
+            setMovement();
+
+            boat.Movement(directionZ, directionX);
+        }
     }
 }
