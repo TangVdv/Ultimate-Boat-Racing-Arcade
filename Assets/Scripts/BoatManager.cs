@@ -9,7 +9,7 @@ public class BoatManager : MonoBehaviour
     
     private MeshRenderer _meshRenderer;
 
-    private void Start()
+    private void Awake()
     {
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
         _meshRenderer.material = material;
@@ -19,7 +19,13 @@ public class BoatManager : MonoBehaviour
     public Color CurrentMaterialColor
     {
         get => _meshRenderer.material.color;
-        set => _meshRenderer.material.color = value;
+        set
+        {
+            if (_meshRenderer)
+            {
+                _meshRenderer.material.color = value;
+            }
+        }
     }
     
 }

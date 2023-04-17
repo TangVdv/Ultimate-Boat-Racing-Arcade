@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class SetupGameScript : MonoBehaviour
 {
+    [SerializeField] private Logger logger;
     [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject fpsUI;
     [SerializeField] private GameObject startUI;
+    [SerializeField] private PlayerUI playerUI;
 
     private int _aiAmount = 0;
     private GameObject _playerBoat;
 
     private void Awake()
     {
+        logger.Log("SETUP", "", LogType.Log);
+
         _playerBoat = config.Boat;
         
         if (config.ShowFPS)
@@ -25,12 +29,15 @@ public class SetupGameScript : MonoBehaviour
         {
             case 0:
                 ChronoMode();
+                logger.Log("ChronoMode", "", LogType.Log);
                 break;
             case 1:
                 RaceMode();
+                logger.Log("RaceMode", "", LogType.Log);
                 break;
             default:
                 RaceMode();
+                logger.Log("RaceMode", "", LogType.Log);
                 break;
         }
     }
@@ -38,6 +45,7 @@ public class SetupGameScript : MonoBehaviour
     private void ChronoMode()
     {
         Debug.Log("ChronoMode");
+        playerUI.ChronoModeUI.SetActive(true);
         StartUI();
     }
 
@@ -45,12 +53,12 @@ public class SetupGameScript : MonoBehaviour
     {
         Debug.Log("RaceMode");
         _aiAmount = config.AIAmount;
-        //SPAWN AI
         StartUI();
     }
 
     private void StartUI()
     {
-        startUI.SetActive(true);
+        StartCoroutine(playerUI.UpdateTimer());
+        //startUI.SetActive(true);
     }
 }

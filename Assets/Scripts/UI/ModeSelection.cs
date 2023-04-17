@@ -65,7 +65,19 @@ public class ModeSelection : MonoBehaviour
 
     public void SetMode(int value)
     {
-        _modeSelect = value;
+        switch (value)
+        {
+            case 1:
+                DisableButton();
+                _modeSelect = value;
+                _aiAmount = 0;
+                _playerAmount = 1;
+                break;
+            case 0:
+                _modeSelect = value;
+                playButton.enabled = true;
+                break;
+        }
     }
 
     /** PLAYER AMOUNT **/

@@ -2360,18 +2360,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1569661308996251839}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
-        m_MethodName: DisableButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 7992942484746935469}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -12392,6 +12380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fce17ff443151c438b274bdd7f3da95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logger: {fileID: 0}
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   locations:
   - {fileID: 0}
@@ -12427,6 +12416,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   currentFPSText: {fileID: 4923311843766948686}
+  timerText: {fileID: 0}
+  chronoModeUI: {fileID: 0}
 --- !u!1 &7551525485420366329
 GameObject:
   m_ObjectHideFlags: 0
