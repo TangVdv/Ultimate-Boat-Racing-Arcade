@@ -1,3 +1,5 @@
+using System;
+using Boat.New;
 using UnityEngine;
 
 namespace PowerUps
@@ -5,22 +7,20 @@ namespace PowerUps
     public class PowerupCrate : MonoBehaviour
     {
         public PowerupArea powerupArea;
-    
-        // Start is called before the first frame update
-        void Start()
-        {
         
-        }
     
         public void SetArea(PowerupArea area)
         {
             powerupArea = area;
         }
-
-        // Update is called once per frame
-        void Update()
-        {
         
+        private void OnTriggerEnter(Collider other)
+        {
+            //Look for NewBulletManagerScript on other
+            var newBulletManagerScript = other.GetComponent<NewBulletManager>();
+            if(!newBulletManagerScript) return;
+            
+            Debug.Log("Touché");
         }
     }
 }

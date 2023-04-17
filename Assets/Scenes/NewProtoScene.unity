@@ -3622,11 +3622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7768223511442280780, guid: d9f910daa89aa6640ab29884015c462a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.25
+      value: 6.79
       objectReference: {fileID: 0}
     - target: {fileID: 7768223511442280780, guid: d9f910daa89aa6640ab29884015c462a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.2
+      value: 12.8
       objectReference: {fileID: 0}
     - target: {fileID: 7768223511442280780, guid: d9f910daa89aa6640ab29884015c462a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4424,10 +4424,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4310872712237868683, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+      propertyPath: initialVelocity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8341459511806100284, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1884155216}
+    - target: {fileID: 8341459511806100284, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+      propertyPath: reloadTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8348493431782611946, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: m_RootOrder
       value: 0
