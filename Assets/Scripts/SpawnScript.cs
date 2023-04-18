@@ -16,14 +16,14 @@ public class SpawnScript : MonoBehaviour
 
     private void Start()
     {
-        logger.Log("player amount : " +config.PlayerAmount, "", LogType.Log);
-        logger.Log("ai amount : "+config.AIAmount, "", LogType.Log);
+        logger.Log("player amount : " +config.PlayerAmount);
+        logger.Log("ai amount : "+config.AIAmount);
         int spawnAmount = config.PlayerAmount + config.AIAmount;
-        logger.Log("spawnAmount : "+spawnAmount, "", LogType.Log);
+        logger.Log("spawnAmount : "+spawnAmount);
         int spawnPlayerIndex = Random.Range(1, spawnAmount);
-        logger.Log("playerIndex : "+spawnPlayerIndex, "", LogType.Log);
+        logger.Log("playerIndex : "+spawnPlayerIndex);
         float distanceBetweenSpawn = (_endX - _startX) / (spawnAmount - 1);
-        logger.Log("boat : "+config.Boat, "", LogType.Log);
+        logger.Log("boat : "+config.Boat);
 
         for (int i = 1; i <= spawnAmount; i++)
         {

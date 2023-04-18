@@ -29,7 +29,8 @@ public class Logger : MonoBehaviour
             _doShow = !_doShow;
         }
     }
-    public void Log(string logString, string stackTrace, LogType type)
+    
+    public void Log(string logString, string stackTrace = "", LogType type = LogType.Log)
     {
         // for onscreen...
         _myLog = _myLog + "\n" + logString;

@@ -61,7 +61,7 @@ public class BoatSelection : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(1, final));
         Destroy(_currentBoat);
         _currentBoat = Instantiate(boats[_indexSelection], locations[start].transform.position, locations[start].transform.rotation);
-        logger.Log("Current Boat : "+boats[_indexSelection], "", LogType.Log);
+        logger.Log("Current Boat : "+boats[_indexSelection]);
         _boatManager = _currentBoat.GetComponent<BoatManager>();
         PlayboatNameText.text = _currentBoat.name;
         CustomboatNameText.text = _currentBoat.name;
@@ -91,7 +91,7 @@ public class BoatSelection : MonoBehaviour
 
     public void Select()
     {
-        logger.Log("Selection Boat : "+boats[_indexSelection], "", LogType.Log);
+        logger.Log("Selection Boat : "+boats[_indexSelection]);
         config.Boat = boats[_indexSelection];
     }
 

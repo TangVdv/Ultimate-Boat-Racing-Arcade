@@ -16,7 +16,7 @@ public class SetupGameScript : MonoBehaviour
 
     private void Awake()
     {
-        logger.Log("SETUP", "", LogType.Log);
+        logger.Log("SETUP");
 
         _playerBoat = config.Boat;
         
@@ -29,15 +29,15 @@ public class SetupGameScript : MonoBehaviour
         {
             case 0:
                 ChronoMode();
-                logger.Log("ChronoMode", "", LogType.Log);
+                logger.Log("ChronoMode");
                 break;
             case 1:
                 RaceMode();
-                logger.Log("RaceMode", "", LogType.Log);
+                logger.Log("RaceMode");
                 break;
             default:
                 RaceMode();
-                logger.Log("RaceMode", "", LogType.Log);
+                logger.Log("RaceMode");
                 break;
         }
     }
@@ -58,7 +58,6 @@ public class SetupGameScript : MonoBehaviour
 
     private void StartUI()
     {
-        StartCoroutine(playerUI.UpdateTimer());
-        //startUI.SetActive(true);
+        startUI.SetActive(true);
     }
 }
