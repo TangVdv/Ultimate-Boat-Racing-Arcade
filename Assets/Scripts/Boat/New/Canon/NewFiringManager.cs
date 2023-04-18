@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Boat.New
+namespace Boat.New.Canon
 {
     public class NewFiringManager: MonoBehaviour
     {
@@ -12,7 +13,9 @@ namespace Boat.New
         public float initialVelocity = 20;
         private GameObject _bullet;
 
-        public void Fire( /*Ajouter en argument la munition ?*/)
+        public NewAimingManager aimingManager;
+
+        public void Fire( BulletType bulletType)
         {
             foreach (var barrelOutput in barrelOutputs)
             {
@@ -24,6 +27,9 @@ namespace Boat.New
                 );
                 cannonBall.transform.localScale = localScale;
                 _bullet = Instantiate(cannonBall, barrelOutput.position, barrelOutput.rotation);  
+                NewBulletManager bulletManager = _bullet.GetComponent<NewBulletManager>();
+                bulletManager.SetManager(aimingManager);
+                bulletManager.SetBulletType(bulletType);
                 _bullet.GetComponent<Rigidbody>().velocity = barrelOutput.forward * initialVelocity;
             }
         }

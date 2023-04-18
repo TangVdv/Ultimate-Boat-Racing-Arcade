@@ -58,7 +58,10 @@ namespace Boat.New
             movementBarrels = Input.GetAxis(_aimAxis);
 
             wantsToFire = Input.GetMouseButtonDown(_fireClic);
-
+            switchingMunition = 0;
+            switchingMunition += Input.GetKeyDown(_changeWeaponLeft) ? -1 : 0;
+            switchingMunition += Input.GetKeyDown(_changeWeaponRight) ? 1 : 0;
+            if(switchingMunition != 0) Debug.Log("Switching munition");
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Boat.New
+namespace Boat.New.Canon
 {
     public class NewAimingManager: MonoBehaviour
     {
@@ -24,6 +24,14 @@ namespace Boat.New
         
         private bool _isReloading;
         private bool _isLoaded;
+        
+        private Dictionary<BulletType, int> bulletInventory = new Dictionary<BulletType, int>()
+        {
+            {BulletType.Basic, 2000000},
+            {BulletType.Explosive, 0},
+            {BulletType.SmokeScreen, 0}
+        };
+        private BulletType currentBulletType = BulletType.Basic;
 
         public void Start()
         {
@@ -56,6 +64,33 @@ namespace Boat.New
             }
             
             if(manager.wantsToFire)Fire();
+
+            if(manager.switchingMunition != 0)SwitchMunition();
+        }
+
+        public void AddRandomMunition()
+        {
+            bulletInventory[(BulletType) Random.Range(1, bulletInventory.Count-1)] += 1;
+            foreach (var bulletType in bulletInventory)
+            {
+                Debug.Log(bulletType.Key + " : " + bulletType.Value);
+            }
+        }
+
+        public void SwitchMunition()
+        {
+            int currentIndex = (int)currentBulletType;
+            //Loop through the bullet types to find one that is available
+            for (int i = currentIndex; i != bulletInventory.Count; i+=manager.switchingMunition)
+            {
+                if (bulletInventory[(BulletType) i] > 0)
+                {
+                    currentBulletType = (BulletType) i;
+                    break;
+                }
+
+                if (i == bulletInventory.Count - 1) i = -1;
+            }
         }
 
         public void LateUpdate()
@@ -67,16 +102,17 @@ namespace Boat.New
             
         }
 
-        public void Fire( /*Ajouter munitiontype en argument ?*/)
+        public void Fire()
         {
             if (_isLoaded)
             {
                 foreach (var canon in canons)
                 {
-                    canon.Fire();
+                    canon.Fire(currentBulletType);
                 }
 
                 _isLoaded = false;
+                bulletInventory[currentBulletType]--;
 
             }else if (manager.State.Munitions > 0 && _isReloading == false)
             {

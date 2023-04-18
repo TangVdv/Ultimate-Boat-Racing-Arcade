@@ -1,6 +1,7 @@
 using System;
 using Boat.New;
 using UnityEngine;
+using Boat.New.Canon;
 
 namespace PowerUps
 {
@@ -17,10 +18,12 @@ namespace PowerUps
         private void OnTriggerEnter(Collider other)
         {
             //Look for NewBulletManagerScript on other
-            var newBulletManagerScript = other.GetComponent<NewBulletManager>();
-            if(!newBulletManagerScript) return;
+            var bulletManagerScript = other.GetComponent<NewBulletManager>();
+            if(!bulletManagerScript) return;
             
-            Debug.Log("Touché");
+            Debug.Log(bulletManagerScript.manager);
+            
+            bulletManagerScript.manager.AddRandomMunition();
         }
     }
 }

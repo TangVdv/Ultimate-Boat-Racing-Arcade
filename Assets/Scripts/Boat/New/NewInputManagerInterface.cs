@@ -9,6 +9,7 @@ namespace Boat.New
         public float movementCam;
         public float movementBarrels;
         public bool wantsToFire;
+        public int switchingMunition;
 
         public struct StateStruct
         { 
@@ -35,6 +36,8 @@ namespace Boat.New
             movementCam = 0;
             movementBarrels = 0;
             wantsToFire = false;
+
+            switchingMunition = 0;
         }
     
     }
