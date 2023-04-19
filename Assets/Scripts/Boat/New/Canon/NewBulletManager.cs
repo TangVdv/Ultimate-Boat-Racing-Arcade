@@ -4,7 +4,7 @@ namespace Boat.New.Canon
 {
     public class NewBulletManager: MonoBehaviour
     {
-        public BulletType bulletType = BulletType.Basic;
+        private BulletType bulletType = BulletType.Basic;
         public Rigidbody rigidBody;
         public NewAimingManager manager;
 

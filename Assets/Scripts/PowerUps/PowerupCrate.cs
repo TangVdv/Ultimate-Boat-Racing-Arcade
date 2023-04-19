@@ -24,6 +24,9 @@ namespace PowerUps
             Debug.Log(bulletManagerScript.manager);
             
             bulletManagerScript.manager.AddRandomMunition();
+            //Destroy this object
+            powerupArea.PowerUpCollected(gameObject);
+            Destroy(gameObject);
         }
     }
 }

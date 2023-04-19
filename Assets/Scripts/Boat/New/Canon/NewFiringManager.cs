@@ -8,7 +8,7 @@ namespace Boat.New.Canon
         public GameObject body;
         public GameObject barrels;
         public Transform[] barrelOutputs;
-        [SerializeField] private GameObject cannonBall; // DONC C'EST CA LA MUNITION A CHANGER, LA RAMENER AU DESSUS ???
+        [SerializeField] private GameObject cannonBall; 
         
         public float initialVelocity = 20;
         private GameObject _bullet;

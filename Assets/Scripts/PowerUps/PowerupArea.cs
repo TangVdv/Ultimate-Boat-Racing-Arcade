@@ -10,6 +10,7 @@ namespace PowerUps
         public int maxPowerups = 3;
 
         public float cooldown = 5;
+        private float _cooldown;
         
         public float spaceBuffer = 5.0f;
     
@@ -23,15 +24,17 @@ namespace PowerUps
         
             for (int i = 0; i < maxPowerups; i++) RandomInstantiatePowerUp();
         
+            _cooldown = cooldown;
         }
 
         void Update()
         {
-            if(cooldown > 0) cooldown -= Time.deltaTime;
-            else if(powerups.Count < maxPowerups)
+            if (powerups.Count >= maxPowerups) _cooldown = cooldown;
+            else if (_cooldown >= 0) _cooldown -= Time.deltaTime;
+            else if (powerups.Count < maxPowerups)
             {
-                cooldown = 5;
-            
+                _cooldown = cooldown;
+
                 RandomInstantiatePowerUp();
             }
         }

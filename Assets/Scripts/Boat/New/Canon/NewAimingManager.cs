@@ -39,6 +39,11 @@ namespace Boat.New.Canon
             {
                 StartCoroutine(Reload());
             }
+
+            foreach (var canon in canons)
+            {
+                canon.aimingManager = this;
+            }
         }
 
         public void Update()
@@ -79,18 +84,14 @@ namespace Boat.New.Canon
 
         public void SwitchMunition()
         {
-            int currentIndex = (int)currentBulletType;
-            //Loop through the bullet types to find one that is available
-            for (int i = currentIndex; i != bulletInventory.Count; i+=manager.switchingMunition)
-            {
-                if (bulletInventory[(BulletType) i] > 0)
-                {
-                    currentBulletType = (BulletType) i;
-                    break;
-                }
-
-                if (i == bulletInventory.Count - 1) i = -1;
-            }
+            //TODO: Sauter les munitions vides
+            int currentBulletTypeInt = (int) currentBulletType;
+            currentBulletTypeInt += manager.switchingMunition;
+            if (currentBulletTypeInt > bulletInventory.Count - 1) currentBulletTypeInt = 1;
+            else if (currentBulletTypeInt < 0) currentBulletTypeInt = bulletInventory.Count - 1; 
+                
+            currentBulletType = (BulletType) currentBulletTypeInt;
+            Debug.Log("Current munition : " + currentBulletType);
         }
 
         public void LateUpdate()
@@ -106,6 +107,9 @@ namespace Boat.New.Canon
         {
             if (_isLoaded)
             {
+                if(!bulletInventory.ContainsKey(currentBulletType)) return;
+                if(bulletInventory[currentBulletType] <= 0) return;
+                
                 foreach (var canon in canons)
                 {
                     canon.Fire(currentBulletType);
