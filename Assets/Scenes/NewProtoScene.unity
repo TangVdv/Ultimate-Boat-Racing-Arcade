@@ -4737,6 +4737,7 @@ MonoBehaviour:
   movementCam: 0
   movementBarrels: 0
   wantsToFire: 0
+  switchingMunition: 0
   controlScheme: 0
 --- !u!4 &1884155217 stripped
 Transform:
@@ -5911,6 +5912,7 @@ MonoBehaviour:
   - {fileID: 518965508663977624}
   cannonBall: {fileID: 937852843518610473, guid: 3a065f26e79db0c4badc6808a3d84017, type: 3}
   initialVelocity: 20
+  aimingManager: {fileID: 0}
 --- !u!4 &518965508663977624
 Transform:
   m_ObjectHideFlags: 0
@@ -6372,6 +6374,7 @@ MonoBehaviour:
   movementCam: 0
   movementBarrels: 0
   wantsToFire: 0
+  switchingMunition: 0
   boat: {fileID: 2392372774742256965}
   rigidBody: {fileID: 6495004143902603341}
   manager: {fileID: 292134616}
@@ -7965,6 +7968,7 @@ MonoBehaviour:
   - {fileID: 8736882229185176934}
   cannonBall: {fileID: 937852843518610473, guid: 3a065f26e79db0c4badc6808a3d84017, type: 3}
   initialVelocity: 20
+  aimingManager: {fileID: 0}
 --- !u!4 &8736882229185176934
 Transform:
   m_ObjectHideFlags: 0
@@ -7998,6 +8002,7 @@ MonoBehaviour:
   - {fileID: 8893281936046187668}
   cannonBall: {fileID: 937852843518610473, guid: 3a065f26e79db0c4badc6808a3d84017, type: 3}
   initialVelocity: 20
+  aimingManager: {fileID: 0}
 --- !u!4 &8893281936046187668
 Transform:
   m_ObjectHideFlags: 0

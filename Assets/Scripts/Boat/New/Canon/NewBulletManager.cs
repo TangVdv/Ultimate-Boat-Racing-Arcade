@@ -8,6 +8,8 @@ namespace Boat.New.Canon
         public Rigidbody rigidBody;
         public NewAimingManager manager;
 
+        public GameObject smokeScreenPrefab;
+        
         public void SetBulletType(BulletType type)
         {
             bulletType = type;
@@ -21,10 +23,12 @@ namespace Boat.New.Canon
                     //TODO
                     break;
                 case BulletType.SmokeScreen:
-                    //TODO
+                    //Instantiate SmokeScreen prefab
+                    Instantiate(smokeScreenPrefab, transform.position, Quaternion.identity);
                     break;
                 case BulletType.Basic: break;
             }
+            Destroy(gameObject);
         }
 
         public void SetManager(NewAimingManager aimingManager)

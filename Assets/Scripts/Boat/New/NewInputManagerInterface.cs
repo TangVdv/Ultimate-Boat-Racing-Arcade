@@ -39,6 +39,5 @@ namespace Boat.New
 
             switchingMunition = 0;
         }
-    
     }
 }
