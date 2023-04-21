@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class SetupGameScript : MonoBehaviour
 {
-    [SerializeField] private Logger logger;
     [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject fpsUI;
     [SerializeField] private GameObject startUI;
-    [SerializeField] private PlayerUI playerUI;
+    [SerializeField] private GameObject chronoUI;
+    [SerializeField] private ChronoScript chrono;
+    [SerializeField] private SpawnScript spawner;
 
     private int _aiAmount = 0;
     private GameObject _playerBoat;
 
-    private void Awake()
+    private void Start()
     {
-        logger.Log("SETUP");
-
         _playerBoat = config.Boat;
         
         if (config.ShowFPS)
@@ -25,19 +24,22 @@ public class SetupGameScript : MonoBehaviour
             fpsUI.SetActive(true);
         }
 
+        spawner.BoatsSetup();
+        Setup();
+    }
+
+    public void Setup()
+    {
+        Debug.Log("SETUP");
+
+        spawner.Spawn();
         switch (config.GameMode)
         {
-            case 0:
-                ChronoMode();
-                logger.Log("ChronoMode");
-                break;
             case 1:
-                RaceMode();
-                logger.Log("RaceMode");
+                ChronoMode();
                 break;
-            default:
+            case 0:
                 RaceMode();
-                logger.Log("RaceMode");
                 break;
         }
     }
@@ -45,19 +47,15 @@ public class SetupGameScript : MonoBehaviour
     private void ChronoMode()
     {
         Debug.Log("ChronoMode");
-        playerUI.ChronoModeUI.SetActive(true);
-        StartUI();
+        chronoUI.SetActive(true);
+        chrono.Reset();
+        startUI.SetActive(true);
     }
 
     private void RaceMode()
     {
         Debug.Log("RaceMode");
         _aiAmount = config.AIAmount;
-        StartUI();
-    }
-
-    private void StartUI()
-    {
         startUI.SetActive(true);
     }
 }

@@ -77,6 +77,7 @@ public class CheckpointManager : MonoBehaviour
             return;
         }
 
+        chrono.SaveCheckpointTime("Map1", checkpoint);
 
         if (checkpoint == 0)
         {
@@ -85,6 +86,7 @@ public class CheckpointManager : MonoBehaviour
                 progress.lap++;
                 Debug.Log("Lap "+ progress.lap +" completed !");
                 chrono.PauseTimer();
+                chrono.PrintCheckpointsTime("Map1");
             }
             else
             {
@@ -93,7 +95,6 @@ public class CheckpointManager : MonoBehaviour
 
 
         }
-        Debug.Log(chrono.TimerChrono);
         progress.checkpoint = checkpoint;
         UpdateVisuals(progress);
     }

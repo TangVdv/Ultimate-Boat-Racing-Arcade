@@ -7,6 +7,8 @@ public class StartUI : MonoBehaviour
 {
     [SerializeField] private ChronoScript chronoScript;
     [SerializeField] private Text countdownText;
+    [SerializeField] private Button startButton;
+    
     public int countdown = 3;
     
     public void StartGame()
@@ -26,6 +28,8 @@ public class StartUI : MonoBehaviour
             count--;
         }
 
+        countdownText.text = "";
+        startButton.gameObject.SetActive(true);
         gameObject.SetActive(false);
         chronoScript.StartTimer();
     }

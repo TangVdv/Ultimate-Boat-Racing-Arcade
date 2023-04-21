@@ -11,7 +11,7 @@ public class Logger : MonoBehaviour
     private string _filename = "";
     private bool _doShow = false;
     private int kChars = 700;
-
+    
     private void OnEnable()
     {
         Application.logMessageReceived += Log;

@@ -7,7 +7,6 @@ using Color = System.Drawing.Color;
 
 public class BoatSelection : MonoBehaviour
 {
-    [SerializeField] private Logger logger;
     [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject[] locations;
     [SerializeField] private GameObject[] boats;
@@ -27,7 +26,7 @@ public class BoatSelection : MonoBehaviour
         if (boats.Length > 0)
         {
             _currentBoat = Instantiate( boats[_indexSelection], locations[1].transform.position, locations[1].transform.rotation);
-            logger.Log("Current Boat : "+boats[_indexSelection], "", LogType.Log);
+            Debug.Log("Current Boat : "+boats[_indexSelection]);
             PlayboatNameText.text = _currentBoat.name;
             CustomboatNameText.text = _currentBoat.name;
             _boatManager = _currentBoat.GetComponent<BoatManager>();
@@ -61,7 +60,7 @@ public class BoatSelection : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(1, final));
         Destroy(_currentBoat);
         _currentBoat = Instantiate(boats[_indexSelection], locations[start].transform.position, locations[start].transform.rotation);
-        logger.Log("Current Boat : "+boats[_indexSelection]);
+        Debug.Log("Current Boat : "+boats[_indexSelection]);
         _boatManager = _currentBoat.GetComponent<BoatManager>();
         PlayboatNameText.text = _currentBoat.name;
         CustomboatNameText.text = _currentBoat.name;
@@ -91,7 +90,7 @@ public class BoatSelection : MonoBehaviour
 
     public void Select()
     {
-        logger.Log("Selection Boat : "+boats[_indexSelection]);
+        Debug.Log("Selection Boat : "+boats[_indexSelection]);
         config.Boat = boats[_indexSelection];
     }
 

@@ -8,16 +8,10 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
     [SerializeField] private Text currentFPSText;
-    [SerializeField] private GameObject chronoModeUI;
 
     private int[] _fpsArray = {30, 60, 120};
     private float _timer, _timelapse, _avgFramerate;
-
-    public GameObject ChronoModeUI
-    {
-        get => chronoModeUI;
-        set => chronoModeUI = value;
-    }
+    
     private void Start()
     {
         Application.targetFrameRate = _fpsArray[config.FPSIndex];

@@ -57,7 +57,7 @@ public class BoatControls : MonoBehaviour
 		}
 
 		var progress = manager.GetPlayerProgress(body);
-		Debug.Log(progress);
+		//Debug.Log(progress);
     }
 
 	public void TriggerEffect(string effectName, int effectTime){
