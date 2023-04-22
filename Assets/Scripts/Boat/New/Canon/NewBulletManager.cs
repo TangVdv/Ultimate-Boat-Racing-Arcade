@@ -9,6 +9,7 @@ namespace Boat.New.Canon
         public NewAimingManager manager;
 
         public GameObject smokeScreenPrefab;
+        public GameObject explosionPrefab;
         
         public void SetBulletType(BulletType type)
         {
@@ -20,10 +21,9 @@ namespace Boat.New.Canon
             switch (bulletType)
             {
                 case BulletType.Explosive:
-                    //TODO
+                    Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                     break;
                 case BulletType.SmokeScreen:
-                    //Instantiate SmokeScreen prefab
                     Instantiate(smokeScreenPrefab, transform.position, Quaternion.identity);
                     break;
                 case BulletType.Basic: break;
