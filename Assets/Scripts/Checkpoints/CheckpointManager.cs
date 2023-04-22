@@ -8,6 +8,7 @@ namespace Checkpoints
     public class CheckpointManager : MonoBehaviour
     {
 
+        [SerializeField] private ChronoScript chrono;
         public List<GameObject> boats;
     
         public class PlayerProgress
@@ -84,6 +85,7 @@ namespace Checkpoints
                 return;
             }
 
+            chrono.SaveCheckpointTime("Map1", checkpoint);
 
             if (checkpoint == 0)
             {
@@ -91,6 +93,8 @@ namespace Checkpoints
                 {
                     progress.lap++;
                     Debug.Log("Lap "+ progress.lap +" completed !");
+                    chrono.PauseTimer();
+                    chrono.PrintCheckpointsTime("Map1");
                 }
                 else
                 {

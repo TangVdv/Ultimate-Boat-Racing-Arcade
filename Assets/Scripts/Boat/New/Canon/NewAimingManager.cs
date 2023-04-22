@@ -28,7 +28,7 @@ namespace Boat.New.Canon
         private Dictionary<BulletType, int> bulletInventory = new Dictionary<BulletType, int>()
         {
             {BulletType.Basic, 2000000},
-            {BulletType.Explosive, 20},
+            {BulletType.Explosive, 0},
             {BulletType.SmokeScreen, 0}
         };
         private BulletType currentBulletType = BulletType.Basic;
@@ -67,8 +67,17 @@ namespace Boat.New.Canon
                     canon.barrels.transform.localRotation = Quaternion.Lerp(canon.barrels.transform.localRotation, qt, Time.deltaTime * orbitDampening);
                 }
             }
-            
-            if(manager.wantsToFire)Fire();
+
+            if (manager.wantsToFire)
+            {
+                if (_isLoaded)
+                {
+                    Fire();
+                }else if (manager.State.Munitions > 0 && _isReloading == false)
+                {
+                    StartCoroutine(Reload());
+                }
+            }
 
             if(manager.switchingMunition != 0)SwitchMunition();
         }
@@ -105,8 +114,7 @@ namespace Boat.New.Canon
 
         public void Fire()
         {
-            if (_isLoaded)
-            {
+
                 if(!bulletInventory.ContainsKey(currentBulletType)) return;
                 if(bulletInventory[currentBulletType] <= 0) return;
                 
@@ -118,10 +126,6 @@ namespace Boat.New.Canon
                 _isLoaded = false;
                 bulletInventory[currentBulletType]--;
 
-            }else if (manager.State.Munitions > 0 && _isReloading == false)
-            {
-                StartCoroutine(Reload());
-            }
 
         }
         

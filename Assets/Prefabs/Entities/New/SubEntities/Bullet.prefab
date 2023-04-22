@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 937852843518610473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.82, y: 12.74, z: -13.2}
-  m_LocalScale: {x: 0.30000025, y: 0.30000025, z: 0.30000016}
+  m_LocalScale: {x: 0.30000004, y: 0.30000004, z: 0.30000013}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -129,3 +129,4 @@ MonoBehaviour:
   manager: {fileID: 0}
   smokeScreenPrefab: {fileID: 6562046793121478252, guid: db45122316f169d43bbffe1ec86b0370, type: 3}
   explosionPrefab: {fileID: 7099554037876645790, guid: 197f870b9197791479935e0c09b2b1c8, type: 3}
+  originBoat: {fileID: 0}
