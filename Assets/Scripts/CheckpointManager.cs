@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-
+    [SerializeField] private ChronoScript chrono;
     public GameObject[] boats;
     
     public class PlayerProgress
@@ -77,6 +77,7 @@ public class CheckpointManager : MonoBehaviour
             return;
         }
 
+        chrono.SaveCheckpointTime("Map1", checkpoint);
 
         if (checkpoint == 0)
         {
@@ -84,6 +85,8 @@ public class CheckpointManager : MonoBehaviour
             {
                 progress.lap++;
                 Debug.Log("Lap "+ progress.lap +" completed !");
+                chrono.PauseTimer();
+                chrono.PrintCheckpointsTime("Map1");
             }
             else
             {

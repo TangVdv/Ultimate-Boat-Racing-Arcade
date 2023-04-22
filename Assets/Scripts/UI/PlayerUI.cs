@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,30 +6,28 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private GameObject gameSettings;
+    [SerializeField] private ConfigScript config;
     [SerializeField] private Text currentFPSText;
 
-    private GameSettings _gameSettings;
-
-    private bool _showFPS = false;
+    private int[] _fpsArray = {30, 60, 120};
+    private float _timer, _timelapse, _avgFramerate;
     
-    private float timer, timelapse, avgFramerate;
-    void Start()
+    private void Start()
     {
-        _gameSettings = gameSettings.GetComponent<GameSettings>();
+        Application.targetFrameRate = _fpsArray[config.FPSIndex];
     }
-    
+
     void Update()
     {
-        if (_showFPS)
+        if (config.ShowFPS)
         {
             // calcul current framerate
-            timelapse = Time.smoothDeltaTime;
-            timer = timer <= 0 ? 0 : timer -= timelapse;
-            if (timer <= 0)
-                avgFramerate = (int)(1f / timelapse);
+            _timelapse = Time.smoothDeltaTime;
+            _timer = _timer <= 0 ? 0 : _timer -= _timelapse;
+            if (_timer <= 0)
+                _avgFramerate = (int)(1f / _timelapse);
 
-            currentFPSText.text = avgFramerate.ToString();
+            currentFPSText.text = _avgFramerate.ToString();
         }
         else
             currentFPSText.text = "";

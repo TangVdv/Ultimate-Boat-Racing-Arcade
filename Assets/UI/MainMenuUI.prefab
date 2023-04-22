@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88786d7b161a2d3408ffff6b0d240819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 0}
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   languageText: {fileID: 1665320282836215484}
   resolutionText: {fileID: 6784863412192937060}
   windowModeText: {fileID: 6329798759561647757}
@@ -2360,18 +2360,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1569661308996251839}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
-        m_MethodName: DisableButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 7992942484746935469}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -2398,8 +2386,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1569661308996251839}
         m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
-        m_MethodName: SetMode
-        m_Mode: 3
+        m_MethodName: ChronoMode
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8729,8 +8717,20 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1569661308996251839}
         m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
-        m_MethodName: SetMode
-        m_Mode: 3
+        m_MethodName: RaceMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6709371762561827205}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10500,7 +10500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb7a080a0f34544b874ba867f9fc465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 0}
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   playButton: {fileID: 6709371762561827205}
   detailsPanel: {fileID: 7992942484746935469}
   playerAmountText: {fileID: 4925210586512045622}
@@ -12273,8 +12273,9 @@ GameObject:
   - component: {fileID: 8200060945688930381}
   - component: {fileID: 5601238304207963336}
   - component: {fileID: 4884799943940596333}
+  - component: {fileID: 2168510925996177458}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainMenuUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12391,7 +12392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fce17ff443151c438b274bdd7f3da95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 0}
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   locations:
   - {fileID: 0}
   - {fileID: 0}
@@ -12412,6 +12413,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea3f098ddaa8e046a82bb75d262f7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2168510925996177458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543907393091794120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a4c6f46bc67b74499a4c10036496d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  currentFPSText: {fileID: 4923311843766948686}
+  chronoModeUI: {fileID: 0}
 --- !u!1 &7551525485420366329
 GameObject:
   m_ObjectHideFlags: 0
