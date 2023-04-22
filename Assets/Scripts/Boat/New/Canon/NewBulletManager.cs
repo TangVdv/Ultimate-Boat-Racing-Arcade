@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Boat.New.Canon
 {
@@ -11,13 +12,28 @@ namespace Boat.New.Canon
         public GameObject smokeScreenPrefab;
         public GameObject explosionPrefab;
         
+        public GameObject originBoat;
+        
         public void SetBulletType(BulletType type)
         {
             bulletType = type;
         }
-        
+
+        public void Update()
+        {
+            if (transform.position.y < 0) Destroy(gameObject);
+        }
+
         private void OnCollisionEnter(Collision other)
         {
+            
+            //if other is origin boat, do nothing
+            if (other.gameObject == originBoat)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            
             switch (bulletType)
             {
                 case BulletType.Explosive:
@@ -28,12 +44,16 @@ namespace Boat.New.Canon
                     break;
                 case BulletType.Basic: break;
             }
-            Destroy(gameObject);
         }
 
         public void SetManager(NewAimingManager aimingManager)
         {
             manager = aimingManager;
+        }
+        
+        public void SetParent(GameObject parent)
+        {
+            originBoat = parent;
         }
     }
 }

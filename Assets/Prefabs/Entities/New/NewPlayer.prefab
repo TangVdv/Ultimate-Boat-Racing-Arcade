@@ -225,6 +225,7 @@ MonoBehaviour:
   movementCam: 0
   movementBarrels: 0
   wantsToFire: 0
+  switchingMunition: 0
   controlScheme: 0
 --- !u!54 &7413920482512147655
 Rigidbody:
@@ -261,6 +262,7 @@ MonoBehaviour:
   slowModifier: 0.6
   fastModifier: 1.5
   rotationSpeed: 40
+  maxSpeed: 20
 --- !u!65 &752578266343152926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -731,6 +733,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1e6b467d167ca74499a57e05e78c9da, type: 2}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: boat
+      value: 
+      objectReference: {fileID: 2157788149339898319}
     - target: {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: m_Name
       value: Cannon
@@ -820,6 +826,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1e6b467d167ca74499a57e05e78c9da, type: 2}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: boat
+      value: 
+      objectReference: {fileID: 2157788149339898319}
     - target: {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: m_Name
       value: Cannon
@@ -909,6 +919,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1e6b467d167ca74499a57e05e78c9da, type: 2}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: boat
+      value: 
+      objectReference: {fileID: 2157788149339898319}
     - target: {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: m_Name
       value: Cannon
