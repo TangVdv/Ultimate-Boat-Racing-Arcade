@@ -8,8 +8,8 @@ public class ChronoScript : MonoBehaviour
 {
     [SerializeField] private Text timerText;
 
-    private Dictionary<string, Dictionary<int, string>> _checkpointTimes =
-        new Dictionary<string, Dictionary<int, string>>();
+    private Dictionary<int, Dictionary<int, string>> _checkpointTimes =
+        new Dictionary<int, Dictionary<int, string>>();
 
     private string _timerString;
     private float _timerChrono;
@@ -56,32 +56,32 @@ public class ChronoScript : MonoBehaviour
         }
     }
 
-    public void SaveCheckpointTime(string mapName, int checkpointID)
+    public void SaveCheckpointTime(int mapID, int checkpointID)
     {
-        if (!_checkpointTimes.ContainsKey(mapName))
+        if (!_checkpointTimes.ContainsKey(mapID))
         {
-            _checkpointTimes[mapName] = new Dictionary<int, string>();
+            _checkpointTimes[mapID] = new Dictionary<int, string>();
         }
 
-        _checkpointTimes[mapName][checkpointID] = _timerString;
+        _checkpointTimes[mapID][checkpointID] = _timerString;
     }
 
-    public string GetCheckpointTime(string mapName, int checkpointID)
+    public string GetCheckpointTime(int mapID, int checkpointID)
     {
-        if (_checkpointTimes.ContainsKey(mapName))
+        if (_checkpointTimes.ContainsKey(mapID))
         {
-            if (_checkpointTimes[mapName].ContainsKey(checkpointID))
+            if (_checkpointTimes[mapID].ContainsKey(checkpointID))
             {
-                return _checkpointTimes[mapName][checkpointID];
+                return _checkpointTimes[mapID][checkpointID];
             }
         }
 
         return "";
     }
 
-    public void PrintCheckpointsTime(string mapName)
+    public void PrintCheckpointsTime(int mapID)
     {
-        foreach (KeyValuePair<int, string> entry in _checkpointTimes[mapName])
+        foreach (KeyValuePair<int, string> entry in _checkpointTimes[mapID])
         {
             Debug.Log("Checkpoint" + entry.Key + " : " + entry.Value);
         }

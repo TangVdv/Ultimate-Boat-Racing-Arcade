@@ -7,7 +7,7 @@ public class SetupGameScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject fpsUI;
-    [SerializeField] private GameObject startUI;
+    [SerializeField] private StartUI startUI;
     [SerializeField] private GameObject chronoUI;
     [SerializeField] private ChronoScript chrono;
     [SerializeField] private SpawnScript spawner;
@@ -49,13 +49,13 @@ public class SetupGameScript : MonoBehaviour
         Debug.Log("ChronoMode");
         chronoUI.SetActive(true);
         chrono.Reset();
-        startUI.SetActive(true);
+        startUI.StartGame();
     }
 
     private void RaceMode()
     {
         Debug.Log("RaceMode");
         _aiAmount = config.AIAmount;
-        startUI.SetActive(true);
+        startUI.StartGame();
     }
 }

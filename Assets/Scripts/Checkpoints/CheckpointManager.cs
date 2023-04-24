@@ -85,7 +85,7 @@ namespace Checkpoints
                 return;
             }
 
-            chrono.SaveCheckpointTime("Map1", checkpoint);
+            chrono.SaveCheckpointTime(0, checkpoint);
 
             if (checkpoint == 0)
             {
@@ -94,7 +94,7 @@ namespace Checkpoints
                     progress.lap++;
                     Debug.Log("Lap "+ progress.lap +" completed !");
                     chrono.PauseTimer();
-                    chrono.PrintCheckpointsTime("Map1");
+                    chrono.PrintCheckpointsTime(0);
                 }
                 else
                 {
