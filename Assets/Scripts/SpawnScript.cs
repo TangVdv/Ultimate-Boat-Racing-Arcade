@@ -10,12 +10,13 @@ using Random = UnityEngine.Random;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
-    [SerializeField] private List<GameObject> boats;
+    [SerializeField] private Transform playerContainer;
     
     public float startX = -10f;
     public float endX = 10f;
     public bool debug = false;
-    
+
+    private List<GameObject> _boats;
     private int _spawnAmount;
 
     private void OnDrawGizmos()
@@ -32,22 +33,28 @@ public class SpawnScript : MonoBehaviour
     public void BoatsSetup()
     {
         _spawnAmount = config.PlayerAmount + config.AIAmount;
-        Debug.Log("spawnAmount : "+_spawnAmount);
-        for (int i = boats.Count; i > _spawnAmount; i--)
+        Debug.Log("SpawnAmount : "+_spawnAmount);
+        _boats = new List<GameObject>(playerContainer.childCount);
+        foreach (Transform child in playerContainer)
         {
-            Destroy(boats[i-1]);
-            boats.RemoveAt(i-1);
+            _boats.Add(child.gameObject);
+        }
+        
+        for (int i = _boats.Count; i > _spawnAmount; i--)
+        {
+            Destroy(_boats[i-1]);
+            _boats.RemoveAt(i-1);
         }
     }
     
     public void Spawn()
     {
-        float distanceBetweenSpawn = (endX - startX) / (boats.Count - 1);
+        float distanceBetweenSpawn = (endX - startX) / (_boats.Count - 1);
         int i = 0;
-        foreach (GameObject boat in boats)
+        foreach (GameObject boat in _boats)
         {
             float x = startX + i * distanceBetweenSpawn;
-            if (boats.Count == 1)
+            if (_boats.Count == 1)
             {
                 x = transform.position.x;
             }
