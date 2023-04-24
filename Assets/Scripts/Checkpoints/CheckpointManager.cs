@@ -9,8 +9,9 @@ namespace Checkpoints
     {
 
         [SerializeField] private ChronoScript chrono;
+        
         public List<GameObject> boats;
-    
+
         public class PlayerProgress
         {
             public readonly GameObject player;

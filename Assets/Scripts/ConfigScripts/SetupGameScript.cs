@@ -23,7 +23,6 @@ public class SetupGameScript : MonoBehaviour
         {
             fpsUI.SetActive(true);
         }
-
         spawner.BoatsSetup();
         Setup();
     }
