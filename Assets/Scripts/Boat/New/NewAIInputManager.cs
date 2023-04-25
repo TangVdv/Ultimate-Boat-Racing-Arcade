@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
+using Boat.New.Canon;
 using Checkpoints;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Boat.New
 {
@@ -14,6 +20,16 @@ namespace Boat.New
         public Rigidbody rigidBody;
         
         public CheckpointManager manager;
+        public NewAimingManager aimingManager;
+        private float initialVelocity;
+
+        private float canonDirection = 0;
+        private float canonAngle = 0;
+        
+        public float firingAngleMercy = 0.5f;
+        
+        public LayerMask targetingMask;
+        
         private NewBoatMovementManager _newBoatMovementManager;
         
         //TODO: mettre dans un fichier séparé
@@ -51,8 +67,10 @@ namespace Boat.New
 	        _botTargetPosition = Vector3.zero;
 	        _nextCheckpoint = 0;
 	        
-	        float maxSpeed = _newBoatMovementManager.maxSpeed;
+	        initialVelocity = aimingManager.canons[0].initialVelocity;
 	        
+	        float maxSpeed = _newBoatMovementManager.maxSpeed;
+
 	        decisionTree.Add(new AIDecision(2.0f, maxSpeed * 0.05f, maxSpeed * 0.00f));
 	        decisionTree.Add(new AIDecision(1.5f, maxSpeed * 0.10f, maxSpeed * 0.05f));
 	        decisionTree.Add(new AIDecision(1.0f, maxSpeed * 0.25f, maxSpeed * 0.10f));
@@ -61,7 +79,82 @@ namespace Boat.New
 	        decisionTree.Add(new AIDecision(0.0f, maxSpeed * 1.00f, maxSpeed * 0.90f));
         }
 
-        private void Update()
+        //TODO: Register target
+        private void TakeAimingDecision()
+        {
+	        if (State.IsBlinded) return;
+
+	        //Raycast in a sphere, in Targeting Physics layer
+	        //If hit, check if it's an instance of a prefab in potentialTargetPrefabs
+	        RaycastHit[] hits =
+		        Physics.SphereCastAll(transform.position, 100.0f, transform.forward, 100.0f, targetingMask);
+
+	        if (hits.Length <= 0) return;
+
+	        //if self in hits, remove self
+	        List<RaycastHit> filteredHits = new List<RaycastHit>();
+	        foreach (var hit in hits)
+	        {
+		        if (hit.transform.gameObject == boat) continue;
+		        filteredHits.Add(hit);
+	        }
+
+	        // Get closest
+	        RaycastHit closestHit = filteredHits[0];
+	        foreach (var hit in filteredHits)
+	        {
+		        if (hit.distance < closestHit.distance)
+			        closestHit = hit;
+	        }
+	        
+	        Vector3 targetPosition = closestHit.transform.position;
+	        Vector3 direction = targetPosition - transform.position;
+
+	        //get angle in degrees with 0 being forward
+	        float angularDifference = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
+	        float diffToCanon = angularDifference - canonDirection;
+
+	        wantsToFire = false;
+	        movementBarrels = 0;
+	        movementCam = 0;
+
+	        if (Mathf.Abs(diffToCanon) < 20.0f) movementCam = 0;
+	        else if (diffToCanon > 0) movementCam = 1;
+	        else movementCam = -1;
+
+	        double maxDistance = (2 * Math.Pow(initialVelocity, 2)
+	                                * Math.Sin(Mathf.Deg2Rad * canonAngle)
+	                                * Math.Cos(Mathf.Deg2Rad * canonAngle))
+	                             / 9.81;
+
+	        double maxHeight = Math.Pow(initialVelocity * Math.Sin(Mathf.Deg2Rad * canonAngle), 2)
+		        / (2 * 9.81) + transform.position.y;
+	        maxHeight -= (1 - firingAngleMercy);
+
+	        if (maxDistance < direction.magnitude) movementBarrels = 1;
+	        if(maxHeight > targetPosition.y) movementBarrels = -1;
+	        else wantsToFire = true;
+        }
+
+        private void UpdateCanonAngle()
+        {
+	        if (movementCam != 0)
+	        {
+		        if (movementCam == 1) canonDirection += 3.0f;
+		        else canonDirection -= 3.0f;
+	        
+		        if(canonDirection >= 180) canonDirection = -180+(canonDirection-180);
+		        else if (canonDirection <= -180) canonDirection = 180-(canonDirection+180);   
+	        }
+
+	        if (movementBarrels > 0) canonAngle += 3;
+	        else if (movementBarrels < 0) canonAngle -= 3;
+	        
+	        if(canonAngle >= 45) canonAngle = 45;
+	        else if (canonAngle <= 0) canonAngle = 0;
+        }
+
+        private void TakeMovementDecision()
         {
 	        movementZ = 0;
 	        movementX = 0;
@@ -107,8 +200,6 @@ namespace Boat.New
 	        {
 		        movementX = (short)UnityEngine.Random.Range(-1, 1);
 	        }
-
-	        
 	        
 	        movementZ = movement.y;
 
@@ -122,6 +213,14 @@ namespace Boat.New
 			        break;
 		        }
 	        }
+        }
+
+        private void Update()
+        {
+	        TakeMovementDecision();
+	        TakeAimingDecision();
+
+	        UpdateCanonAngle();
         }
 
     }

@@ -41,8 +41,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Targetting
+  - Targetable
   m_SortingLayers:
   - name: Default
     uniqueID: 0

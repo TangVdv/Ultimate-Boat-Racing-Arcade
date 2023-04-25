@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6168348685373023794}
   - component: {fileID: 742529779034517016}
   - component: {fileID: 7409907871737779463}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Powerup Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
