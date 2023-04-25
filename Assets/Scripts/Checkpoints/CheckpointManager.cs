@@ -16,11 +16,12 @@ namespace Checkpoints
         {
             public readonly GameObject player;
             public int lap;
-            public int checkpoint; 
+            public int checkpoint;
+            public List<float> checkpointTime = new List<float>();
             public PlayerProgress(GameObject player)
             {
                 this.player = player;
-                this.lap = 0;
+                this.lap = 1;
                 this.checkpoint = 0;
             }
         }
@@ -28,6 +29,7 @@ namespace Checkpoints
         private Checkpoint[] checkpoints;
     
         public int grace = 3;
+        public int lapGoal = 1;
     
         private List<PlayerProgress> playerProgress = new List<PlayerProgress>();
 
@@ -86,16 +88,23 @@ namespace Checkpoints
                 return;
             }
 
-            chrono.SaveCheckpointTime(0, checkpoint);
+            progress.checkpointTime.Add(chrono.TimerChrono);
+            Debug.Log(progress.checkpointTime.Count - 1);
+            chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
 
             if (checkpoint == 0)
             {
                 if ( (progress.checkpoint == checkpoints.Length - 1) || (progress.checkpoint + grace >= checkpoints.Length) )
                 {
-                    progress.lap++;
                     Debug.Log("Lap "+ progress.lap +" completed !");
-                    chrono.PauseTimer();
-                    chrono.PrintCheckpointsTime(0);
+                    progress.lap++;
+                    if (progress.lap > lapGoal)
+                    {
+                        chrono.PauseTimer();
+                        chrono.SaveCheckpointsTime(progress.checkpointTime);
+                        progress.lap = 0;
+                        progress.checkpointTime = new List<float>();
+                    }
                 }
                 else
                 {

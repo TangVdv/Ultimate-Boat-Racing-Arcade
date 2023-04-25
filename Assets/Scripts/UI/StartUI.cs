@@ -28,7 +28,6 @@ public class StartUI : MonoBehaviour
         }
 
         countdownText.text = "";
-        gameObject.SetActive(false);
         chronoScript.StartTimer();
     }
 }
