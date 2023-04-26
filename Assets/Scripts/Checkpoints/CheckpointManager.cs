@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //Use tuples
@@ -9,6 +10,7 @@ namespace Checkpoints
     {
 
         [SerializeField] private ChronoScript chrono;
+        [SerializeField] private RaceModeScript race;
         
         public List<GameObject> boats;
 
@@ -46,7 +48,8 @@ namespace Checkpoints
                 checkpoints[checkpoint.ID] = checkpoint;
                 checkpoint.SetCheckpointManager(this);
             }
-        
+
+            race.MaxLapText.text = "/"+lapGoal;
             UpdateVisuals(playerProgress[0]);
         
         }
@@ -88,9 +91,36 @@ namespace Checkpoints
                 return;
             }
 
+            //CHRONO MODE
             progress.checkpointTime.Add(chrono.TimerChrono);
-            Debug.Log(progress.checkpointTime.Count - 1);
             chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
+
+            //RACE MODE
+            checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
+            if (player.name == "NewPlayer")
+            {
+                race.ResetRanking();
+                Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
+                KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
+                int i = timerDictionary.Count;
+                foreach (KeyValuePair<string, float> entry in timerDictionary)
+                {
+                    Debug.Log("Key : "+entry.Key+" ; Value : "+entry.Value+" ; timer : "+chrono.ConvertTimerToString(entry.Value));
+                    float timerDiff = chrono.TimerChrono - firstEntry.Value;
+                    if (entry.Key == "NewPlayer")
+                    {
+                        race.CurrentPosText.text = i.ToString();
+                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), true);
+                    }
+                    else
+                    {
+                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), false);
+                    }
+
+                    i--;
+                }
+            }  
+
 
             if (checkpoint == 0)
             {
@@ -98,6 +128,7 @@ namespace Checkpoints
                 {
                     Debug.Log("Lap "+ progress.lap +" completed !");
                     progress.lap++;
+                    race.CurrentLapText.text = progress.lap.ToString();
                     if (progress.lap > lapGoal)
                     {
                         chrono.PauseTimer();

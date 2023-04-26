@@ -1,18 +1,80 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class RaceModeScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject rankingPanel;
+    [SerializeField] private GameObject rankingTemplate;
+    [SerializeField] private Text currentPosText;
+    [SerializeField] private Text maxPosText;
+    [SerializeField] private Text currentLapText;
+    [SerializeField] private Text maxLapText;
+
+    private float _startPosY = 45f;
+    private float _spacingY = 17.5f;
+    
+    public void ResetRanking()
     {
-        
+        currentLapText.text = "0";
+        currentPosText.text = "1";
+        if (rankingPanel.transform.childCount > 0)
+        {
+            foreach (Transform child in rankingPanel.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InstantiateRanking(string playerName, string playerTimer, bool isPlayer)
     {
-        
+        int i = rankingPanel.transform.childCount;
+        Debug.Log("startPos : "+_startPosY+" ; i : "+i+" ; spacing : "+_spacingY);
+        Vector3 position = new Vector3(0f, _startPosY - i * _spacingY, 0f);
+        GameObject currentTemplate = Instantiate(rankingTemplate, rankingPanel.transform);
+        currentTemplate.transform.GetChild(0).GetComponent<Text>().text = playerName;
+        Text timer = currentTemplate.transform.GetChild(1).GetComponent<Text>();
+        if (isPlayer)
+        {
+            timer.color = new Color(0.34f,0.84f,1f);
+        }
+        else
+        {
+            timer.color = new Color(0.34f,1f,0.43f);
+        }
+
+        if (i > 0) playerTimer = "+" + playerTimer;
+        timer.text = playerTimer;
+        currentTemplate.transform.localPosition = position;   
+    }
+    
+    public Text CurrentPosText
+    {
+        get => currentPosText;
+        set => currentPosText = value;
+    }
+
+    public Text MaxPosText
+    {
+        get => maxPosText;
+        set => maxPosText = value;
+    }
+
+    public Text CurrentLapText
+    {
+        get => currentLapText;
+        set => currentLapText = value;
+    }
+
+    public Text MaxLapText
+    {
+        get => maxLapText;
+        set => maxLapText = value;
     }
 }

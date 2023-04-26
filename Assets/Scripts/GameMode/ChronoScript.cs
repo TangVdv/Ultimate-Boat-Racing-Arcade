@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class ChronoScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
-    [SerializeField] private Text timerText;
+    [SerializeField] private Text timerChronoModeText;
+    [SerializeField] private Text timerRaceModeText;
     [SerializeField] private Text timerDifferenceText;
     
     private float _timerChrono;
@@ -18,14 +19,23 @@ public class ChronoScript : MonoBehaviour
         set => _timerChrono = value;
     }
 
+    private Text _timerText;
     private bool _isTimerOn;
     private int _circuitIndex;
     private IEnumerator _timerCoroutine;
     
     public void Reset()
     {
+        if (config.GameMode == 1)
+        {
+            _timerText = timerChronoModeText;
+        }
+        else
+        {
+            _timerText = timerRaceModeText;
+        }
         _circuitIndex = config.Circuit;
-        timerText.text = "00:00:000";
+        _timerText.text = "00:00:000";
         timerDifferenceText.text = "";
         _timerChrono = 0f;
         PauseTimer();
@@ -37,7 +47,7 @@ public class ChronoScript : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
             _timerChrono += 0.01f;
-            timerText.text = ConvertTimerToString(_timerChrono);
+            _timerText.text = ConvertTimerToString(_timerChrono);
         }
     }
 
@@ -59,22 +69,6 @@ public class ChronoScript : MonoBehaviour
             _isTimerOn = true;
         }
     }
-/*
-    public void SaveCheckpointTime(int checkpointID)
-    {
-        if (_checkpointTimes[_circuitIndex].ContainsKey(checkpointID))
-        {
-            if (_checkpointTimes[_circuitIndex][checkpointID] > _timerChrono)
-            {
-                _checkpointTimes[_circuitIndex][checkpointID] = _timerChrono;   
-            }   
-        }
-        else
-        {
-            _checkpointTimes[_circuitIndex][checkpointID] = _timerChrono;
-        }
-    }
-*/
     public void ShowCheckpointTimeDifference(int index)
     {
         if (config.CheckpointTimes.Length > 0)
@@ -83,7 +77,6 @@ public class ChronoScript : MonoBehaviour
             {
                 float checkPointTimer = config.CheckpointTimes[_circuitIndex][index];
                 float timerDiff = _timerChrono - checkPointTimer;
-                Debug.Log(ConvertTimerToString(checkPointTimer));
                 if (timerDiff > 0)
                 {
                     timerDifferenceText.text = "+ "+ ConvertTimerToString(timerDiff); 
@@ -103,7 +96,7 @@ public class ChronoScript : MonoBehaviour
         }
     }
 
-    private string ConvertTimerToString(float timer)
+    public string ConvertTimerToString(float timer)
     {
         int minutes = Mathf.FloorToInt(timer / 60);
         int seconds = Mathf.FloorToInt(timer % 60);
@@ -123,7 +116,7 @@ public class ChronoScript : MonoBehaviour
     
     public void SaveCheckpointsTime(List<float> checkpointTime)
     {
-        PrintCheckpointsTime(checkpointTime);
+        //PrintCheckpointsTime(checkpointTime);
         config.CheckpointTimes[_circuitIndex] = checkpointTime;
     }
 }
