@@ -50,7 +50,7 @@ namespace Checkpoints
             }
 
             race.MaxLapText.text = "/"+lapGoal;
-            UpdateVisuals(playerProgress[0]);
+            //UpdateVisuals(playerProgress[0]);
         
         }
     
@@ -91,9 +91,12 @@ namespace Checkpoints
                 return;
             }
 
-            //CHRONO MODE
-            progress.checkpointTime.Add(chrono.TimerChrono);
-            chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
+            if (chrono != null)
+            {
+                //CHRONO MODE
+                progress.checkpointTime.Add(chrono.TimerChrono);
+                chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);   
+            }
 
             //RACE MODE
             checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;

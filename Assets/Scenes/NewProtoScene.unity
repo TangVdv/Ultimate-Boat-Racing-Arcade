@@ -231,17 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7714912 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6607383071803390825, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
-  m_PrefabInstance: {fileID: 7714910}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &54848048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -588,7 +577,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
-  timerText: {fileID: 7714912}
+  timerChronoModeText: {fileID: 0}
+  timerRaceModeText: {fileID: 0}
   timerDifferenceText: {fileID: 7714911}
 --- !u!1001 &153265210
 PrefabInstance:
@@ -1106,10 +1096,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chrono: {fileID: 151983191}
+  race: {fileID: 0}
   boats:
   - {fileID: 1884155213}
   - {fileID: 2392372774742256965}
   grace: 3
+  lapGoal: 1
 --- !u!4 &292134617
 Transform:
   m_ObjectHideFlags: 0
@@ -4582,11 +4574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8348493431782611946, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.6
+      value: 5.38
       objectReference: {fileID: 0}
     - target: {fileID: 8348493431782611946, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -85.6
+      value: -95.31
       objectReference: {fileID: 0}
     - target: {fileID: 8348493431782611946, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: m_LocalRotation.w
