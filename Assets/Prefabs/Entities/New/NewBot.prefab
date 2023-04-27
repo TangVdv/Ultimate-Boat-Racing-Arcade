@@ -210,6 +210,11 @@ MonoBehaviour:
   boat: {fileID: 2157788149339898319}
   rigidBody: {fileID: 7413920482512147655}
   manager: {fileID: 0}
+  aimingManager: {fileID: 8341459511806100284}
+  firingAngleMercy: 0.5
+  targetingMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3381123249354642913
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +466,10 @@ PrefabInstance:
       propertyPath: boat
       value: 
       objectReference: {fileID: 2157788149339898319}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: aimingManager
+      value: 
+      objectReference: {fileID: 8341459511806100284}
     - target: {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: m_Name
       value: Cannon
@@ -636,6 +645,10 @@ PrefabInstance:
       propertyPath: boat
       value: 
       objectReference: {fileID: 2157788149339898319}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: aimingManager
+      value: 
+      objectReference: {fileID: 8341459511806100284}
     - target: {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: m_Name
       value: Cannon
@@ -729,6 +742,10 @@ PrefabInstance:
       propertyPath: boat
       value: 
       objectReference: {fileID: 2157788149339898319}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: aimingManager
+      value: 
+      objectReference: {fileID: 8341459511806100284}
     - target: {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: m_Name
       value: Cannon
