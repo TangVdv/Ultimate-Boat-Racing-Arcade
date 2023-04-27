@@ -6,7 +6,7 @@ using UnityEngine;
 public class ConfigScript : ScriptableObject
 {
     private GameObject _boat;
-    private string[] _circuit = {"AlphaScene"};
+    private int _circuit;
     private int _gameMode;
     private int _aiAmount;
     private int _playerAmount;
@@ -16,6 +16,12 @@ public class ConfigScript : ScriptableObject
     private bool _showFPS;
 
     private int _fpsIndex;
+    private List<float>[] _checkpointTimes = new List<float>[5];
+    public List<float>[] CheckpointTimes
+    {
+        get => _checkpointTimes;
+        set => _checkpointTimes = value;
+    }
 
     public GameObject Boat
     {
@@ -23,7 +29,7 @@ public class ConfigScript : ScriptableObject
         set => _boat = value;
     }
 
-    public string[] Circuit
+    public int Circuit
     {
         get => _circuit;
         set => _circuit = value;

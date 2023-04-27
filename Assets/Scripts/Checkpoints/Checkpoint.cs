@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 namespace Checkpoints
 {
@@ -6,7 +8,8 @@ namespace Checkpoints
     {
 
         private CheckpointManager _checkpointManager;
-    
+        private Dictionary<string, float> _playerTimer = new Dictionary<string, float>();
+
         public int ID;
 
         private void OnTriggerEnter(Collider other)
@@ -17,6 +20,12 @@ namespace Checkpoints
         public void SetCheckpointManager(CheckpointManager checkpointManager)
         {
             _checkpointManager = checkpointManager;
+        }
+        
+        public Dictionary<string, float> PlayerTimer
+        {
+            get => _playerTimer;
+            set => _playerTimer = value;
         }
     }
 }

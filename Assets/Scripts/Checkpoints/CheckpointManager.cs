@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //Use tuples
@@ -9,17 +10,20 @@ namespace Checkpoints
     {
 
         [SerializeField] private ChronoScript chrono;
+        [SerializeField] private RaceModeScript race;
+        
         public List<GameObject> boats;
-    
+
         public class PlayerProgress
         {
             public readonly GameObject player;
             public int lap;
-            public int checkpoint; 
+            public int checkpoint;
+            public List<float> checkpointTime = new List<float>();
             public PlayerProgress(GameObject player)
             {
                 this.player = player;
-                this.lap = 0;
+                this.lap = 1;
                 this.checkpoint = 0;
             }
         }
@@ -27,6 +31,7 @@ namespace Checkpoints
         private Checkpoint[] checkpoints;
     
         public int grace = 3;
+        public int lapGoal = 1;
     
         private List<PlayerProgress> playerProgress = new List<PlayerProgress>();
 
@@ -43,7 +48,8 @@ namespace Checkpoints
                 checkpoints[checkpoint.ID] = checkpoint;
                 checkpoint.SetCheckpointManager(this);
             }
-        
+
+            race.MaxLapText.text = "/"+lapGoal;
             UpdateVisuals(playerProgress[0]);
         
         }
@@ -85,16 +91,57 @@ namespace Checkpoints
                 return;
             }
 
-            chrono.SaveCheckpointTime(0, checkpoint);
+            //CHRONO MODE
+            progress.checkpointTime.Add(chrono.TimerChrono);
+            chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
+
+            //RACE MODE
+            checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
+            Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
+            if (player.name == "NewPlayer")
+            {
+                race.ResetRanking();
+                KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
+                foreach (KeyValuePair<string, float> entry in timerDictionary)
+                {
+                    bool isPlayer = entry.Key == "NewPlayer" ? true : false;
+                    if (entry.Key == firstEntry.Key)
+                    {
+                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(entry.Value), isPlayer);
+                    }
+                    else
+                    {
+                        float timerDiff = entry.Value - firstEntry.Value;
+                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), isPlayer);
+                    }
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<string, float> entry in timerDictionary)
+                {
+                    if (entry.Key == "NewPlayer")
+                    {
+                        race.InstantiateRanking(timerDictionary.Last().Key, chrono.ConvertTimerToString(timerDictionary.Last().Value), false);
+                    }
+                }
+            }
+
 
             if (checkpoint == 0)
             {
                 if ( (progress.checkpoint == checkpoints.Length - 1) || (progress.checkpoint + grace >= checkpoints.Length) )
                 {
-                    progress.lap++;
                     Debug.Log("Lap "+ progress.lap +" completed !");
-                    chrono.PauseTimer();
-                    chrono.PrintCheckpointsTime(0);
+                    progress.lap++;
+                    race.CurrentLapText.text = progress.lap.ToString();
+                    if (progress.lap > lapGoal)
+                    {
+                        chrono.PauseTimer();
+                        chrono.SaveCheckpointsTime(progress.checkpointTime);
+                        progress.lap = 0;
+                        progress.checkpointTime = new List<float>();
+                    }
                 }
                 else
                 {
