@@ -18,25 +18,26 @@ public class RaceModeScript : MonoBehaviour
 
     private float _startPosY = 45f;
     private float _spacingY = 17.5f;
-    
+    private int _index = 0;
+
     public void ResetRanking()
     {
         currentLapText.text = "0";
         currentPosText.text = "1";
-        if (rankingPanel.transform.childCount > 0)
+        if (_index > 0)
         {
             foreach (Transform child in rankingPanel.transform)
             {
                 Destroy(child.gameObject);
             }
+
+            _index = 0;
         }
     }
 
     public void InstantiateRanking(string playerName, string playerTimer, bool isPlayer)
     {
-        int i = rankingPanel.transform.childCount;
-        Debug.Log("startPos : "+_startPosY+" ; i : "+i+" ; spacing : "+_spacingY);
-        Vector3 position = new Vector3(0f, _startPosY - i * _spacingY, 0f);
+        Vector3 position = new Vector3(0f, _startPosY - _index * _spacingY, 0f);
         GameObject currentTemplate = Instantiate(rankingTemplate, rankingPanel.transform);
         currentTemplate.transform.GetChild(0).GetComponent<Text>().text = playerName;
         Text timer = currentTemplate.transform.GetChild(1).GetComponent<Text>();
@@ -49,9 +50,10 @@ public class RaceModeScript : MonoBehaviour
             timer.color = new Color(0.34f,1f,0.43f);
         }
 
-        if (i > 0) playerTimer = "+" + playerTimer;
+        if (_index > 0) playerTimer = "+" + playerTimer;
         timer.text = playerTimer;
-        currentTemplate.transform.localPosition = position;   
+        currentTemplate.transform.localPosition = position;
+        _index++;
     }
     
     public Text CurrentPosText

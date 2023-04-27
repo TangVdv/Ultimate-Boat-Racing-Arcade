@@ -43,10 +43,11 @@ public class ChronoScript : MonoBehaviour
     
     private IEnumerator UpdateTimer()
     {
+        float startTime = Time.realtimeSinceStartup;
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
-            _timerChrono += 0.01f;
+            yield return null;
+            _timerChrono = Time.realtimeSinceStartup - startTime;
             _timerText.text = ConvertTimerToString(_timerChrono);
         }
     }

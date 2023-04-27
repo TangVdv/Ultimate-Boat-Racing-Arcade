@@ -97,29 +97,35 @@ namespace Checkpoints
 
             //RACE MODE
             checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
+            Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
             if (player.name == "NewPlayer")
             {
                 race.ResetRanking();
-                Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
                 KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
-                int i = timerDictionary.Count;
                 foreach (KeyValuePair<string, float> entry in timerDictionary)
                 {
-                    Debug.Log("Key : "+entry.Key+" ; Value : "+entry.Value+" ; timer : "+chrono.ConvertTimerToString(entry.Value));
-                    float timerDiff = chrono.TimerChrono - firstEntry.Value;
-                    if (entry.Key == "NewPlayer")
+                    bool isPlayer = entry.Key == "NewPlayer" ? true : false;
+                    if (entry.Key == firstEntry.Key)
                     {
-                        race.CurrentPosText.text = i.ToString();
-                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), true);
+                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(entry.Value), isPlayer);
                     }
                     else
                     {
-                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), false);
+                        float timerDiff = entry.Value - firstEntry.Value;
+                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), isPlayer);
                     }
-
-                    i--;
                 }
-            }  
+            }
+            else
+            {
+                foreach (KeyValuePair<string, float> entry in timerDictionary)
+                {
+                    if (entry.Key == "NewPlayer")
+                    {
+                        race.InstantiateRanking(timerDictionary.Last().Key, chrono.ConvertTimerToString(timerDictionary.Last().Value), false);
+                    }
+                }
+            }
 
 
             if (checkpoint == 0)
