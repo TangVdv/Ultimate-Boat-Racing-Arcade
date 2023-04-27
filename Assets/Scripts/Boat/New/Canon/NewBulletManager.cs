@@ -44,6 +44,7 @@ namespace Boat.New.Canon
                     break;
                 case BulletType.Basic: break;
             }
+            Destroy(gameObject);
         }
 
         public void SetManager(NewAimingManager aimingManager)
