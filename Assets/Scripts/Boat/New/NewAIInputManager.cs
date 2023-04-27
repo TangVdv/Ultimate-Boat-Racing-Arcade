@@ -82,6 +82,7 @@ namespace Boat.New
         //TODO: Register target
         private void TakeAimingDecision()
         {
+	        Debug.Log("Targeting");
 	        if (State.IsBlinded) return;
 
 	        //Raycast in a sphere, in Targeting Physics layer

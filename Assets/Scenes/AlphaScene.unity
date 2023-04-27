@@ -4323,6 +4323,7 @@ MonoBehaviour:
   - {fileID: 994610746}
   - {fileID: 113087656}
   - {fileID: 478889535}
+  debug: 0
   grace: 3
   lapGoal: 1
 --- !u!4 &806419291

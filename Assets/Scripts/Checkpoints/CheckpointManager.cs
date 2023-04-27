@@ -13,6 +13,7 @@ namespace Checkpoints
         [SerializeField] private RaceModeScript race;
         
         public List<GameObject> boats;
+        public bool debug = false;
 
         public class PlayerProgress
         {
@@ -39,7 +40,7 @@ namespace Checkpoints
         {
             foreach (GameObject boat in boats)playerProgress.Add(new PlayerProgress(boat));
 
-            Debug.Log(playerProgress);
+            if(debug) Debug.Log(playerProgress);
         
             checkpoints = new Checkpoint[transform.childCount];
             foreach (Transform child in transform)
@@ -48,10 +49,8 @@ namespace Checkpoints
                 checkpoints[checkpoint.ID] = checkpoint;
                 checkpoint.SetCheckpointManager(this);
             }
-
-            race.MaxLapText.text = "/"+lapGoal;
-            //UpdateVisuals(playerProgress[0]);
-        
+            if(race != null) race.MaxLapText.text = "/"+lapGoal;
+            if(debug) UpdateVisuals(playerProgress[0]);
         }
     
         public void AddPlayer(GameObject player)
@@ -98,6 +97,30 @@ namespace Checkpoints
                 chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);   
             }
 
+            if (race != null) HandleRaceMode(checkpoint, player);
+
+            if (checkpoint == 0 && (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length))
+            { 
+                if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
+                progress.lap++;
+                if(race != null) race.CurrentLapText.text = progress.lap.ToString();
+                if (progress.lap > lapGoal)
+                {
+                    if (chrono != null)
+                    {
+                        chrono.PauseTimer();
+                        chrono.SaveCheckpointsTime(progress.checkpointTime);   
+                    }
+                    progress.lap = 0;
+                    progress.checkpointTime = new List<float>();
+                }
+            }
+            progress.checkpoint = checkpoint;
+            if(debug) UpdateVisuals(progress);
+        }
+
+        private void HandleRaceMode(int checkpoint, GameObject player)
+        {
             //RACE MODE
             checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
@@ -125,40 +148,17 @@ namespace Checkpoints
                 {
                     if (entry.Key == "NewPlayer")
                     {
-                        race.InstantiateRanking(timerDictionary.Last().Key, chrono.ConvertTimerToString(timerDictionary.Last().Value), false);
+                        race.InstantiateRanking(timerDictionary.Last().Key,
+                            chrono.ConvertTimerToString(timerDictionary.Last().Value), false);
                     }
                 }
             }
-
-
-            if (checkpoint == 0)
-            {
-                if ( (progress.checkpoint == checkpoints.Length - 1) || (progress.checkpoint + grace >= checkpoints.Length) )
-                {
-                    Debug.Log("Lap "+ progress.lap +" completed !");
-                    progress.lap++;
-                    race.CurrentLapText.text = progress.lap.ToString();
-                    if (progress.lap > lapGoal)
-                    {
-                        chrono.PauseTimer();
-                        chrono.SaveCheckpointsTime(progress.checkpointTime);
-                        progress.lap = 0;
-                        progress.checkpointTime = new List<float>();
-                    }
-                }
-                else
-                {
-                    return;
-                }
-
-
-            }
-            progress.checkpoint = checkpoint;
-            UpdateVisuals(progress);
         }
 
         public void UpdateVisuals(PlayerProgress progress)
         {
+            if(!debug) return;
+            
             //Debug.Log("Checkpoint " + progress.checkpoint + " passed, lap " + progress.lap);
             foreach (Checkpoint checkpoint in checkpoints)
             {
