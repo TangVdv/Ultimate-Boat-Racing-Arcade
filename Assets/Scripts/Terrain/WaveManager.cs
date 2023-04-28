@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Terrain
@@ -11,18 +12,16 @@ namespace Terrain
         public float length = 2f;
         public float speed = 1f;
         public float offset = 0f;
-        private static readonly int Amplitude = Shader.PropertyToID("Amplitude");
-        private static readonly int Length = Shader.PropertyToID("Length");
-        private static readonly int Speed = Shader.PropertyToID("Speed");
+        private static readonly int Amplitude = Shader.PropertyToID("_amplitude");
+        private static readonly int Length = Shader.PropertyToID("_length");
+        private static readonly int Speed = Shader.PropertyToID("_speed");
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
-                waterMaterial.SetFloat(Amplitude, amplitude);
-                waterMaterial.SetFloat(Length, length);
-                waterMaterial.SetFloat(Speed, speed);
+
                 
             }
             else if(instance != this)
@@ -35,11 +34,15 @@ namespace Terrain
         private void Update()
         {
             offset += Time.deltaTime * speed;
+            waterMaterial.SetFloat(Amplitude, amplitude);
+            waterMaterial.SetFloat(Length, length);
+            waterMaterial.SetFloat(Speed, speed);
         }
 
         public float GetWaveHeight(float _x)
         {
             return amplitude * Mathf.Sin(_x / length + offset);
         }
+        
     }
 }
