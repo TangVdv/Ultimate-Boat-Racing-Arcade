@@ -49,7 +49,7 @@ public class ModeSelection : MonoBehaviour
         config.AIAmount = _aiAmount;
         config.PlayerAmount = _playerAmount;
         config.GameMode = _modeSelect;
-        SceneManager.LoadScene("AlphaScene");
+        SceneManager.LoadScene("Map 1");
     }
 
     public void DisableButton()

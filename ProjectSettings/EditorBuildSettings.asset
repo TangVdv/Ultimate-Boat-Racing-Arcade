@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlphaScene.unity
     guid: b4aa12310dea3cf4391205b2c44e42de
+  - enabled: 1
+    path: Assets/Scenes/Map 1.unity
+    guid: 836abbe641738ed408a7154473715aff
   m_configObjects: {}
