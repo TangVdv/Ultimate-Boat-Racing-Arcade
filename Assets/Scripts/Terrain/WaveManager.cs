@@ -5,17 +5,25 @@ namespace Terrain
     public class WaveManager : MonoBehaviour
     {
         public static WaveManager instance;
+        public Material waterMaterial;
 
         public float amplitude = 1f;
         public float length = 2f;
         public float speed = 1f;
         public float offset = 0f;
+        private static readonly int Amplitude = Shader.PropertyToID("Amplitude");
+        private static readonly int Length = Shader.PropertyToID("Length");
+        private static readonly int Speed = Shader.PropertyToID("Speed");
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
+                waterMaterial.SetFloat(Amplitude, amplitude);
+                waterMaterial.SetFloat(Length, length);
+                waterMaterial.SetFloat(Speed, speed);
+                
             }
             else if(instance != this)
             {
