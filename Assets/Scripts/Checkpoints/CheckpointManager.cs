@@ -90,6 +90,30 @@ namespace Checkpoints
                 return;
             }
 
+            if (checkpoint == 0)
+            {
+                if (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length)
+                {
+                    if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
+                    progress.lap++;
+                    if(race != null) race.CurrentLapText.text = progress.lap.ToString();
+                    if (progress.lap > lapGoal)
+                    {
+                        if (chrono != null)
+                        {
+                            chrono.PauseTimer();
+                            chrono.SaveCheckpointsTime(progress.checkpointTime);   
+                        }
+                        progress.lap = 0;
+                        progress.checkpointTime = new List<float>();
+                    }   
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
             if (chrono != null)
             {
                 //CHRONO MODE
@@ -98,23 +122,7 @@ namespace Checkpoints
             }
 
             if (race != null) HandleRaceMode(checkpoint, player);
-
-            if (checkpoint == 0 && (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length))
-            { 
-                if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
-                progress.lap++;
-                if(race != null) race.CurrentLapText.text = progress.lap.ToString();
-                if (progress.lap > lapGoal)
-                {
-                    if (chrono != null)
-                    {
-                        chrono.PauseTimer();
-                        chrono.SaveCheckpointsTime(progress.checkpointTime);   
-                    }
-                    progress.lap = 0;
-                    progress.checkpointTime = new List<float>();
-                }
-            }
+            
             progress.checkpoint = checkpoint;
             if(debug) UpdateVisuals(progress);
         }
@@ -122,6 +130,7 @@ namespace Checkpoints
         private void HandleRaceMode(int checkpoint, GameObject player)
         {
             //RACE MODE
+            Debug.Log("called");
             checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
             if (player.name == "NewPlayer")

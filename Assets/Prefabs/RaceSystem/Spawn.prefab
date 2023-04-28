@@ -45,6 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   playerContainer: {fileID: 0}
-  startX: -20
-  endX: 20
+  size: 10
   debug: 1
