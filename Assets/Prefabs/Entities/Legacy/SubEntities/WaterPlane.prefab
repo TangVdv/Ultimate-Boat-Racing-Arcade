@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84db1f6224d640e4eb51e0f0a006906f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterMaterial: {fileID: 2100000, guid: 8c208fc0e6b8aaa42bae3060ddb20e96, type: 2}
   amplitude: 0.6
   length: 3
   speed: 1.5
