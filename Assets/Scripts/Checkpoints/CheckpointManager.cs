@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Checkpoints
     {
         [SerializeField] private ChronoScript chrono;
         [SerializeField] private RaceModeScript race;
+        [SerializeField] private GameObject finishUI;
         
         public List<GameObject> boats;
         public bool debug = false;
@@ -37,10 +39,16 @@ namespace Checkpoints
 
         void Start()
         {
+
             foreach (GameObject boat in boats)playerProgress.Add(new PlayerProgress(boat));
 
+            Reset();
+            
             if(debug) Debug.Log(playerProgress);
-        
+        }
+
+        private void Reset(PlayerProgress progress = null)
+        {
             checkpoints = new Checkpoint[transform.childCount];
             foreach (Transform child in transform)
             {
@@ -48,10 +56,18 @@ namespace Checkpoints
                 checkpoints[checkpoint.ID] = checkpoint;
                 checkpoint.SetCheckpointManager(this);
             }
-            if(race != null) race.MaxLapText.text = "/"+lapGoal;
             if(debug) UpdateVisuals(playerProgress[0]);
+
+            if(race != null) race.MaxLapText.text = "/"+lapGoal;
+            
+            if (progress != null)
+            {
+                progress.lap = 1;
+                progress.checkpointTime = new List<float>();
+                progress.checkpoint = 0;
+            }
         }
-    
+
         public void AddPlayer(GameObject player)
         {
             boats.Add(player);
@@ -75,12 +91,12 @@ namespace Checkpoints
         
             // Ignore if same checkpoint
             if (progress.checkpoint == checkpoint) return;
-        
-        
-            // Ignore if checkpoint is not within grace
+
+
+                // Ignore if checkpoint is not within grace
             if (progress.checkpoint + grace < checkpoint) return;
-        
-        
+
+
             // If checkpoint is a previous checkpoint, ignore
             if (progress.checkpoint > checkpoint && checkpoint != 0)
             {
@@ -88,13 +104,20 @@ namespace Checkpoints
                 // UpdateVisuals(progress);
                 return;
             }
+            
+            if (chrono != null && chrono.isActiveAndEnabled)
+            {
+                //CHRONO MODE
+                progress.checkpointTime.Add(chrono.TimerChrono);
+                chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);   
+            }
 
             if (checkpoint == 0)
             {
                 if (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length)
                 {
-                    if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
                     progress.lap++;
+                    if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
                     if(race != null && race.isActiveAndEnabled) race.CurrentLapText.text = progress.lap.ToString();
                     if (progress.lap > lapGoal)
                     {
@@ -104,8 +127,10 @@ namespace Checkpoints
                             chrono.PauseTimer();
                             chrono.SaveCheckpointsTime(progress.checkpointTime);   
                         }
-                        progress.lap = 0;
-                        progress.checkpointTime = new List<float>();
+                        Reset(progress);
+                        finishUI.SetActive(true);
+                        Time.timeScale = 0f;
+                        return;
                     }   
                 }
                 else
@@ -113,14 +138,6 @@ namespace Checkpoints
                     return;
                 }
             }
-            if (chrono != null && chrono.isActiveAndEnabled)
-            {
-                //CHRONO MODE
-                Debug.Log("called chrono");
-                progress.checkpointTime.Add(chrono.TimerChrono);
-                chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);   
-            }
-
             if (race != null && race.isActiveAndEnabled) HandleRaceMode(checkpoint, player);
             
             progress.checkpoint = checkpoint;

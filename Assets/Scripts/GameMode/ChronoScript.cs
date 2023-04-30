@@ -86,7 +86,7 @@ public class ChronoScript : MonoBehaviour
                 }
                 else if(timerDiff < 0) 
                 { 
-                    timerDifferenceText.text = "- " + ConvertTimerToString(timerDiff);
+                    timerDifferenceText.text = "- " + ConvertTimerToString(-timerDiff);
                     timerDifferencePanel.color = new Color(0, 0, 1, .4f);
                 }
                 else 

@@ -19,17 +19,33 @@ public class SetupGameScript : MonoBehaviour
     private int _aiAmount = 0;
     private GameObject _playerBoat;
     private SpawnScript _spawnScript;
+    private int _currentLevelIndex;
+    private GameObject _currentLevel;
+
+    public int CurrentLevelIndex
+    {
+        get => _currentLevelIndex;
+        set => _currentLevelIndex = value;
+    }
 
     private void Start()
     {
-        levelManagers.GetChild(config.Level).gameObject.SetActive(true);
+        _currentLevelIndex = config.Level;
+        
         _playerBoat = config.Boat;
         
         if (config.ShowFPS)
         {
             fpsUI.SetActive(true);
         }
+        SetupLevel();
+        SetupGameMode();
+    }
 
+    public void SetupLevel()
+    {
+        _currentLevel = levelManagers.GetChild(_currentLevelIndex).gameObject;
+        ActivateLevel(true);
         foreach (var spawner in spawners)
         {
             if (spawner != null && spawner.activeInHierarchy)
@@ -37,10 +53,14 @@ public class SetupGameScript : MonoBehaviour
                 _spawnScript = spawner.GetComponent<SpawnScript>();
             }   
         }
-        Setup();
     }
 
-    public void Setup()
+    public void ActivateLevel(bool active)
+    {
+        _currentLevel.SetActive(active);
+    }
+
+    public void SetupGameMode()
     {
         Debug.Log("SETUP");
         _spawnScript.BoatsSetup();
