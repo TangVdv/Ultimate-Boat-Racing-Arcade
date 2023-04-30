@@ -10,6 +10,7 @@ public class ChronoScript : MonoBehaviour
     [SerializeField] private Text timerChronoModeText;
     [SerializeField] private Text timerRaceModeText;
     [SerializeField] private Text timerDifferenceText;
+    [SerializeField] private Image timerDifferencePanel;
     
     private float _timerChrono;
 
@@ -21,7 +22,7 @@ public class ChronoScript : MonoBehaviour
 
     private Text _timerText;
     private bool _isTimerOn;
-    private int _circuitIndex;
+    private int _levelIndex;
     private IEnumerator _timerCoroutine;
     
     public void Reset()
@@ -34,7 +35,7 @@ public class ChronoScript : MonoBehaviour
         {
             _timerText = timerRaceModeText;
         }
-        _circuitIndex = config.Circuit;
+        _levelIndex = config.Level;
         _timerText.text = "00:00:000";
         timerDifferenceText.text = "";
         _timerChrono = 0f;
@@ -74,27 +75,40 @@ public class ChronoScript : MonoBehaviour
     {
         if (config.CheckpointTimes.Length > 0)
         {
-            if (config.CheckpointTimes[_circuitIndex] != null)
+            if (config.CheckpointTimes[_levelIndex] != null)
             {
-                float checkPointTimer = config.CheckpointTimes[_circuitIndex][index];
+                float checkPointTimer = config.CheckpointTimes[_levelIndex][index];
                 float timerDiff = _timerChrono - checkPointTimer;
                 if (timerDiff > 0)
                 {
-                    timerDifferenceText.text = "+ "+ ConvertTimerToString(timerDiff); 
-                    timerDifferenceText.color = Color.red;
+                    timerDifferenceText.text = "+ "+ ConvertTimerToString(timerDiff);
+                    timerDifferencePanel.color = new Color(1, 0, 0, .4f);
                 }
                 else if(timerDiff < 0) 
                 { 
                     timerDifferenceText.text = "- " + ConvertTimerToString(timerDiff);
-                    timerDifferenceText.color = Color.blue;
+                    timerDifferencePanel.color = new Color(0, 0, 1, .4f);
                 }
                 else 
                 { 
-                    timerDifferenceText.text = ConvertTimerToString(timerDiff); 
-                    timerDifferenceText.color = Color.grey;
-                }       
+                    timerDifferenceText.text = ConvertTimerToString(timerDiff);
+                    timerDifferencePanel.color = new Color(.7f, .7f, .7f, .4f);
+                }
             }
+            else
+            {
+                timerDifferenceText.text = ConvertTimerToString(_timerChrono);
+                timerDifferencePanel.color = new Color(.7f, .7f, .7f, .4f);
+            }
+            StartCoroutine(TimerDifferenceFadeAway());
         }
+    }
+
+    private IEnumerator TimerDifferenceFadeAway()
+    {
+        yield return new WaitForSeconds(2.0f);
+        timerDifferencePanel.color = Color.clear;
+        timerDifferenceText.text = "";
     }
 
     public string ConvertTimerToString(float timer)
@@ -118,6 +132,6 @@ public class ChronoScript : MonoBehaviour
     public void SaveCheckpointsTime(List<float> checkpointTime)
     {
         //PrintCheckpointsTime(checkpointTime);
-        config.CheckpointTimes[_circuitIndex] = checkpointTime;
+        config.CheckpointTimes[_levelIndex] = checkpointTime;
     }
 }

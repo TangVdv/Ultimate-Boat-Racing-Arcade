@@ -8,7 +8,6 @@ namespace Checkpoints
 {
     public class CheckpointManager : MonoBehaviour
     {
-
         [SerializeField] private ChronoScript chrono;
         [SerializeField] private RaceModeScript race;
         
@@ -96,11 +95,12 @@ namespace Checkpoints
                 {
                     if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
                     progress.lap++;
-                    if(race != null) race.CurrentLapText.text = progress.lap.ToString();
+                    if(race != null && race.isActiveAndEnabled) race.CurrentLapText.text = progress.lap.ToString();
                     if (progress.lap > lapGoal)
                     {
-                        if (chrono != null)
+                        if (chrono != null && chrono.isActiveAndEnabled)
                         {
+                            chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
                             chrono.PauseTimer();
                             chrono.SaveCheckpointsTime(progress.checkpointTime);   
                         }
@@ -113,15 +113,15 @@ namespace Checkpoints
                     return;
                 }
             }
-            
-            if (chrono != null)
+            if (chrono != null && chrono.isActiveAndEnabled)
             {
                 //CHRONO MODE
+                Debug.Log("called chrono");
                 progress.checkpointTime.Add(chrono.TimerChrono);
                 chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);   
             }
 
-            if (race != null) HandleRaceMode(checkpoint, player);
+            if (race != null && race.isActiveAndEnabled) HandleRaceMode(checkpoint, player);
             
             progress.checkpoint = checkpoint;
             if(debug) UpdateVisuals(progress);
@@ -130,7 +130,7 @@ namespace Checkpoints
         private void HandleRaceMode(int checkpoint, GameObject player)
         {
             //RACE MODE
-            Debug.Log("called");
+            Debug.Log("called race");
             checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
             if (player.name == "NewPlayer")
@@ -140,15 +140,8 @@ namespace Checkpoints
                 foreach (KeyValuePair<string, float> entry in timerDictionary)
                 {
                     bool isPlayer = entry.Key == "NewPlayer" ? true : false;
-                    if (entry.Key == firstEntry.Key)
-                    {
-                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(entry.Value), isPlayer);
-                    }
-                    else
-                    {
-                        float timerDiff = entry.Value - firstEntry.Value;
-                        race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), isPlayer);
-                    }
+                    float timerDiff = entry.Key == firstEntry.Key ? entry.Value : entry.Value - firstEntry.Value;
+                    race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), isPlayer);
                 }
             }
             else
@@ -157,8 +150,10 @@ namespace Checkpoints
                 {
                     if (entry.Key == "NewPlayer")
                     {
-                        race.InstantiateRanking(timerDictionary.Last().Key,
-                            chrono.ConvertTimerToString(timerDictionary.Last().Value), false);
+                        race.InstantiateRanking(
+                            timerDictionary.Last().Key, 
+                            chrono.ConvertTimerToString(timerDictionary.Last().Value), 
+                            false);
                     }
                 }
             }

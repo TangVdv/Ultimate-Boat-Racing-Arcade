@@ -19,7 +19,7 @@ public class ModeSelection : MonoBehaviour
     [SerializeField] private Text difficultyText;
 
     private int _modeSelect;
-    private int _circuitIndex;
+    private int _levelIndex;
     private int _playerAmount = 1;
     private int _aiAmount = 2;
     private int _difficultyIndex = 0;
@@ -49,6 +49,7 @@ public class ModeSelection : MonoBehaviour
         config.AIAmount = _aiAmount;
         config.PlayerAmount = _playerAmount;
         config.GameMode = _modeSelect;
+        config.Level = _levelIndex;
         SceneManager.LoadScene("Map 1");
     }
 
@@ -59,7 +60,7 @@ public class ModeSelection : MonoBehaviour
 
     public void CircuitSelection(int value)
     {
-        _circuitIndex = value;
+        _levelIndex = value;
         playButton.enabled = true;
         detailsPanel.SetActive(true);
         detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + value;

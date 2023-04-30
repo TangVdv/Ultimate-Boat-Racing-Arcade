@@ -6,7 +6,7 @@ using UnityEngine;
 public class ConfigScript : ScriptableObject
 {
     private GameObject _boat;
-    private int _circuit;
+    private int _level;
     private int _gameMode;
     private int _aiAmount;
     private int _playerAmount;
@@ -29,10 +29,10 @@ public class ConfigScript : ScriptableObject
         set => _boat = value;
     }
 
-    public int Circuit
+    public int Level
     {
-        get => _circuit;
-        set => _circuit = value;
+        get => _level;
+        set => _level = value;
     }
 
     public int GameMode

@@ -25,9 +25,11 @@ public class SpawnScript : MonoBehaviour
         if (debug)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(
-                new Vector3(transform.position.x - size, transform.position.y, transform.position.z), 
-                new Vector3(transform.position.x + size, transform.position.y, transform.position.z));
+
+            Vector3 leftPoint = transform.TransformPoint(new Vector3(-size, 0f, 0f));
+            Vector3 rightPoint = transform.TransformPoint(new Vector3(size, 0f, 0f));
+
+            Gizmos.DrawLine(leftPoint, rightPoint);
         }
     }
 
@@ -63,7 +65,9 @@ public class SpawnScript : MonoBehaviour
             }
             Vector3 spawnPosition = new Vector3(x, transform.position.y, transform.position.z);
             boat.transform.position = spawnPosition;
-            Quaternion boatRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+            
+            Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+            Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
             boat.transform.rotation = boatRotation;
             i++;
         }
