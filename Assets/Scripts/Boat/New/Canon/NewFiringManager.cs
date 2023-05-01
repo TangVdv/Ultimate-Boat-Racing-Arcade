@@ -33,7 +33,7 @@ namespace Boat.New.Canon
                 bulletManager.SetManager(aimingManager);
                 bulletManager.SetBulletType(bulletType);
                 bulletManager.SetParent(boat);
-                _bullet.GetComponent<Rigidbody>().velocity = barrelOutput.forward * initialVelocity;
+                _bullet.GetComponent<Rigidbody>().velocity = barrelOutput.forward * initialVelocity + boat.GetComponent<Rigidbody>().velocity;
             }
         }
     }

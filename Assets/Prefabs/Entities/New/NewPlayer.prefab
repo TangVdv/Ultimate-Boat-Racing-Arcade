@@ -566,6 +566,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2157788149339898319}
     - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: aimingManager
+      value: 
+      objectReference: {fileID: 8341459511806100284}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: initialVelocity
       value: 50
       objectReference: {fileID: 0}
@@ -785,6 +789,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2157788149339898319}
     - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: aimingManager
+      value: 
+      objectReference: {fileID: 8341459511806100284}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: initialVelocity
       value: 50
       objectReference: {fileID: 0}
@@ -921,6 +929,10 @@ PrefabInstance:
       propertyPath: boat
       value: 
       objectReference: {fileID: 2157788149339898319}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: aimingManager
+      value: 
+      objectReference: {fileID: 8341459511806100284}
     - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: initialVelocity
       value: 50

@@ -25,16 +25,13 @@ namespace Boat.New.Canon
         private bool _isReloading;
         private bool _isLoaded;
 
-        private Dictionary<BulletType, int> _bulletInventory;
 
 
 
         public void Start()
         {
-            
-            _bulletInventory = manager.BulletInventory;
-            
-            if (_bulletInventory[manager.currentBulletType] > 0)
+
+            if (manager.BulletInventory[manager.currentBulletType] > 0)
             {
                 StartCoroutine(Reload());
             }
@@ -75,7 +72,7 @@ namespace Boat.New.Canon
                     Fire();
                 }
             }
-            else if (_bulletInventory[manager.currentBulletType] > 0 && _isReloading == false)
+            else if (manager.BulletInventory[manager.currentBulletType] > 0 && _isReloading == false)
             {
                     StartCoroutine(Reload());
             }
@@ -86,8 +83,8 @@ namespace Boat.New.Canon
 
         public void AddRandomMunition()
         {
-            _bulletInventory[(BulletType) Random.Range(1, _bulletInventory.Count)] += 1;
-            foreach (var bulletType in _bulletInventory)
+            manager.BulletInventory[(BulletType) Random.Range(1, manager.BulletInventory.Count)] += 1;
+            foreach (var bulletType in manager.BulletInventory)
             {
                 Debug.Log(bulletType.Key + " : " + bulletType.Value);
             }
@@ -97,8 +94,8 @@ namespace Boat.New.Canon
         {
             int currentBulletTypeInt = (int) manager.currentBulletType;
             currentBulletTypeInt += manager.switchingMunition;
-            currentBulletTypeInt %= _bulletInventory.Count;
-            if (currentBulletTypeInt < 0) currentBulletTypeInt = _bulletInventory.Count - 1; 
+            currentBulletTypeInt %= manager.BulletInventory.Count;
+            if (currentBulletTypeInt < 0) currentBulletTypeInt = manager.BulletInventory.Count - 1; 
             
             manager.currentBulletType = (BulletType) currentBulletTypeInt;
             if(debug) Debug.Log("Current munition : " + manager.currentBulletType);
@@ -116,8 +113,8 @@ namespace Boat.New.Canon
         public void Fire()
         {
 
-                if(!_bulletInventory.ContainsKey(manager.currentBulletType)) return;
-                if(_bulletInventory[manager.currentBulletType] <= 0) return;
+                if(!manager.BulletInventory.ContainsKey(manager.currentBulletType)) return;
+                if(manager.BulletInventory[manager.currentBulletType] <= 0) return;
                 
                 foreach (var canon in canons)
                 {
@@ -125,7 +122,7 @@ namespace Boat.New.Canon
                 }
 
                 _isLoaded = false;
-                _bulletInventory[manager.currentBulletType]--;
+                manager.BulletInventory[manager.currentBulletType]--;
 
 
         }

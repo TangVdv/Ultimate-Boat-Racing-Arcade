@@ -5,7 +5,7 @@ namespace Boat.New.Canon
 {
     public class NewBulletManager: MonoBehaviour
     {
-        private BulletType bulletType = BulletType.Basic;
+        private BulletType _bulletType = BulletType.Basic;
         public Rigidbody rigidBody;
         public NewAimingManager manager;
 
@@ -16,7 +16,7 @@ namespace Boat.New.Canon
         
         public void SetBulletType(BulletType type)
         {
-            bulletType = type;
+            _bulletType = type;
         }
 
         public void Update()
@@ -34,7 +34,7 @@ namespace Boat.New.Canon
                 return;
             }
             
-            switch (bulletType)
+            switch (_bulletType)
             {
                 case BulletType.Explosive:
                     Instantiate(explosionPrefab, transform.position, Quaternion.identity);
