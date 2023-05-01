@@ -147,8 +147,7 @@ namespace Checkpoints
         private void HandleRaceMode(int checkpoint, GameObject player)
         {
             //RACE MODE
-            Debug.Log("called race");
-            checkpoints[checkpoint].PlayerTimer[player.name] = chrono.TimerChrono;
+            checkpoints[checkpoint].PlayerTimer[player.name] = race.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
             if (player.name == "NewPlayer")
             {
@@ -158,7 +157,7 @@ namespace Checkpoints
                 {
                     bool isPlayer = entry.Key == "NewPlayer" ? true : false;
                     float timerDiff = entry.Key == firstEntry.Key ? entry.Value : entry.Value - firstEntry.Value;
-                    race.InstantiateRanking(entry.Key, chrono.ConvertTimerToString(timerDiff), isPlayer);
+                    race.InstantiateRanking(entry.Key, timerDiff, isPlayer);
                 }
             }
             else
@@ -167,10 +166,7 @@ namespace Checkpoints
                 {
                     if (entry.Key == "NewPlayer")
                     {
-                        race.InstantiateRanking(
-                            timerDictionary.Last().Key, 
-                            chrono.ConvertTimerToString(timerDictionary.Last().Value), 
-                            false);
+                        race.InstantiateRanking(timerDictionary.Last().Key, timerDictionary.Last().Value, false);
                     }
                 }
             }

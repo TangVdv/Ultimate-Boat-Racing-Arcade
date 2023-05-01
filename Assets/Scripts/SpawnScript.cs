@@ -48,8 +48,8 @@ public class SpawnScript : MonoBehaviour
             _boats.RemoveAt(i-1);
         }
 
-        _startX = transform.position.x - size;
-        _endX = transform.position.x + size;
+        _startX = transform.localPosition.x - size;
+        _endX = transform.localPosition.x + size;
     }
     
     public void Spawn()
@@ -61,14 +61,17 @@ public class SpawnScript : MonoBehaviour
             float x = _startX + i * distanceBetweenSpawn;
             if (_boats.Count == 1)
             {
-                x = transform.position.x;
+                x = transform.localPosition.x;
             }
+            
             Vector3 spawnPosition = new Vector3(x, transform.position.y, transform.position.z);
             boat.transform.position = spawnPosition;
             
             Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
             Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
             boat.transform.rotation = boatRotation;
+            
+
             i++;
         }
     }

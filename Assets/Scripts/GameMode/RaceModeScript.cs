@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class RaceModeScript : MonoBehaviour
+public class RaceModeScript : TimerScript
 {
     [SerializeField] private GameObject rankingPanel;
     [SerializeField] private GameObject rankingTemplate;
@@ -35,7 +35,7 @@ public class RaceModeScript : MonoBehaviour
         }
     }
 
-    public void InstantiateRanking(string playerName, string playerTimer, bool isPlayer)
+    public void InstantiateRanking(string playerName, float playerTimer, bool isPlayer)
     {
         Vector3 position = new Vector3(0f, _startPosY - _index * _spacingY, 0f);
         GameObject currentTemplate = Instantiate(rankingTemplate, rankingPanel.transform);
@@ -50,8 +50,9 @@ public class RaceModeScript : MonoBehaviour
             timer.color = new Color(0.34f,1f,0.43f);
         }
 
-        if (_index > 0) playerTimer = "+" + playerTimer;
-        timer.text = playerTimer;
+        string timerStr = ConvertTimerToString(playerTimer);
+        if (_index > 0) timerStr = "+" + timerStr;
+        timer.text = timerStr;
         currentTemplate.transform.localPosition = position;
         _index++;
     }

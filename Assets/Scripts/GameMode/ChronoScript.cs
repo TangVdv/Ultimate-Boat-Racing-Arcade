@@ -4,73 +4,20 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChronoScript : MonoBehaviour
+public class ChronoScript : TimerScript
 {
-    [SerializeField] private ConfigScript config;
-    [SerializeField] private Text timerChronoModeText;
-    [SerializeField] private Text timerRaceModeText;
     [SerializeField] private Text timerDifferenceText;
     [SerializeField] private Image timerDifferencePanel;
     
-    private float _timerChrono;
-
-    public float TimerChrono
-    {
-        get => _timerChrono;
-        set => _timerChrono = value;
-    }
-
-    private Text _timerText;
-    private bool _isTimerOn;
     private int _levelIndex;
-    private IEnumerator _timerCoroutine;
     
-    public void Reset()
+    public void ResetChrono()
     {
-        if (config.GameMode == 1)
-        {
-            _timerText = timerChronoModeText;
-        }
-        else
-        {
-            _timerText = timerRaceModeText;
-        }
         _levelIndex = config.Level;
-        _timerText.text = "00:00:000";
         timerDifferenceText.text = "";
-        _timerChrono = 0f;
-        PauseTimer();
-    }
-    
-    private IEnumerator UpdateTimer()
-    {
-        float startTime = Time.realtimeSinceStartup;
-        while (true)
-        {
-            yield return null;
-            _timerChrono = Time.realtimeSinceStartup - startTime;
-            _timerText.text = ConvertTimerToString(_timerChrono);
-        }
+        ResetTimer();
     }
 
-    public void PauseTimer()
-    {
-        if (_timerCoroutine != null)
-        {
-            StopCoroutine(_timerCoroutine);
-            _isTimerOn = false;
-        }
-    }
-
-    public void StartTimer()
-    {
-        if (!_isTimerOn)
-        {
-            _timerCoroutine = UpdateTimer();
-            StartCoroutine(_timerCoroutine);
-            _isTimerOn = true;
-        }
-    }
     public void ShowCheckpointTimeDifference(int index)
     {
         if (config.CheckpointTimes.Length > 0)
@@ -78,7 +25,7 @@ public class ChronoScript : MonoBehaviour
             if (config.CheckpointTimes[_levelIndex] != null)
             {
                 float checkPointTimer = config.CheckpointTimes[_levelIndex][index];
-                float timerDiff = _timerChrono - checkPointTimer;
+                float timerDiff = TimerChrono - checkPointTimer;
                 if (timerDiff > 0)
                 {
                     timerDifferenceText.text = "+ "+ ConvertTimerToString(timerDiff);
@@ -97,7 +44,7 @@ public class ChronoScript : MonoBehaviour
             }
             else
             {
-                timerDifferenceText.text = ConvertTimerToString(_timerChrono);
+                timerDifferenceText.text = ConvertTimerToString(TimerChrono);
                 timerDifferencePanel.color = new Color(.7f, .7f, .7f, .4f);
             }
             StartCoroutine(TimerDifferenceFadeAway());
@@ -111,14 +58,6 @@ public class ChronoScript : MonoBehaviour
         timerDifferenceText.text = "";
     }
 
-    public string ConvertTimerToString(float timer)
-    {
-        int minutes = Mathf.FloorToInt(timer / 60);
-        int seconds = Mathf.FloorToInt(timer % 60);
-        int milliseconds = Mathf.FloorToInt((timer * 1000) % 1000);
-        return $"{minutes:00}:{seconds:00}:{milliseconds:000}";
-    }
-    
     public void PrintCheckpointsTime(List<float> checkpointTime)
     {
         int i = 0;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StartUI : MonoBehaviour
 {
-    [SerializeField] private ChronoScript chronoScript;
+    [SerializeField] private TimerScript timer;
     [SerializeField] private Text countdownText;
     
     public int countdown = 3;
@@ -28,6 +28,6 @@ public class StartUI : MonoBehaviour
         }
 
         countdownText.text = "";
-        chronoScript.StartTimer();
+        timer.StartTimer();
     }
 }

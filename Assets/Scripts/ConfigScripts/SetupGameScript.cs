@@ -38,7 +38,6 @@ public class SetupGameScript : MonoBehaviour
         {
             fpsUI.SetActive(true);
         }
-        SetupLevel();
         SetupGameMode();
     }
 
@@ -53,6 +52,7 @@ public class SetupGameScript : MonoBehaviour
                 _spawnScript = spawner.GetComponent<SpawnScript>();
             }   
         }
+        _spawnScript.BoatsSetup();
     }
 
     public void ActivateLevel(bool active)
@@ -63,7 +63,6 @@ public class SetupGameScript : MonoBehaviour
     public void SetupGameMode()
     {
         Debug.Log("SETUP");
-        _spawnScript.BoatsSetup();
         switch (config.GameMode)
         {
             case 1:
@@ -81,20 +80,23 @@ public class SetupGameScript : MonoBehaviour
 
     public void ResetGame()
     {
+        SetupLevel();
+        _spawnScript.Spawn();
         if (chrono != null && chrono.isActiveAndEnabled)
         {
-            chrono.Reset();
+            chrono.ResetChrono();
+            chrono.StartTimer();
         }
         else if (race != null && race.isActiveAndEnabled)
         {
             race.MaxPosText.text = "/"+(config.AIAmount + config.PlayerAmount);
+            race.ResetTimer();
             race.ResetRanking();
+            race.StartTimer();
         }
         else
         {
             Debug.Log("No GameMode found, couldn't reset");
         }
-        _spawnScript.Spawn();
-        startUI.StartGame();
     }
 }
