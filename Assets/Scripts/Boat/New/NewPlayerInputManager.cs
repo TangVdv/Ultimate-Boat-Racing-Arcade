@@ -61,6 +61,8 @@ namespace Boat.New
             switchingMunition = 0;
             switchingMunition += Input.GetKeyDown(_changeWeaponLeft) ? -1 : 0;
             switchingMunition += Input.GetKeyDown(_changeWeaponRight) ? 1 : 0;
+            
+            
         }
     }
 }

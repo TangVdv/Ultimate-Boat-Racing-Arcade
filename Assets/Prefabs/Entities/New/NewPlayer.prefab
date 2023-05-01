@@ -145,6 +145,7 @@ MonoBehaviour:
   movementBarrels: 0
   wantsToFire: 0
   switchingMunition: 0
+  currentBulletType: 0
   controlScheme: 0
 --- !u!54 &7413920482512147655
 Rigidbody:
@@ -193,8 +194,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.5, y: 5, z: 22}
-  m_Center: {x: 0, y: 0, z: -0.5}
+  m_Size: {x: 5.5, y: 6.290665, z: 22}
+  m_Center: {x: 0, y: -2.841345, z: -0.5}
 --- !u!65 &7715670024124278490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -206,8 +207,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.339367, y: 5.271412, z: 3.7334156}
-  m_Center: {x: 0, y: 5, z: -2}
+  m_Size: {x: 2.339367, y: 7.3191023, z: 3.7334156}
+  m_Center: {x: 0, y: 3.9761548, z: -2}
 --- !u!1 &2624822224602114381
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +520,7 @@ MonoBehaviour:
   scrollSensitivity: 40
   orbitDampening: 10
   topClamp: 25
+  debug: 0
   reloadTime: 1
 --- !u!1001 &902043465733598248
 PrefabInstance:

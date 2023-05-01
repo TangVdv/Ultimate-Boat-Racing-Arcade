@@ -24,18 +24,17 @@ namespace Boat.New.Canon
         
         private bool _isReloading;
         private bool _isLoaded;
-        
-        private Dictionary<BulletType, int> bulletInventory = new Dictionary<BulletType, int>()
-        {
-            {BulletType.Basic, 2000000},
-            {BulletType.Explosive, 0},
-            {BulletType.SmokeScreen, 0}
-        };
-        private BulletType currentBulletType = BulletType.Basic;
+
+        private Dictionary<BulletType, int> _bulletInventory;
+
+
 
         public void Start()
         {
-            if (manager.State.Munitions > 0)
+            
+            _bulletInventory = manager.BulletInventory;
+            
+            if (_bulletInventory[manager.currentBulletType] > 0)
             {
                 StartCoroutine(Reload());
             }
@@ -44,6 +43,7 @@ namespace Boat.New.Canon
             {
                 canon.aimingManager = this;
             }
+
         }
 
         public void Update()
@@ -68,24 +68,26 @@ namespace Boat.New.Canon
                 }
             }
 
-            if (manager.wantsToFire)
+            if (_isLoaded)
             {
-                if (_isLoaded)
+                if (manager.wantsToFire)
                 {
                     Fire();
-                }else if (manager.State.Munitions > 0 && _isReloading == false)
-                {
-                    StartCoroutine(Reload());
                 }
             }
+            else if (_bulletInventory[manager.currentBulletType] > 0 && _isReloading == false)
+            {
+                    StartCoroutine(Reload());
+            }
+            
 
             if(manager.switchingMunition != 0)SwitchMunition();
         }
 
         public void AddRandomMunition()
         {
-            bulletInventory[(BulletType) Random.Range(1, bulletInventory.Count-1)] += 1;
-            foreach (var bulletType in bulletInventory)
+            _bulletInventory[(BulletType) Random.Range(1, _bulletInventory.Count)] += 1;
+            foreach (var bulletType in _bulletInventory)
             {
                 Debug.Log(bulletType.Key + " : " + bulletType.Value);
             }
@@ -93,14 +95,13 @@ namespace Boat.New.Canon
 
         public void SwitchMunition()
         {
-            //TODO: Sauter les munitions vides
-            int currentBulletTypeInt = (int) currentBulletType;
+            int currentBulletTypeInt = (int) manager.currentBulletType;
             currentBulletTypeInt += manager.switchingMunition;
-            if (currentBulletTypeInt > bulletInventory.Count - 1) currentBulletTypeInt = 1;
-            else if (currentBulletTypeInt < 0) currentBulletTypeInt = bulletInventory.Count - 1; 
-                
-            currentBulletType = (BulletType) currentBulletTypeInt;
-            if(debug) Debug.Log("Current munition : " + currentBulletType);
+            currentBulletTypeInt %= _bulletInventory.Count;
+            if (currentBulletTypeInt < 0) currentBulletTypeInt = _bulletInventory.Count - 1; 
+            
+            manager.currentBulletType = (BulletType) currentBulletTypeInt;
+            if(debug) Debug.Log("Current munition : " + manager.currentBulletType);
         }
 
         public void LateUpdate()
@@ -115,16 +116,16 @@ namespace Boat.New.Canon
         public void Fire()
         {
 
-                if(!bulletInventory.ContainsKey(currentBulletType)) return;
-                if(bulletInventory[currentBulletType] <= 0) return;
+                if(!_bulletInventory.ContainsKey(manager.currentBulletType)) return;
+                if(_bulletInventory[manager.currentBulletType] <= 0) return;
                 
                 foreach (var canon in canons)
                 {
-                    canon.Fire(currentBulletType);
+                    canon.Fire(manager.currentBulletType);
                 }
 
                 _isLoaded = false;
-                bulletInventory[currentBulletType]--;
+                _bulletInventory[manager.currentBulletType]--;
 
 
         }
@@ -134,10 +135,8 @@ namespace Boat.New.Canon
             if(debug) print("isReloading");
             _isReloading = true;
             yield return new WaitForSeconds(reloadTime);
-            manager.State.Munitions--;
             _isLoaded = true;
             if(debug) print("isLoaded");
-            if(debug) print("Ammo left : " + manager.State.Munitions);
             _isReloading = false;
         }
     }

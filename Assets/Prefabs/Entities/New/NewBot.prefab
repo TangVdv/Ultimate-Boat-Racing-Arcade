@@ -174,8 +174,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.5, y: 5, z: 22}
-  m_Center: {x: 0, y: 0, z: -0.5}
+  m_Size: {x: 5.5, y: 7.3654857, z: 22}
+  m_Center: {x: 0, y: -3.0878785, z: -0.5}
 --- !u!65 &7715670024124278490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -187,8 +187,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.339367, y: 5.271412, z: 3.7334156}
-  m_Center: {x: 0, y: 5, z: -2}
+  m_Size: {x: 2.339367, y: 7.1782103, z: 3.7334156}
+  m_Center: {x: 0, y: 4.046601, z: -2}
 --- !u!114 &5516772998419531923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   movementBarrels: 0
   wantsToFire: 0
   switchingMunition: 0
+  currentBulletType: 0
   boat: {fileID: 2157788149339898319}
   rigidBody: {fileID: 7413920482512147655}
   manager: {fileID: 0}
@@ -215,6 +216,7 @@ MonoBehaviour:
   targetingMask:
     serializedVersion: 2
     m_Bits: 2147483648
+  debug: 0
 --- !u!1 &3381123249354642913
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +444,7 @@ MonoBehaviour:
   scrollSensitivity: 40
   orbitDampening: 10
   topClamp: 25
+  debug: 0
   reloadTime: 1
 --- !u!1001 &902043465733598248
 PrefabInstance:

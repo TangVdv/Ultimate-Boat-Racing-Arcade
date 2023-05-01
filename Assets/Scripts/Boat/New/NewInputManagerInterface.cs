@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Boat.New.Canon;
 using UnityEngine;
 
 namespace Boat.New
@@ -17,18 +19,19 @@ namespace Boat.New
             public bool IsBlinded;
             public bool IsSlowed;
             public bool IsFastened;
-            public int Munitions;
 
         }
 
         public StateStruct State;
+
+        public Dictionary<BulletType, int> BulletInventory;
+        public BulletType currentBulletType;
 
         public void Start()
         {
             State.IsBlinded = false;
             State.IsSlowed = false;
             State.IsFastened = false;
-            State.Munitions = 10;
             
             
             movementX = 0;
@@ -36,6 +39,13 @@ namespace Boat.New
             movementCam = 0;
             movementBarrels = 0;
             wantsToFire = false;
+            BulletInventory = new Dictionary<BulletType, int>()
+            {
+                {BulletType.Basic, 2000000},
+                {BulletType.Explosive, 0},
+                {BulletType.SmokeScreen, 0}
+            };
+            currentBulletType = BulletType.Basic;
 
             switchingMunition = 0;
         }
