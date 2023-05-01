@@ -17,8 +17,8 @@ public class SpawnScript : MonoBehaviour
 
     private List<GameObject> _boats;
     private int _spawnAmount;
-    private float _startX;
-    private float _endX;
+    private Vector3 _start;
+    private Vector3 _end;
 
     private void OnDrawGizmos()
     {
@@ -48,23 +48,28 @@ public class SpawnScript : MonoBehaviour
             _boats.RemoveAt(i-1);
         }
 
-        _startX = transform.localPosition.x - size;
-        _endX = transform.localPosition.x + size;
+        var transform1 = transform;
+        var localPosition = transform1.localPosition;
+        var right = transform1.right;
+        
+        _start = localPosition - right * size;
+        _end = localPosition + right * size;
     }
     
     public void Spawn()
     {
-        float distanceBetweenSpawn = (_endX - _startX) / (_boats.Count - 1);
+        float distanceBetweenSpawn = Vector3.Distance(_start,_end) / (_boats.Count - 1);
         int i = 0;
         foreach (GameObject boat in _boats)
         {
-            float x = _startX + i * distanceBetweenSpawn;
+            boat.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            Vector3 pos = _start + i * distanceBetweenSpawn * transform.right;
             if (_boats.Count == 1)
             {
-                x = transform.localPosition.x;
+                pos = transform.localPosition;
             }
             
-            Vector3 spawnPosition = new Vector3(x, transform.position.y, transform.position.z);
+            Vector3 spawnPosition = pos;
             boat.transform.position = spawnPosition;
             
             Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
