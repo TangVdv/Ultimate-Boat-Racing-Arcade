@@ -26,7 +26,6 @@ public class BoatSelection : MonoBehaviour
         if (boats.Length > 0)
         {
             _currentBoat = Instantiate( boats[_indexSelection], locations[1].transform.position, locations[1].transform.rotation);
-            Debug.Log("Current Boat : "+boats[_indexSelection]);
             PlayboatNameText.text = _currentBoat.name;
             CustomboatNameText.text = _currentBoat.name;
             _boatManager = _currentBoat.GetComponent<BoatManager>();
@@ -90,7 +89,6 @@ public class BoatSelection : MonoBehaviour
 
     public void Select()
     {
-        Debug.Log("Selection Boat : "+boats[_indexSelection]);
         config.Boat = boats[_indexSelection];
     }
 

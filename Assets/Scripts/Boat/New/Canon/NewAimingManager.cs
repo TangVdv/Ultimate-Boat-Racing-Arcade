@@ -18,8 +18,8 @@ namespace Boat.New.Canon
 
         private float _localRotation;
         private float _scrollAmount;
-        
-        
+
+        public bool debug = false;
         public float reloadTime = 5f;
         
         private bool _isReloading;
@@ -100,7 +100,7 @@ namespace Boat.New.Canon
             else if (currentBulletTypeInt < 0) currentBulletTypeInt = bulletInventory.Count - 1; 
                 
             currentBulletType = (BulletType) currentBulletTypeInt;
-            Debug.Log("Current munition : " + currentBulletType);
+            if(debug) Debug.Log("Current munition : " + currentBulletType);
         }
 
         public void LateUpdate()
@@ -131,13 +131,13 @@ namespace Boat.New.Canon
         
         IEnumerator Reload()
         {
-            print("isReloading");
+            if(debug) print("isReloading");
             _isReloading = true;
             yield return new WaitForSeconds(reloadTime);
             manager.State.Munitions--;
             _isLoaded = true;
-            print("isLoaded");
-            print("Ammo left : " + manager.State.Munitions);
+            if(debug) print("isLoaded");
+            if(debug) print("Ammo left : " + manager.State.Munitions);
             _isReloading = false;
         }
     }

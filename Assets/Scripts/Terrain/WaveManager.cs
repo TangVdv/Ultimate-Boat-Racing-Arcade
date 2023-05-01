@@ -12,6 +12,7 @@ namespace Terrain
         public float length = 2f;
         public float speed = 1f;
         public float offset = 0f;
+        public bool debug = false;
         private static readonly int Amplitude = Shader.PropertyToID("_amplitude");
         private static readonly int Length = Shader.PropertyToID("_length");
         private static readonly int Speed = Shader.PropertyToID("_speed");
@@ -26,7 +27,7 @@ namespace Terrain
             }
             else if(instance != this)
             {
-                Debug.Log("Instance already exists, destroying object!");
+                if(debug) Debug.Log("Instance already exists, destroying object!");
                 Destroy(this);
             }
         }

@@ -78,6 +78,7 @@ public class ModeSelection : MonoBehaviour
     public void RaceMode()
     {
         _modeSelect = 0;
+        _levelIndex = 0;
     }
 
     public void ChronoMode()

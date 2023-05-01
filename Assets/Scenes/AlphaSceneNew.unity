@@ -407,7 +407,7 @@ MonoBehaviour:
   - {fileID: 483677931}
   - {fileID: 1697130815}
   - {fileID: 413338424}
-  debug: 1
+  debug: 0
   grace: 1
   lapGoal: 1
 --- !u!4 &234521139 stripped

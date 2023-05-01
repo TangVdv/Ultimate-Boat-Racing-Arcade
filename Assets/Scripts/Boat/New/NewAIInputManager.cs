@@ -31,6 +31,8 @@ namespace Boat.New
         public LayerMask targetingMask;
         
         private NewBoatMovementManager _newBoatMovementManager;
+
+        public bool debug = false;
         
         //TODO: mettre dans un fichier séparé
         public class AIDecision
@@ -82,7 +84,7 @@ namespace Boat.New
         //TODO: Register target
         private void TakeAimingDecision()
         {
-	        Debug.Log("Targeting");
+	        if(debug) Debug.Log("Targeting");
 	        if (State.IsBlinded) return;
 
 	        //Raycast in a sphere, in Targeting Physics layer
