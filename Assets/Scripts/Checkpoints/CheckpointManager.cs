@@ -47,7 +47,7 @@ namespace Checkpoints
             if(debug) Debug.Log(playerProgress);
         }
 
-        private void Reset(PlayerProgress progress = null)
+        public void Reset(PlayerProgress progress = null)
         {
             checkpoints = new Checkpoint[transform.childCount];
             foreach (Transform child in transform)
@@ -127,6 +127,12 @@ namespace Checkpoints
                             chrono.PauseTimer();
                             chrono.SaveCheckpointsTime(progress.checkpointTime);   
                         }
+
+                        if (race != null && race.isActiveAndEnabled)
+                        {
+                            race.PauseTimer();
+                        }
+                        
                         Reset(progress);
                         finishUI.SetActive(true);
                         Time.timeScale = 0f;

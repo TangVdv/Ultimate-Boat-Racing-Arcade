@@ -13,4 +13,9 @@ public class MainMenu : MonoBehaviour
     {
         Application.OpenURL("https://github.com/TangVdv/Ultimate-Boat-Racing-Arcade");
     }
+    
+    public void ItchioButton()
+    {
+        Application.OpenURL("https://kabajsah.itch.io/ultimate-boat-racing-arcade");
+    }
 }
