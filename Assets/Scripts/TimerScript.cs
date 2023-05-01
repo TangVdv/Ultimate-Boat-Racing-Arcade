@@ -26,12 +26,10 @@ public class TimerScript : MonoBehaviour
     {
         if (config.GameMode == 1 && timerChronoModeText.isActiveAndEnabled)
         {
-            Debug.Log("called chrono");
             _timerText = timerChronoModeText;
         }
         else if(config.GameMode == 0 && timerRaceModeText.isActiveAndEnabled)
         {
-            Debug.Log("called race");
             _timerText = timerRaceModeText;
         }
         _timerText.text = "00:00:000";

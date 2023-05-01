@@ -50,7 +50,7 @@ public class ModeSelection : MonoBehaviour
         config.PlayerAmount = _playerAmount;
         config.GameMode = _modeSelect;
         config.Level = _levelIndex;
-        SceneManager.LoadScene("Map 1");
+        SceneManager.LoadScene("AlphaSceneNew");
     }
 
     public void DisableButton()
@@ -64,7 +64,13 @@ public class ModeSelection : MonoBehaviour
         playButton.enabled = true;
         detailsPanel.SetActive(true);
         detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + value;
-        detailsPanel.transform.GetChild(1).GetComponent<Text>().text = "Best time : 00:00:00";
+        string text = "None";
+        if (config.CheckpointTimes[value] != null)
+        {
+            int lastIndex = config.CheckpointTimes[value].Count - 1;
+            text = config.CheckpointTimes[value][lastIndex].ToString();   
+        }
+        detailsPanel.transform.GetChild(1).GetComponent<Text>().text = "Best time : " + text;
         detailsPanel.transform.GetChild(2).GetComponent<Text>().text = "Boat : None";
         detailsPanel.transform.GetChild(3).GetComponent<Text>().text = "Current boat : " + config.Boat.name;
     }

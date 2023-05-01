@@ -116,8 +116,8 @@ namespace Checkpoints
             {
                 if (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length)
                 {
-                    progress.lap++;
                     if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
+                    progress.lap++;
                     if(race != null && race.isActiveAndEnabled) race.CurrentLapText.text = progress.lap.ToString();
                     if (progress.lap > lapGoal)
                     {
