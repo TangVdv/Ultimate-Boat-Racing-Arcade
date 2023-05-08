@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
 namespace Boat.New
@@ -59,10 +60,23 @@ namespace Boat.New
 
             wantsToFire = Input.GetMouseButtonDown(_fireClic);
             switchingMunition = 0;
-            switchingMunition += Input.GetKeyDown(_changeWeaponLeft) ? -1 : 0;
+            switchingMunition += 
+            Input.GetKeyDown(_changeWeaponLeft) ? -1 : 0;
             switchingMunition += Input.GetKeyDown(_changeWeaponRight) ? 1 : 0;
             
             
+        }
+
+        public void OnUp(InputAction.CallbackContext context)
+        {
+            int forwardInput = context.ReadValue<int>();
+            Debug.Log(forwardInput);
+        }
+        
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            float fireInput = context.ReadValue<float>();
+            Debug.Log(fireInput);
         }
     }
 }

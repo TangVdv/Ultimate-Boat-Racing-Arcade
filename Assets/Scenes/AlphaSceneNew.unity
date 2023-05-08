@@ -408,9 +408,9 @@ MonoBehaviour:
   - {fileID: 483677931}
   - {fileID: 1697130815}
   - {fileID: 413338424}
-  debug: 0
+  debug: 1
   grace: 1
-  lapGoal: 1
+  lapGoal: 2
 --- !u!4 &234521139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
@@ -2881,7 +2881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1316404739
 Transform:
   m_ObjectHideFlags: 0
