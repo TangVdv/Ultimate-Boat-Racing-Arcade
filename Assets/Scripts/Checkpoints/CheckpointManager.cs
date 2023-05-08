@@ -117,20 +117,19 @@ namespace Checkpoints
 
             if (checkpoint == 0)
             {
-                if (progress.player.name != "NewPlayer")
-                {
-                    //TODO : Deactivate bot inputs instead
-                    progress.player.SetActive(false);    
-                    return;
-                }
-                
                 if (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length)
                 {
                     if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
                     progress.lap++;
-                    if(race != null && race.isActiveAndEnabled) race.CurrentLapText.text = progress.lap.ToString();
                     if (progress.lap > lapGoal)
                     {
+                        if (progress.player.name != "NewPlayer")
+                        {
+                            //TODO : Deactivate bot inputs instead
+                            progress.player.SetActive(false);    
+                            return;
+                        }
+                        
                         if (chrono != null && chrono.isActiveAndEnabled)
                         {
                             chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
@@ -146,7 +145,11 @@ namespace Checkpoints
                         finishUI.SetActive(true);
                         Time.timeScale = 0f;
                         return;
-                    }   
+                    }
+                    else
+                    {
+                        if(race != null && race.isActiveAndEnabled) race.CurrentLapText.text = progress.lap.ToString();
+                    }
                 }
                 else
                 {
@@ -162,9 +165,10 @@ namespace Checkpoints
             Debug.Log("\n");
             int i = 1;
             Dictionary<string, float> dictionary = checkpoints[checkpoint].PlayerTimer;
+            if(debug) Debug.Log("Final ranking : ");
             foreach(KeyValuePair<string, float> entry in dictionary)
             {
-                Debug.Log("name : "+entry.Key+" ; Pos : "+i);
+                if(debug) Debug.Log("name : "+entry.Key+" ; Pos : "+i);
                 i++;
             }
         }
@@ -188,9 +192,10 @@ namespace Checkpoints
             checkpoints[checkpoint].PlayerTimer[progress.player.name] = race.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
             SetPlayerPos(timerDictionary, progress);
-            Debug.Log("Player "+progress.player.name+" position is "+progress.pos+" ; checkpoint "+checkpoint);
+            if(debug) Debug.Log("Player "+progress.player.name+" position is "+progress.pos+" ; checkpoint "+checkpoint);
             if (progress.player.name == "NewPlayer")
             {
+                race.CurrentPosText.text = progress.pos.ToString();
                 race.ResetRanking();
                 KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
                 foreach (KeyValuePair<string, float> entry in timerDictionary)

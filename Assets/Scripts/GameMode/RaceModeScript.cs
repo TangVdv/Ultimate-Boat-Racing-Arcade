@@ -22,7 +22,7 @@ public class RaceModeScript : TimerScript
 
     public void ResetRanking()
     {
-        currentLapText.text = "0";
+        currentLapText.text = "1";
         currentPosText.text = "1";
         if (_index > 0)
         {
