@@ -446,72 +446,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2157788149339898319, guid: 4ef8385f2faa2194f929b17f8bb3323b, type: 3}
   m_PrefabInstance: {fileID: 113087654}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &115659030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 115659033}
-  - component: {fileID: 115659032}
-  - component: {fileID: 115659031}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &115659031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115659030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &115659032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115659030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &115659033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115659030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &117079770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -759,6 +693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6218301055634948072, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
+      propertyPath: playerContainer
+      value: 
+      objectReference: {fileID: 1345157559}
     - target: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -769,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3102,6 +3040,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8142990103292359015, guid: f41a74affb5ed5041aa3485b142c2669, type: 3}
   m_PrefabInstance: {fileID: 617102990}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &625480714 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8235877819828062200, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+  m_PrefabInstance: {fileID: 973507347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &643406293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4861,9 +4804,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4186027717189459784, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186027717189459784, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21
+      objectReference: {fileID: 0}
     - target: {fileID: 8341459511806100284, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341459511806100284, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+      propertyPath: mouseSensitivity
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8348493431782611946, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
       propertyPath: m_RootOrder
@@ -4921,18 +4876,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2157788149339898319, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
   m_PrefabInstance: {fileID: 973507347}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &973507354 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6076377763760968102, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
-  m_PrefabInstance: {fileID: 973507347}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973507349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4156e086140c4ccab92d2572f8ae8aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &973507355
+--- !u!114 &973507350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4961,34 +4905,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 973507354}
         m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
-        m_MethodName: OnUp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hello
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e90668be-91a5-4950-b5ad-22e54c2dd405
-    m_ActionName: BoatController/Up
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9bd292bd-9941-4c8e-8112-db802779a85b
-    m_ActionName: BoatController/Down
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: db5a98ea-407f-4f2a-a41e-d186749d2819
-    m_ActionName: BoatController/Left
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 45ba2002-a7f4-428f-9f0e-43b23dc06759
-    m_ActionName: BoatController/Right
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 973507354}
-        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
         m_MethodName: OnFire
         m_Mode: 0
         m_Arguments:
@@ -5000,16 +4916,87 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 8f9b5b22-e5f0-4579-8e34-2df03e5bf492
-    m_ActionName: BoatController/Fire
+    m_ActionName: BoatController/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 973507354}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnSwitchAmmo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7bd679fe-4b64-436d-b176-ca6120fe1749
-    m_ActionName: BoatController/Ammo selection
+    m_ActionName: BoatController/Ammo selection[/Keyboard/a,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 973507354}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6b3ffa6f-5512-4b8c-964c-10d8d787dc2d
+    m_ActionName: BoatController/Movemement
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 973507354}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fdf84694-4ba2-4289-97d4-5c634e4630b2
+    m_ActionName: BoatController/Camera[/Mouse/delta/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 973507354}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b2f1ce53-74bd-4b08-9ab4-9f7bad3aee03
+    m_ActionName: BoatController/Aim[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: BoatController
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 625480714}
+--- !u!114 &973507354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6076377763760968102, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+  m_PrefabInstance: {fileID: 973507347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973507349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4156e086140c4ccab92d2572f8ae8aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &981857564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10112,7 +10099,7 @@ Transform:
   - {fileID: 959652808}
   - {fileID: 1345157559}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2097580807
 PrefabInstance:

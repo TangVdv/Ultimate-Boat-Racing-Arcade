@@ -24,10 +24,12 @@ public class Logger : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             _doShow = !_doShow;
         }
+        */
     }
     
     public void Log(string logString, string stackTrace = "", LogType type = LogType.Log)

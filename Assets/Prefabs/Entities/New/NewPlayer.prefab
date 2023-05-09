@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 1612310317884955973}
   - component: {fileID: 752578266343152926}
   - component: {fileID: 7715670024124278490}
+  - component: {fileID: 5583105710607611721}
   m_Layer: 31
   m_Name: NewPlayer
   m_TagString: Untagged
@@ -146,7 +147,6 @@ MonoBehaviour:
   wantsToFire: 0
   switchingMunition: 0
   currentBulletType: 0
-  controlScheme: 0
 --- !u!54 &7413920482512147655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -209,6 +209,116 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.339367, y: 7.3191023, z: 3.7334156}
   m_Center: {x: 0, y: 3.9761548, z: -2}
+--- !u!114 &5583105710607611721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157788149339898319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: b85d47a1b0af9234d90ddbb379bd217e, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6076377763760968102}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f9b5b22-e5f0-4579-8e34-2df03e5bf492
+    m_ActionName: BoatController/Fire[/Mouse/leftButton,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6076377763760968102}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnSwitchAmmo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7bd679fe-4b64-436d-b176-ca6120fe1749
+    m_ActionName: BoatController/Ammo selection[/Keyboard/q,/Keyboard/e,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6076377763760968102}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6b3ffa6f-5512-4b8c-964c-10d8d787dc2d
+    m_ActionName: BoatController/Movemement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6076377763760968102}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fdf84694-4ba2-4289-97d4-5c634e4630b2
+    m_ActionName: BoatController/Camera[/Mouse/delta/x,/XInputControllerWindows/rightStick/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6076377763760968102}
+        m_TargetAssemblyTypeName: Boat.New.NewPlayerInputManager, Assembly-CSharp
+        m_MethodName: OnAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b2f1ce53-74bd-4b08-9ab4-9f7bad3aee03
+    m_ActionName: BoatController/Aim[/Mouse/scroll/y,/XInputControllerWindows/rightStick/y]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: BoatController
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 8235877819828062200}
 --- !u!1 &2624822224602114381
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,11 +757,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d1e6b467d167ca74499a57e05e78c9da, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
---- !u!4 &5922225925446440089 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6821628363679692977, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
-  m_PrefabInstance: {fileID: 902043465733598248}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4310872712237868683 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
@@ -663,6 +768,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50124f2a46c4e63bd606c862ffcfcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5922225925446440089 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6821628363679692977, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+  m_PrefabInstance: {fileID: 902043465733598248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1787323725527705255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -870,6 +980,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d1e6b467d167ca74499a57e05e78c9da, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+--- !u!4 &3348159923881957013 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6821628363679692977, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+  m_PrefabInstance: {fileID: 8132453558671224356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5155424516480574599 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
@@ -881,11 +996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50124f2a46c4e63bd606c862ffcfcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &3348159923881957013 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6821628363679692977, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
-  m_PrefabInstance: {fileID: 8132453558671224356}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8253035128794296278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1011,6 +1121,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d1e6b467d167ca74499a57e05e78c9da, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+--- !u!4 &3180633579524839271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6821628363679692977, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+  m_PrefabInstance: {fileID: 8253035128794296278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5034834845776553333 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
@@ -1022,8 +1137,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50124f2a46c4e63bd606c862ffcfcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &3180633579524839271 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6821628363679692977, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
-  m_PrefabInstance: {fileID: 8253035128794296278}
-  m_PrefabAsset: {fileID: 0}
