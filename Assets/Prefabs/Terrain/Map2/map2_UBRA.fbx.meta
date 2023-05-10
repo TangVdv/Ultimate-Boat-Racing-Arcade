@@ -1,8 +1,32 @@
 fileFormatVersion: 2
-guid: f741555d088b48a4a8bba3e1782e1094
+guid: 4457268aa3206a44a94242319419fe4e
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -714229430729072381
+    second: Obstacles|CylinderAction.001
+  - first:
+      74: 2059366230845967972
+    second: Obstacles|CylinderAction.002
+  - first:
+      74: 6566103913418223699
+    second: Obstacles|CylinderAction.003
+  - first:
+      74: -4976798611821562398
+    second: Obstacles|CylinderAction.004
+  - first:
+      74: 642576567448283877
+    second: Obstacles|CylinderAction.005
+  - first:
+      74: 8116584524099778735
+    second: Obstacles|CylinderAction.006
+  - first:
+      74: 8919146823868935633
+    second: Obstacles|CylinderAction.007
+  - first:
+      74: -1537212994397365850
+    second: Obstacles|CylinderAction.008
   externalObjects: {}
   materials:
     materialImportMode: 2

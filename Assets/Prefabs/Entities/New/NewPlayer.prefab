@@ -314,8 +314,16 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b2f1ce53-74bd-4b08-9ab4-9f7bad3aee03
     m_ActionName: BoatController/Aim[/Mouse/scroll/y,/XInputControllerWindows/rightStick/y]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ca88acc-4810-448d-bdc3-8bc6fe448e40
+    m_ActionName: UIController/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 557187ce-fa11-47fc-8a41-4ef9739cd984
+    m_ActionName: UIController/Console[/Keyboard/slash]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: BoatController
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 8235877819828062200}
