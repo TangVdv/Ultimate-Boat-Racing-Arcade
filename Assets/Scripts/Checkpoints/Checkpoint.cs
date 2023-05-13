@@ -9,6 +9,7 @@ namespace Checkpoints
 
         private CheckpointManager _checkpointManager;
         private Dictionary<string, float> _playerTimer = new Dictionary<string, float>();
+        public GameObject core;
 
         public int ID;
 

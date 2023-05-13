@@ -5,7 +5,9 @@ using Boat.New.Canon;
 using Checkpoints;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -14,8 +16,6 @@ namespace Boat.New
     public class NewAIInputManager : NewInputManagerInterface
     {
 	    
-	    private Vector3 _botTargetPosition;
-        private int _nextCheckpoint;
         public GameObject boat;
         public Rigidbody rigidBody;
         
@@ -33,6 +33,15 @@ namespace Boat.New
         private NewBoatMovementManager _newBoatMovementManager;
 
         public bool debug = false;
+        
+        private NavMeshPath path = null;
+        private bool pathPending = false;
+        private Vector3 _botTargetPosition;
+        private int _nextCheckpoint;
+        private int pathCornerIndex = 0;
+        public float pathReSamplingInterval = 1.0f;
+        private float reSamplingTimer;
+        public float pathCornerDistanceThreshold = 5.0f;
         
         //TODO: mettre dans un fichier séparé
         public class AIDecision
@@ -84,7 +93,6 @@ namespace Boat.New
         //TODO: Register target
         private void TakeAimingDecision()
         {
-	        if(debug) Debug.Log("Targeting");
 	        if (State.IsBlinded) return;
 
 	        //Raycast in a sphere, in Targeting Physics layer
@@ -161,32 +169,61 @@ namespace Boat.New
         {
 	        movementZ = 0;
 	        movementX = 0;
-
-	        if (_botTargetPosition == Vector3.zero)
-	        {
-		        _botTargetPosition = manager.GetNextCheckpointCoordinates(boat);
-	        }
+	        
+	        Vector3 position = boat.transform.position;
 
 	        int passedCheckpoint = manager.GetPlayerProgress(boat).Item2;
-	        if (passedCheckpoint == _nextCheckpoint)
+	        
+	        reSamplingTimer -= Time.deltaTime;
+	        if (reSamplingTimer <= 0) pathPending = true;
+	        
+	        
+	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
 		        _nextCheckpoint = (_nextCheckpoint + 1) % manager.GetCheckpointCount();
-		        _botTargetPosition = manager.GetNextCheckpointCoordinates(boat);
+		        //Hungry call to get the next checkpoint, but it's only called one frame everytime the boat passes a checkpoint
+		        _botTargetPosition = manager.GetNextCheckpointCollider(boat).ClosestPoint(boat.transform.position);
+		        
+		        pathPending = true;
 	        }
 
-	        RaycastHit hit;
-	        if (Physics.Raycast(transform.position, transform.forward, out hit, 100.0f))
+	        if (pathPending)
 	        {
-		        //If object hit has same coordinates as next checkpoint, change target to straight ahead
-		        if (hit.transform.position == _botTargetPosition)
+		        reSamplingTimer = pathReSamplingInterval;
+		        
+		        pathPending = false;
+		        
+		        path = new NavMeshPath();
+		        NavMesh.CalculatePath(transform.position, _botTargetPosition, NavMesh.AllAreas, path);
+		        
+		        pathCornerIndex = 0;
+
+		        if (debug)
 		        {
-			        //Get exact coordinates of raycast hit
-			        _botTargetPosition = hit.point;
+			        var firstEdge = NavMesh.SamplePosition(position, out var hit, 100, NavMesh.AllAreas);
+			        var targetEdge = NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 100, NavMesh.AllAreas);
+
+			        Debug.DrawLine(position, hit.position, Color.blue, 0.2f);
+			        Debug.DrawLine(position, hitNext.position, Color.green, 0.2f);
+		        
+			        for (var i = 1; i < path.corners.Length; i++)
+			        {
+				        Debug.DrawLine(path.corners[i - 1], path.corners[i], Color.red, 0.2f);
+				        Debug.DrawLine(path.corners.Length == 0 ? position : path.corners[1], hitNext.position, Color.red, 0.2f);
+			        }
 		        }
 	        }
+	        
+	        Vector3 targetCorner = pathCornerIndex >= path.corners.Length ? _botTargetPosition : path.corners[pathCornerIndex];
+	        
+	        Vector2 movement = new Vector2(targetCorner.x - position.x, targetCorner.z - position.z);
 
-	        var position = transform.position;
-	        Vector2 movement = new Vector2(_botTargetPosition.x - position.x, _botTargetPosition.z - position.z);
+	        if (movement.magnitude <= pathCornerDistanceThreshold)
+	        {
+		        pathCornerIndex++;
+		        movement = new Vector2(targetCorner.x - position.x, targetCorner.z - position.z);
+	        }
+
 	        movement.Normalize();
 	        var forward = transform.forward;
 	        float angularDifference = Vector2.Angle(new Vector2(forward.x, forward.z), movement);
@@ -199,11 +236,8 @@ namespace Boat.New
 	        else if (steer < -0.3f) movementX = -1;
 
 	        //If has effect Blind, change movementX randomly
-	        if (State.IsBlinded)
-	        {
-		        movementX = (short)UnityEngine.Random.Range(-1, 1);
-	        }
-	        
+	        if (State.IsBlinded) movementX = (short)UnityEngine.Random.Range(-1, 1);
+
 	        movementZ = movement.y;
 
 	        float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
