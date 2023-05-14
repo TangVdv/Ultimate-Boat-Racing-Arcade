@@ -10,5 +10,6 @@ namespace Boat.New
         public int floaterCount = 1;
         public float waterDrag = 0.99f;
         public float waterAngularDrag = 0.5f;
+        public NewBoatMovementManager movementManager;
     }
 }
