@@ -14,6 +14,8 @@ namespace Boat.New
             float waveHeight = WaveManager.instance.GetWaveHeight(position.x);
             if (transform.position.y < waveHeight)
             {
+                Manager.rigidBody.AddForce(Manager.movementManager.GetSpeedModifier() * Manager.rigidBody.transform.forward / Manager.floaterCount);
+                
                 var position1 = transform.position;
                 float displacementMultiplier =
                     Mathf.Clamp01((waveHeight - position1.y) / Manager.depthBeforeSubmission) * Manager.displacementAmount;

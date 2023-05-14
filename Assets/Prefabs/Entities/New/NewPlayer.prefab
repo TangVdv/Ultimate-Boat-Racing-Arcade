@@ -345,6 +345,7 @@ MonoBehaviour:
   floaterCount: 4
   waterDrag: 0.4
   waterAngularDrag: 2.8
+  movementManager: {fileID: 1612310317884955973}
 --- !u!1 &4529839243799965413
 GameObject:
   m_ObjectHideFlags: 0
