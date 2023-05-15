@@ -43,6 +43,8 @@ namespace Boat.New
         private float reSamplingTimer;
         public float pathCornerDistanceThreshold = 5.0f;
         
+        public LayerMask checkPointMask;
+        
         //TODO: mettre dans un fichier séparé
         public class AIDecision
         {
@@ -59,7 +61,7 @@ namespace Boat.New
 	        
 	        public bool IsApplicable(float angularDifference)
 	        {
-		        return angularDifference >= angularThreshold;
+		        return Math.Abs(angularDifference) >= angularThreshold;
 	        }
 
 	        public int DecisionTree(float speed)
@@ -176,8 +178,8 @@ namespace Boat.New
 	        
 	        reSamplingTimer -= Time.deltaTime;
 	        if (reSamplingTimer <= 0) pathPending = true;
-	        
-	        
+
+
 	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
 		        _nextCheckpoint = (_nextCheckpoint + 1) % manager.GetCheckpointCount();
@@ -194,23 +196,23 @@ namespace Boat.New
 		        pathPending = false;
 		        
 		        path = new NavMeshPath();
-		        NavMesh.CalculatePath(transform.position, _botTargetPosition, NavMesh.AllAreas, path);
-		        
+		        NavMesh.CalculatePath(boat.transform.position, _botTargetPosition, NavMesh.AllAreas, path);
+
 		        pathCornerIndex = 0;
+	        }
+	        
+	        if (debug)
+	        {
+		        var firstEdge = NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
+		        var targetEdge = NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 10, NavMesh.AllAreas);
 
-		        if (debug)
-		        {
-			        var firstEdge = NavMesh.SamplePosition(position, out var hit, 100, NavMesh.AllAreas);
-			        var targetEdge = NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 100, NavMesh.AllAreas);
-
-			        Debug.DrawLine(position, hit.position, Color.blue, 0.2f);
-			        Debug.DrawLine(position, hitNext.position, Color.green, 0.2f);
+		        Debug.DrawLine(position, hit.position, Color.blue, 0.2f);
+		        Debug.DrawLine(position, hitNext.position, Color.green, 0.2f);
 		        
-			        for (var i = 1; i < path.corners.Length; i++)
-			        {
-				        Debug.DrawLine(path.corners[i - 1], path.corners[i], Color.red, 0.2f);
-				        Debug.DrawLine(path.corners.Length == 0 ? position : path.corners[1], hitNext.position, Color.red, 0.2f);
-			        }
+		        for (var i = 1; i < path.corners.Length; i++)
+		        {
+			        Debug.DrawLine(path.corners[i - 1], path.corners[i], Color.red, 0.2f);
+			        Debug.DrawLine(path.corners.Length == 0 ? position : path.corners[1], hitNext.position, Color.red, 0.2f);
 		        }
 	        }
 	        
@@ -226,19 +228,20 @@ namespace Boat.New
 
 	        movement.Normalize();
 	        var forward = transform.forward;
-	        float angularDifference = Vector2.Angle(new Vector2(forward.x, forward.z), movement);
+	        
+	        float angularDifference = Vector2.SignedAngle(new Vector2(forward.x, forward.z), movement);
 	        angularDifference /= 45.0f;
 
-	        float angularSpeed = rigidBody.angularVelocity.y;
+	        float angularSpeed = 0.5f * rigidBody.angularVelocity.y;
 	        float steer = Mathf.Clamp(angularDifference - angularSpeed, -1.0f, 1.0f);
-
-	        if (steer > 0.3f) movementX = 1;
-	        else if (steer < -0.3f) movementX = -1;
+	        
+	        if (steer > 0.3f) movementX = -1;
+			else if (steer < -0.3f) movementX = 1;
+	        
+	        movementZ = movement.y;
 
 	        //If has effect Blind, change movementX randomly
 	        if (State.IsBlinded) movementX = (short)UnityEngine.Random.Range(-1, 1);
-
-	        movementZ = movement.y;
 
 	        float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
 

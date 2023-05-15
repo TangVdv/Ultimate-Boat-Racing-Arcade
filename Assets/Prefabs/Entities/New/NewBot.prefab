@@ -217,6 +217,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   debug: 0
+  pathReSamplingInterval: 1
+  pathCornerDistanceThreshold: 5
+  checkPointMask:
+    serializedVersion: 2
+    m_Bits: 536870912
 --- !u!1 &3381123249354642913
 GameObject:
   m_ObjectHideFlags: 0
