@@ -147,6 +147,8 @@ MonoBehaviour:
   wantsToFire: 0
   switchingMunition: 0
   currentBulletType: 0
+  playerMesh: {fileID: 2253875726267285836}
+  _playerName: 
 --- !u!54 &7413920482512147655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,12 +318,52 @@ MonoBehaviour:
     m_ActionName: BoatController/Aim[/Mouse/scroll/y,/XInputControllerWindows/rightStick/y]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 2ca88acc-4810-448d-bdc3-8bc6fe448e40
-    m_ActionName: UIController/Pause[/Keyboard/escape]
+    m_ActionId: b4267b4d-2882-481f-895b-875116a7f306
+    m_ActionName: UI/Pause[/Keyboard/escape,/XInputControllerWindows/start]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 557187ce-fa11-47fc-8a41-4ef9739cd984
-    m_ActionName: UIController/Console[/Keyboard/slash]
+    m_ActionId: b9ff8290-c3de-405b-a7bd-f3418791001a
+    m_ActionName: UI/Console[/Keyboard/slash,/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 460e25b5-43ba-4fa0-8756-0c68259b7bf2
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 72b6151d-e42c-4909-ac5e-0b55855d04ea
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a52257d-d5bd-40e3-b01c-3df6122a1bb7
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f71857e1-04f6-4f62-ba6c-61b7151e6e09
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4adcec9a-4a3e-4313-82f9-b8af8b05cf1f
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3187e9d8-6b36-44bc-b413-9935caf3253a
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f32a289-1b32-4b3a-b364-7c5593fec88d
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e0f6723d-00a2-4ed0-82c3-7b42da00203d
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d273d692-e130-4b82-b201-8b5a03d97b8d
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bb7e712-e966-4168-a6af-e0d447d1eb1e
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: BoatController

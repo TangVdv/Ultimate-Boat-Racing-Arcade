@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlphaSceneNew.unity
     guid: 836abbe641738ed408a7154473715aff
+  - enabled: 1
+    path: Assets/Scenes/SetupPlayersMenu.unity
+    guid: 5e00b1b93b8bba244a72f1132a9fcd12
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3b26adca797219a4f8ccf0795ddeb3fe, type: 2}

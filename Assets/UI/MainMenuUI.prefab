@@ -2685,8 +2685,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
+      - m_Target: {fileID: 5400378941000570563}
+        m_TargetAssemblyTypeName: ModeSelectionUI, Assembly-CSharp
         m_MethodName: RightAIAmountCarousel
         m_Mode: 1
         m_Arguments:
@@ -4516,8 +4516,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
+      - m_Target: {fileID: 5400378941000570563}
+        m_TargetAssemblyTypeName: ModeSelectionUI, Assembly-CSharp
         m_MethodName: LeftPlayerAmountCarousel
         m_Mode: 1
         m_Arguments:
@@ -4780,8 +4780,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
+      - m_Target: {fileID: 5400378941000570563}
+        m_TargetAssemblyTypeName: ModeSelectionUI, Assembly-CSharp
         m_MethodName: RightPlayerAmountCarousel
         m_Mode: 1
         m_Arguments:
@@ -5968,8 +5968,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
+      - m_Target: {fileID: 5400378941000570563}
+        m_TargetAssemblyTypeName: ModeSelectionUI, Assembly-CSharp
         m_MethodName: LeftDifficultyCarousel
         m_Mode: 1
         m_Arguments:
@@ -11799,6 +11799,8 @@ MonoBehaviour:
   difficultyText: {fileID: 3723063985506804038}
   maps: []
   mapContainer: {fileID: 0}
+  playerSetupMenuRoot: {fileID: 0}
+  playerSetupMenuPrefab: {fileID: 0}
 --- !u!1 &7551525485420366329
 GameObject:
   m_ObjectHideFlags: 0
@@ -13280,8 +13282,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
+      - m_Target: {fileID: 5400378941000570563}
+        m_TargetAssemblyTypeName: ModeSelectionUI, Assembly-CSharp
         m_MethodName: RightDifficultyCarousel
         m_Mode: 1
         m_Arguments:
@@ -14190,8 +14192,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ModeSelection, Assembly-CSharp
+      - m_Target: {fileID: 5400378941000570563}
+        m_TargetAssemblyTypeName: ModeSelectionUI, Assembly-CSharp
         m_MethodName: LeftAIAmountCarousel
         m_Mode: 1
         m_Arguments:

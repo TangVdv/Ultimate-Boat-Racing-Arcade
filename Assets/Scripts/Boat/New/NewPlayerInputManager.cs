@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,21 @@ namespace Boat.New
 {
     public class NewPlayerInputManager : NewInputManagerInterface
     {
+        [SerializeField] private Transform playerMesh;
+        
+        public string _playerName;
+        private PlayerConfiguration _playerConfiguration;
+
+        public void InitializePlayer(PlayerConfiguration playerConfiguration)
+        {
+            _playerConfiguration = playerConfiguration;
+            _playerName = playerConfiguration.Name;
+            foreach (Transform childMesh in playerMesh)
+            {
+                childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
+            }
+        }
+        
         public void OnMovement(InputAction.CallbackContext context)
         {
             Vector2 value = context.ReadValue<Vector2>();

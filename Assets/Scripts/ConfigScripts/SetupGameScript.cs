@@ -15,6 +15,7 @@ public class SetupGameScript : MonoBehaviour
     [SerializeField] private RaceModeScript race;
     [SerializeField] private GameObject[] spawners;
     [SerializeField] private Transform levelManagers;
+    public bool debug = false;
 
     private int _aiAmount = 0;
     private GameObject _playerBoat;
@@ -62,15 +63,15 @@ public class SetupGameScript : MonoBehaviour
 
     public void SetupGameMode()
     {
-        Debug.Log("SETUP");
+        if(debug)Debug.Log("SETUP");
         switch (config.GameMode)
         {
             case 1:
-                Debug.Log("ChronoMode");
+                if(debug)Debug.Log("ChronoMode");
                 chronoUI.SetActive(true);
                 break;
             case 0:
-                Debug.Log("RaceMode");
+                if(debug)Debug.Log("RaceMode");
                 raceUI.SetActive(true);
                 _aiAmount = config.AIAmount;
                 break;
@@ -96,7 +97,7 @@ public class SetupGameScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("No GameMode found, couldn't reset");
+            if(debug)Debug.Log("No GameMode found, couldn't reset");
         }
     }
 }

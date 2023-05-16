@@ -17,6 +17,14 @@ public class ConfigScript : ScriptableObject
 
     private int _fpsIndex;
     private List<float>[] _checkpointTimes = new List<float>[5];
+    private List<PlayerConfiguration> _playerConfigurations;
+
+    public List<PlayerConfiguration> PlayerConfigurations
+    {
+        get => _playerConfigurations;
+        set => _playerConfigurations = value;
+    }
+
     public List<float>[] CheckpointTimes
     {
         get => _checkpointTimes;

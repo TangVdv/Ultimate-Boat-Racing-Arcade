@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Boat.New;
 using Checkpoints;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class SpawnScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
     [SerializeField] private Transform playerContainer;
+    [SerializeField] private GameObject playerPrefab;
     
     public float size = 10f;
     public bool debug = false;
@@ -35,7 +37,7 @@ public class SpawnScript : MonoBehaviour
 
     public void BoatsSetup()
     {
-        _spawnAmount = config.PlayerAmount + config.AIAmount;
+        _spawnAmount = config.AIAmount;
         _boats = new List<GameObject>(playerContainer.childCount);
         foreach (Transform child in playerContainer)
         {
@@ -46,6 +48,14 @@ public class SpawnScript : MonoBehaviour
         {
             Destroy(_boats[i-1]);
             _boats.RemoveAt(i-1);
+        }
+
+        var playerConfigs = config.PlayerConfigurations;
+        for (int i = 0; i < playerConfigs.Count; i++)
+        {
+            var player = Instantiate(playerPrefab);
+            player.GetComponent<NewPlayerInputManager>().InitializePlayer(playerConfigs[i]);
+            _boats.Add(player);
         }
 
         var transform1 = transform;

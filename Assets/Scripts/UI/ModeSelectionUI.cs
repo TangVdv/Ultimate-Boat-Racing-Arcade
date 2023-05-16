@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -69,6 +71,7 @@ public class ModeSelectionUI : MonoBehaviour
         config.PlayerAmount = _playerAmount;
         config.GameMode = _modeSelect;
         config.Level = _levelIndex;
+        SceneManager.LoadScene("SetupPlayersMenu");
     }
 
     public void CircuitSelection(int value)
