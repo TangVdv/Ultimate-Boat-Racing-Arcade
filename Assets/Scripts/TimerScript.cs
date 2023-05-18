@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
-    [SerializeField] private Text timerChronoModeText;
-    [SerializeField] private Text timerRaceModeText;
     public ConfigScript config;
     
     private float _timerChrono;
@@ -22,16 +20,9 @@ public class TimerScript : MonoBehaviour
     private bool _isTimerOn;
     private IEnumerator _timerCoroutine;
 
-    public void ResetTimer()
+    public void ResetTimer(Text timer)
     {
-        if (config.GameMode == 1 && timerChronoModeText.isActiveAndEnabled)
-        {
-            _timerText = timerChronoModeText;
-        }
-        else if(config.GameMode == 0 && timerRaceModeText.isActiveAndEnabled)
-        {
-            _timerText = timerRaceModeText;
-        }
+        _timerText = timer;
         _timerText.text = "00:00:000";
         _timerChrono = 0f;
         PauseTimer();

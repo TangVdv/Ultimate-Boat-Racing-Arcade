@@ -6,16 +6,23 @@ using UnityEngine.UI;
 
 public class ChronoScript : TimerScript
 {
+    [SerializeField] private GameObject chronoModeUI;
     [SerializeField] private Text timerDifferenceText;
     [SerializeField] private Image timerDifferencePanel;
+    [SerializeField] private Text timerChronoText;
     
     private int _levelIndex;
-    
+
     public void ResetChrono()
     {
+        if (!chronoModeUI.activeInHierarchy)
+        {
+            chronoModeUI.SetActive(true);
+        }
         _levelIndex = config.Level;
         timerDifferenceText.text = "";
-        ResetTimer();
+        ResetTimer(timerChronoText);
+        StartTimer();
     }
 
     public void ShowCheckpointTimeDifference(int index)

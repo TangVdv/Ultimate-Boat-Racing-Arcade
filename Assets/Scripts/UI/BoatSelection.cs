@@ -87,11 +87,6 @@ public class BoatSelection : MonoBehaviour
         }
     }
 
-    public void Select()
-    {
-        config.Boat = boats[_indexSelection];
-    }
-
     public void ColorSelect(Button button)
     {
         var color = button.GetComponent<Image>().color;

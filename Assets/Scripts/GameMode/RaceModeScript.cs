@@ -9,16 +9,30 @@ using UnityEngine.UIElements;
 
 public class RaceModeScript : TimerScript
 {
+    [SerializeField] private GameObject raceModeUI;
     [SerializeField] private GameObject rankingPanel;
     [SerializeField] private GameObject rankingTemplate;
     [SerializeField] private Text currentPosText;
     [SerializeField] private Text maxPosText;
     [SerializeField] private Text currentLapText;
     [SerializeField] private Text maxLapText;
+    [SerializeField] private Text timerRaceText;
 
     private float _startPosY = 45f;
     private float _spacingY = 17.5f;
     private int _index = 0;
+
+    public void ResetRace()
+    {
+        if (!raceModeUI.activeInHierarchy)
+        {
+            raceModeUI.SetActive(true);
+        }
+        maxPosText.text = "/"+(config.AIAmount + config.PlayerAmount);
+        ResetRanking();
+        ResetTimer(timerRaceText);
+        StartTimer();
+    }
 
     public void ResetRanking()
     {

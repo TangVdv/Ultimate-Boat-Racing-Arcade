@@ -9,20 +9,27 @@ namespace Boat.New
 {
     public class NewPlayerInputManager : NewInputManagerInterface
     {
+        [SerializeField] private ConfigScript config;
         [SerializeField] private Transform playerMesh;
+        [SerializeField] private RaceModeScript raceModeScript;
+        [SerializeField] private ChronoScript chronoScript;
+        [SerializeField] private PlayerUI playerUI;
+
+        public bool debug;
         
         private string _playerName;
-        private PlayerConfiguration _playerConfiguration;
         private Logger _logger;
-        
+        private SetupGameScript _setupGameScript;
+
         private void Awake()
         {
             _logger = FindObjectOfType<Logger>();
+            _setupGameScript = FindObjectOfType<SetupGameScript>();
+            StartGame();
         }
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
         {
-            _playerConfiguration = playerConfiguration;
             _playerName = playerConfiguration.Name;
             lastCheckpoint = spawner;
             foreach (Transform childMesh in playerMesh)
@@ -30,7 +37,42 @@ namespace Boat.New
                 childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
             }
         }
+
+        public void ResetPlayerProgress()
+        {
+            if (config.GameMode == 1)
+            {
+                if(debug)Debug.Log("RaceMode");
+                raceModeScript.ResetRace();   
+            }
+            else if (config.GameMode == 0)
+            {
+                if(debug)Debug.Log("ChronoMode");
+                chronoScript.ResetChrono();   
+            }
+            else
+                if(debug)Debug.Log("No GameMode found, couldn't reset");
+        }
+
+        private void StartGame()
+        {
+            lastCheckpoint = GameObject.Find("Spawn").transform;
+            Respawn();
+            ResetPlayerProgress();
+            _setupGameScript.SetupGame();
+        }
+
+        private void Respawn()
+        {
+            if (lastCheckpoint != null)
+            {
+                transform.position = lastCheckpoint.position;
+                transform.rotation = lastCheckpoint.rotation;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
         
+        // INPUTS
         public void OnMovement(InputAction.CallbackContext context)
         {
             Vector2 value = context.ReadValue<Vector2>();
@@ -58,12 +100,7 @@ namespace Boat.New
         {
             if (context.performed)
             {
-                if (lastCheckpoint != null)
-                {
-                    transform.position = lastCheckpoint.position;
-                    transform.rotation = lastCheckpoint.rotation;
-                    GetComponent<Rigidbody>().velocity = Vector3.zero;
-                }
+                Respawn();
             }
         }
         public void Logger(InputAction.CallbackContext context)
@@ -71,6 +108,13 @@ namespace Boat.New
             if (context.performed)
             {
                 _logger.ToggleConsole();
+            }
+        }
+        public void StartGame(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                StartGame();
             }
         }
     }

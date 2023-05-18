@@ -15,7 +15,7 @@ public class SpawnScript : MonoBehaviour
     [SerializeField] private GameObject botPrefab;
     
     public float size = 10f;
-    public bool debug = false;
+    public bool debug;
 
     private List<GameObject> _boats = new List<GameObject>();
 

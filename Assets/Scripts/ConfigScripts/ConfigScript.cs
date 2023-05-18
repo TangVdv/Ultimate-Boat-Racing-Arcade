@@ -5,17 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Config", menuName = "ConfigScript", order = 0)]
 public class ConfigScript : ScriptableObject
 {
-    private GameObject _boat;
     private int _level;
     private int _gameMode;
     private int _aiAmount;
     private int _playerAmount;
     private int _difficulty;
 
-    private bool _showHUD;
     private bool _showFPS;
-
     private int _fpsIndex;
+    
     private List<float>[] _checkpointTimes = new List<float>[5];
     private List<PlayerConfiguration> _playerConfigurations;
 
@@ -30,13 +28,7 @@ public class ConfigScript : ScriptableObject
         get => _checkpointTimes;
         set => _checkpointTimes = value;
     }
-
-    public GameObject Boat
-    {
-        get => _boat;
-        set => _boat = value;
-    }
-
+    
     public int Level
     {
         get => _level;
@@ -65,12 +57,6 @@ public class ConfigScript : ScriptableObject
     {
         get => _difficulty;
         set => _difficulty = value;
-    }
-
-    public bool ShowHUD
-    {
-        get => _showHUD;
-        set => _showHUD = value;
     }
 
     public bool ShowFPS

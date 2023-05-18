@@ -180,10 +180,4 @@ public class SettingsMenu : MonoBehaviour
         _showFPS = value;
         config.ShowFPS = value;
     }
-
-    public void HUDToggle(bool value)
-    {
-        _showHUD = value;
-        config.ShowHUD = value;
-    }
 }

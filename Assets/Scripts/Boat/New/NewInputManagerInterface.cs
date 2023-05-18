@@ -30,7 +30,6 @@ namespace Boat.New
 
         public void Start()
         {
-            lastCheckpoint = GameObject.Find("Spawn").transform;
             State.IsBlinded = false;
             State.IsSlowed = false;
             State.IsFastened = false;

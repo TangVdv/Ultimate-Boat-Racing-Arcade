@@ -88,7 +88,7 @@ public class ModeSelectionUI : MonoBehaviour
         }
         detailsPanel.transform.GetChild(1).GetComponent<Text>().text = "Best time : " + text;
         detailsPanel.transform.GetChild(2).GetComponent<Text>().text = "Boat : None";
-        detailsPanel.transform.GetChild(3).GetComponent<Text>().text = "Current boat : " + config.Boat.name;
+        detailsPanel.transform.GetChild(3).GetComponent<Text>().text = "Current boat : ";
         InstantiateMap();
     }
 
