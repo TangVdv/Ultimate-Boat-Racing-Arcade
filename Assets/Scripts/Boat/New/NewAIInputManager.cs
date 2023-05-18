@@ -183,7 +183,6 @@ namespace Boat.New
 	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
 		        _nextCheckpoint = (_nextCheckpoint + 1) % manager.GetCheckpointCount();
-		        //Hungry call to get the next checkpoint, but it's only called one frame everytime the boat passes a checkpoint
 		        _botTargetPosition = manager.GetNextCheckpointCollider(boat).ClosestPoint(boat.transform.position);
 		        
 		        pathPending = true;
