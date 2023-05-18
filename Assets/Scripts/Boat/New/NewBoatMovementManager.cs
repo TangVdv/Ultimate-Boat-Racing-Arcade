@@ -16,10 +16,7 @@ namespace Boat.New
         public float rotationSpeed = 5f;
         
         private float _speedModifier;
-        
-        //TODO
-        public float maxSpeed = 20f;
-        
+
         public void FixedUpdate()
         {
             _speedModifier = 1f;

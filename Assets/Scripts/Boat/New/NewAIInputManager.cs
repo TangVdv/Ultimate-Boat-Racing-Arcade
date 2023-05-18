@@ -39,40 +39,13 @@ namespace Boat.New
         private Vector3 _botTargetPosition;
         private int _nextCheckpoint;
         private int pathCornerIndex = 0;
-        public float pathReSamplingInterval = 1.0f;
+        public float pathReSamplingInterval = 0.2f;
         private float reSamplingTimer;
         public float pathCornerDistanceThreshold = 5.0f;
+        private Collider botTargetCollider;
         
         public LayerMask checkPointMask;
         
-        //TODO: mettre dans un fichier séparé
-        public class AIDecision
-        {
-	        public float angularThreshold;
-	        public float maxSpeed;
-	        public float minSpeed;
-
-	        public AIDecision(float angularThreshold, float maxSpeed, float minSpeed)
-	        {
-		        this.angularThreshold = angularThreshold;
-		        this.maxSpeed = maxSpeed;
-		        this.minSpeed = minSpeed;
-	        }
-	        
-	        public bool IsApplicable(float angularDifference)
-	        {
-		        return Math.Abs(angularDifference) >= angularThreshold;
-	        }
-
-	        public int DecisionTree(float speed)
-	        {
-		        if(speed >= maxSpeed) return -1;
-		        return speed <= minSpeed ? 1 : 0;
-	        }
-        }
-        
-        public List<AIDecision> decisionTree = new List<AIDecision>();
-
         private new void Start()
         {
 	        _newBoatMovementManager = boat.GetComponent<NewBoatMovementManager>();
@@ -81,15 +54,6 @@ namespace Boat.New
 	        _nextCheckpoint = 0;
 	        
 	        initialVelocity = aimingManager.canons[0].initialVelocity;
-	        
-	        float maxSpeed = _newBoatMovementManager.maxSpeed;
-
-	        decisionTree.Add(new AIDecision(2.0f, maxSpeed * 0.05f, maxSpeed * 0.00f));
-	        decisionTree.Add(new AIDecision(1.5f, maxSpeed * 0.10f, maxSpeed * 0.05f));
-	        decisionTree.Add(new AIDecision(1.0f, maxSpeed * 0.25f, maxSpeed * 0.10f));
-	        decisionTree.Add(new AIDecision(0.5f, maxSpeed * 0.50f, maxSpeed * 0.25f));
-	        decisionTree.Add(new AIDecision(0.25f, maxSpeed * 0.70f, maxSpeed * 0.50f));
-	        decisionTree.Add(new AIDecision(0.0f, maxSpeed * 1.00f, maxSpeed * 0.90f));
         }
 
         //TODO: Register target
@@ -183,38 +147,49 @@ namespace Boat.New
 	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
 		        _nextCheckpoint = (_nextCheckpoint + 1) % manager.GetCheckpointCount();
-		        _botTargetPosition = manager.GetNextCheckpointCollider(boat).ClosestPoint(boat.transform.position);
-		        
+		        botTargetCollider = manager.GetNextCheckpointCollider(boat);
+
 		        pathPending = true;
 	        }
 
 	        if (pathPending)
 	        {
+		        if(debug) Debug.Log("Resampling path");
+		        
 		        reSamplingTimer = pathReSamplingInterval;
 		        
 		        pathPending = false;
+		        
+		        //Raycast from the front in the CheckPointMask layer and if not found, use ClosestPoint instead
+		        Physics.Raycast(position, boat.transform.forward, out var hitForward, 100000.0f, checkPointMask);
+		        if (hitForward.collider == botTargetCollider)
+		        {
+			        if (debug) Debug.DrawLine(position, hitForward.point, Color.blue, pathReSamplingInterval);
+			        _botTargetPosition = hitForward.point;
+		        }
+		        else _botTargetPosition = botTargetCollider.ClosestPoint(position);
+		        
 		        
 		        path = new NavMeshPath();
 		        NavMesh.CalculatePath(boat.transform.position, _botTargetPosition, NavMesh.AllAreas, path);
 
 		        pathCornerIndex = 0;
-	        }
-	        
-	        if (debug)
-	        {
-		        var firstEdge = NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
-		        var targetEdge = NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 10, NavMesh.AllAreas);
-
-		        Debug.DrawLine(position, hit.position, Color.blue, 0.2f);
-		        Debug.DrawLine(position, hitNext.position, Color.green, 0.2f);
 		        
-		        for (var i = 1; i < path.corners.Length; i++)
+		        if (debug)
 		        {
-			        Debug.DrawLine(path.corners[i - 1], path.corners[i], Color.red, 0.2f);
-			        Debug.DrawLine(path.corners.Length == 0 ? position : path.corners[1], hitNext.position, Color.red, 0.2f);
+			        var firstEdge = NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
+			        var targetEdge = NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 10, NavMesh.AllAreas);
+		        
+			        Debug.DrawLine(position, hitNext.position, Color.green, pathReSamplingInterval);
+		        
+			        for (var i = 1; i < path.corners.Length; i++)
+			        {
+				        Debug.DrawLine(path.corners[i - 1], path.corners[i], Color.red, pathReSamplingInterval);
+				        Debug.DrawLine(path.corners.Length == 0 ? position : path.corners[1], hitNext.position, Color.red, pathReSamplingInterval);
+			        }
 		        }
 	        }
-	        
+
 	        Vector3 targetCorner = pathCornerIndex >= path.corners.Length ? _botTargetPosition : path.corners[pathCornerIndex];
 	        
 	        Vector2 movement = new Vector2(targetCorner.x - position.x, targetCorner.z - position.z);
@@ -234,24 +209,17 @@ namespace Boat.New
 	        float angularSpeed = 0.5f * rigidBody.angularVelocity.y;
 	        float steer = Mathf.Clamp(angularDifference - angularSpeed, -1.0f, 1.0f);
 	        
-	        if (steer > 0.3f) movementX = -1;
-			else if (steer < -0.3f) movementX = 1;
+	        if (steer >= 0.25f) movementX = -1;
+			else if (steer <= -0.25f) movementX = 1;
 	        
-	        movementZ = movement.y;
-
 	        //If has effect Blind, change movementX randomly
 	        if (State.IsBlinded) movementX = (short)UnityEngine.Random.Range(-1, 1);
 
 	        float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
 
-	        foreach (var decision in decisionTree)
-	        {
-		        if (decision.IsApplicable(angularDifference))
-		        {
-			        movementZ = decision.DecisionTree(forwardSpeed);
-			        break;
-		        }
-	        }
+			if (Mathf.Abs(angularDifference) >= 1.5f) movementZ = -1;
+			else if (Mathf.Abs(angularDifference) <= 1f) movementZ = 1;
+			else movementZ = 0;
         }
 
         private void Update()

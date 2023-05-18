@@ -162,7 +162,7 @@ MonoBehaviour:
   slowModifier: 0.6
   fastModifier: 1.5
   rotationSpeed: 100000
-  maxSpeed: 200
+  maxSpeed: 50
 --- !u!65 &752578266343152926
 BoxCollider:
   m_ObjectHideFlags: 0
