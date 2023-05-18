@@ -11,13 +11,20 @@ namespace Boat.New
     {
         [SerializeField] private Transform playerMesh;
         
-        public string _playerName;
+        private string _playerName;
         private PlayerConfiguration _playerConfiguration;
-
-        public void InitializePlayer(PlayerConfiguration playerConfiguration)
+        private Logger _logger;
+        
+        private void Awake()
+        {
+            _logger = FindObjectOfType<Logger>();
+        }
+        
+        public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
         {
             _playerConfiguration = playerConfiguration;
             _playerName = playerConfiguration.Name;
+            lastCheckpoint = spawner;
             foreach (Transform childMesh in playerMesh)
             {
                 childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
@@ -46,6 +53,25 @@ namespace Boat.New
         public void OnSwitchAmmo(InputAction.CallbackContext context)
         {
             switchingMunition = (int)context.ReadValue<float>();
+        }
+        public void Respawn(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                if (lastCheckpoint != null)
+                {
+                    transform.position = lastCheckpoint.position;
+                    transform.rotation = lastCheckpoint.rotation;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                }
+            }
+        }
+        public void Logger(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                _logger.ToggleConsole();
+            }
         }
     }
 }

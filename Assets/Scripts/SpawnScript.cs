@@ -11,14 +11,14 @@ using Random = UnityEngine.Random;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
-    [SerializeField] private Transform playerContainer;
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject botPrefab;
     
     public float size = 10f;
     public bool debug = false;
 
-    private List<GameObject> _boats;
-    private int _spawnAmount;
+    private List<GameObject> _boats = new List<GameObject>();
+
     private Vector3 _start;
     private Vector3 _end;
 
@@ -37,25 +37,22 @@ public class SpawnScript : MonoBehaviour
 
     public void BoatsSetup()
     {
-        _spawnAmount = config.AIAmount;
-        _boats = new List<GameObject>(playerContainer.childCount);
-        foreach (Transform child in playerContainer)
-        {
-            _boats.Add(child.gameObject);
-        }
-        
-        for (int i = _boats.Count; i > _spawnAmount; i--)
-        {
-            Destroy(_boats[i-1]);
-            _boats.RemoveAt(i-1);
-        }
-
+        // Instantiate players
         var playerConfigs = config.PlayerConfigurations;
-        for (int i = 0; i < playerConfigs.Count; i++)
+        for (int i = 0; i < config.PlayerAmount; i++)
         {
             var player = Instantiate(playerPrefab);
-            player.GetComponent<NewPlayerInputManager>().InitializePlayer(playerConfigs[i]);
-            _boats.Add(player);
+            if (playerConfigs[i] != null)
+            {
+                player.GetComponent<NewPlayerInputManager>().InitializePlayer(playerConfigs[i], transform);
+            }
+            _boats.Add(player);   
+        }
+        
+        // Instantiate bots
+        for (int i = 0; i < config.AIAmount; i++)
+        {
+            _boats.Add(Instantiate(botPrefab));
         }
 
         var transform1 = transform;
@@ -68,26 +65,29 @@ public class SpawnScript : MonoBehaviour
     
     public void Spawn()
     {
-        float distanceBetweenSpawn = Vector3.Distance(_start,_end) / (_boats.Count - 1);
-        int i = 0;
-        foreach (GameObject boat in _boats)
+        if (_boats.Count > 0)
         {
-            boat.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            Vector3 pos = _start + i * distanceBetweenSpawn * transform.right;
-            if (_boats.Count == 1)
+            float distanceBetweenSpawn = Vector3.Distance(_start,_end) / (_boats.Count - 1);
+            int i = 0;
+            foreach (GameObject boat in _boats)
             {
-                pos = transform.localPosition;
-            }
+                boat.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                Vector3 pos = _start + i * distanceBetweenSpawn * transform.right;
+                if (_boats.Count == 1)
+                {
+                    pos = transform.localPosition;
+                }
             
-            Vector3 spawnPosition = pos;
-            boat.transform.position = spawnPosition;
+                Vector3 spawnPosition = pos;
+                boat.transform.position = spawnPosition;
             
-            Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-            Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
-            boat.transform.rotation = boatRotation;
+                Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+                Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
+                boat.transform.rotation = boatRotation;
             
 
-            i++;
+                i++;
+            }   
         }
     }
 }

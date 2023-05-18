@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Boat.New;
 using UnityEngine;
 
 //Use tuples
@@ -41,14 +42,11 @@ namespace Checkpoints
 
         void Start()
         {
-
-            foreach (GameObject boat in boats)playerProgress.Add(new PlayerProgress(boat));
-
             Reset();
             
             if(debug) Debug.Log(playerProgress);
         }
-
+        
         public void Reset(PlayerProgress progress = null)
         {
             checkpoints = new Checkpoint[transform.childCount];
@@ -106,6 +104,8 @@ namespace Checkpoints
                 // UpdateVisuals(progress);
                 return;
             }
+
+            player.GetComponent<NewPlayerInputManager>().lastCheckpoint = checkpoints[checkpoint].transform;
             
             if (chrono != null && chrono.isActiveAndEnabled)
             {

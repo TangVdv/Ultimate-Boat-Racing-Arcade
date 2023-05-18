@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UIElements;
 
 public class SetupGameScript : MonoBehaviour
 {
@@ -13,7 +16,6 @@ public class SetupGameScript : MonoBehaviour
     [SerializeField] private GameObject raceUI;
     [SerializeField] private ChronoScript chrono;
     [SerializeField] private RaceModeScript race;
-    [SerializeField] private GameObject[] spawners;
     [SerializeField] private Transform levelManagers;
     public bool debug = false;
 
@@ -31,6 +33,10 @@ public class SetupGameScript : MonoBehaviour
 
     private void Start()
     {
+        InputAction buttonAction = new InputAction("StartGameAction", InputActionType.Button, "<Keyboard>/p");
+        buttonAction.performed += StartGame;
+        buttonAction.Enable();
+        
         _currentLevelIndex = config.Level;
         
         _playerBoat = config.Boat;
@@ -46,13 +52,8 @@ public class SetupGameScript : MonoBehaviour
     {
         _currentLevel = levelManagers.GetChild(_currentLevelIndex).gameObject;
         ActivateLevel(true);
-        foreach (var spawner in spawners)
-        {
-            if (spawner != null && spawner.activeInHierarchy)
-            {
-                _spawnScript = spawner.GetComponent<SpawnScript>();
-            }   
-        }
+        var spawner = GameObject.Find("Spawn");
+        _spawnScript = spawner.GetComponent<SpawnScript>();
         _spawnScript.BoatsSetup();
     }
 
@@ -99,5 +100,10 @@ public class SetupGameScript : MonoBehaviour
         {
             if(debug)Debug.Log("No GameMode found, couldn't reset");
         }
+    }
+
+    public void StartGame(InputAction.CallbackContext context)
+    {
+        ResetGame();
     }
 }

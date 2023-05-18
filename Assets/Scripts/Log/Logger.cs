@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class Logger : MonoBehaviour
@@ -22,14 +23,9 @@ public class Logger : MonoBehaviour
         Application.logMessageReceived -= Log;
     }
 
-    private void Update()
+    public void ToggleConsole()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            _doShow = !_doShow;
-        }
-        */
+        _doShow = !_doShow;
     }
     
     public void Log(string logString, string stackTrace = "", LogType type = LogType.Log)

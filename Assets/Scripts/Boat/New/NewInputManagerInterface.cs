@@ -12,6 +12,7 @@ namespace Boat.New
         public float movementBarrels;
         public bool wantsToFire;
         public int switchingMunition;
+        public Transform lastCheckpoint;
 
         public struct StateStruct
         { 
@@ -29,6 +30,7 @@ namespace Boat.New
 
         public void Start()
         {
+            lastCheckpoint = GameObject.Find("Spawn").transform;
             State.IsBlinded = false;
             State.IsSlowed = false;
             State.IsFastened = false;
@@ -48,6 +50,9 @@ namespace Boat.New
             currentBulletType = BulletType.Basic;
 
             switchingMunition = 0;
+            var playerManager = GameObject.Find("PlayerContainer");
+            transform.SetParent(playerManager.transform);
+            playerManager.GetComponent<PlayerManager>().AddPlayer(gameObject);
         }
     }
 }
