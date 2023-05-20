@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Boat.New.Canon;
 using Checkpoints;
@@ -33,6 +34,15 @@ namespace Boat.New
         private NewBoatMovementManager _newBoatMovementManager;
 
         public bool debug = false;
+
+        public enum Difficulty
+        {
+	        Easy = 1,
+	        Normal = 2,
+	        Hard = 3
+        }
+
+        public Difficulty difficulty = Difficulty.Normal;
         
         private NavMeshPath path = null;
         private bool pathPending = false;
@@ -42,7 +52,7 @@ namespace Boat.New
         public float pathReSamplingInterval = 0.2f;
         private float reSamplingTimer;
         public float pathCornerDistanceThreshold = 5.0f;
-        private Collider botTargetCollider;
+        private Collider botTargetCollider; 
         
         public LayerMask checkPointMask;
         
@@ -57,6 +67,7 @@ namespace Boat.New
         }
 
         //TODO: Register target
+        //TODO too: add something about difficulty
         private void TakeAimingDecision()
         {
 	        if (State.IsBlinded) return;
@@ -89,6 +100,7 @@ namespace Boat.New
 
 	        //get angle in degrees with 0 being forward
 	        float angularDifference = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
+	        
 	        float diffToCanon = angularDifference - canonDirection;
 
 	        wantsToFire = false;
@@ -130,7 +142,7 @@ namespace Boat.New
 	        if(canonAngle >= 45) canonAngle = 45;
 	        else if (canonAngle <= 0) canonAngle = 0;
         }
-
+        
         private void TakeMovementDecision()
         {
 	        movementZ = 0;
@@ -144,18 +156,17 @@ namespace Boat.New
 	        if (reSamplingTimer <= 0) pathPending = true;
 
 
-	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
+	        if (passedCheckpoint == _nextCheckpoint ||_botTargetPosition == Vector3.zero)
 	        {
 		        _nextCheckpoint = (_nextCheckpoint + 1) % manager.GetCheckpointCount();
-		        botTargetCollider = manager.GetNextCheckpointCollider(boat);
-
+		        
+		        botTargetCollider = manager.GetNextCheckpointCollider(boat, (int) difficulty);
+		        
 		        pathPending = true;
 	        }
 
 	        if (pathPending)
 	        {
-		        if(debug) Debug.Log("Resampling path");
-		        
 		        reSamplingTimer = pathReSamplingInterval;
 		        
 		        pathPending = false;
@@ -169,19 +180,16 @@ namespace Boat.New
 		        }
 		        else _botTargetPosition = botTargetCollider.ClosestPoint(position);
 		        
-		        
 		        path = new NavMeshPath();
-		        NavMesh.CalculatePath(boat.transform.position, _botTargetPosition, NavMesh.AllAreas, path);
+		        NavMesh.CalculatePath(position, _botTargetPosition, NavMesh.AllAreas, path);
 
 		        pathCornerIndex = 0;
 		        
 		        if (debug)
 		        {
-			        var firstEdge = NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
-			        var targetEdge = NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 10, NavMesh.AllAreas);
-		        
+			        NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
+			        NavMesh.SamplePosition(_botTargetPosition, out var hitNext, 10, NavMesh.AllAreas);
 			        Debug.DrawLine(position, hitNext.position, Color.green, pathReSamplingInterval);
-		        
 			        for (var i = 1; i < path.corners.Length; i++)
 			        {
 				        Debug.DrawLine(path.corners[i - 1], path.corners[i], Color.red, pathReSamplingInterval);
@@ -214,9 +222,7 @@ namespace Boat.New
 	        
 	        //If has effect Blind, change movementX randomly
 	        if (State.IsBlinded) movementX = (short)UnityEngine.Random.Range(-1, 1);
-
-	        float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
-
+	        
 			if (Mathf.Abs(angularDifference) >= 1.5f) movementZ = -1;
 			else if (Mathf.Abs(angularDifference) <= 1f) movementZ = 1;
 			else movementZ = 0;

@@ -81,10 +81,9 @@ namespace Checkpoints
             return checkpoints[index].core.transform.position;
         }
         
-        public Collider GetNextCheckpointCollider(GameObject player){
+        public Collider GetNextCheckpointCollider(GameObject player, int i = 1){
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
-            int index = progress.checkpoint + 1;
-            if (index >= checkpoints.Length) index = 0;
+            int index = (progress.checkpoint + i) % checkpoints.Length;
             return checkpoints[index].core.GetComponent<Collider>();
         }
 
