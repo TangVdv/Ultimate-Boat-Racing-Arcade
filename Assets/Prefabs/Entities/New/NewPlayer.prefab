@@ -154,7 +154,7 @@ MonoBehaviour:
   raceModeScript: {fileID: 528620621061791894}
   chronoScript: {fileID: 3234213521888596828}
   playerUI: {fileID: 1509106759525938275}
-  debug: 1
+  debug: 0
 --- !u!54 &7413920482512147655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -953,6 +953,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8348493431782611946}
     m_Modifications:
+    - target: {fileID: 1726771185228614832, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_Name
+      value: Event System
+      objectReference: {fileID: 0}
     - target: {fileID: 1960080529798711677, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1053,6 +1057,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8311187233524400517, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: chronoScript
+      value: 
+      objectReference: {fileID: 3234213521888596828}
+    - target: {fileID: 8311187233524400517, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: raceModeScript
+      value: 
+      objectReference: {fileID: 528620621061791894}
     - target: {fileID: 8482117619526900086, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
       propertyPath: m_Name
       value: PlayerUI

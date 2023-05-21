@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TimerScript : MonoBehaviour
 {
     public ConfigScript config;
+    [SerializeField] private Text timerText;
     
     private float _timerChrono;
 
@@ -20,10 +21,15 @@ public class TimerScript : MonoBehaviour
     private bool _isTimerOn;
     private IEnumerator _timerCoroutine;
 
-    public void ResetTimer(Text timer)
+    private void Awake()
     {
-        _timerText = timer;
-        _timerText.text = "00:00:000";
+        ResetTimer();
+        StartTimer();
+    }
+
+    public void ResetTimer()
+    {
+        timerText.text = "00:00:000";
         _timerChrono = 0f;
         PauseTimer();
     }
@@ -35,7 +41,7 @@ public class TimerScript : MonoBehaviour
         {
             yield return null;
             _timerChrono = Time.realtimeSinceStartup - startTime;
-            _timerText.text = ConvertTimerToString(_timerChrono);
+            timerText.text = ConvertTimerToString(_timerChrono);
         }
     }
     

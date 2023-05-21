@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChronoScript : TimerScript
+public class ChronoScript : MonoBehaviour
 {
+    [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject chronoModeUI;
     [SerializeField] private Text timerDifferenceText;
     [SerializeField] private Image timerDifferencePanel;
-    [SerializeField] private Text timerChronoText;
     
     private int _levelIndex;
 
@@ -21,37 +21,33 @@ public class ChronoScript : TimerScript
         }
         _levelIndex = config.Level;
         timerDifferenceText.text = "";
-        ResetTimer(timerChronoText);
-        StartTimer();
     }
 
-    public void ShowCheckpointTimeDifference(int index)
+    public void ShowCheckpointTimeDifference(float timerDiff, string timerText )
     {
         if (config.CheckpointTimes.Length > 0)
         {
             if (config.CheckpointTimes[_levelIndex] != null)
             {
-                float checkPointTimer = config.CheckpointTimes[_levelIndex][index];
-                float timerDiff = TimerChrono - checkPointTimer;
                 if (timerDiff > 0)
                 {
-                    timerDifferenceText.text = "+ "+ ConvertTimerToString(timerDiff);
+                    timerDifferenceText.text = "+ "+ timerText;
                     timerDifferencePanel.color = new Color(1, 0, 0, .4f);
                 }
                 else if(timerDiff < 0) 
                 { 
-                    timerDifferenceText.text = "- " + ConvertTimerToString(-timerDiff);
+                    timerDifferenceText.text = "- " + timerText;
                     timerDifferencePanel.color = new Color(0, 0, 1, .4f);
                 }
                 else 
                 { 
-                    timerDifferenceText.text = ConvertTimerToString(timerDiff);
+                    timerDifferenceText.text = timerText;
                     timerDifferencePanel.color = new Color(.7f, .7f, .7f, .4f);
                 }
             }
             else
             {
-                timerDifferenceText.text = ConvertTimerToString(TimerChrono);
+                timerDifferenceText.text = timerText;
                 timerDifferencePanel.color = new Color(.7f, .7f, .7f, .4f);
             }
             StartCoroutine(TimerDifferenceFadeAway());
@@ -65,16 +61,6 @@ public class ChronoScript : TimerScript
         timerDifferenceText.text = "";
     }
 
-    public void PrintCheckpointsTime(List<float> checkpointTime)
-    {
-        int i = 0;
-        foreach (var time in checkpointTime)
-        {
-            Debug.Log("Checkpoint " + i + " : " + ConvertTimerToString(time));
-            i++;
-        }
-    }
-    
     public void SaveCheckpointsTime(List<float> checkpointTime)
     {
         //PrintCheckpointsTime(checkpointTime);

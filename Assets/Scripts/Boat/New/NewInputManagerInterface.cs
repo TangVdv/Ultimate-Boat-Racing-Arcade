@@ -14,6 +14,12 @@ namespace Boat.New
         public int switchingMunition;
         public Transform lastCheckpoint;
 
+        public enum PlayerType
+        {
+            Bot,
+            Player
+        }
+
         public struct StateStruct
         { 
 
@@ -24,6 +30,7 @@ namespace Boat.New
         }
 
         public StateStruct State;
+        public PlayerType playerType;
 
         public Dictionary<BulletType, int> BulletInventory;
         public BulletType currentBulletType;

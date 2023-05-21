@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Boat.New;
+using TMPro;
 using UnityEngine;
 
 //Use tuples
@@ -10,12 +11,12 @@ namespace Checkpoints
 {
     public class CheckpointManager : MonoBehaviour
     {
-        [SerializeField] private ChronoScript chrono;
-        [SerializeField] private RaceModeScript race;
+        [SerializeField] private ConfigScript config;
         [SerializeField] private GameObject finishUI;
+        private TimerScript _timerScript;
         
         public List<GameObject> boats;
-        public bool debug = false;
+        public bool debug;
 
         public class PlayerProgress
         {
@@ -24,12 +25,16 @@ namespace Checkpoints
             public int checkpoint;
             public int pos;
             public List<float> checkpointTime = new List<float>();
+            public NewPlayerInputManager newPlayerInputManager;
+            public PlayerUI playerUI;
             public PlayerProgress(GameObject player)
             {
                 this.player = player;
                 this.lap = 1;
                 this.checkpoint = 0;
                 this.pos = 1;
+                this.newPlayerInputManager = player.GetComponent<NewPlayerInputManager>();
+                this.playerUI = newPlayerInputManager.PlayerUI;
             }
         }
     
@@ -37,19 +42,20 @@ namespace Checkpoints
     
         public int grace = 3;
         public int lapGoal = 1;
+
+        private int _maxPos;
     
         private List<PlayerProgress> playerProgress = new List<PlayerProgress>();
 
-        void Start()
+        private void Awake()
         {
-            Reset();
-            
-            if(debug) Debug.Log(playerProgress);
+            _maxPos = config.PlayerAmount + config.AIAmount;
+            _timerScript = GameObject.Find("TimerUI").GetComponent<TimerScript>();
         }
-        
+
         public void Reset(PlayerProgress progress = null)
         {
-            checkpoints = new Checkpoint[transform.childCount];
+            checkpoints = new Checkpoint[transform.childCount]; 
             foreach (Transform child in transform)
             {
                 Checkpoint checkpoint = child.GetComponent<Checkpoint>();
@@ -58,7 +64,7 @@ namespace Checkpoints
             }
             if(debug) UpdateVisuals(playerProgress[0]);
 
-            if(race != null) race.MaxLapText.text = "/"+lapGoal;
+            //if(race != null) race.MaxLapText.text = "/"+lapGoal;
             
             if (progress != null)
             {
@@ -70,8 +76,22 @@ namespace Checkpoints
 
         public void AddPlayer(GameObject player)
         {
+            if(debug)Debug.Log("Add player : "+player); 
             boats.Add(player);
-            playerProgress.Add(new PlayerProgress(player));
+            playerProgress.Add(new PlayerProgress(player));   
+            
+            if (playerProgress.Count == (config.PlayerAmount + config.AIAmount)) 
+            {
+                if (debug)
+                {
+                    Debug.Log("Start : ");
+                    foreach (var p in playerProgress)
+                    {
+                        Debug.Log(p.player.name);
+                    }
+                }
+                Reset();
+            }
         }
 
         public Vector3 GetNextCheckpointCoordinates(GameObject player){
@@ -88,7 +108,9 @@ namespace Checkpoints
         public void CheckPointPassed(int checkpoint, GameObject player)
         {
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
-        
+            ChronoScript chrono = progress.playerUI.ChronoScript;
+            RaceModeScript race = progress.playerUI.RaceModeScript;
+
             // Ignore if same checkpoint
             if (progress.checkpoint == checkpoint) return;
 
@@ -105,20 +127,22 @@ namespace Checkpoints
                 return;
             }
 
-            player.GetComponent<NewPlayerInputManager>().lastCheckpoint = checkpoints[checkpoint].transform;
-            
-            if (chrono != null && chrono.isActiveAndEnabled)
+            progress.newPlayerInputManager.lastCheckpoint = checkpoints[checkpoint].transform;
+            progress.checkpoint = checkpoint;
+
+            if (config.GameMode == 1)
             {
                 //CHRONO MODE
-                progress.checkpointTime.Add(chrono.TimerChrono);
-                chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);   
+                progress.checkpointTime.Add(_timerScript.TimerChrono);
+                ChronoTimeDifference(progress); 
             }
-            if (race != null && race.isActiveAndEnabled) HandleRaceMode(checkpoint, progress);
+            if (config.GameMode == 0) HandleRaceMode(checkpoint, progress);
 
             if (checkpoint == 0)
             {
                 if (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length)
                 {
+                    //TODO : FIX EVERYTHING
                     if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
                     progress.lap++;
                     if (progress.lap > lapGoal)
@@ -132,13 +156,13 @@ namespace Checkpoints
                         
                         if (chrono != null && chrono.isActiveAndEnabled)
                         {
-                            chrono.ShowCheckpointTimeDifference(progress.checkpointTime.Count-1);
-                            chrono.PauseTimer();
+                            ChronoTimeDifference(progress);
+                            _timerScript.PauseTimer();
                             chrono.SaveCheckpointsTime(progress.checkpointTime);   
                         }
                         if (race != null && race.isActiveAndEnabled)
                         {
-                            race.PauseTimer();
+                            _timerScript.PauseTimer();
                         }
                         
                         Reset(progress);
@@ -148,7 +172,7 @@ namespace Checkpoints
                     }
                     else
                     {
-                        if(race != null && race.isActiveAndEnabled) race.CurrentLapText.text = progress.lap.ToString();
+                        if(race != null && race.isActiveAndEnabled) race.SetCurrentLapText(progress.lap);
                     }
                 }
                 else
@@ -156,13 +180,25 @@ namespace Checkpoints
                     return;
                 }
             }
-            progress.checkpoint = checkpoint;
             if(debug) UpdateVisuals(progress);
         }
 
+        private void ChronoTimeDifference(PlayerProgress progress)
+        {
+            ChronoScript chrono = progress.playerUI.ChronoScript;
+            //TODO : fix "config.CheckpointTimes[config.Level]", it's not set properly (add a verif)
+            float checkPointTimer = config.CheckpointTimes[config.Level][progress.checkpointTime.Count-1];
+            string timerText;
+            float timerDiff = _timerScript.TimerChrono - checkPointTimer;
+            if (config.CheckpointTimes[config.Level] != null)
+                timerText = _timerScript.ConvertTimerToString(timerDiff);
+            else
+                timerText = _timerScript.ConvertTimerToString(_timerScript.TimerChrono);
+            chrono.ShowCheckpointTimeDifference(timerDiff, timerText);
+        }
+        
         private void GetAllPos(int checkpoint)
         {
-            Debug.Log("\n");
             int i = 1;
             Dictionary<string, float> dictionary = checkpoints[checkpoint].PlayerTimer;
             if(debug) Debug.Log("Final ranking : ");
@@ -176,9 +212,13 @@ namespace Checkpoints
         private void SetPlayerPos(Dictionary<string, float> dictionary, PlayerProgress progress)
         {
             int currentPos = 1;
+            if (!dictionary.ContainsKey(progress.newPlayerInputManager.PlayerName))
+            {
+                progress.pos = _maxPos;
+            }
             foreach (KeyValuePair<string, float> entry in dictionary)
             {
-                if (entry.Key == progress.player.name)
+                if (entry.Key == progress.newPlayerInputManager.PlayerName)
                 {
                     progress.pos = currentPos;
                 }
@@ -189,29 +229,28 @@ namespace Checkpoints
         private void HandleRaceMode(int checkpoint, PlayerProgress progress)
         {
             //RACE MODE
-            checkpoints[checkpoint].PlayerTimer[progress.player.name] = race.TimerChrono;
+            RaceModeScript race = progress.playerUI.RaceModeScript;
+            checkpoints[checkpoint].PlayerTimer[progress.newPlayerInputManager.PlayerName] = _timerScript.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
-            SetPlayerPos(timerDictionary, progress);
+
             if(debug) Debug.Log("Player "+progress.player.name+" position is "+progress.pos+" ; checkpoint "+checkpoint);
-            if (progress.player.name == "NewPlayer")
+            
+            foreach (var playerProg in playerProgress)
             {
-                race.CurrentPosText.text = progress.pos.ToString();
-                race.ResetRanking();
-                KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
-                foreach (KeyValuePair<string, float> entry in timerDictionary)
+                race = playerProg.playerUI.RaceModeScript;
+                SetPlayerPos(timerDictionary, playerProg);
+                race.SetCurrentPosText(playerProg.pos);
+                if (playerProg.newPlayerInputManager.playerType == NewInputManagerInterface.PlayerType.Player && playerProg.checkpoint == checkpoint)
                 {
-                    bool isPlayer = entry.Key == "NewPlayer" ? true : false;
-                    float timerDiff = entry.Key == firstEntry.Key ? entry.Value : entry.Value - firstEntry.Value;
-                    race.InstantiateRanking(entry.Key, timerDiff, isPlayer);
-                }
-            }
-            else
-            {
-                foreach (KeyValuePair<string, float> entry in timerDictionary)
-                {
-                    if (entry.Key == "NewPlayer")
+                    race.ResetRanking();
+                
+                    KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
+                
+                    foreach (KeyValuePair<string, float> entry in timerDictionary)
                     {
-                        race.InstantiateRanking(timerDictionary.Last().Key, timerDictionary.Last().Value, false);
+                        bool isPlayer = entry.Key == playerProg.newPlayerInputManager.PlayerName ? true : false;
+                        float timerDiff = entry.Key == firstEntry.Key ? entry.Value : entry.Value - firstEntry.Value;
+                        race.InstantiateRanking(entry.Key, _timerScript.ConvertTimerToString(timerDiff), isPlayer);
                     }
                 }
             }

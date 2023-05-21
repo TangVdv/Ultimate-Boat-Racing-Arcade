@@ -15,37 +15,50 @@ namespace Boat.New
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
 
+        public PlayerUI PlayerUI
+        {
+            get => playerUI;
+            set => playerUI = value;
+        }
+
         public bool debug;
         
         private string _playerName;
+
+        public string PlayerName
+        {
+            get => _playerName;
+            set => _playerName = value;
+        }
+
         private Logger _logger;
         private SetupGameScript _setupGameScript;
-
-        private void Awake()
-        {
-            _logger = FindObjectOfType<Logger>();
-            _setupGameScript = FindObjectOfType<SetupGameScript>();
-            StartGame();
-        }
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
         {
+            playerType = PlayerType.Player;
             _playerName = playerConfiguration.Name;
             lastCheckpoint = spawner;
             foreach (Transform childMesh in playerMesh)
             {
                 childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
             }
+            
+            _logger = FindObjectOfType<Logger>();
+            _setupGameScript = FindObjectOfType<SetupGameScript>();
+            ResetPlayerProgress();
         }
+        
 
         public void ResetPlayerProgress()
         {
-            if (config.GameMode == 1)
+            lastCheckpoint = GameObject.Find("Spawn").transform;
+            if (config.GameMode == 0)
             {
                 if(debug)Debug.Log("RaceMode");
                 raceModeScript.ResetRace();   
             }
-            else if (config.GameMode == 0)
+            else if (config.GameMode == 1)
             {
                 if(debug)Debug.Log("ChronoMode");
                 chronoScript.ResetChrono();   
@@ -56,7 +69,6 @@ namespace Boat.New
 
         private void StartGame()
         {
-            lastCheckpoint = GameObject.Find("Spawn").transform;
             Respawn();
             ResetPlayerProgress();
             _setupGameScript.SetupGame();
@@ -85,7 +97,6 @@ namespace Boat.New
         }
         public void OnCamera(InputAction.CallbackContext context)
         {
-            Debug.Log(context.ReadValue<float>());
             movementCam = context.ReadValue<float>();
         }
         public void OnAim(InputAction.CallbackContext context)

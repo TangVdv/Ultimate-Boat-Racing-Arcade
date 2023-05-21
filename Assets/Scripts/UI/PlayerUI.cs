@@ -6,8 +6,22 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private ConfigScript config;
+    public ConfigScript config;
     [SerializeField] private Text currentFPSText;
+    [SerializeField] private ChronoScript chronoScript;
+    [SerializeField] private RaceModeScript raceModeScript;
+
+    public ChronoScript ChronoScript
+    {
+        get => chronoScript;
+        set => chronoScript = value;
+    }
+
+    public RaceModeScript RaceModeScript
+    {
+        get => raceModeScript;
+        set => raceModeScript = value;
+    }
 
     private int[] _fpsArray = {30, 60, 120};
     private float _timer, _timelapse, _avgFramerate;

@@ -1,14 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
 public class ModeSelectionUI : MonoBehaviour

@@ -68,6 +68,7 @@ namespace Boat.New
 	        base.Start();
 	        _botTargetPosition = Vector3.zero;
 	        _nextCheckpoint = 0;
+	        playerType = PlayerType.Bot;
 	        
 	        initialVelocity = aimingManager.canons[0].initialVelocity;
 	        

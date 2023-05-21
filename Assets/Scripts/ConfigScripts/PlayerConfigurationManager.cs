@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerConfigurationManager : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
-    public bool debug = false;
+    public bool debug;
 
     private List<PlayerConfiguration> _playerConfigs;
     private int _maxPlayers;
@@ -46,6 +46,10 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         _playerConfigs[index].IsReady = true;
+        // TODO : DELETE FIXED MATERIAL
+        Material mat = new Material(Shader.Find("Standard"));
+        mat.color = Color.blue;
+        SetPlayerColor(index, mat);
         if(debug)Debug.Log("Player "+ _playerConfigs[index].Name+" is ready !");
         if (_playerConfigs.Count == _maxPlayers && _playerConfigs.All(p => p.IsReady == true))
         {
@@ -88,7 +92,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 
             if (_playerConfigs.All(p => p.PlayerIndex != playerInput.playerIndex))
             {
-                //playerInput.transform.SetParent(transform);
                 _playerConfigs.Add(new PlayerConfiguration(playerInput));
             }   
         }
