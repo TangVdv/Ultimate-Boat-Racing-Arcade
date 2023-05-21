@@ -77,4 +77,9 @@ public class RaceModeScript : MonoBehaviour
     {
         currentLapText.text = value.ToString();
     }
+    
+    public void SetMaxLapText(int value)
+    {
+        maxLapText.text = "/"+value;
+    }
 }

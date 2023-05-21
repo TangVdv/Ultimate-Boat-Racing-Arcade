@@ -60,10 +60,4 @@ public class ChronoScript : MonoBehaviour
         timerDifferencePanel.color = Color.clear;
         timerDifferenceText.text = "";
     }
-
-    public void SaveCheckpointsTime(List<float> checkpointTime)
-    {
-        //PrintCheckpointsTime(checkpointTime);
-        config.CheckpointTimes[_levelIndex] = checkpointTime;
-    }
 }

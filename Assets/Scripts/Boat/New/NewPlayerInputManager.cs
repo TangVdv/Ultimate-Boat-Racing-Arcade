@@ -22,14 +22,6 @@ namespace Boat.New
         }
 
         public bool debug;
-        
-        private string _playerName;
-
-        public string PlayerName
-        {
-            get => _playerName;
-            set => _playerName = value;
-        }
 
         private Logger _logger;
         private SetupGameScript _setupGameScript;
@@ -37,7 +29,7 @@ namespace Boat.New
         public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
         {
             playerType = PlayerType.Player;
-            _playerName = playerConfiguration.Name;
+            playerName = playerConfiguration.Name;
             lastCheckpoint = spawner;
             foreach (Transform childMesh in playerMesh)
             {

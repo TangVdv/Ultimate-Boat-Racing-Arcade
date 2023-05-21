@@ -13,6 +13,7 @@ namespace Boat.New
         public bool wantsToFire;
         public int switchingMunition;
         public Transform lastCheckpoint;
+        public string playerName;
 
         public enum PlayerType
         {
