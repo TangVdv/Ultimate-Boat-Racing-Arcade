@@ -162,7 +162,7 @@ MonoBehaviour:
   slowModifier: 0.6
   fastModifier: 1.5
   rotationSpeed: 100000
-  maxSpeed: 200
+  maxSpeed: 50
 --- !u!65 &752578266343152926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -217,6 +217,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   debug: 0
+  pathReSamplingInterval: 1
+  pathCornerDistanceThreshold: 5
+  checkPointMask:
+    serializedVersion: 2
+    m_Bits: 536870912
 --- !u!1 &3381123249354642913
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +275,7 @@ MonoBehaviour:
   floaterCount: 4
   waterDrag: 0.4
   waterAngularDrag: 2.8
+  movementManager: {fileID: 1612310317884955973}
 --- !u!1 &4529839243799965413
 GameObject:
   m_ObjectHideFlags: 0

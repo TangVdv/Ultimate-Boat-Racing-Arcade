@@ -15,31 +15,36 @@ namespace Boat.New
 
         public float rotationSpeed = 5f;
         
-        //TODO
-        public float maxSpeed = 20f;
-        
+        private float _speedModifier;
+
         public void FixedUpdate()
         {
-            float speedModifier = 1f;
-            if (manager.State.IsFastened) speedModifier *= fastModifier;
-            if (manager.State.IsSlowed) speedModifier *= slowModifier;
+            _speedModifier = 1f;
+            if (manager.State.IsFastened) _speedModifier *= fastModifier;
+            if (manager.State.IsSlowed) _speedModifier *= slowModifier;
 
             if (manager.movementZ < 0)
             {
-                speedModifier *= backwardAcceleration;
+                _speedModifier *= backwardAcceleration;
             }
             else
             {
-                speedModifier *= forwardAcceleration;
+                _speedModifier *= forwardAcceleration;
             }
 
-            speedModifier *= manager.movementZ;
+            _speedModifier *= manager.movementZ;
             
             float forwardSpeed = Vector3.Dot(rigidBody.velocity, transform.forward);
-            if (forwardSpeed < maxSpeed) rigidBody.AddForce(transform.forward * speedModifier);
+            //if (forwardSpeed < maxSpeed) rigidBody.AddForce(transform.forward * _speedModifier);
+            // NB : Moved to Floaters
             
             rigidBody.AddTorque(transform.up * (manager.movementX * rotationSpeed));
             
+        }
+
+        public float GetSpeedModifier()
+        {
+            return _speedModifier;
         }
     }
 }
