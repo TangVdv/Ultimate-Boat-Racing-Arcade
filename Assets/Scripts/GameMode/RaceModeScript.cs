@@ -7,8 +7,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class RaceModeScript : TimerScript
+public class RaceModeScript : MonoBehaviour
 {
+    [SerializeField] private ConfigScript config;
+    [SerializeField] private GameObject raceModeUI;
     [SerializeField] private GameObject rankingPanel;
     [SerializeField] private GameObject rankingTemplate;
     [SerializeField] private Text currentPosText;
@@ -19,11 +21,21 @@ public class RaceModeScript : TimerScript
     private float _startPosY = 45f;
     private float _spacingY = 17.5f;
     private int _index = 0;
+    
+    public void ResetRace()
+    {
+        if (!raceModeUI.activeInHierarchy)
+        {
+            raceModeUI.SetActive(true);
+        }
+        maxPosText.text = "/"+(config.AIAmount + config.PlayerAmount);
+        currentLapText.text = "1";
+        currentPosText.text = "1";
+        ResetRanking();
+    }
 
     public void ResetRanking()
     {
-        currentLapText.text = "0";
-        currentPosText.text = "1";
         if (_index > 0)
         {
             foreach (Transform child in rankingPanel.transform)
@@ -35,7 +47,7 @@ public class RaceModeScript : TimerScript
         }
     }
 
-    public void InstantiateRanking(string playerName, float playerTimer, bool isPlayer)
+    public void InstantiateRanking(string playerName, string playerTimer, bool isPlayer)
     {
         Vector3 position = new Vector3(0f, _startPosY - _index * _spacingY, 0f);
         GameObject currentTemplate = Instantiate(rankingTemplate, rankingPanel.transform);
@@ -43,41 +55,31 @@ public class RaceModeScript : TimerScript
         Text timer = currentTemplate.transform.GetChild(1).GetComponent<Text>();
         if (isPlayer)
         {
-            timer.color = new Color(0.34f,0.84f,1f);
+            timer.color = new Color(0.34f,1f,0.43f);
         }
         else
         {
-            timer.color = new Color(0.34f,1f,0.43f);
+            timer.color = new Color(1f,0.46f,0.34f);
         }
-
-        string timerStr = ConvertTimerToString(playerTimer);
-        if (_index > 0) timerStr = "+" + timerStr;
-        timer.text = timerStr;
+        
+        if (_index > 0) playerTimer = "+" + playerTimer;
+        timer.text = playerTimer;
         currentTemplate.transform.localPosition = position;
         _index++;
     }
+
+    public void SetCurrentPosText(int value)
+    {
+        currentPosText.text = value.ToString();
+    }
+
+    public void SetCurrentLapText(int value)
+    {
+        currentLapText.text = value.ToString();
+    }
     
-    public Text CurrentPosText
+    public void SetMaxLapText(int value)
     {
-        get => currentPosText;
-        set => currentPosText = value;
-    }
-
-    public Text MaxPosText
-    {
-        get => maxPosText;
-        set => maxPosText = value;
-    }
-
-    public Text CurrentLapText
-    {
-        get => currentLapText;
-        set => currentLapText = value;
-    }
-
-    public Text MaxLapText
-    {
-        get => maxLapText;
-        set => maxLapText = value;
+        maxLapText.text = "/"+value;
     }
 }

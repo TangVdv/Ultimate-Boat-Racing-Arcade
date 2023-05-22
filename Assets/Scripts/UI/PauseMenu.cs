@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -10,20 +11,16 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject playerUI;
 
     private bool _isGamePaused = false;
-    
-    private void Update()
+
+    public void OnPause(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (context.ReadValue<int>() > 0)
         {
             if (_isGamePaused)
-            {
                 Resume();
-            }
             else
-            {
                 Pause();
-            }
-        }    
+        }
     }
 
     public void Resume()

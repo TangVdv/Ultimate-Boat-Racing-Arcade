@@ -12,6 +12,14 @@ namespace Boat.New
         public float movementBarrels;
         public bool wantsToFire;
         public int switchingMunition;
+        public Transform lastCheckpoint;
+        public string playerName;
+
+        public enum PlayerType
+        {
+            Bot,
+            Player
+        }
 
         public struct StateStruct
         { 
@@ -23,6 +31,7 @@ namespace Boat.New
         }
 
         public StateStruct State;
+        public PlayerType playerType;
 
         public Dictionary<BulletType, int> BulletInventory;
         public BulletType currentBulletType;
@@ -48,6 +57,9 @@ namespace Boat.New
             currentBulletType = BulletType.Basic;
 
             switchingMunition = 0;
+            var playerManager = GameObject.Find("PlayerContainer");
+            transform.SetParent(playerManager.transform);
+            playerManager.GetComponent<PlayerManager>().AddPlayer(gameObject);
         }
     }
 }

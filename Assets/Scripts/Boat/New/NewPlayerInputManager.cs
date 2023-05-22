@@ -1,68 +1,124 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
 namespace Boat.New
 {
     public class NewPlayerInputManager : NewInputManagerInterface
     {
-        public enum ControlScheme{
-            BasicZqsd,
+        [SerializeField] private ConfigScript config;
+        [SerializeField] private Transform playerMesh;
+        [SerializeField] private RaceModeScript raceModeScript;
+        [SerializeField] private ChronoScript chronoScript;
+        [SerializeField] private PlayerUI playerUI;
+
+        public PlayerUI PlayerUI
+        {
+            get => playerUI;
+            set => playerUI = value;
         }
 
-        public ControlScheme controlScheme;
+        public bool debug;
 
-        private KeyCode _forward;
-        private KeyCode _backward;
-        private KeyCode _left;
-        private KeyCode _right;
-        private int _fireClic;
-        private KeyCode _changeWeaponLeft;
-        private KeyCode _changeWeaponRight;
-        private string _cameraAxis;
-        private string _aimAxis;
-
-        public new void Start()
+        private Logger _logger;
+        private SetupGameScript _setupGameScript;
+        
+        public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
         {
-            base.Start();
-            switch (controlScheme)
+            playerType = PlayerType.Player;
+            playerName = playerConfiguration.Name;
+            lastCheckpoint = spawner;
+            foreach (Transform childMesh in playerMesh)
             {
-                case(ControlScheme.BasicZqsd):
-                    _forward = KeyCode.Z;
-                    _backward = KeyCode.S;
-                    _left = KeyCode.Q;
-                    _right = KeyCode.D;
-                    _fireClic = 0;
-                    _changeWeaponLeft = KeyCode.A;
-                    _changeWeaponRight = KeyCode.E;
-                    _cameraAxis = "Mouse X";
-                    _aimAxis = "Mouse ScrollWheel";
-                    break;
-                default:
-                    break;
+                childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
+            }
+            
+            _logger = FindObjectOfType<Logger>();
+            _setupGameScript = FindObjectOfType<SetupGameScript>();
+            ResetPlayerProgress();
+        }
+        
+
+        public void ResetPlayerProgress()
+        {
+            lastCheckpoint = GameObject.Find("Spawn").transform;
+            if (config.GameMode == 0)
+            {
+                if(debug)Debug.Log("RaceMode");
+                raceModeScript.ResetRace();   
+            }
+            else if (config.GameMode == 1)
+            {
+                if(debug)Debug.Log("ChronoMode");
+                chronoScript.ResetChrono();   
+            }
+            else
+                if(debug)Debug.Log("No GameMode found, couldn't reset");
+        }
+
+        private void StartGame()
+        {
+            Respawn();
+            ResetPlayerProgress();
+            _setupGameScript.SetupGame();
+        }
+
+        private void Respawn()
+        {
+            if (lastCheckpoint != null)
+            {
+                transform.position = lastCheckpoint.position;
+                transform.rotation = lastCheckpoint.rotation;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
-
-        public void Update()
-        {
-            movementZ = 0;
-            movementX = 0;
         
-            movementZ += Input.GetKey(_forward) ? 1 : 0;
-            movementZ -= Input.GetKey(_backward) ? 1 : 0;
-            movementX -= Input.GetKey(_left) ? 1 : 0;
-            movementX += Input.GetKey(_right) ? 1 : 0;
-
-            movementCam = Input.GetAxis(_cameraAxis);
-            movementBarrels = Input.GetAxis(_aimAxis);
-
-            wantsToFire = Input.GetMouseButtonDown(_fireClic);
-            switchingMunition = 0;
-            switchingMunition += Input.GetKeyDown(_changeWeaponLeft) ? -1 : 0;
-            switchingMunition += Input.GetKeyDown(_changeWeaponRight) ? 1 : 0;
-            
-            
+        // INPUTS
+        public void OnMovement(InputAction.CallbackContext context)
+        {
+            Vector2 value = context.ReadValue<Vector2>();
+            movementX = value.x;
+            movementZ = value.y;
+        }
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            wantsToFire = context.ReadValue<float>() > 0 ? true : false;
+        }
+        public void OnCamera(InputAction.CallbackContext context)
+        {
+            movementCam = context.ReadValue<float>();
+        }
+        public void OnAim(InputAction.CallbackContext context)
+        {
+            movementBarrels = context.ReadValue<float>();
+        }
+        public void OnSwitchAmmo(InputAction.CallbackContext context)
+        {
+            switchingMunition = (int)context.ReadValue<float>();
+        }
+        public void Respawn(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Respawn();
+            }
+        }
+        public void Logger(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                _logger.ToggleConsole();
+            }
+        }
+        public void StartGame(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                StartGame();
+            }
         }
     }
 }

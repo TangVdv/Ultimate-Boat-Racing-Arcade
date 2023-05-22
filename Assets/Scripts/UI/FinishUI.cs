@@ -36,16 +36,15 @@ public class FinishUI : MonoBehaviour
     public void Continue()
     {
         Resume();
-        setupGameScript.ActivateLevel(false);
         setupGameScript.CurrentLevelIndex++;
         setupGameScript.SetupLevel();
-        setupGameScript.ResetGame();
+        setupGameScript.SetupGame();
     }
 
     public void Restart()
     {
         Resume();
-        setupGameScript.ResetGame();
+        setupGameScript.SetupGame();
     }
 
     public void Resume()
