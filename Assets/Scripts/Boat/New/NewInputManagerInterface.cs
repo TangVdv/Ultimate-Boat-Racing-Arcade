@@ -14,6 +14,7 @@ namespace Boat.New
         public int switchingMunition;
         public Transform lastCheckpoint;
         public string playerName;
+        public int score = 0;
 
         public enum PlayerType
         {

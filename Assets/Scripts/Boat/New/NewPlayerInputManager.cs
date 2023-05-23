@@ -14,6 +14,13 @@ namespace Boat.New
         [SerializeField] private RaceModeScript raceModeScript;
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
+        [SerializeField] private FinishUI finishUI;
+
+        public FinishUI FinishUI
+        {
+            get => finishUI;
+            set => finishUI = value;
+        }
 
         public PlayerUI PlayerUI
         {
@@ -97,7 +104,7 @@ namespace Boat.New
         }
         public void OnSwitchAmmo(InputAction.CallbackContext context)
         {
-            switchingMunition = (int)context.ReadValue<float>();
+            switchingMunition = context.ReadValue<int>();
         }
         public void Respawn(InputAction.CallbackContext context)
         {

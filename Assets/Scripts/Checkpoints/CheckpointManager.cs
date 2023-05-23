@@ -13,6 +13,7 @@ namespace Checkpoints
     {
         [SerializeField] private ConfigScript config;
         private TimerScript _timerScript;
+        private FinishUI _finishUI;
         
         public List<GameObject> boats;
         public bool debug;
@@ -48,10 +49,16 @@ namespace Checkpoints
     
         private List<PlayerProgress> playerProgress = new List<PlayerProgress>();
 
+        private ChronoScript chrono;
+        private RaceModeScript race;
+        
+        private int[] pointsTable = {15, 12, 10, 8, 6, 4, 2};
+
         private void Awake()
         {
             _maxPos = config.PlayerAmount + config.AIAmount;
             _timerScript = GameObject.Find("TimerUI").GetComponent<TimerScript>();
+            _finishUI = GameObject.Find("FinishUI").GetComponent<FinishUI>();
         }
 
         private void Setup()
@@ -124,7 +131,8 @@ namespace Checkpoints
         public void CheckPointPassed(int checkpoint, GameObject player)
         {
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
-            RaceModeScript race = progress.playerUI.RaceModeScript;
+            race = progress.playerUI.RaceModeScript;
+            chrono = progress.playerUI.ChronoScript;
 
             // Ignore if same checkpoint
             if (progress.checkpoint == checkpoint) return;
@@ -145,11 +153,14 @@ namespace Checkpoints
             progress.newInputManagerInterface.lastCheckpoint = checkpoints[checkpoint].transform;
             progress.checkpoint = checkpoint;
 
+            progress.checkpointTime.Add(_timerScript.TimerChrono);
+            
             if (config.GameMode == 1)
             {
                 //CHRONO MODE
-                progress.checkpointTime.Add(_timerScript.TimerChrono);
-                ChronoTimeDifference(progress); 
+                chrono.ShowCheckpointTimeDifference(
+                    ChronoTimeDifference(progress.checkpointTime.Count - 1).Item1, 
+                    ChronoTimeDifference(progress.checkpointTime.Count - 1).Item2);
             }
             else if (config.GameMode == 0)
             {
@@ -160,63 +171,100 @@ namespace Checkpoints
             if (checkpoint == 0)
             {
                 //if (progress.checkpoint == checkpoints.Length - 1 || progress.checkpoint + grace >= checkpoints.Length)
-                if(true)
+                if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
+                progress.lap++;
+                if (progress.lap > lapGoal)
                 {
-                    //TODO : FIX EVERYTHING
-                    if(debug) Debug.Log("Lap "+ progress.lap +" completed !");
-                    progress.lap++;
-                    if (progress.lap > lapGoal)
+                    progress.isFinished = true;
+                    
+                    if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Bot)
                     {
-                        progress.isFinished = true;
-                        if(debug)Debug.Log("Player arrived : "+progress.isFinished);
-                        
-                        if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Bot)
-                        {
-                            //TODO : Deactivate bot inputs instead
-                            progress.player.SetActive(false);    
-                            return;
-                        }
-                        
-                        if (playerProgress.All(p => p.isFinished && p.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player))
-                        {
-                            if (config.GameMode == 1)
-                            {
-                                //CHRONO MODE
-                                if(debug) Debug.Log("Chrono mode finished");
-                                // Save checkpoint times to config
-                                config.CheckpointTimes[config.Level] = progress.checkpointTime;
-                            }
-                            else if (config.GameMode == 0)
-                            {
-                                //RACE MODE
-                                if(debug) Debug.Log("Race mode finished");
-                            }
-                            _timerScript.ResetTimer();
-                            Time.timeScale = 0f;
-                            return;
-                        }
+                        //TODO : Deactivate bot inputs instead
+                        progress.player.SetActive(false);    
+                        return;
                     }
-                    else
+                    
+                    if (playerProgress.All(p => p.isFinished && p.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player))
                     {
-                        // Next lap
-                        if (config.GameMode == 0)
-                        {
-                            race.SetCurrentLapText(progress.lap);
-                        }
+                        HandleFinishUI(progress);
+                        _timerScript.PauseTimer();
+                        //Time.timeScale = 0f;
+                        return;
+                    }
+                }
+                else
+                {
+                    // Next lap
+                    if (config.GameMode == 0)
+                    {
+                        race.SetCurrentLapText(progress.lap);
                     }
                 }
             }
             if(debug) UpdateVisuals(progress);
         }
 
-        private void ChronoTimeDifference(PlayerProgress progress)
+        private void HandleFinishUI(PlayerProgress progress)
         {
-            ChronoScript chrono = progress.playerUI.ChronoScript;
-            string timerText;
+            if (config.GameMode == 1)
+            {
+                //CHRONO MODE
+                if(debug) Debug.Log("Chrono mode finished");
+                int i = 1;
+                string text = "";
+                Color color = new Color();
+                _finishUI.ClearCheckpointInfo();
+                foreach (var time in progress.checkpointTime)
+                {
+                    string timerText =  ChronoTimeDifference(i).Item2;
+                    float timerDiff =  ChronoTimeDifference(i).Item1;
+                    _finishUI.InstantiateCheckpointInfo(
+                        i, 
+                        _timerScript.ConvertTimerToString(time), 
+                        chrono.GetTimerDiffValues(timerDiff, timerText).Item1, 
+                        chrono.GetTimerDiffValues(timerDiff, timerText).Item2);
+                    i++;
+                }
+                            
+                _finishUI.SetChronoInfo(_timerScript.ConvertTimerToString(_timerScript.TimerChrono), text, color);
+
+                // Save checkpoint times to config
+                config.CheckpointTimes[config.Level] = progress.checkpointTime;
+                            
+            }
+            else if (config.GameMode == 0)
+            {
+                //RACE MODE
+                if(debug) Debug.Log("Race mode finished");
+                CalculateScoreboard();
+            }
+                        
+            _finishUI.FinishUIPanel.SetActive(true);
+        }
+
+        private void CalculateScoreboard()
+        {
+            playerProgress.Sort((x, y) => x.pos.CompareTo(y.pos));
+            _finishUI.ClearPlayerScoreboard();
+            foreach (var progress in playerProgress)
+            {
+                progress.newInputManagerInterface.score += pointsTable[progress.pos - 1];
+                _finishUI.InstantiatePlayerScore(
+                    progress.pos,
+                    progress.newInputManagerInterface.playerName,
+                    _timerScript.ConvertTimerToString(progress.checkpointTime[progress.checkpointTime.Count - 1]), 
+                    progress.newInputManagerInterface.score, 
+                    progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player);
+            }
+        }
+
+        private (float, string) ChronoTimeDifference(int id)
+        {
             float timerDiff;
+            string timerText;
             if (config.CheckpointTimes[config.Level] != null)
             {
-                float checkPointTimer = config.CheckpointTimes[config.Level][progress.checkpointTime.Count - 1];
+                float checkPointTimer = config.CheckpointTimes[config.Level][id];
                 timerDiff = _timerScript.TimerChrono - checkPointTimer;
                 timerText = _timerScript.ConvertTimerToString(timerDiff);
             }
@@ -226,14 +274,13 @@ namespace Checkpoints
                 timerText = _timerScript.ConvertTimerToString(_timerScript.TimerChrono);
             }
 
-            chrono.ShowCheckpointTimeDifference(timerDiff, timerText);
+            return (timerDiff, timerText);
         }
         
         private void GetAllPos(int checkpoint)
         {
             int i = 1;
             Dictionary<string, float> dictionary = checkpoints[checkpoint].PlayerTimer;
-            if(debug) Debug.Log("Final ranking : ");
             foreach(KeyValuePair<string, float> entry in dictionary)
             {
                 if(debug) Debug.Log("name : "+entry.Key+" ; Pos : "+i);
@@ -261,7 +308,6 @@ namespace Checkpoints
         private void HandleRaceMode(int checkpoint, PlayerProgress progress)
         {
             //RACE MODE
-            RaceModeScript race = progress.playerUI.RaceModeScript;
             checkpoints[checkpoint].PlayerTimer[progress.newInputManagerInterface.playerName] = _timerScript.TimerChrono;
             Dictionary<string, float> timerDictionary = checkpoints[checkpoint].PlayerTimer;
 
