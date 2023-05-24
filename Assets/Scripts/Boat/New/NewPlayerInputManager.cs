@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Transactions;
+using Boat.New.Canon;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
@@ -25,7 +26,6 @@ namespace Boat.New
         public PlayerUI PlayerUI
         {
             get => playerUI;
-            set => playerUI = value;
         }
 
         public bool debug;
@@ -35,6 +35,7 @@ namespace Boat.New
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
         {
+            globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
             lastCheckpoint = spawner;
@@ -42,12 +43,12 @@ namespace Boat.New
             {
                 childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
             }
+            if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
             
             _logger = FindObjectOfType<Logger>();
             _setupGameScript = FindObjectOfType<SetupGameScript>();
             ResetPlayerProgress();
         }
-        
 
         public void ResetPlayerProgress()
         {
@@ -93,10 +94,13 @@ namespace Boat.New
         public void OnFire(InputAction.CallbackContext context)
         {
             wantsToFire = context.ReadValue<float>() > 0 ? true : false;
+            Debug.Log(wantsToFire);
+            playerUI.UpdateBulletAmount(BulletInventory[currentBulletType]);
         }
         public void OnCamera(InputAction.CallbackContext context)
         {
             movementCam = context.ReadValue<float>();
+            Debug.Log(movementCam);
         }
         public void OnAim(InputAction.CallbackContext context)
         {
@@ -104,7 +108,17 @@ namespace Boat.New
         }
         public void OnSwitchAmmo(InputAction.CallbackContext context)
         {
-            switchingMunition = context.ReadValue<int>();
+            if (context.started)
+            {
+                int currentBulletTypeInt = (int) currentBulletType;
+                currentBulletTypeInt += (int)context.ReadValue<float>();
+                currentBulletTypeInt %= BulletInventory.Count;
+                if (currentBulletTypeInt < 0) currentBulletTypeInt = BulletInventory.Count - 1;
+
+                currentBulletType = (BulletType) currentBulletTypeInt;
+                Debug.Log("Current munition : " + currentBulletType);
+                playerUI.BulletSelection(currentBulletTypeInt);
+            }
         }
         public void Respawn(InputAction.CallbackContext context)
         {

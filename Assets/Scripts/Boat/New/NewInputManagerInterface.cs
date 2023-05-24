@@ -36,8 +36,11 @@ namespace Boat.New
 
         public Dictionary<BulletType, int> BulletInventory;
         public BulletType currentBulletType;
+        public int currentBulletTypeInt;
 
-        public void Start()
+        public PlayerUI globalPlayerUI;
+
+        public void Awake()
         {
             State.IsBlinded = false;
             State.IsSlowed = false;

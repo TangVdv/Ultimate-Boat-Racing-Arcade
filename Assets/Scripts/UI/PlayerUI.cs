@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Boat.New.Canon;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,27 +12,30 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private ChronoScript chronoScript;
     [SerializeField] private RaceModeScript raceModeScript;
 
+    [SerializeField] private GameObject hotbarPanel;
+    [SerializeField] private GameObject bulletInventoryTemplate;
+
     public ChronoScript ChronoScript
     {
         get => chronoScript;
-        set => chronoScript = value;
     }
-
     public RaceModeScript RaceModeScript
     {
         get => raceModeScript;
-        set => raceModeScript = value;
     }
 
     private int[] _fpsArray = {30, 60, 120};
     private float _timer, _timelapse, _avgFramerate;
-    
+    private List<Text> _bulletsPanelText = new List<Text>();
+    private List<Image> _bulletsPanelImage = new List<Image>();
+    private int _selectedBullet = 0;
+
     private void Start()
     {
         Application.targetFrameRate = _fpsArray[config.FPSIndex];
     }
 
-    void Update()
+    private void Update()
     {
         if (config.ShowFPS)
         {
@@ -45,5 +49,42 @@ public class PlayerUI : MonoBehaviour
         }
         else
             currentFPSText.text = "";
+    }
+
+    public void HotbarManager(Dictionary<BulletType, int> bullets)
+    {
+        foreach (KeyValuePair<BulletType, int> bullet in bullets)
+        {
+            var currentTemplate = Instantiate(bulletInventoryTemplate, hotbarPanel.transform);
+            string bulletAmount;
+            if (bullet.Value > 999)
+            {
+                bulletAmount = "∞";
+            }
+            else
+            {
+                Debug.Log(bullet.Value);
+                bulletAmount = bullet.Value.ToString();
+            }
+            var currentTemplateText = currentTemplate.transform.GetChild(0).GetComponent<Text>();
+            currentTemplateText.text = bulletAmount;
+            _bulletsPanelText.Add(currentTemplateText);
+            _bulletsPanelImage.Add(currentTemplate.GetComponent<Image>());
+        }
+        BulletSelection(_selectedBullet);
+    }
+
+    public void BulletSelection(int bulletId)
+    {
+        _bulletsPanelImage[_selectedBullet].fillCenter = true;
+        _bulletsPanelText[_selectedBullet].color = Color.black;
+        _selectedBullet = bulletId;
+        _bulletsPanelImage[_selectedBullet].fillCenter = false;
+        _bulletsPanelText[_selectedBullet].color = Color.white;
+    }
+
+    public void UpdateBulletAmount(int bulletAmount)
+    {
+        _bulletsPanelText[_selectedBullet].text = bulletAmount.ToString();
     }
 }

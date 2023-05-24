@@ -152,6 +152,7 @@ MonoBehaviour:
   score: 0
   playerType: 0
   currentBulletType: 0
+  currentBulletTypeInt: 0
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   playerMesh: {fileID: 2253875726267285836}
   raceModeScript: {fileID: 528620621061791894}
@@ -725,7 +726,7 @@ MonoBehaviour:
   scrollSensitivity: 40
   orbitDampening: 10
   topClamp: 25
-  debug: 1
+  debug: 0
   reloadTime: 1
 --- !u!1001 &902043465733598248
 PrefabInstance:
@@ -1057,6 +1058,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4132581501953416511, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132581501953416511, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132581501953416511, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132581501953416511, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214264983084387709, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214264983084387709, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214264983084387709, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214264983084387709, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4976537215080097866, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1064,6 +1097,22 @@ PrefabInstance:
     - target: {fileID: 6130412074761914268, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474659193852983370, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474659193852983370, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474659193852983370, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474659193852983370, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8311187233524400517, guid: a95360565b620eb42bd6d81060e21c11, type: 3}
       propertyPath: chronoScript

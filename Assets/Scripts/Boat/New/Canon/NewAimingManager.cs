@@ -88,6 +88,7 @@ namespace Boat.New.Canon
             {
                 Debug.Log(bulletType.Key + " : " + bulletType.Value);
             }
+            if(manager.globalPlayerUI != null) manager.globalPlayerUI.UpdateBulletAmount(manager.BulletInventory[manager.currentBulletType]);
         }
 
         public void SwitchMunition()
@@ -95,8 +96,8 @@ namespace Boat.New.Canon
             int currentBulletTypeInt = (int) manager.currentBulletType;
             currentBulletTypeInt += manager.switchingMunition;
             currentBulletTypeInt %= manager.BulletInventory.Count;
-            if (currentBulletTypeInt < 0) currentBulletTypeInt = manager.BulletInventory.Count - 1; 
-            
+            if (currentBulletTypeInt < 0) currentBulletTypeInt = manager.BulletInventory.Count - 1;
+
             manager.currentBulletType = (BulletType) currentBulletTypeInt;
             if(debug) Debug.Log("Current munition : " + manager.currentBulletType);
         }
