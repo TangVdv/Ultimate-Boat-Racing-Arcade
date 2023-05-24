@@ -15,13 +15,6 @@ namespace Boat.New
         [SerializeField] private RaceModeScript raceModeScript;
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
-        [SerializeField] private FinishUI finishUI;
-
-        public FinishUI FinishUI
-        {
-            get => finishUI;
-            set => finishUI = value;
-        }
 
         public PlayerUI PlayerUI
         {
@@ -94,13 +87,11 @@ namespace Boat.New
         public void OnFire(InputAction.CallbackContext context)
         {
             wantsToFire = context.ReadValue<float>() > 0 ? true : false;
-            Debug.Log(wantsToFire);
             playerUI.UpdateBulletAmount(BulletInventory[currentBulletType]);
         }
         public void OnCamera(InputAction.CallbackContext context)
         {
             movementCam = context.ReadValue<float>();
-            Debug.Log(movementCam);
         }
         public void OnAim(InputAction.CallbackContext context)
         {

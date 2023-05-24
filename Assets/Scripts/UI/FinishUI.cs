@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class FinishUI : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
+    [SerializeField] private SetupLevelScript setupLevelScript;
+    
     [SerializeField] private GameObject playerScoreTemplate;
     [SerializeField] private GameObject checkpointInfoTemplate;
     [SerializeField] private GameObject finishUIPanel;
@@ -67,11 +69,11 @@ public class FinishUI : MonoBehaviour
         var image = currentTemplate.GetComponent<Image>();
         if (isPlayer)
         {
-            image.color = new Color(0.34f,1f,0.43f, .4f);
+            image.color = new Color(0.34f,1f,0.43f);
         }
         else
         {
-            image.color = new Color(1f,0.46f,0.34f, .4f);
+            image.color = new Color(1f,0.46f,0.34f);
         }
     }
 
@@ -111,5 +113,17 @@ public class FinishUI : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void Restart()
+    {
+        setupLevelScript.ResetCurrentMap();
+        finishUIPanel.SetActive(false);
+    }
+
+    public void NextMap()
+    {
+        config.Level++;
+        setupLevelScript.SetupLevel();
     }
 }

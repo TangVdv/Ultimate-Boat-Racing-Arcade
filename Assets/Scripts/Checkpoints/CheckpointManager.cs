@@ -61,9 +61,8 @@ namespace Checkpoints
             _finishUI = GameObject.Find("FinishUI").GetComponent<FinishUI>();
         }
 
-        private void Setup()
+        public void Setup()
         {
-            
             // First time init
             if (checkpoints == null)
             {
@@ -159,8 +158,8 @@ namespace Checkpoints
             {
                 //CHRONO MODE
                 chrono.ShowCheckpointTimeDifference(
-                    ChronoTimeDifference(progress.checkpointTime.Count - 1).Item1, 
-                    ChronoTimeDifference(progress.checkpointTime.Count - 1).Item2);
+                    ChronoTimeDifference(progress.checkpointTime.Count - 1, progress).Item1, 
+                    ChronoTimeDifference(progress.checkpointTime.Count - 1, progress).Item2);
             }
             else if (config.GameMode == 0)
             {
@@ -210,16 +209,17 @@ namespace Checkpoints
             {
                 //CHRONO MODE
                 if(debug) Debug.Log("Chrono mode finished");
-                int i = 1;
+                int i = 0;
                 string text = "";
                 Color color = new Color();
                 _finishUI.ClearCheckpointInfo();
+                float timerDiff = 0;
                 foreach (var time in progress.checkpointTime)
                 {
-                    string timerText =  ChronoTimeDifference(i).Item2;
-                    float timerDiff =  ChronoTimeDifference(i).Item1;
+                    string timerText =  ChronoTimeDifference(i, progress).Item2;
+                    timerDiff =  ChronoTimeDifference(i, progress).Item1;
                     _finishUI.InstantiateCheckpointInfo(
-                        i, 
+                        i+1, 
                         _timerScript.ConvertTimerToString(time), 
                         chrono.GetTimerDiffValues(timerDiff, timerText).Item1, 
                         chrono.GetTimerDiffValues(timerDiff, timerText).Item2);
@@ -229,7 +229,11 @@ namespace Checkpoints
                 _finishUI.SetChronoInfo(_timerScript.ConvertTimerToString(_timerScript.TimerChrono), text, color);
 
                 // Save checkpoint times to config
-                config.CheckpointTimes[config.Level] = progress.checkpointTime;
+                if (timerDiff < 0 || config.CheckpointTimes[config.Level] == null)
+                {
+                    config.BestTimePlayerName.Insert(config.Level, progress.newInputManagerInterface.playerName);
+                    config.CheckpointTimes[config.Level] = progress.checkpointTime;
+                }
                             
             }
             else if (config.GameMode == 0)
@@ -258,15 +262,16 @@ namespace Checkpoints
             }
         }
 
-        private (float, string) ChronoTimeDifference(int id)
+        private (float, string) ChronoTimeDifference(int id, PlayerProgress progress)
         {
             float timerDiff;
             string timerText;
             if (config.CheckpointTimes[config.Level] != null)
             {
                 float checkPointTimer = config.CheckpointTimes[config.Level][id];
-                timerDiff = _timerScript.TimerChrono - checkPointTimer;
-                timerText = _timerScript.ConvertTimerToString(timerDiff);
+                timerDiff = progress.checkpointTime[id] - checkPointTimer;
+                if(timerDiff<0) timerText = _timerScript.ConvertTimerToString(-timerDiff);
+                else timerText = _timerScript.ConvertTimerToString(timerDiff);
             }
             else
             {
@@ -332,7 +337,7 @@ namespace Checkpoints
             }
         }
 
-        public void UpdateVisuals(PlayerProgress progress)
+        private void UpdateVisuals(PlayerProgress progress)
         {
             if(!debug) return;
             

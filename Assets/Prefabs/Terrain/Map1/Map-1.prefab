@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed76e0295fcfad846825b31d2a9d1dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  core: {fileID: 0}
   ID: 1
 --- !u!1 &8427463235666284205
 GameObject:
@@ -155,11 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06da4863303d16a4aa7d48102dd1138d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chrono: {fileID: 0}
-  race: {fileID: 0}
-  finishUI: {fileID: 0}
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   boats: []
-  debug: 0
+  debug: 1
   grace: 1
   lapGoal: 1
 --- !u!1 &8427463236457413801
@@ -314,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed76e0295fcfad846825b31d2a9d1dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  core: {fileID: 0}
   ID: 0
 --- !u!1 &8427463236769681782
 GameObject:
@@ -504,8 +504,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8427463236868687268}
+  - component: {fileID: 1260949780114711088}
   m_Layer: 0
-  m_Name: LevelManager-1
+  m_Name: Map-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,7 +520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8427463236868687269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -828.79236, y: -52.53979, z: -77.36062}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8427463237636489370}
@@ -527,6 +528,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260949780114711088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427463236868687269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b40aa598a845a14d8eb25294483abee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 8427463236769681781}
+  checkpointManager: {fileID: 8427463235666284203}
+  debug: 0
 --- !u!1 &8427463237147644839
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed76e0295fcfad846825b31d2a9d1dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  core: {fileID: 0}
   ID: 2
 --- !u!1 &8427463237614461905
 GameObject:

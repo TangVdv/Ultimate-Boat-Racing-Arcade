@@ -161,7 +161,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5157684582546800444}
         m_TargetAssemblyTypeName: FinishUI, Assembly-CSharp
-        m_MethodName: Continue
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -547,6 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  setupLevelScript: {fileID: 0}
   playerScoreTemplate: {fileID: 3343690712956776477, guid: 9ed8a0278d7227e4eba3184779e95197, type: 3}
   checkpointInfoTemplate: {fileID: 4186301663299912549, guid: 763a95387704f31499c602f1a2d6fbd7, type: 3}
   finishUIPanel: {fileID: 7272335315499128816}
@@ -1667,7 +1668,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5157684582546800444}
         m_TargetAssemblyTypeName: FinishUI, Assembly-CSharp
-        m_MethodName: Continue
+        m_MethodName: NextMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2096,7 +2097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

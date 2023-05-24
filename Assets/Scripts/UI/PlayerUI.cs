@@ -63,7 +63,6 @@ public class PlayerUI : MonoBehaviour
             }
             else
             {
-                Debug.Log(bullet.Value);
                 bulletAmount = bullet.Value.ToString();
             }
             var currentTemplateText = currentTemplate.transform.GetChild(0).GetComponent<Text>();

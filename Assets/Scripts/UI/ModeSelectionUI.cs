@@ -74,16 +74,27 @@ public class ModeSelectionUI : MonoBehaviour
         _levelIndex = value;
         selectButton.enabled = true;
         detailsPanel.SetActive(true);
-        detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + value;
-        string text = "None";
+        detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + (value+1);
+        string text;
         if (config.CheckpointTimes[value] != null)
         {
             int lastIndex = config.CheckpointTimes[value].Count - 1;
-            text = config.CheckpointTimes[value][lastIndex].ToString();   
+            float timer = config.CheckpointTimes[value][lastIndex];
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+            int milliseconds = Mathf.FloorToInt((timer * 1000) % 1000);
+            text = $"Best time : {minutes:00}:{seconds:00}:{milliseconds:000}";
         }
-        detailsPanel.transform.GetChild(1).GetComponent<Text>().text = "Best time : " + text;
-        detailsPanel.transform.GetChild(2).GetComponent<Text>().text = "Boat : None";
-        detailsPanel.transform.GetChild(3).GetComponent<Text>().text = "Current boat : ";
+        else
+            text = "Best time :";
+        detailsPanel.transform.GetChild(1).GetComponent<Text>().text = text;
+
+        if (config.BestTimePlayerName[value] != null)
+            text = "Player : "+config.BestTimePlayerName[value];
+        else
+            text = "Player :";
+        
+        detailsPanel.transform.GetChild(2).GetComponent<Text>().text = text;
         InstantiateMap();
     }
 
