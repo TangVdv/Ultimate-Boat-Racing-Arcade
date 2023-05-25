@@ -41,7 +41,7 @@ namespace Boat.New
 
         public PlayerUI globalPlayerUI;
         
-        private CheckpointManager _checkpointManager;
+        public CheckpointManager checkpointManager;
 
         public void Awake()
         {

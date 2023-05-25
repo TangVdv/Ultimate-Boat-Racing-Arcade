@@ -36,7 +36,7 @@ namespace Checkpoints
                 this.pos = 1;
                 this.isFinished = false;
                 this.newInputManagerInterface = player.GetComponent<NewInputManagerInterface>();
-                this.playerUI = player.GetComponent<NewPlayerInputManager>().PlayerUI;
+                this.playerUI = player.GetComponent<NewInputManagerInterface>().globalPlayerUI;
             }
         }
     
@@ -86,7 +86,8 @@ namespace Checkpoints
                 progress.checkpoint = 0;
                 progress.checkpointTime = new List<float>();
                 progress.isFinished = false;
-                progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);   
+                if(progress.playerUI) progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);
+                progress.newInputManagerInterface.checkpointManager = this;
             }
         }
 
@@ -94,8 +95,8 @@ namespace Checkpoints
         {
             if(debug)Debug.Log("Add player : "+player); 
             boats.Add(player);
-            playerProgress.Add(new PlayerProgress(player));   
-            
+            playerProgress.Add(new PlayerProgress(player));
+
             if (playerProgress.Count == (config.PlayerAmount + config.AIAmount)) 
             {
                 if (debug)
@@ -130,8 +131,11 @@ namespace Checkpoints
         public void CheckPointPassed(int checkpoint, GameObject player)
         {
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
-            race = progress.playerUI.RaceModeScript;
-            chrono = progress.playerUI.ChronoScript;
+            if (progress.playerUI)
+            {
+                race = progress.playerUI.RaceModeScript;
+                chrono = progress.playerUI.ChronoScript;   
+            }
 
             // Ignore if same checkpoint
             if (progress.checkpoint == checkpoint) return;
@@ -156,10 +160,13 @@ namespace Checkpoints
             
             if (config.GameMode == 1)
             {
-                //CHRONO MODE
-                chrono.ShowCheckpointTimeDifference(
-                    ChronoTimeDifference(progress.checkpointTime.Count - 1, progress).Item1, 
-                    ChronoTimeDifference(progress.checkpointTime.Count - 1, progress).Item2);
+                if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
+                {
+                    //CHRONO MODE
+                    chrono.ShowCheckpointTimeDifference(
+                        ChronoTimeDifference(progress.checkpointTime.Count - 1, progress).Item1, 
+                        ChronoTimeDifference(progress.checkpointTime.Count - 1, progress).Item2);   
+                }
             }
             else if (config.GameMode == 0)
             {
@@ -367,21 +374,24 @@ namespace Checkpoints
 
             foreach (var playerProg in playerProgress)
             {
-                race = playerProg.playerUI.RaceModeScript;
-                SetPlayerPos(timerDictionary, playerProg);
-                race.SetCurrentPosText(playerProg.pos);
-                if (playerProg.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player && playerProg.checkpoint == checkpoint)
+                if (playerProg.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
                 {
-                    race.ResetRanking();
-                
-                    KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
-                
-                    foreach (KeyValuePair<string, float> entry in timerDictionary)
+                    race = playerProg.playerUI.RaceModeScript;
+                    SetPlayerPos(timerDictionary, playerProg);
+                    race.SetCurrentPosText(playerProg.pos);
+                    if (playerProg.checkpoint == checkpoint)
                     {
-                        bool isPlayer = entry.Key == playerProg.newInputManagerInterface.playerName ? true : false;
-                        float timerDiff = entry.Key == firstEntry.Key ? entry.Value : entry.Value - firstEntry.Value;
-                        race.InstantiateRanking(entry.Key, _timerScript.ConvertTimerToString(timerDiff), isPlayer);
-                    }
+                        race.ResetRanking();
+                
+                        KeyValuePair<string, float> firstEntry = timerDictionary.FirstOrDefault();
+                
+                        foreach (KeyValuePair<string, float> entry in timerDictionary)
+                        {
+                            bool isPlayer = entry.Key == playerProg.newInputManagerInterface.playerName ? true : false;
+                            float timerDiff = entry.Key == firstEntry.Key ? entry.Value : entry.Value - firstEntry.Value;
+                            race.InstantiateRanking(entry.Key, _timerScript.ConvertTimerToString(timerDiff), isPlayer);
+                        }
+                    }   
                 }
             }
         }

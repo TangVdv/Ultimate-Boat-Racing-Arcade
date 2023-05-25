@@ -20,7 +20,6 @@ namespace Boat.New
         public GameObject boat;
         public Rigidbody rigidBody;
         
-        public CheckpointManager manager;
         public NewAimingManager aimingManager;
         private float initialVelocity;
 
@@ -150,8 +149,9 @@ namespace Boat.New
 	        movementX = 0;
 	        
 	        Vector3 position = boat.transform.position;
+	        Debug.Log(position);
 
-	        int passedCheckpoint = manager.GetPlayerProgress(boat).Item2;
+	        int passedCheckpoint = checkpointManager.GetPlayerProgress(boat).Item2;
 	        
 	        reSamplingTimer -= Time.deltaTime;
 	        if (reSamplingTimer <= 0) pathPending = true;
@@ -159,9 +159,9 @@ namespace Boat.New
 
 	        if (passedCheckpoint == _nextCheckpoint ||_botTargetPosition == Vector3.zero)
 	        {
-		        _nextCheckpoint = (_nextCheckpoint + 1) % manager.GetCheckpointCount();
+		        _nextCheckpoint = (_nextCheckpoint + 1) % checkpointManager.GetCheckpointCount();
 		        
-		        botTargetCollider = manager.GetNextCheckpointCollider(boat, (int) difficulty);
+		        botTargetCollider = checkpointManager.GetNextCheckpointCollider(boat, (int) difficulty);
 		        
 		        pathPending = true;
 	        }
@@ -231,7 +231,7 @@ namespace Boat.New
 
         private void Update()
         {
-	        TakeMovementDecision();
+	        if(checkpointManager) TakeMovementDecision();
 	        TakeAimingDecision();
 
 	        UpdateCanonAngle();
