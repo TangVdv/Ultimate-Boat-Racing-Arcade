@@ -56,10 +56,10 @@ namespace Boat.New
         
         public LayerMask checkPointMask;
         
-        private new void Start()
+        private new void Awake()
         {
 	        _newBoatMovementManager = boat.GetComponent<NewBoatMovementManager>();
-	        base.Start();
+	        base.Awake();
 	        _botTargetPosition = Vector3.zero;
 	        _nextCheckpoint = 0;
 	        playerType = PlayerType.Bot;

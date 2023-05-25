@@ -17,9 +17,7 @@ public class RaceModeScript : MonoBehaviour
     [SerializeField] private Text maxPosText;
     [SerializeField] private Text currentLapText;
     [SerializeField] private Text maxLapText;
-
-    private float _startPosY = 45f;
-    private float _spacingY = 17.5f;
+    
     private int _index = 0;
     
     public void ResetRace()
@@ -36,20 +34,15 @@ public class RaceModeScript : MonoBehaviour
 
     public void ResetRanking()
     {
-        if (_index > 0)
+        foreach (Transform child in rankingPanel.transform)
         {
-            foreach (Transform child in rankingPanel.transform)
-            {
-                Destroy(child.gameObject);
-            }
-
-            _index = 0;
+            Destroy(child.gameObject);
         }
+        _index = 0;
     }
 
     public void InstantiateRanking(string playerName, string playerTimer, bool isPlayer)
     {
-        Vector3 position = new Vector3(0f, _startPosY - _index * _spacingY, 0f);
         GameObject currentTemplate = Instantiate(rankingTemplate, rankingPanel.transform);
         currentTemplate.transform.GetChild(0).GetComponent<Text>().text = playerName;
         Text timer = currentTemplate.transform.GetChild(1).GetComponent<Text>();
@@ -64,7 +57,6 @@ public class RaceModeScript : MonoBehaviour
         
         if (_index > 0) playerTimer = "+" + playerTimer;
         timer.text = playerTimer;
-        currentTemplate.transform.localPosition = position;
         _index++;
     }
 

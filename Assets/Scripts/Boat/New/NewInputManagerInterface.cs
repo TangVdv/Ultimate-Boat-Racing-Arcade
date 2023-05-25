@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Boat.New.Canon;
+using Checkpoints;
 using UnityEngine;
 
 namespace Boat.New
@@ -14,6 +15,7 @@ namespace Boat.New
         public int switchingMunition;
         public Transform lastCheckpoint;
         public string playerName;
+        public int score = 0;
 
         public enum PlayerType
         {
@@ -35,8 +37,13 @@ namespace Boat.New
 
         public Dictionary<BulletType, int> BulletInventory;
         public BulletType currentBulletType;
+        public int currentBulletTypeInt;
 
-        public void Start()
+        public PlayerUI globalPlayerUI;
+        
+        private CheckpointManager _checkpointManager;
+
+        public void Awake()
         {
             State.IsBlinded = false;
             State.IsSlowed = false;
@@ -59,7 +66,6 @@ namespace Boat.New
             switchingMunition = 0;
             var playerManager = GameObject.Find("PlayerContainer");
             transform.SetParent(playerManager.transform);
-            playerManager.GetComponent<PlayerManager>().AddPlayer(gameObject);
         }
     }
 }

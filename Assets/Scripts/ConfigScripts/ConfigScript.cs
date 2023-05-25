@@ -5,69 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Config", menuName = "ConfigScript", order = 0)]
 public class ConfigScript : ScriptableObject
 {
-    private int _level;
-    private int _gameMode;
-    private int _aiAmount;
-    private int _playerAmount;
-    private int _difficulty;
+    public List<string> BestTimePlayerName { get; set; } = new List<string>(5);
 
-    private bool _showFPS;
-    private int _fpsIndex;
+    public List<PlayerConfiguration> PlayerConfigurations { get; set; }
+
+    public List<float>[] CheckpointTimes { get; set; } = new List<float>[5];
+
+    public int Level { get; set; }
     
-    private List<float>[] _checkpointTimes = new List<float>[5];
-    private List<PlayerConfiguration> _playerConfigurations;
+    public int LastLevelIndex { get; set; }
 
-    public List<PlayerConfiguration> PlayerConfigurations
-    {
-        get => _playerConfigurations;
-        set => _playerConfigurations = value;
-    }
+    public int GameMode { get; set; }
 
-    public List<float>[] CheckpointTimes
-    {
-        get => _checkpointTimes;
-        set => _checkpointTimes = value;
-    }
-    
-    public int Level
-    {
-        get => _level;
-        set => _level = value;
-    }
+    public int AIAmount { get; set; }
 
-    public int GameMode
-    {
-        get => _gameMode;
-        set => _gameMode = value;
-    }
+    public int PlayerAmount { get; set; }
 
-    public int AIAmount
-    {
-        get => _aiAmount;
-        set => _aiAmount = value;
-    }
+    public int Difficulty { get; set; }
 
-    public int PlayerAmount
-    {
-        get => _playerAmount;
-        set => _playerAmount = value;
-    }
+    public bool ShowFPS { get; set; }
 
-    public int Difficulty
-    {
-        get => _difficulty;
-        set => _difficulty = value;
-    }
-
-    public bool ShowFPS
-    {
-        get => _showFPS;
-        set => _showFPS = value;
-    }
-    
-    public int FPSIndex
-    {
-        get => _fpsIndex;
-        set => _fpsIndex = value;
-    }
+    public int FPSIndex { get; set; }
 }

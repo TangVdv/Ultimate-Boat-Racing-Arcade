@@ -11,9 +11,7 @@ using Random = UnityEngine.Random;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject botPrefab;
-    
+
     public float size = 10f;
     public bool debug;
 
@@ -35,26 +33,9 @@ public class SpawnScript : MonoBehaviour
         }
     }
 
-    public void BoatsSetup()
+    public void SpawnSetup(List<GameObject> boats)
     {
-        // Instantiate players
-        var playerConfigs = config.PlayerConfigurations;
-        for (int i = 0; i < config.PlayerAmount; i++)
-        {
-            var player = Instantiate(playerPrefab);
-            if (playerConfigs[i] != null)
-            {
-                player.GetComponent<NewPlayerInputManager>().InitializePlayer(playerConfigs[i], transform);
-            }
-            _boats.Add(player);   
-        }
-        
-        // Instantiate bots
-        for (int i = 0; i < config.AIAmount; i++)
-        {
-            _boats.Add(Instantiate(botPrefab));
-        }
-
+        _boats = boats;
         var transform1 = transform;
         var localPosition = transform1.localPosition;
         var right = transform1.right;
@@ -71,6 +52,7 @@ public class SpawnScript : MonoBehaviour
             int i = 0;
             foreach (GameObject boat in _boats)
             {
+                boat.GetComponent<NewInputManagerInterface>().lastCheckpoint = transform;
                 boat.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 Vector3 pos = _start + i * distanceBetweenSpawn * transform.right;
                 if (_boats.Count == 1)

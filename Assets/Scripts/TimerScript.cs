@@ -20,13 +20,7 @@ public class TimerScript : MonoBehaviour
     private Text _timerText;
     private bool _isTimerOn;
     private IEnumerator _timerCoroutine;
-
-    private void Awake()
-    {
-        ResetTimer();
-        StartTimer();
-    }
-
+    
     public void ResetTimer()
     {
         timerText.text = "00:00:000";

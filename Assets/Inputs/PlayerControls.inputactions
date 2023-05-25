@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Fire",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "8f9b5b22-e5f0-4579-8e34-2df03e5bf492",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "Ammo selection",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "7bd679fe-4b64-436d-b176-ca6120fe1749",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Movemement",
@@ -52,9 +52,9 @@
                 },
                 {
                     "name": "Camera",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "fdf84694-4ba2-4289-97d4-5c634e4630b2",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -92,7 +92,7 @@
                     "name": "",
                     "id": "35a25720-9ea3-4387-9525-04e51460ad57",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Fire",
@@ -103,7 +103,7 @@
                     "name": "",
                     "id": "1133752d-d42e-4efb-9d8a-dea4633ea131",
                     "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Fire",
@@ -114,7 +114,7 @@
                     "name": "Left/Right Keyboard",
                     "id": "962a8a88-656e-4f59-a84b-721c29313c22",
                     "path": "1DAxis",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "Ammo selection",
@@ -289,7 +289,7 @@
                 {
                     "name": "",
                     "id": "197995c8-c11f-470f-b20e-590115e3da66",
-                    "path": "<Mouse>/delta/x",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
