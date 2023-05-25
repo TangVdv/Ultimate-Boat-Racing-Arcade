@@ -62,6 +62,8 @@ public class ModeSelectionUI : MonoBehaviour
             _aiAmount = 0;
             _playerAmount = 1;
         }
+
+        config.LastLevelIndex = maps.Length - 1;
         config.AIAmount = _aiAmount;
         config.PlayerAmount = _playerAmount;
         config.GameMode = _modeSelect;

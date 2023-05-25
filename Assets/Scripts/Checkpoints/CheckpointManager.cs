@@ -227,6 +227,7 @@ namespace Checkpoints
                 }
                             
                 _finishUI.SetChronoInfo(_timerScript.ConvertTimerToString(_timerScript.TimerChrono), text, color);
+                _finishUI.ChronoInfoPanel.SetActive(true);
 
                 // Save checkpoint times to config
                 if (timerDiff < 0 || config.CheckpointTimes[config.Level] == null)
@@ -240,10 +241,29 @@ namespace Checkpoints
             {
                 //RACE MODE
                 if(debug) Debug.Log("Race mode finished");
-                CalculateScoreboard();
+                // if this is the last level, show final scoreboard
+                CalculatePlayerScore();
+                if (config.Level == config.LastLevelIndex)
+                {
+                    CalculateFinalScoreboard();
+                    _finishUI.FinalScoreboardPanel.SetActive(true);
+                }
+                else
+                {
+                    CalculateScoreboard();
+                    _finishUI.ScoreBoardPanel.SetActive(true);
+                }
             }
                         
             _finishUI.FinishUIPanel.SetActive(true);
+        }
+
+        private void CalculatePlayerScore()
+        {
+            foreach (var progress in playerProgress)
+            {
+                progress.newInputManagerInterface.score += pointsTable[progress.pos - 1];   
+            }
         }
 
         private void CalculateScoreboard()
@@ -252,13 +272,42 @@ namespace Checkpoints
             _finishUI.ClearPlayerScoreboard();
             foreach (var progress in playerProgress)
             {
-                progress.newInputManagerInterface.score += pointsTable[progress.pos - 1];
                 _finishUI.InstantiatePlayerScore(
                     progress.pos,
                     progress.newInputManagerInterface.playerName,
                     _timerScript.ConvertTimerToString(progress.checkpointTime[progress.checkpointTime.Count - 1]), 
                     progress.newInputManagerInterface.score, 
                     progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player);
+            }
+        }
+        
+        private void CalculateFinalScoreboard()
+        {
+            playerProgress.Sort((x, y) => y.newInputManagerInterface.score.CompareTo(x.newInputManagerInterface.score));
+            _finishUI.ClearFinalScoreboard();
+            int index = 0;
+            foreach (var progress in playerProgress)
+            {
+                if (index < 3)
+                {
+                    _finishUI.SetTop3Scoreboard(index,
+                        progress.newInputManagerInterface.playerName,
+                        progress.newInputManagerInterface.score);
+                }
+                else
+                {
+                    _finishUI.InstantiateFinalScoreboard(
+                        index+1,
+                        progress.newInputManagerInterface.playerName,
+                        progress.newInputManagerInterface.score);
+                }
+                _finishUI.InstantiatePlayerScore(
+                    progress.pos,
+                    progress.newInputManagerInterface.playerName,
+                    _timerScript.ConvertTimerToString(progress.checkpointTime[progress.checkpointTime.Count - 1]), 
+                    progress.newInputManagerInterface.score, 
+                    progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player);
+                index++;
             }
         }
 

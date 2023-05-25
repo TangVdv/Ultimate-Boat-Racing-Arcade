@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Checkpoints;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,27 +23,40 @@ public class FinishUI : MonoBehaviour
     [SerializeField] private Image timerDiffPanel;
     [SerializeField] private Text timerDiffText;
     [SerializeField] private GameObject checkpointPanel;
+
+    [SerializeField] private GameObject finalScoreboardPanel;
+    [SerializeField] private GameObject playerFinalScoreTemplate;
+    [SerializeField] private GameObject playerFinalScorePanel;
+    
+    [SerializeField] private Text firstPlayerNameText;
+    [SerializeField] private Text firstPlayerScoreText;
+    
+    [SerializeField] private Text secondPlayerNameText;
+    [SerializeField] private Text secondPlayerScoreText;
+    
+    [SerializeField] private Text thirdPlayerNameText;
+    [SerializeField] private Text thirdPlayerScoreText;
+    
+    public GameObject ScoreBoardPanel
+    {
+        get => scoreBoardPanel;
+    }
+
+    public GameObject ChronoInfoPanel
+    {
+        get => chronoInfoPanel;
+    }
+    
+    public GameObject FinalScoreboardPanel
+    {
+        get => finalScoreboardPanel;
+    }
     
     public GameObject FinishUIPanel
     {
         get => finishUIPanel;
     }
-    
-    private void Start()
-    {
-        if (config.GameMode == 1)
-        {
-            // IF CHRONO MODE
-            chronoInfoPanel.SetActive(true);
-            
-        }
-        else
-        {
-            //IF RACE MODE
-            scoreBoardPanel.SetActive(true);
-        }   
-    }
-    
+
     public void ClearPlayerScoreboard()
     {
         foreach (Transform child in scorePanel.transform)
@@ -119,6 +133,7 @@ public class FinishUI : MonoBehaviour
     {
         setupLevelScript.ResetCurrentMap();
         finishUIPanel.SetActive(false);
+        chronoInfoPanel.SetActive(false);
     }
 
     public void NextMap()
@@ -126,5 +141,42 @@ public class FinishUI : MonoBehaviour
         config.Level++;
         setupLevelScript.SetupLevel();
         finishUIPanel.SetActive(false);
+        scoreBoardPanel.SetActive(false);
     }
+
+    public void SetTop3Scoreboard(int pos, string name, int score)
+    {
+        switch (pos)
+        {
+            case 0:
+                firstPlayerNameText.text = name;
+                firstPlayerScoreText.text = score.ToString();
+                break;
+            case 1:
+                secondPlayerNameText.text = name;
+                secondPlayerScoreText.text = score.ToString();
+                break;
+            case 2:
+                thirdPlayerNameText.text = name;
+                thirdPlayerScoreText.text = score.ToString();
+                break;
+        }
+    }
+
+    public void ClearFinalScoreboard()
+    {
+        foreach (Transform child in playerFinalScorePanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+    
+    public void InstantiateFinalScoreboard(int pos, string name, int score)
+    {
+        GameObject currentTemplate = Instantiate(playerFinalScoreTemplate, playerFinalScorePanel.transform);
+        currentTemplate.transform.GetChild(0).GetComponent<Text>().text = pos.ToString();
+        currentTemplate.transform.GetChild(1).GetComponent<Text>().text = name;
+        currentTemplate.transform.GetChild(3).GetComponent<Text>().text = score.ToString();
+    }
+
 }

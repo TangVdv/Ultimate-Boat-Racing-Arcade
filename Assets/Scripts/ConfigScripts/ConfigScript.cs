@@ -12,6 +12,8 @@ public class ConfigScript : ScriptableObject
     public List<float>[] CheckpointTimes { get; set; } = new List<float>[5];
 
     public int Level { get; set; }
+    
+    public int LastLevelIndex { get; set; }
 
     public int GameMode { get; set; }
 
