@@ -24,14 +24,12 @@ namespace Boat.New
         public bool debug;
 
         private Logger _logger;
-        private SetupGameScript _setupGameScript;
         
-        public void InitializePlayer(PlayerConfiguration playerConfiguration, Transform spawner)
+        public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
             globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
-            lastCheckpoint = spawner;
             foreach (Transform childMesh in playerMesh)
             {
                 childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
@@ -39,13 +37,11 @@ namespace Boat.New
             if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
             
             _logger = FindObjectOfType<Logger>();
-            _setupGameScript = FindObjectOfType<SetupGameScript>();
             ResetPlayerProgress();
         }
 
         public void ResetPlayerProgress()
         {
-            lastCheckpoint = GameObject.Find("Spawn").transform;
             if (config.GameMode == 0)
             {
                 if(debug)Debug.Log("RaceMode");
@@ -59,14 +55,7 @@ namespace Boat.New
             else
                 if(debug)Debug.Log("No GameMode found, couldn't reset");
         }
-
-        private void StartGame()
-        {
-            Respawn();
-            ResetPlayerProgress();
-            _setupGameScript.SetupGame();
-        }
-
+        
         private void Respawn()
         {
             if (lastCheckpoint != null)
@@ -123,13 +112,6 @@ namespace Boat.New
             if (context.performed)
             {
                 _logger.ToggleConsole();
-            }
-        }
-        public void StartGame(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                StartGame();
             }
         }
     }

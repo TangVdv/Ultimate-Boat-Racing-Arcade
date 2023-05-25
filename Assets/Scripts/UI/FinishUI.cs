@@ -125,5 +125,6 @@ public class FinishUI : MonoBehaviour
     {
         config.Level++;
         setupLevelScript.SetupLevel();
+        finishUIPanel.SetActive(false);
     }
 }
