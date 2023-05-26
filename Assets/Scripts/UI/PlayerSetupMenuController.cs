@@ -10,9 +10,9 @@ public class PlayerSetupMenuController : MonoBehaviour
     [SerializeField] private InputField playerName;
     [SerializeField] private Button nextButton;
     [SerializeField] private Image verifiedImage;
+    [SerializeField] private Material defaultMat;
     
-    private int _playerIndex;
-    private float _ignoreInputTime = 1.5f;
+    public int _playerIndex;
     private bool _inputEnabled;
 
     private void Awake()
@@ -26,23 +26,13 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         _playerIndex = pi;
         playerName.text = "Player "+(pi+1);
-        _ignoreInputTime = Time.time + _ignoreInputTime;
-    }
-
-    private void Update()
-    {
-        if (Time.time > _ignoreInputTime)
-        {
-            _inputEnabled = true;
-        }
     }
 
     public void ReadyPlayer()
     {
-        if (!_inputEnabled) return;
         PlayerConfigurationManager.Instance.SetPlayerName(_playerIndex, playerName.text);
         PlayerConfigurationManager.Instance.ReadyPlayer(_playerIndex);
-        nextButton.enabled = false;
+        nextButton.gameObject.SetActive(false);
     }
 
     public void PlayerIsConnected()
@@ -50,12 +40,18 @@ public class PlayerSetupMenuController : MonoBehaviour
         if (PlayerConfigurationManager.Instance.PlayerIsConnected(_playerIndex))
         {
             verifiedImage.color = Color.green;
-            nextButton.enabled = true;
         }
         else
         {
             verifiedImage.color = Color.red;
             nextButton.enabled = false;
         }
+    }
+
+    public void SetColor(Image buttonImage)
+    {
+        defaultMat.color = buttonImage.color;
+        PlayerConfigurationManager.Instance.SetPlayerColor(_playerIndex, defaultMat);
+        nextButton.enabled = true;
     }
 }

@@ -46,10 +46,6 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         _playerConfigs[index].IsReady = true;
-        // TODO : DELETE FIXED MATERIAL
-        Material mat = new Material(Shader.Find("Standard"));
-        mat.color = Color.blue;
-        SetPlayerColor(index, mat);
         if(debug)Debug.Log("Player "+ _playerConfigs[index].Name+" is ready !");
         if (_playerConfigs.Count == _maxPlayers && _playerConfigs.All(p => p.IsReady == true))
         {

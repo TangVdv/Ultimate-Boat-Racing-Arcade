@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Boat.New;
 using Checkpoints;
 using UnityEditor;
 using UnityEngine;
