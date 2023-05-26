@@ -65,7 +65,9 @@ public class SetupLevelScript : MonoBehaviour
         // Instantiate bots
         for (int i = 0; i < config.AIAmount; i++)
         {
-            _boats.Add(Instantiate(botPrefab));
+            var bot = Instantiate(botPrefab);
+            bot.GetComponent<NewAIInputManager>().InitializeAI("Bot " + (i+1));
+            _boats.Add(bot);
         }
     }
 }

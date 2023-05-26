@@ -61,9 +61,14 @@ namespace Boat.New
 	        base.Awake();
 	        _botTargetPosition = Vector3.zero;
 	        _nextCheckpoint = 0;
-	        playerType = PlayerType.Bot;
-	        
+
 	        initialVelocity = aimingManager.canons[0].initialVelocity;
+        }
+
+        public void InitializeAI(string AIName)
+        {
+	        playerName = AIName;
+	        playerType = PlayerType.Bot;
         }
 
         //TODO: Register target
@@ -149,7 +154,6 @@ namespace Boat.New
 	        movementX = 0;
 	        
 	        Vector3 position = boat.transform.position;
-	        Debug.Log(position);
 
 	        int passedCheckpoint = checkpointManager.GetPlayerProgress(boat).Item2;
 	        

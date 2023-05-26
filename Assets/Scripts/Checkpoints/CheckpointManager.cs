@@ -24,7 +24,6 @@ namespace Checkpoints
             public int lap;
             public int checkpoint;
             public int pos;
-            public bool isFinished;
             public List<float> checkpointTime = new List<float>();
             public NewInputManagerInterface newInputManagerInterface;
             public PlayerUI playerUI;
@@ -34,7 +33,6 @@ namespace Checkpoints
                 this.lap = 1;
                 this.checkpoint = 0;
                 this.pos = 1;
-                this.isFinished = false;
                 this.newInputManagerInterface = player.GetComponent<NewInputManagerInterface>();
                 this.playerUI = player.GetComponent<NewInputManagerInterface>().globalPlayerUI;
             }
@@ -46,6 +44,7 @@ namespace Checkpoints
         public int lapGoal = 1;
 
         private int _maxPos;
+        private int _playerFinishedAmount = 0;
     
         private List<PlayerProgress> playerProgress = new List<PlayerProgress>();
 
@@ -74,6 +73,8 @@ namespace Checkpoints
                     checkpoint.SetCheckpointManager(this);
                 }
             }
+
+            _playerFinishedAmount = 0;
             if(debug) UpdateVisuals(playerProgress[0]);
             ResetProgress();
         }
@@ -85,7 +86,6 @@ namespace Checkpoints
                 progress.lap = 1;
                 progress.checkpoint = 0;
                 progress.checkpointTime = new List<float>();
-                progress.isFinished = false;
                 if(progress.playerUI) progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);
                 progress.newInputManagerInterface.checkpointManager = this;
             }
@@ -181,8 +181,6 @@ namespace Checkpoints
                 progress.lap++;
                 if (progress.lap > lapGoal)
                 {
-                    progress.isFinished = true;
-                    
                     if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Bot)
                     {
                         //TODO : Deactivate bot inputs instead
@@ -190,7 +188,12 @@ namespace Checkpoints
                         return;
                     }
                     
-                    if (playerProgress.All(p => p.isFinished && p.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player))
+                    if(progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
+                    {
+                        _playerFinishedAmount++;
+                    }
+
+                    if (_playerFinishedAmount == config.PlayerAmount)
                     {
                         HandleFinishUI(progress);
                         _timerScript.PauseTimer();
@@ -374,10 +377,10 @@ namespace Checkpoints
 
             foreach (var playerProg in playerProgress)
             {
+                SetPlayerPos(timerDictionary, playerProg);
                 if (playerProg.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
                 {
                     race = playerProg.playerUI.RaceModeScript;
-                    SetPlayerPos(timerDictionary, playerProg);
                     race.SetCurrentPosText(playerProg.pos);
                     if (playerProg.checkpoint == checkpoint)
                     {
