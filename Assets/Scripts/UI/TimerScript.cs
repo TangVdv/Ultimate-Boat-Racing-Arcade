@@ -20,6 +20,7 @@ public class TimerScript : MonoBehaviour
     private Text _timerText;
     private bool _isTimerOn;
     private IEnumerator _timerCoroutine;
+    private float _startTime;
     
     public void ResetTimer()
     {
@@ -30,11 +31,10 @@ public class TimerScript : MonoBehaviour
     
     private IEnumerator UpdateTimer()
     {
-        float startTime = Time.realtimeSinceStartup;
         while (true)
         {
             yield return null;
-            _timerChrono = Time.realtimeSinceStartup - startTime;
+            _timerChrono = Time.realtimeSinceStartup - _startTime;
             timerText.text = ConvertTimerToString(_timerChrono);
         }
     }
@@ -43,7 +43,16 @@ public class TimerScript : MonoBehaviour
     {
         if (!_isTimerOn)
         {
+            _startTime = Time.realtimeSinceStartup;
             _timerCoroutine = UpdateTimer();
+            ResumeTimer();
+        }
+    }
+
+    public void ResumeTimer()
+    {
+        if (!_isTimerOn)
+        {
             StartCoroutine(_timerCoroutine);
             _isTimerOn = true;
         }

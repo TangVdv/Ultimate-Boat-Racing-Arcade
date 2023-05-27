@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
@@ -8,13 +9,26 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject playerUI;
+    [SerializeField] private InputAction pauseAction;
+    [SerializeField] private TimerScript timer;
 
-    private bool _isGamePaused = false;
+    private bool _isGamePaused;
 
-    public void OnPause(InputAction.CallbackContext context)
+    private void Awake()
     {
-        if (context.ReadValue<int>() > 0)
+        pauseAction.Enable();
+        pauseAction.performed += OnPause;
+    }
+    
+    private void OnDisable()
+    {
+        pauseAction.Disable();
+        pauseAction.performed -= OnPause;
+    }
+
+    private void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
             if (_isGamePaused)
                 Resume();
@@ -26,16 +40,15 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        playerUI.SetActive(true);
-        
         Time.timeScale = 1f;
+        timer.ResumeTimer();
         _isGamePaused = false;
     }
 
     private void Pause()
     {
         pauseMenu.SetActive(true);
-        playerUI.SetActive(false);
+        timer.PauseTimer();
         Time.timeScale = 0f;
         _isGamePaused = true;
     }
@@ -43,11 +56,6 @@ public class PauseMenu : MonoBehaviour
     public void BackToMenu()
     {
         Resume();
-        SceneManager.LoadScene("MainMenuScene");
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
+        SceneManager.LoadScene("Main Menu");
     }
 }
