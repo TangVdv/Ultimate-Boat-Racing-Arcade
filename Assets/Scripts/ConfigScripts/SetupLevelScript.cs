@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Boat.New;
 using UnityEngine;
+using UnityEngine.AI;
+using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 
 public class SetupLevelScript : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class SetupLevelScript : MonoBehaviour
     [SerializeField] private GameObject botPrefab;
     
     public List<GameObject> mapTemplates;
+    
+    public List<NavMeshData> navMeshes;
+    private NavMeshDataInstance _currentNavMesh;
 
     private SetupGameScript _setupGameScript;
     private GameObject _currentMap;
@@ -28,6 +33,7 @@ public class SetupLevelScript : MonoBehaviour
         if (_currentMap != null)
         {
             Destroy(_currentMap);
+            NavMesh.RemoveNavMeshData(_currentNavMesh);
         }
     }
 
@@ -36,6 +42,7 @@ public class SetupLevelScript : MonoBehaviour
         ClearLevel();
         _currentMap = Instantiate(mapTemplates[config.Level]);
         _setupGameScript = _currentMap.GetComponent<SetupGameScript>();
+        _currentNavMesh = NavMesh.AddNavMeshData(navMeshes[config.Level]);
         _setupGameScript.SetupGame(_boats);
         timerScript.ResetTimer();
         timerScript.StartTimer();
