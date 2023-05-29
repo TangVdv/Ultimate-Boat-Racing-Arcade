@@ -77,8 +77,8 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 0
-    - _amplitude: 2
-    - _length: 20
+    - _amplitude: 1
+    - _length: 30
     - _offset: 0
     - _speed: 1
     m_Colors:

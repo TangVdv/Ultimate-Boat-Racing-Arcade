@@ -84,10 +84,13 @@ namespace Boat.New.Canon
         public void AddRandomMunition()
         {
             manager.BulletInventory[(BulletType) Random.Range(1, manager.BulletInventory.Count)] += 1;
-            foreach (var bulletType in manager.BulletInventory)
+            if (debug)
             {
-                Debug.Log(bulletType.Key + " : " + bulletType.Value);
-            }
+                foreach (var bulletType in manager.BulletInventory)
+                {
+                    Debug.Log(bulletType.Key + " : " + bulletType.Value);
+                } 
+            }  
             if(manager.globalPlayerUI != null) manager.globalPlayerUI.UpdateBulletAmount(manager.BulletInventory[manager.currentBulletType]);
         }
 

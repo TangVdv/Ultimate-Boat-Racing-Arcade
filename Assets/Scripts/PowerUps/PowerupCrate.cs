@@ -8,6 +8,7 @@ namespace PowerUps
     public class PowerupCrate : MonoBehaviour
     {
         public PowerupArea powerupArea;
+        public bool debug;
         
     
         public void SetArea(PowerupArea area)
@@ -21,7 +22,7 @@ namespace PowerUps
             var bulletManagerScript = other.GetComponent<NewBulletManager>();
             if(!bulletManagerScript) return;
             
-            Debug.Log(bulletManagerScript.manager);
+            if(debug)Debug.Log(bulletManagerScript.manager);
             
             bulletManagerScript.manager.AddRandomMunition();
             //Destroy this object

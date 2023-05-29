@@ -11,7 +11,7 @@ namespace Boat.New
     public class NewPlayerInputManager : NewInputManagerInterface
     {
         [SerializeField] private ConfigScript config;
-        [SerializeField] private Transform playerMesh;
+        [SerializeField] private MeshRenderer[] playerMesh;
         [SerializeField] private RaceModeScript raceModeScript;
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
@@ -30,9 +30,9 @@ namespace Boat.New
             globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
-            foreach (Transform childMesh in playerMesh)
+            foreach (MeshRenderer childMeshRenderer in playerMesh)
             {
-                childMesh.GetComponent<MeshRenderer>().material = playerConfiguration.PlayerMaterial;
+                childMeshRenderer.material = playerConfiguration.PlayerMaterial;
             }
             if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
             
