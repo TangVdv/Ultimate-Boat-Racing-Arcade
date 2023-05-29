@@ -458,6 +458,9 @@ MonoBehaviour:
   mapTemplates:
   - {fileID: 8427463236868687269, guid: 0f5675870fb7ffc4b865af6e5867a7bf, type: 3}
   - {fileID: 7757699424523501728, guid: 8903239f317c73e489da15830ef41faa, type: 3}
+  navMeshes:
+  - {fileID: 23800000, guid: 537e555ad510b23449e8a1965fc426dd, type: 2}
+  - {fileID: 23800000, guid: 4c6cb9a8cf0ca6649a3cf094fed03814, type: 2}
 --- !u!114 &952903661
 MonoBehaviour:
   m_ObjectHideFlags: 0
