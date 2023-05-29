@@ -126,6 +126,7 @@ public class FinishUI : MonoBehaviour
 
     public void BackToMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
     }
 
@@ -176,7 +177,7 @@ public class FinishUI : MonoBehaviour
         GameObject currentTemplate = Instantiate(playerFinalScoreTemplate, playerFinalScorePanel.transform);
         currentTemplate.transform.GetChild(0).GetComponent<Text>().text = pos.ToString();
         currentTemplate.transform.GetChild(1).GetComponent<Text>().text = name;
-        currentTemplate.transform.GetChild(3).GetComponent<Text>().text = score.ToString();
+        currentTemplate.transform.GetChild(2).GetComponent<Text>().text = score.ToString();
     }
 
 }

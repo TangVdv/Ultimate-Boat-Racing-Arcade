@@ -202,7 +202,6 @@ namespace Checkpoints
                     {
                         HandleFinishUI(progress);
                         _timerScript.PauseTimer();
-                        //Time.timeScale = 0f;
                         return;
                     }
                 }
@@ -262,6 +261,7 @@ namespace Checkpoints
                 {
                     CalculateFinalScoreboard();
                     _finishUI.FinalScoreboardPanel.SetActive(true);
+                    Time.timeScale = 0f;
                 }
                 else
                 {

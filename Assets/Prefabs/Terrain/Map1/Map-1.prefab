@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   size: 50
-  debug: 1
+  debug: 0
 --- !u!1 &8427463236797120563
 GameObject:
   m_ObjectHideFlags: 0

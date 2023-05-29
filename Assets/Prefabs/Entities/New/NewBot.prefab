@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 5516772998419531923}
   rigidBody: {fileID: 7413920482512147655}
+  frozen: 0
   forwardAcceleration: 30000
   backwardAcceleration: 10000
   slowModifier: 0.6
@@ -221,7 +222,7 @@ MonoBehaviour:
   targetingMask:
     serializedVersion: 2
     m_Bits: 2147483648
-  debug: 1
+  debug: 0
   difficulty: 2
   pathReSamplingInterval: 1
   pathCornerDistanceThreshold: 5

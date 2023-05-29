@@ -86,7 +86,7 @@ namespace Boat.New
                 if (currentBulletTypeInt < 0) currentBulletTypeInt = BulletInventory.Count - 1;
 
                 currentBulletType = (BulletType) currentBulletTypeInt;
-                Debug.Log("Current munition : " + currentBulletType);
+                if(debug)Debug.Log("Current munition : " + currentBulletType);
                 playerUI.BulletSelection(currentBulletTypeInt);
             }
         }

@@ -159,8 +159,6 @@ namespace Boat.New
         
         private void TakeMovementDecision()
         {
-	        Debug.Log("TakeMovementDecision");
-	        
 	        movementZ = 0;
 	        movementX = 0;
 	        
@@ -174,7 +172,7 @@ namespace Boat.New
 
 	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
-		        Debug.Log("Passed checkpoint");
+		        if(debug)Debug.Log("Passed checkpoint");
 		        _nextCheckpoint = (_nextCheckpoint + 1) % checkpointManager.GetCheckpointCount();
 		        
 		        botTargetCollider = checkpointManager.GetNextCheckpointCollider(boat, (int) difficulty);
@@ -184,7 +182,6 @@ namespace Boat.New
 
 	        if (pathPending)
 	        {
-		        Debug.Log("Resampling path");
 		        reSamplingTimer = pathReSamplingInterval;
 		        
 		        pathPending = false;
@@ -202,8 +199,6 @@ namespace Boat.New
 		        NavMesh.CalculatePath(position, _botTargetPosition, NavMesh.AllAreas, path);
 
 		        pathCornerIndex = 0;
-		        Debug.Log("Yoyo");
-		        Debug.Log(_botTargetPosition);
 		        if (debug)
 		        {
 			        NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
