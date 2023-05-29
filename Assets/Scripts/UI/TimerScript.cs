@@ -20,7 +20,11 @@ public class TimerScript : MonoBehaviour
     private Text _timerText;
     private bool _isTimerOn;
     private IEnumerator _timerCoroutine;
+    private IEnumerator _timerPausedCoroutine;
     private float _startTime;
+    private float _startPausedTime;
+    private float _currentPausedTime;
+    private float _totalPausedTime;
     
     public void ResetTimer()
     {
@@ -28,23 +32,34 @@ public class TimerScript : MonoBehaviour
         _timerChrono = 0f;
         PauseTimer();
     }
-    
+
     private IEnumerator UpdateTimer()
     {
         while (true)
         {
             yield return null;
-            _timerChrono = Time.realtimeSinceStartup - _startTime;
+            _timerChrono = Time.realtimeSinceStartup - _startTime - _totalPausedTime;
             timerText.text = ConvertTimerToString(_timerChrono);
         }
     }
-    
+
+    private IEnumerator UpdatePausedTimer()
+    {
+        while (true)
+        {
+            yield return null;
+            _currentPausedTime = Time.realtimeSinceStartup - _startPausedTime;
+            timerText.text = ConvertTimerToString(_timerChrono);
+        }
+    }
+
     public void StartTimer()
     {
         if (!_isTimerOn)
         {
             _startTime = Time.realtimeSinceStartup;
             _timerCoroutine = UpdateTimer();
+            _timerPausedCoroutine = UpdatePausedTimer();
             ResumeTimer();
         }
     }
@@ -53,6 +68,11 @@ public class TimerScript : MonoBehaviour
     {
         if (!_isTimerOn)
         {
+            if (_timerPausedCoroutine != null)
+            {
+                StopCoroutine(_timerPausedCoroutine);
+                _totalPausedTime += _currentPausedTime;
+            }
             StartCoroutine(_timerCoroutine);
             _isTimerOn = true;
         }
@@ -62,6 +82,8 @@ public class TimerScript : MonoBehaviour
     {
         if (_timerCoroutine != null)
         {
+            _startPausedTime = Time.realtimeSinceStartup;
+            StartCoroutine(_timerPausedCoroutine);
             StopCoroutine(_timerCoroutine);
             _isTimerOn = false;
         }
