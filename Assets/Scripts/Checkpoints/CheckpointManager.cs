@@ -111,6 +111,7 @@ namespace Checkpoints
             }
         }
 
+        //Deprecated
         public Vector3 GetNextCheckpointCoordinates(GameObject player){
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
             int index = progress.checkpoint + 1;
@@ -120,6 +121,7 @@ namespace Checkpoints
         
         public Collider GetNextCheckpointCollider(GameObject player, int i = 1){
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
+            if(lapGoal == progress.lap && progress.checkpoint+i >= checkpoints.Length) return checkpoints[0].core.GetComponent<Collider>();
             int index = (progress.checkpoint + i) % checkpoints.Length;
             return checkpoints[index].core.GetComponent<Collider>();
         }
