@@ -8,6 +8,8 @@ namespace Boat.New
         public NewInputManagerInterface manager;
         public Rigidbody rigidBody;
         
+        public bool frozen = false;
+        
         public float forwardAcceleration = 10f;
         public float backwardAcceleration = 5f;
         public float slowModifier = 0.6f;
@@ -19,6 +21,8 @@ namespace Boat.New
 
         public void FixedUpdate()
         {
+            if (frozen) return;
+
             _speedModifier = 1f;
             if (manager.State.IsFastened) _speedModifier *= fastModifier;
             if (manager.State.IsSlowed) _speedModifier *= slowModifier;

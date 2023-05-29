@@ -460,7 +460,7 @@ MonoBehaviour:
   - {fileID: 7757699424523501728, guid: 8903239f317c73e489da15830ef41faa, type: 3}
   navMeshes:
   - {fileID: 23800000, guid: 537e555ad510b23449e8a1965fc426dd, type: 2}
-  - {fileID: 23800000, guid: 4c6cb9a8cf0ca6649a3cf094fed03814, type: 2}
+  - {fileID: 23800000, guid: af1a24079a95e7247b974b7d8f9745a3, type: 2}
 --- !u!114 &952903661
 MonoBehaviour:
   m_ObjectHideFlags: 0

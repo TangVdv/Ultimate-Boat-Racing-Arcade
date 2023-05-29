@@ -55,17 +55,7 @@ namespace Boat.New
             else
                 if(debug)Debug.Log("No GameMode found, couldn't reset");
         }
-        
-        private void Respawn()
-        {
-            if (lastCheckpoint != null)
-            {
-                transform.position = lastCheckpoint.position;
-                transform.rotation = lastCheckpoint.rotation;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
-        }
-        
+
         // INPUTS
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -102,10 +92,7 @@ namespace Boat.New
         }
         public void Respawn(InputAction.CallbackContext context)
         {
-            if (context.performed)
-            {
-                Respawn();
-            }
+            if (context.performed) Respawn();
         }
         public void Logger(InputAction.CallbackContext context)
         {

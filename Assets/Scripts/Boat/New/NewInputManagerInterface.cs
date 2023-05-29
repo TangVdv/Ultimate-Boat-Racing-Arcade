@@ -22,7 +22,16 @@ namespace Boat.New
             Bot,
             Player
         }
-
+        public void Respawn()
+        {
+            if (lastCheckpoint != null)
+            {
+                transform.position = lastCheckpoint.position;
+                transform.rotation = lastCheckpoint.rotation;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+        
         public struct StateStruct
         { 
 
@@ -48,8 +57,7 @@ namespace Boat.New
             State.IsBlinded = false;
             State.IsSlowed = false;
             State.IsFastened = false;
-            
-            
+
             movementX = 0;
             movementZ = 0;
             movementCam = 0;

@@ -147,9 +147,20 @@ namespace Boat.New
 	        if(canonAngle >= 45) canonAngle = 45;
 	        else if (canonAngle <= 0) canonAngle = 0;
         }
+
+        public void ResetPathing()
+        {
+	        reSamplingTimer = pathReSamplingInterval;
+	        _botTargetPosition = Vector3.zero;
+	        botTargetCollider = null;
+	        pathPending = true;
+	        path = null;
+        }
         
         private void TakeMovementDecision()
         {
+	        Debug.Log("TakeMovementDecision");
+	        
 	        movementZ = 0;
 	        movementX = 0;
 	        
@@ -161,8 +172,9 @@ namespace Boat.New
 	        if (reSamplingTimer <= 0) pathPending = true;
 
 
-	        if (passedCheckpoint == _nextCheckpoint ||_botTargetPosition == Vector3.zero)
+	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
+		        Debug.Log("Passed checkpoint");
 		        _nextCheckpoint = (_nextCheckpoint + 1) % checkpointManager.GetCheckpointCount();
 		        
 		        botTargetCollider = checkpointManager.GetNextCheckpointCollider(boat, (int) difficulty);
@@ -172,6 +184,7 @@ namespace Boat.New
 
 	        if (pathPending)
 	        {
+		        Debug.Log("Resampling path");
 		        reSamplingTimer = pathReSamplingInterval;
 		        
 		        pathPending = false;
@@ -189,7 +202,8 @@ namespace Boat.New
 		        NavMesh.CalculatePath(position, _botTargetPosition, NavMesh.AllAreas, path);
 
 		        pathCornerIndex = 0;
-		        
+		        Debug.Log("Yoyo");
+		        Debug.Log(_botTargetPosition);
 		        if (debug)
 		        {
 			        NavMesh.SamplePosition(position, out var hit, 10, NavMesh.AllAreas);
@@ -233,8 +247,22 @@ namespace Boat.New
 			else movementZ = 0;
         }
 
+        private bool TakeRespawnDecision()
+        {
+	        //Check if the boat is upside down
+	        if (transform.up.y < 0.0f)
+	        {
+		        Respawn();
+		        return true;
+	        }
+
+	        return false;
+        }
+
         private void Update()
         {
+	        if(TakeRespawnDecision()) return;
+	        
 	        if(checkpointManager) TakeMovementDecision();
 	        TakeAimingDecision();
 

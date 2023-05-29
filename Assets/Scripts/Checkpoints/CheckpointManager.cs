@@ -88,6 +88,10 @@ namespace Checkpoints
                 progress.checkpointTime = new List<float>();
                 if(progress.playerUI) progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);
                 progress.newInputManagerInterface.checkpointManager = this;
+                
+                progress.player.GetComponent<NewBoatMovementManager>().frozen = false;
+                var aiInputManager = progress.player.GetComponent<NewAIInputManager>();
+                if (aiInputManager) aiInputManager.ResetPathing();
             }
         }
 
@@ -185,8 +189,7 @@ namespace Checkpoints
                 {
                     if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Bot)
                     {
-                        //TODO : Deactivate bot inputs instead
-                        progress.player.SetActive(false);    
+                        progress.player.GetComponent<NewBoatMovementManager>().frozen = true; 
                         return;
                     }
                     
