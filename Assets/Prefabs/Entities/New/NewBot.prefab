@@ -215,6 +215,7 @@ MonoBehaviour:
   currentBulletTypeInt: 0
   globalPlayerUI: {fileID: 0}
   checkpointManager: {fileID: 0}
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   boat: {fileID: 2157788149339898319}
   rigidBody: {fileID: 7413920482512147655}
   aimingManager: {fileID: 8341459511806100284}

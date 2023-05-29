@@ -56,7 +56,7 @@ public class ModeSelectionUI : MonoBehaviour
 
     public void ModeSelection()
     {
-        config.Difficulty = _difficultyIndex;
+        config.Difficulty = _difficultyIndex+1;
         if (_modeSelect == 1)
         {
             _aiAmount = 0;

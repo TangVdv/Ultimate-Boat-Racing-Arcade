@@ -16,7 +16,7 @@ namespace Boat.New
 {
     public class NewAIInputManager : NewInputManagerInterface
     {
-	    
+	    public ConfigScript config;
         public GameObject boat;
         public Rigidbody rigidBody;
         
@@ -69,6 +69,7 @@ namespace Boat.New
         {
 	        playerName = AIName;
 	        playerType = PlayerType.Bot;
+	        difficulty = (Difficulty) config.Difficulty;
         }
 
         //TODO: Register target
