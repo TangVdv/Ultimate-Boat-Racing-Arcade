@@ -15,7 +15,10 @@ namespace Checkpoints
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_checkpointManager.boats.Contains(other.gameObject)) _checkpointManager.CheckPointPassed(ID, other.gameObject);
+            if (_checkpointManager.boats.Contains(other.gameObject))
+            {
+                _checkpointManager.CheckPointPassed(ID, other.gameObject);
+            }
         }
     
         public void SetCheckpointManager(CheckpointManager checkpointManager)

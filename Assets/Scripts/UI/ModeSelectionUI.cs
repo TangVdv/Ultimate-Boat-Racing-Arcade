@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ public class ModeSelectionUI : MonoBehaviour
     private int _levelIndex = 0;
     private int _playerAmount = 1;
     private int _aiAmount = 2;
-    private int _difficultyIndex = 0;
+    private int _difficultyIndex = 1;
     private string[] _difficulty = {"EASY", "MEDIUM", "HARD"};
 
     private void Start()
@@ -75,10 +76,16 @@ public class ModeSelectionUI : MonoBehaviour
     {
         _levelIndex = value;
         selectButton.enabled = true;
+        SetChronoLevelInfo(value);
+        InstantiateMap();
+    }
+
+    private void SetChronoLevelInfo(int value)
+    {
         detailsPanel.SetActive(true);
         detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + (value+1);
         string text;
-        if (config.CheckpointTimes[value] != null)
+        if (config.CheckpointTimes.ElementAtOrDefault(value) != null)
         {
             int lastIndex = config.CheckpointTimes[value].Count - 1;
             float timer = config.CheckpointTimes[value][lastIndex];
@@ -90,14 +97,13 @@ public class ModeSelectionUI : MonoBehaviour
         else
             text = "Best time :";
         detailsPanel.transform.GetChild(1).GetComponent<Text>().text = text;
-
-        if (config.BestTimePlayerName[value] != null)
+        
+        if (config.BestTimePlayerName.ElementAtOrDefault(value) != null)
             text = "Player : "+config.BestTimePlayerName[value];
         else
             text = "Player :";
         
         detailsPanel.transform.GetChild(2).GetComponent<Text>().text = text;
-        InstantiateMap();
     }
 
     public void DisableButton()

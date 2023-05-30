@@ -324,11 +324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948072, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: size
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948072, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: debug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948072, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: playerContainer
@@ -344,11 +344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6218301055634948073, guid: 7430a895fb52ec645a8fcfc4e2de4ada, type: 3}
       propertyPath: m_LocalRotation.w
