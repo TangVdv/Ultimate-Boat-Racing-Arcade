@@ -156,6 +156,7 @@ namespace Boat.New
 	        botTargetCollider = null;
 	        pathPending = true;
 	        path = null;
+	        _nextCheckpoint = 0;
         }
         
         private void TakeMovementDecision()
@@ -171,11 +172,10 @@ namespace Boat.New
 	        if (reSamplingTimer <= 0) pathPending = true;
 
 
-	        if (passedCheckpoint == _nextCheckpoint || _botTargetPosition == Vector3.zero)
+	        if (passedCheckpoint >= _nextCheckpoint || _botTargetPosition == Vector3.zero)
 	        {
-		        if(debug)Debug.Log("Passed checkpoint");
 		        _nextCheckpoint = (_nextCheckpoint + 1) % checkpointManager.GetCheckpointCount();
-		        
+
 		        botTargetCollider = checkpointManager.GetNextCheckpointCollider(boat, (int) difficulty);
 		        
 		        pathPending = true;
