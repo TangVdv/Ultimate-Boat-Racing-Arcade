@@ -32,7 +32,7 @@ namespace Boat.New
             playerName = playerConfiguration.Name;
             foreach (MeshRenderer childMeshRenderer in playerMesh)
             {
-                childMeshRenderer.material = playerConfiguration.PlayerMaterial;
+                childMeshRenderer.material = playerConfiguration.PlayerBoatMaterial;
             }
             if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
             

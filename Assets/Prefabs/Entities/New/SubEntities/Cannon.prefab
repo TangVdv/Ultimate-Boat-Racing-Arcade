@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6342936332963220819}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Point1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 7414278393860401370}
   - component: {fileID: 7181978217871365297}
   - component: {fileID: 7808974247022211458}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: right_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5934068622762415750}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Point2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1935446080623770322}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 8208158000102449672}
   - component: {fileID: 3138455682906515745}
   - component: {fileID: 188775349748122248}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: left_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 1421162989906688412}
   - component: {fileID: 2054422668159704027}
   - component: {fileID: 3987928832720997027}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,9 @@ MonoBehaviour:
   - {fileID: 6054499066611463273}
   - {fileID: 3996492905248974394}
   cannonBall: {fileID: 937852843518610473, guid: 3a065f26e79db0c4badc6808a3d84017, type: 3}
+  boat: {fileID: 0}
   initialVelocity: 20
+  aimingManager: {fileID: 0}
 --- !u!1 &4604345901257659354
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6054499066611463273}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: right_barrel_out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3996492905248974394}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: left_barrel_out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +449,7 @@ GameObject:
   - component: {fileID: 3145328605261580573}
   - component: {fileID: 1375718258362426444}
   - component: {fileID: 921327423427631699}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6729384712383180366}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Point3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
