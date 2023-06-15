@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   timerScript: {fileID: 1141699298}
-  playerPrefab: {fileID: 2157788149339898319, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+  playerPrefab: {fileID: 2157788149339898319, guid: 39937ad87a6110a42896d30a203336a2, type: 3}
   botPrefab: {fileID: 2157788149339898319, guid: 4ef8385f2faa2194f929b17f8bb3323b, type: 3}
   mapTemplates:
   - {fileID: 8427463236868687269, guid: 0f5675870fb7ffc4b865af6e5867a7bf, type: 3}
@@ -609,7 +609,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 893421471529021073, guid: cc2d47fdfec455742baa5a0306c79550, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 893421471529021073, guid: cc2d47fdfec455742baa5a0306c79550, type: 3}
       propertyPath: m_LocalPosition.x
@@ -654,7 +654,7 @@ PrefabInstance:
     - target: {fileID: 893421471529021086, guid: cc2d47fdfec455742baa5a0306c79550, type: 3}
       propertyPath: m_PlayerPrefab
       value: 
-      objectReference: {fileID: 2157788149339898319, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
+      objectReference: {fileID: 2157788149339898319, guid: 39937ad87a6110a42896d30a203336a2, type: 3}
     - target: {fileID: 893421471529021086, guid: cc2d47fdfec455742baa5a0306c79550, type: 3}
       propertyPath: m_MaxPlayerCount
       value: 2
@@ -879,7 +879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927994140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1347, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1009,5 +1009,5 @@ Transform:
   - {fileID: 547341294}
   - {fileID: 1404648632}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

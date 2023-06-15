@@ -16,6 +16,8 @@ namespace Boat.New
         public Transform lastCheckpoint;
         public string playerName;
         public int score = 0;
+        public NewBoatMovementManager newBoatMovementManager;
+        public Rigidbody rigidbody;
 
         public enum PlayerType
         {
@@ -24,11 +26,11 @@ namespace Boat.New
         }
         public void Respawn()
         {
-            if (lastCheckpoint != null)
+            if (lastCheckpoint)
             {
                 transform.position = lastCheckpoint.position;
                 transform.rotation = lastCheckpoint.rotation;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                rigidbody.velocity = Vector3.zero;
             }
         }
         

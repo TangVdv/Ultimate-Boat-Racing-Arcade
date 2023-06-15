@@ -9,7 +9,9 @@ using Color = System.Drawing.Color;
 public class BoatSelection : MonoBehaviour
 {
     [SerializeField] private GameObject[] boats;
+    [SerializeField] private GameObject[] boatsTemplate;
     [SerializeField] private GameObject[] cannons;
+    [SerializeField] private GameObject[] cannonsTemplate;
     [SerializeField] private GameObject boatPanel;
     [SerializeField] private GameObject cannonPanel;
     [SerializeField] private GameObject playerSetupPanel;
@@ -39,10 +41,10 @@ public class BoatSelection : MonoBehaviour
             button.transform.GetChild(0).GetComponent<Text>().text = boat.name;
             var prefab = Instantiate(boat, button.transform.GetChild(1).transform);
             prefab.transform.position = button.transform.GetChild(1).transform.position;
-            
+            int index = System.Array.IndexOf(boats, boat);
             UnityAction buttonClickHandler = () =>
             {
-                SetPrefab(prefab, 0);
+                SetPrefab(cannonsTemplate[index], 0);
             };
 
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
@@ -57,10 +59,10 @@ public class BoatSelection : MonoBehaviour
             button.transform.GetChild(0).GetComponent<Text>().text = cannon.name;
             var prefab = Instantiate(cannon, button.transform.GetChild(1).transform);
             prefab.transform.position = button.transform.GetChild(1).transform.position;
-            
+            int index = System.Array.IndexOf(cannons, cannon);
             UnityAction buttonClickHandler = () =>
             {
-                SetPrefab(prefab, 1);
+                SetPrefab(boatsTemplate[index], 1);
             };
 
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);

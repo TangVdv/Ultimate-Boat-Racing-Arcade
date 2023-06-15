@@ -35,12 +35,6 @@ namespace Boat.New.Canon
             {
                 StartCoroutine(Reload());
             }
-
-            foreach (var canon in canons)
-            {
-                canon.aimingManager = this;
-            }
-
         }
 
         public void Update()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Boat.New;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,7 +23,7 @@ public class SetupLevelScript : MonoBehaviour
     private GameObject _currentMap;
     
     private List<GameObject> _boats = new List<GameObject>();
-    void Start()
+    void Awake()
     {
         BoatsSetup();
         SetupLevel();
@@ -62,7 +63,7 @@ public class SetupLevelScript : MonoBehaviour
         for (int i = 0; i < config.PlayerAmount; i++)
         {
             var player = Instantiate(playerPrefab);
-            if (playerConfigs[i] != null)
+            if(playerConfigs.ElementAtOrDefault(i) != null)
             {
                 player.GetComponent<NewPlayerInputManager>().InitializePlayer(playerConfigs[i]);
             }

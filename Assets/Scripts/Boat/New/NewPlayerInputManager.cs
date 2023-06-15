@@ -27,6 +27,7 @@ namespace Boat.New
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
+            if(debug)Debug.Log("Initialize");
             globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
@@ -62,6 +63,7 @@ namespace Boat.New
             Vector2 value = context.ReadValue<Vector2>();
             movementX = value.x;
             movementZ = value.y;
+            Debug.Log("movementZ" + movementZ);
         }
         public void OnFire(InputAction.CallbackContext context)
         {

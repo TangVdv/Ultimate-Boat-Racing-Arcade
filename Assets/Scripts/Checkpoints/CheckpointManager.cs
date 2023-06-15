@@ -88,8 +88,7 @@ namespace Checkpoints
                 progress.checkpointTime = new List<float>();
                 if(progress.playerUI) progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);
                 progress.newInputManagerInterface.checkpointManager = this;
-                
-                progress.player.GetComponent<NewBoatMovementManager>().frozen = false;
+                progress.newInputManagerInterface.newBoatMovementManager.frozen = false;
                 var aiInputManager = progress.player.GetComponent<NewAIInputManager>();
                 if (aiInputManager) aiInputManager.ResetPathing();
             }

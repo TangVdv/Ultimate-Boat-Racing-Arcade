@@ -9,10 +9,11 @@ public class PlayerSetupMenuController : MonoBehaviour
 {
     [SerializeField] private InputField playerName;
     [SerializeField] private Button readyButton;
-    [SerializeField] private GameObject objectParent;
-    [SerializeField] private GameObject boatTest;
-    
-    public int _playerIndex;
+    [SerializeField] private GameObject globalObjectParentPreview;
+    [SerializeField] private GameObject boatObjectParentPreview;
+    [SerializeField] private GameObject cannonObjectParentPreview;
+
+    private int _playerIndex;
     private bool _isCannonSet;
     private bool _isBoatSet;
 
@@ -21,8 +22,6 @@ public class PlayerSetupMenuController : MonoBehaviour
         SetPlayerIndex(GetComponentInParent<PlayerInput>().playerIndex);
         readyButton.enabled = false;
         PlayerIsConnected();
-        PlayerConfigurationManager.Instance.SetPlayerBoat(_playerIndex, boatTest);
-        SetPreview();
     }
 
     private void SetPlayerIndex(int pi)
@@ -43,14 +42,41 @@ public class PlayerSetupMenuController : MonoBehaviour
     }
     
 
-    private void SetPreview()
+    public void SetPreview(GameObject prefab)
     {
-        GameObject boat = PlayerConfigurationManager.Instance.GetPlayerBoat(_playerIndex); 
+        foreach (Transform child in globalObjectParentPreview.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        foreach (Transform child in boatObjectParentPreview.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        foreach (Transform child in cannonObjectParentPreview.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        GameObject boat = PlayerConfigurationManager.Instance.GetPlayerBoat(_playerIndex);
+        GameObject cannon = PlayerConfigurationManager.Instance.GetPlayerCannon(_playerIndex);
         if (boat)
         {
             boat = Instantiate(boat);
-            boat.transform.position = objectParent.transform.position;
-            boat.transform.parent = objectParent.transform;   
+            boat.transform.position = globalObjectParentPreview.transform.position;
+            boat.transform.parent = globalObjectParentPreview.transform;
+            
+            boat = Instantiate(boat);
+            boat.transform.position = boatObjectParentPreview.transform.position;
+            boat.transform.parent = boatObjectParentPreview.transform; 
+        }
+
+        if (cannon)
+        {
+            cannon = Instantiate(cannon);
+            cannon.transform.position = cannonObjectParentPreview.transform.position;
+            cannon.transform.parent = cannonObjectParentPreview.transform; 
         }
     }
 

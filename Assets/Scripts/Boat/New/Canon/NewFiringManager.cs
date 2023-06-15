@@ -9,13 +9,18 @@ namespace Boat.New.Canon
         public GameObject barrels;
         public Transform[] barrelOutputs;
         [SerializeField] private GameObject cannonBall;
+        [SerializeField] private GameObject boat;
 
-        public GameObject boat;
-        
         public float initialVelocity = 20;
+        public NewAimingManager aimingManager;
+
+        private Rigidbody _boatRigidbody;
         private GameObject _bullet;
 
-        public NewAimingManager aimingManager;
+        private NewFiringManager()
+        {
+            _boatRigidbody = boat.GetComponent<Rigidbody>();
+        }
 
         public void Fire( BulletType bulletType)
         {
@@ -33,7 +38,8 @@ namespace Boat.New.Canon
                 bulletManager.SetManager(aimingManager);
                 bulletManager.SetBulletType(bulletType);
                 bulletManager.SetParent(boat);
-                _bullet.GetComponent<Rigidbody>().velocity = barrelOutput.forward * initialVelocity + boat.GetComponent<Rigidbody>().velocity;
+                //TODO change velocity location to bulletManager script
+                _bullet.GetComponent<Rigidbody>().velocity = barrelOutput.forward * initialVelocity + _boatRigidbody.velocity;
             }
         }
     }

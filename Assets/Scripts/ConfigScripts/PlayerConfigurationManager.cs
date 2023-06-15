@@ -75,6 +75,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         return _playerConfigs[index].PlayerBoat;
     }
     
+    public GameObject GetPlayerCannon(int index)
+    {
+        return _playerConfigs[index].PlayerCannon;
+    }
+    
     public void SetPlayerCannon(int index, GameObject cannon)
     {
         _playerConfigs[index].PlayerCannon = cannon;

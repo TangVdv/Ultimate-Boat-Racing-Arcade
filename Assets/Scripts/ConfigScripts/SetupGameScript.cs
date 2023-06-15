@@ -25,6 +25,7 @@ public class SetupGameScript : MonoBehaviour
         spawner.SpawnSetup(boats);
         foreach (var boat in boats)
         {
+            Debug.Log(boat);
             checkpointManager.AddPlayer(boat);   
         }
         spawner.Spawn();
