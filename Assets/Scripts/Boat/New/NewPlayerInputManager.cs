@@ -59,7 +59,6 @@ namespace Boat.New
             Vector2 value = context.ReadValue<Vector2>();
             movementX = value.x;
             movementZ = value.y;
-            Debug.Log("movementZ" + movementZ);
         }
         public void OnFire(InputAction.CallbackContext context)
         {
@@ -84,7 +83,6 @@ namespace Boat.New
                 if (currentBulletTypeInt < 0) currentBulletTypeInt = BulletInventory.Count - 1;
 
                 currentBulletType = (BulletType) currentBulletTypeInt;
-                if(debug)Debug.Log("Current munition : " + currentBulletType);
                 playerUI.BulletSelection(currentBulletTypeInt);
             }
         }

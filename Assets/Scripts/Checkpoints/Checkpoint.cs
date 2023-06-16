@@ -17,7 +17,7 @@ namespace Checkpoints
         {
             if (_checkpointManager.boats.Contains(other.gameObject))
             {
-                _checkpointManager.CheckPointPassed(ID, other.gameObject);
+                _checkpointManager.CheckPointPassed(ID, other.transform.parent.gameObject);
             }
         }
     

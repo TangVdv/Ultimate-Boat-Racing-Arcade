@@ -8,9 +8,11 @@ public class BuildBoatPreview : MonoBehaviour
 
     private GameObject _boatTemplate;
     private GameObject _cannonTemplate;
+    private string _layerName;
 
-    public void CreateCannon(GameObject cannon, Material color)
+    public void CreateCannon(GameObject cannon, Material color, string layerName)
     {
+        _layerName = layerName;
         ClearCannon();
         if (cannon)
         {
@@ -19,6 +21,7 @@ public class BuildBoatPreview : MonoBehaviour
                 foreach (Transform pos in cannonPos)
                 {
                     _cannonTemplate = Instantiate(cannon, pos);
+                    _cannonTemplate.layer = LayerMask.NameToLayer(_layerName);
                     _cannonTemplate.GetComponent<Rotator>().rotation = new Vector3(0f, 0f, 0f);
                     if (color)
                     {
@@ -47,6 +50,7 @@ public class BuildBoatPreview : MonoBehaviour
         foreach (Transform child in parent)
         {
             MeshRenderer renderer = child.GetComponent<MeshRenderer>();
+            child.gameObject.layer = LayerMask.NameToLayer(_layerName);
 
             if (renderer != null)
             {

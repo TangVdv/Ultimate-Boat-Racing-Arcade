@@ -274,7 +274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4582077285671144924, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 40.00006
+      value: 40.000122
       objectReference: {fileID: 0}
     - target: {fileID: 4724621844302640156, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: m_Pivot.x
@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: debug
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5898828616544038494, guid: 5d810872239ea874c99291966495ce9d, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1589073236771544587}
     - target: {fileID: 6043144252011805486, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -28.368118
@@ -430,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6677410458572459686, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 40.00006
+      value: 40.000122
       objectReference: {fileID: 0}
     - target: {fileID: 6858818918244129724, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: m_AnchorMax.y

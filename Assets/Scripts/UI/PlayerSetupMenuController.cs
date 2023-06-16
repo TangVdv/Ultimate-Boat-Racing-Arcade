@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -12,9 +13,12 @@ public class PlayerSetupMenuController : MonoBehaviour
     [SerializeField] private GameObject globalObjectParentPreview;
     [SerializeField] private GameObject boatObjectParentPreview;
     [SerializeField] private GameObject cannonObjectParentPreview;
+    [SerializeField] private Camera playerCamera;
     public bool debug;
     
     private int _playerIndex;
+    private static string _layerName;
+    public string LayerName => _layerName;
     private bool _isCannonSet;
     private bool _isBoatSet;
     private GameObject _boat;
@@ -25,13 +29,72 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         SetPlayerIndex(GetComponentInParent<PlayerInput>().playerIndex);
         readyButton.enabled = false;
+        CreateNewLayer();
+        playerCamera.cullingMask |= (1 << LayerMask.NameToLayer(_layerName));
         PlayerIsConnected();
+    }
+    
+    private static void CreateNewLayer()
+    {
+        SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+        SerializedProperty layersProperty = tagManager.FindProperty("layers");
+
+        // Check if the layer name already exists
+        if (!LayerExists())
+        {
+            // Find an empty layer slot
+            int emptyLayerIndex = -1;
+            for (int i = 8; i < layersProperty.arraySize; i++)
+            {
+                SerializedProperty layerProperty = layersProperty.GetArrayElementAtIndex(i);
+                if (string.IsNullOrEmpty(layerProperty.stringValue))
+                {
+                    emptyLayerIndex = i;
+                    break;
+                }
+            }
+
+            // Assign the new layer name to the empty slot
+            if (emptyLayerIndex != -1)
+            {
+                SerializedProperty newLayer = layersProperty.GetArrayElementAtIndex(emptyLayerIndex);
+                newLayer.stringValue = _layerName;
+                tagManager.ApplyModifiedProperties();
+                Debug.Log("New layer created: "+_layerName);
+            }
+            else
+            {
+                Debug.LogError("No empty layer slot available. Please free up a layer and try again.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Layer "+_layerName+" already exists.");
+        }
+    }
+
+    private static bool LayerExists()
+    {
+        SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+        SerializedProperty layersProperty = tagManager.FindProperty("layers");
+
+        for (int i = 0; i < layersProperty.arraySize; i++)
+        {
+            SerializedProperty layerProperty = layersProperty.GetArrayElementAtIndex(i);
+            if (layerProperty.stringValue == _layerName)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void SetPlayerIndex(int pi)
     {
         _playerIndex = pi;
-        playerName.text = "Player "+(pi+1);
+        _layerName = "Player " + (pi + 1);
+        playerName.text = _layerName;
     }
 
     public void ReadyPlayer()
@@ -62,13 +125,15 @@ public class PlayerSetupMenuController : MonoBehaviour
             
             if (prefab)
             {
-                Instantiate(prefab, boatObjectParentPreview.transform);
+                _boat = Instantiate(prefab, boatObjectParentPreview.transform);
+                _boat.layer = LayerMask.NameToLayer(_layerName);
             
                 _boat = Instantiate(prefab, globalObjectParentPreview.transform);
+                _boat.layer = LayerMask.NameToLayer(_layerName);
                 _boat.GetComponent<BuildBoatPreview>().ApplyColor(mat, _boat.GetComponent<MeshRenderer>());
                 if (_cannon)
                 {
-                    _boat.GetComponent<BuildBoatPreview>().CreateCannon(_cannon, _cannonMat);
+                    _boat.GetComponent<BuildBoatPreview>().CreateCannon(_cannon, _cannonMat, _layerName);
                 }
             }
         }
@@ -83,8 +148,22 @@ public class PlayerSetupMenuController : MonoBehaviour
             _cannon = prefab;
             _cannonMat = mat;
 
-            Instantiate(prefab, cannonObjectParentPreview.transform);
-            if (_boat) _boat.GetComponent<BuildBoatPreview>().CreateCannon(prefab, mat);
+            var cannon = Instantiate(prefab, cannonObjectParentPreview.transform);
+            cannon.layer = LayerMask.NameToLayer(_layerName);
+            ApplyLayerRecursively(cannon.transform);
+            if (_boat) _boat.GetComponent<BuildBoatPreview>().CreateCannon(prefab, mat, _layerName);
+        }
+    }
+    
+    private void ApplyLayerRecursively(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer(_layerName);
+            if (child.childCount > 0)
+            {
+                ApplyLayerRecursively(child);
+            }
         }
     }
 

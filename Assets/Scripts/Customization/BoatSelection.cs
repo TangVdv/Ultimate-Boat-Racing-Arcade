@@ -23,9 +23,11 @@ public class BoatSelection : MonoBehaviour
     private GameObject _currentPrefabPreview;
     private int _currentIndex;
     private UnityEngine.Color color;
+    private string _layerName;
 
     private void Start()
     {
+        _layerName = playerSetupMenuController.LayerName;
         selectButton.enabled = false;
         if(boats.Length > 0)
             SetupBoatMenu();
@@ -41,6 +43,7 @@ public class BoatSelection : MonoBehaviour
             var button = Instantiate(buttonTemplate, boatPanel.transform);
             button.transform.GetChild(0).GetComponent<Text>().text = boat.name;
             var prefab = Instantiate(boat, button.transform.GetChild(1).transform);
+            prefab.layer = LayerMask.NameToLayer(_layerName);
             prefab.transform.position = button.transform.GetChild(1).transform.position;
             int index = System.Array.IndexOf(boats, boat);
             UnityAction buttonClickHandler = () =>
@@ -59,6 +62,8 @@ public class BoatSelection : MonoBehaviour
             var button = Instantiate(buttonTemplate, cannonPanel.transform);
             button.transform.GetChild(0).GetComponent<Text>().text = cannon.name;
             var prefab = Instantiate(cannon, button.transform.GetChild(1).transform);
+            prefab.layer = LayerMask.NameToLayer(_layerName);
+            ApplyLayerRecursively(prefab.transform);
             prefab.transform.position = button.transform.GetChild(1).transform.position;
             int index = System.Array.IndexOf(cannons, cannon);
             UnityAction buttonClickHandler = () =>
@@ -69,6 +74,18 @@ public class BoatSelection : MonoBehaviour
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
         }
         
+    }
+    
+    private void ApplyLayerRecursively(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer(_layerName);
+            if (child.childCount > 0)
+            {
+                ApplyLayerRecursively(child);
+            }
+        }
     }
 
     private void SetPrefab(GameObject prefab, GameObject prefabPreview, int index)
