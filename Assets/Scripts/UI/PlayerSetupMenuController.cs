@@ -17,6 +17,9 @@ public class PlayerSetupMenuController : MonoBehaviour
     private int _playerIndex;
     private bool _isCannonSet;
     private bool _isBoatSet;
+    private GameObject _boat;
+    private GameObject _cannon;
+    private Material _cannonMat;
 
     private void Awake()
     {
@@ -43,41 +46,45 @@ public class PlayerSetupMenuController : MonoBehaviour
     }
     
 
-    public void SetPreview(GameObject prefab)
+    public void SetPreview(int index, GameObject prefab, Material mat)
     {
-        foreach (Transform child in globalObjectParentPreview.transform)
+        if (index == 0)
         {
-            Destroy(child.gameObject);
-        }
+            foreach (Transform child in globalObjectParentPreview.transform)
+            {
+                Destroy(child.gameObject);
+            }
         
-        foreach (Transform child in boatObjectParentPreview.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        
-        foreach (Transform child in cannonObjectParentPreview.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        
-        GameObject boat = PlayerConfigurationManager.Instance.GetPlayerBoat(_playerIndex);
-        GameObject cannon = PlayerConfigurationManager.Instance.GetPlayerCannon(_playerIndex);
-        if (boat)
-        {
-            boat = Instantiate(boat);
-            boat.transform.position = globalObjectParentPreview.transform.position;
-            boat.transform.parent = globalObjectParentPreview.transform;
+            foreach (Transform child in boatObjectParentPreview.transform)
+            {
+                Destroy(child.gameObject);
+            }  
             
-            boat = Instantiate(boat);
-            boat.transform.position = boatObjectParentPreview.transform.position;
-            boat.transform.parent = boatObjectParentPreview.transform; 
+            if (prefab)
+            {
+                Instantiate(prefab, boatObjectParentPreview.transform);
+            
+                _boat = Instantiate(prefab, globalObjectParentPreview.transform);
+                _boat.GetComponent<BuildBoatPreview>().ApplyColor(mat, _boat.GetComponent<MeshRenderer>());
+                if (_cannon)
+                {
+                    _boat.GetComponent<BuildBoatPreview>().CreateCannon(_cannon, _cannonMat);
+                }
+            }
         }
 
-        if (cannon)
+        if (index == 1)
         {
-            cannon = Instantiate(cannon);
-            cannon.transform.position = cannonObjectParentPreview.transform.position;
-            cannon.transform.parent = cannonObjectParentPreview.transform; 
+            foreach (Transform child in cannonObjectParentPreview.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            _cannon = prefab;
+            _cannonMat = mat;
+
+            Instantiate(prefab, cannonObjectParentPreview.transform);
+            if (_boat) _boat.GetComponent<BuildBoatPreview>().CreateCannon(prefab, mat);
         }
     }
 

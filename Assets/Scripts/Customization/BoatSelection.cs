@@ -20,6 +20,7 @@ public class BoatSelection : MonoBehaviour
     [SerializeField] private Button selectButton;
 
     private GameObject _currentPrefab;
+    private GameObject _currentPrefabPreview;
     private int _currentIndex;
     private UnityEngine.Color color;
 
@@ -44,7 +45,7 @@ public class BoatSelection : MonoBehaviour
             int index = System.Array.IndexOf(boats, boat);
             UnityAction buttonClickHandler = () =>
             {
-                SetPrefab(boatsTemplate[index], 0);
+                SetPrefab(boatsTemplate[index], boat, 0);
             };
 
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
@@ -62,7 +63,7 @@ public class BoatSelection : MonoBehaviour
             int index = System.Array.IndexOf(cannons, cannon);
             UnityAction buttonClickHandler = () =>
             {
-                SetPrefab(cannonsTemplate[index], 1);
+                SetPrefab(cannonsTemplate[index], cannon, 1);
             };
 
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
@@ -70,9 +71,10 @@ public class BoatSelection : MonoBehaviour
         
     }
 
-    private void SetPrefab(GameObject prefab, int index)
+    private void SetPrefab(GameObject prefab, GameObject prefabPreview, int index)
     {
         _currentPrefab = prefab;
+        _currentPrefabPreview = prefabPreview;
         _currentIndex = index;
         selectButton.enabled = true;
     }
@@ -86,6 +88,7 @@ public class BoatSelection : MonoBehaviour
     {
         Material mat = CreateMaterial();
         playerSetupMenuController.SetPlayerPrefab(_currentIndex, _currentPrefab, mat);
+        playerSetupMenuController.SetPreview(_currentIndex, _currentPrefabPreview, mat);
         Back();
     }
 
