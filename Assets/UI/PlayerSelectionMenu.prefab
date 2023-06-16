@@ -1835,6 +1835,7 @@ MonoBehaviour:
   globalObjectParentPreview: {fileID: 4857641725761268843}
   boatObjectParentPreview: {fileID: 5729091670376035981}
   cannonObjectParentPreview: {fileID: 2960810319317091771}
+  playerCamera: {fileID: 0}
   debug: 0
 --- !u!223 &2278985510501807306
 Canvas:
@@ -2449,6 +2450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fce17ff443151c438b274bdd7f3da95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   boats:
   - {fileID: 713982562764439200, guid: ba43832a26eb528468a8fc50526e67d9, type: 3}
   boatsTemplate:

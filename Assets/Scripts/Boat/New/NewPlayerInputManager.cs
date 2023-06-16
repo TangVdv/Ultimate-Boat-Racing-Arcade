@@ -26,8 +26,12 @@ namespace Boat.New
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
-            if (debug) Debug.Log("Initialize"); 
-            buildBoat.Initiate(playerConfiguration);
+            if (debug) Debug.Log("Initialize");
+            buildBoat.Initiate(
+                playerConfiguration.PlayerBoat, 
+                playerConfiguration.PlayerCannon,
+                playerConfiguration.PlayerBoatMaterial,
+                playerConfiguration.PlayerCannonMaterial);
             globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;

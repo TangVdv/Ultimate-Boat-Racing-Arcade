@@ -24,7 +24,7 @@ namespace Boat.New
 
         public enum PlayerType
         {
-            Bot,
+            AI,
             Player
         }
         public void Respawn()

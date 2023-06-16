@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Color = System.Drawing.Color;
+using Random = UnityEngine.Random;
 
 public class BoatSelection : MonoBehaviour
 {
+    [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject[] boats;
     [SerializeField] private GameObject[] boatsTemplate;
     [SerializeField] private GameObject[] cannons;
@@ -29,11 +31,31 @@ public class BoatSelection : MonoBehaviour
     {
         _layerName = playerSetupMenuController.LayerName;
         selectButton.enabled = false;
-        if(boats.Length > 0)
+        if (boats.Length > 0)
+        {
             SetupBoatMenu();
-        
-        if(cannons.Length > 0)
+            if (config.BoatTemplates.Length == 0)
+            {
+                config.BoatTemplates = boatsTemplate;
+            }
+        }
+
+        if (cannons.Length > 0)
+        {
             SetupCannonMenu();
+            if (config.CannonTemplates.Length == 0)
+            {
+                config.CannonTemplates = cannonsTemplate;
+            }
+        }
+    }
+
+    public void RandomPrefab()
+    {
+        int randomIndex = Random.Range(0, boats.Length);
+        SetPrefab(boatsTemplate[randomIndex], boats[randomIndex], 0);
+        randomIndex = Random.Range(0, cannons.Length);
+        SetPrefab(cannonsTemplate[0], cannons[0], 1);
     }
 
     private void SetupBoatMenu()

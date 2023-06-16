@@ -23,7 +23,6 @@ public class PlayerConfigurationManager : MonoBehaviour
         else
         {
             Instance = this;
-            //DontDestroyOnLoad(Instance);
             _playerConfigs = new List<PlayerConfiguration>();
             _maxPlayers = config.PlayerAmount;
             if (_maxPlayers <= 0) _maxPlayers = 1;
@@ -69,17 +68,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         _playerConfigs[index].PlayerBoat = boat;
     }
-    
-    public GameObject GetPlayerBoat(int index)
-    {
-        return _playerConfigs[index].PlayerBoat;
-    }
-    
-    public GameObject GetPlayerCannon(int index)
-    {
-        return _playerConfigs[index].PlayerCannon;
-    }
-    
+
     public void SetPlayerCannon(int index, GameObject cannon)
     {
         _playerConfigs[index].PlayerCannon = cannon;

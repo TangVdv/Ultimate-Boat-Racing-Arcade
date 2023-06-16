@@ -17,11 +17,10 @@ namespace Boat.New
     public class NewAIInputManager : NewInputManagerInterface
     {
 	    public ConfigScript config;
-        public GameObject boat;
         public Rigidbody rigidBody;
         
         public NewAimingManager aimingManager;
-        private float initialVelocity;
+        private float initialVelocity = 0;
 
         private float canonDirection = 0;
         private float canonAngle = 0;
@@ -29,8 +28,6 @@ namespace Boat.New
         public float firingAngleMercy = 0.5f;
         
         public LayerMask targetingMask;
-        
-        private NewBoatMovementManager _newBoatMovementManager;
 
         public bool debug = false;
 
@@ -57,18 +54,23 @@ namespace Boat.New
         
         private new void Awake()
         {
-	        _newBoatMovementManager = boat.GetComponent<NewBoatMovementManager>();
 	        base.Awake();
 	        _botTargetPosition = Vector3.zero;
 	        _nextCheckpoint = 0;
-
-	        initialVelocity = aimingManager.canons[0].initialVelocity;
+			//TODO: find an other way to set initialVelocity
+	        //initialVelocity = aimingManager.canons[0].initialVelocity;
         }
 
-        public void InitializeAI(string AIName)
+        public void InitializeAI(AIConfiguration botConfiguration)
         {
-	        playerName = AIName;
-	        playerType = PlayerType.Bot;
+	        buildBoat.Initiate(
+		        botConfiguration.AIBoat, 
+		        botConfiguration.AICannon, 
+		        botConfiguration.AIBoatMaterial, 
+		        botConfiguration.AICannonMaterial);
+	        
+	        playerName = botConfiguration.Name;
+	        playerType = PlayerType.AI;
 	        difficulty = (Difficulty) config.Difficulty;
         }
 
@@ -89,7 +91,7 @@ namespace Boat.New
 	        List<RaycastHit> filteredHits = new List<RaycastHit>();
 	        foreach (var hit in hits)
 	        {
-		        if (hit.transform.gameObject == boat) continue;
+		        if (hit.transform.gameObject == gameObject) continue;
 		        filteredHits.Add(hit);
 	        }
 
@@ -164,9 +166,9 @@ namespace Boat.New
 	        movementZ = 0;
 	        movementX = 0;
 	        
-	        Vector3 position = boat.transform.position;
+	        Vector3 position = transform.position;
 
-	        int passedCheckpoint = checkpointManager.GetPlayerProgress(boat).Item2;
+	        int passedCheckpoint = checkpointManager.GetPlayerProgress(gameObject).Item2;
 	        
 	        reSamplingTimer -= Time.deltaTime;
 	        if (reSamplingTimer <= 0) pathPending = true;
@@ -176,7 +178,7 @@ namespace Boat.New
 	        {
 		        _nextCheckpoint = (_nextCheckpoint + 1) % checkpointManager.GetCheckpointCount();
 
-		        botTargetCollider = checkpointManager.GetNextCheckpointCollider(boat, (int) difficulty);
+		        botTargetCollider = checkpointManager.GetNextCheckpointCollider(gameObject, (int) difficulty);
 		        
 		        pathPending = true;
 	        }
@@ -188,7 +190,7 @@ namespace Boat.New
 		        pathPending = false;
 		        
 		        //Raycast from the front in the CheckPointMask layer and if not found, use ClosestPoint instead
-		        Physics.Raycast(position, boat.transform.forward, out var hitForward, 100000.0f, checkPointMask);
+		        Physics.Raycast(position, transform.forward, out var hitForward, 100000.0f, checkPointMask);
 		        if (hitForward.collider == botTargetCollider)
 		        {
 			        if (debug) Debug.DrawLine(position, hitForward.point, Color.blue, pathReSamplingInterval);

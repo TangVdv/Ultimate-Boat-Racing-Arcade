@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 952903662}
   - component: {fileID: 952903661}
   - component: {fileID: 952903658}
+  - component: {fileID: 952903659}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -454,13 +455,28 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   timerScript: {fileID: 1141699298}
   playerPrefab: {fileID: 2157788149339898319, guid: 39937ad87a6110a42896d30a203336a2, type: 3}
-  botPrefab: {fileID: 2157788149339898319, guid: 4ef8385f2faa2194f929b17f8bb3323b, type: 3}
+  botPrefab: {fileID: 2157788149339898319, guid: 332b837761a6ad745b36716b8c4d1cb5, type: 3}
+  aiConfigurationManager: {fileID: 952903659}
   mapTemplates:
   - {fileID: 8427463236868687269, guid: 0f5675870fb7ffc4b865af6e5867a7bf, type: 3}
   - {fileID: 7757699424523501728, guid: 8903239f317c73e489da15830ef41faa, type: 3}
   navMeshes:
   - {fileID: 23800000, guid: 537e555ad510b23449e8a1965fc426dd, type: 2}
   - {fileID: 23800000, guid: af1a24079a95e7247b974b7d8f9745a3, type: 2}
+--- !u!114 &952903659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952903657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c4a806d13dc714aa8ceb6690d88097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  debug: 0
 --- !u!114 &952903661
 MonoBehaviour:
   m_ObjectHideFlags: 0

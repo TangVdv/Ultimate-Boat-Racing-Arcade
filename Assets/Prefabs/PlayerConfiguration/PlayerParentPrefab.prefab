@@ -390,7 +390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5898828616544038494, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5898828616544038494, guid: 5d810872239ea874c99291966495ce9d, type: 3}
       propertyPath: playerCamera

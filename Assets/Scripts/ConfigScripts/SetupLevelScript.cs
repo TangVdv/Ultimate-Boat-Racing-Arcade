@@ -13,6 +13,8 @@ public class SetupLevelScript : MonoBehaviour
     
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject botPrefab;
+
+    [SerializeField] private AIConfigurationManager aiConfigurationManager;
     
     public List<GameObject> mapTemplates;
     
@@ -25,7 +27,8 @@ public class SetupLevelScript : MonoBehaviour
     private List<GameObject> _boats = new List<GameObject>();
     void Awake()
     {
-        BoatsSetup();
+        PlayerSetup();
+        AISetup();
         SetupLevel();
     }
 
@@ -56,26 +59,52 @@ public class SetupLevelScript : MonoBehaviour
         timerScript.StartTimer();
     }
 
-    private void BoatsSetup()
+    private void PlayerSetup()
     {
         // Instantiate players
         var playerConfigs = config.PlayerConfigurations;
-        for (int i = 0; i < config.PlayerAmount; i++)
+        foreach (var player in playerConfigs)
         {
-            var player = Instantiate(playerPrefab);
-            if(playerConfigs.ElementAtOrDefault(i) != null)
-            {
-                player.GetComponent<NewPlayerInputManager>().InitializePlayer(playerConfigs[i]);
-            }
-            _boats.Add(player);   
+            var playerInstantiate = Instantiate(playerPrefab);
+            playerInstantiate.GetComponent<NewPlayerInputManager>().InitializePlayer(player);
+            _boats.Add(playerInstantiate);
         }
-        
-        // Instantiate bots
+    }
+
+    private void AISetup()
+    {
+        var boats = config.BoatTemplates;
+        var cannons = config.CannonTemplates;
+        var colors = config.Colors;
+        // Create AI
         for (int i = 0; i < config.AIAmount; i++)
         {
-            var bot = Instantiate(botPrefab);
-            bot.GetComponent<NewAIInputManager>().InitializeAI("Bot " + (i+1));
-            _boats.Add(bot);
+            Material boatMat = new Material(Shader.Find("Standard"));
+            Material cannonMat = new Material(Shader.Find("Standard"));
+            int randomIndex = Random.Range(0, colors.Count);   
+            boatMat.color = colors[randomIndex];
+            randomIndex = Random.Range(0, colors.Count);   
+            cannonMat.color = colors[randomIndex];
+            
+            aiConfigurationManager.HandleAIJoin(i);
+            aiConfigurationManager.SetupAI(
+                i,
+                boatMat,
+                cannonMat,
+                boats[Random.Range(0, boats.Length)],
+                cannons[Random.Range(0, cannons.Length)]
+            );
+        }
+        
+        // Instantiate AI
+        var AIConfigs = aiConfigurationManager.AIConfigs;
+        Debug.Log(AIConfigs.Count);
+        foreach (var AI in AIConfigs)
+        {
+            Debug.Log(AI);
+            var AIInstantiate = Instantiate(botPrefab);
+            AIInstantiate.GetComponent<NewAIInputManager>().InitializeAI(AI);
+            _boats.Add(AIInstantiate);   
         }
     }
 }

@@ -188,7 +188,7 @@ namespace Checkpoints
                 progress.lap++;
                 if (progress.lap > lapGoal)
                 {
-                    if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Bot)
+                    if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.AI)
                     {
                         progress.player.GetComponent<NewBoatMovementManager>().frozen = true; 
                         return;

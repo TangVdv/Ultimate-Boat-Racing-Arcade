@@ -31,65 +31,35 @@ public class PlayerSetupMenuController : MonoBehaviour
         readyButton.enabled = false;
         CreateNewLayer();
         playerCamera.cullingMask |= (1 << LayerMask.NameToLayer(_layerName));
-        PlayerIsConnected();
     }
     
     private static void CreateNewLayer()
     {
         SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
         SerializedProperty layersProperty = tagManager.FindProperty("layers");
-
-        // Check if the layer name already exists
-        if (!LayerExists())
+        int emptyLayerIndex = -1;
+        for (int i = 8; i < layersProperty.arraySize; i++)
         {
-            // Find an empty layer slot
-            int emptyLayerIndex = -1;
-            for (int i = 8; i < layersProperty.arraySize; i++)
+            SerializedProperty layerProperty = layersProperty.GetArrayElementAtIndex(i);
+            if (string.IsNullOrEmpty(layerProperty.stringValue))
             {
-                SerializedProperty layerProperty = layersProperty.GetArrayElementAtIndex(i);
-                if (string.IsNullOrEmpty(layerProperty.stringValue))
-                {
-                    emptyLayerIndex = i;
-                    break;
-                }
+                emptyLayerIndex = i;
+                break;
             }
-
-            // Assign the new layer name to the empty slot
-            if (emptyLayerIndex != -1)
-            {
-                SerializedProperty newLayer = layersProperty.GetArrayElementAtIndex(emptyLayerIndex);
-                newLayer.stringValue = _layerName;
-                tagManager.ApplyModifiedProperties();
-                Debug.Log("New layer created: "+_layerName);
-            }
-            else
-            {
-                Debug.LogError("No empty layer slot available. Please free up a layer and try again.");
-            }
+        }
+            
+        if (emptyLayerIndex != -1)
+        {
+            SerializedProperty newLayer = layersProperty.GetArrayElementAtIndex(emptyLayerIndex);
+            newLayer.stringValue = _layerName;
+            tagManager.ApplyModifiedProperties();
+            Debug.Log("New layer created: "+_layerName);
         }
         else
         {
-            Debug.LogError("Layer "+_layerName+" already exists.");
+            Debug.LogError("No empty layer slot available. Please free up a layer and try again.");
         }
     }
-
-    private static bool LayerExists()
-    {
-        SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
-        SerializedProperty layersProperty = tagManager.FindProperty("layers");
-
-        for (int i = 0; i < layersProperty.arraySize; i++)
-        {
-            SerializedProperty layerProperty = layersProperty.GetArrayElementAtIndex(i);
-            if (layerProperty.stringValue == _layerName)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private void SetPlayerIndex(int pi)
     {
         _playerIndex = pi;
@@ -103,11 +73,6 @@ public class PlayerSetupMenuController : MonoBehaviour
         PlayerConfigurationManager.Instance.ReadyPlayer(_playerIndex);
         readyButton.gameObject.SetActive(false);
     }
-
-    public void PlayerIsConnected()
-    {
-    }
-    
 
     public void SetPreview(int index, GameObject prefab, Material mat)
     {

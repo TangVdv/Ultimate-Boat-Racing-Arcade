@@ -11,23 +11,22 @@ public class BuildBoat : MonoBehaviour
     [SerializeField] private NewBoatMovementManager newBoatMovementManager;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private NewAimingManager newAimingManager;
-    [SerializeField] private PlayerInput playerInput;
     
     private GameObject _boatTemplate;
     private GameObject _cannonTemplate;
     private BoatConfigurationParameters _boatConfigurationParameters;
     private NewFloatersManager _newFloatersManager;
 
-    public void Initiate(PlayerConfiguration playerConfiguration)
+    public void Initiate(GameObject boat, GameObject cannon, Material boatMat, Material cannonMat)
     {
-        CreateBoat(playerConfiguration.PlayerBoat, playerConfiguration.PlayerBoatMaterial);
+        CreateBoat(boat, boatMat);
         if (_boatConfigurationParameters)
         {
             if (_boatConfigurationParameters.CannonPos.Length > 0)
             {
                 foreach (Transform pos in _boatConfigurationParameters.CannonPos)
                 {
-                    CreateCannon(playerConfiguration.PlayerCannon, pos, playerConfiguration.PlayerCannonMaterial);   
+                    CreateCannon(cannon, pos, cannonMat);   
                 }
             }   
         }
