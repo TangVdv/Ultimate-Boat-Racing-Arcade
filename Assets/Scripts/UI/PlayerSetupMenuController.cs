@@ -83,7 +83,7 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     public void SetPlayerPrefab(int index, GameObject prefab, Material color)
     {
-        if(debug)Debug.Log("Prefab : "+prefab+" ; index : "+index+" ; color : "+color);
+        if(debug)Debug.Log("Prefab : "+prefab+" ; index : "+index+" ; color : "+color.color);
         if (index == 0)
         {
             PlayerConfigurationManager.Instance.SetPlayerBoat(_playerIndex, prefab);

@@ -17,11 +17,11 @@ public class BoatSelection : MonoBehaviour
     [SerializeField] private GameObject playerSetupPanel;
     [SerializeField] private GameObject buttonTemplate;
     [SerializeField] private PlayerSetupMenuController playerSetupMenuController;
-    [SerializeField] private Material defaultMat;
     [SerializeField] private Button selectButton;
 
     private GameObject _currentPrefab;
     private int _currentIndex;
+    private UnityEngine.Color color;
 
     private void Start()
     {
@@ -79,13 +79,23 @@ public class BoatSelection : MonoBehaviour
     
     public void SetColor(Image buttonImage)
     {
-        defaultMat.color = buttonImage.color;
+        color = buttonImage.color;
     }
 
     public void Select()
     {
-        playerSetupMenuController.SetPlayerPrefab(_currentIndex, _currentPrefab, defaultMat);
+        Material mat = CreateMaterial();
+        playerSetupMenuController.SetPlayerPrefab(_currentIndex, _currentPrefab, mat);
         Back();
+    }
+
+    private Material CreateMaterial()
+    {
+        Material newMaterial = new Material(Shader.Find("Standard"))
+        {
+            color = color
+        };
+        return newMaterial;
     }
 
     public void Back()

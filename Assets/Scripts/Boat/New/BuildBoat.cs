@@ -20,27 +20,28 @@ public class BuildBoat : MonoBehaviour
 
     public void Initiate(PlayerConfiguration playerConfiguration)
     {
-        CreateBoat(playerConfiguration.PlayerBoat);
+        CreateBoat(playerConfiguration.PlayerBoat, playerConfiguration.PlayerBoatMaterial);
         if (_boatConfigurationParameters)
         {
             if (_boatConfigurationParameters.CannonPos.Length > 0)
             {
                 foreach (Transform pos in _boatConfigurationParameters.CannonPos)
                 {
-                    CreateCannon(playerConfiguration.PlayerCannon, pos);   
+                    CreateCannon(playerConfiguration.PlayerCannon, pos, playerConfiguration.PlayerCannonMaterial);   
                 }
             }   
         }
         ConnectParameters();
     }
 
-    private void CreateBoat(GameObject template)
+    private void CreateBoat(GameObject template, Material color)
     {
         _boatTemplate = Instantiate(template, transform);
         _boatConfigurationParameters = _boatTemplate.GetComponent<BoatConfigurationParameters>();
+        ApplyColor(color, _boatTemplate.GetComponent<MeshRenderer>());
     }
 
-    private void CreateCannon(GameObject template, Transform pos)
+    private void CreateCannon(GameObject template, Transform pos, Material color)
     {
         _cannonTemplate = Instantiate(template, pos);
         NewFiringManager newFiringManager = _cannonTemplate.GetComponent<NewFiringManager>();
@@ -48,6 +49,26 @@ public class BuildBoat : MonoBehaviour
         newFiringManager.boatRigidbody = rigidbody;
         newFiringManager.aimingManager = newAimingManager;
         newAimingManager.canons.Append(newFiringManager);
+        ApplyColor(color, _cannonTemplate.GetComponent<MeshRenderer>());
+        ApplyMaterialRecursively(_cannonTemplate.transform, color);
+    }
+    
+    private void ApplyMaterialRecursively(Transform parent, Material color)
+    {
+        foreach (Transform child in parent)
+        {
+            MeshRenderer renderer = child.GetComponent<MeshRenderer>();
+
+            if (renderer != null)
+            {
+                ApplyColor(color, renderer);
+            }
+
+            if (child.childCount > 0)
+            {
+                ApplyMaterialRecursively(child, color);
+            }
+        }
     }
 
     private void ApplyColor(Material mat, MeshRenderer mesh) 
