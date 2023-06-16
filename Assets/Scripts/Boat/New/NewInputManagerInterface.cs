@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Boat.New.Canon;
 using Checkpoints;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Boat.New
 {
@@ -16,8 +17,10 @@ namespace Boat.New
         public Transform lastCheckpoint;
         public string playerName;
         public int score = 0;
+        
         public NewBoatMovementManager newBoatMovementManager;
         public Rigidbody rigidbody;
+        public BuildBoat buildBoat;
 
         public enum PlayerType
         {

@@ -44,7 +44,7 @@ public class BoatSelection : MonoBehaviour
             int index = System.Array.IndexOf(boats, boat);
             UnityAction buttonClickHandler = () =>
             {
-                SetPrefab(cannonsTemplate[index], 0);
+                SetPrefab(boatsTemplate[index], 0);
             };
 
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
@@ -62,7 +62,7 @@ public class BoatSelection : MonoBehaviour
             int index = System.Array.IndexOf(cannons, cannon);
             UnityAction buttonClickHandler = () =>
             {
-                SetPrefab(boatsTemplate[index], 1);
+                SetPrefab(cannonsTemplate[index], 1);
             };
 
             button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
@@ -84,8 +84,8 @@ public class BoatSelection : MonoBehaviour
 
     public void Select()
     {
-        Back();
         playerSetupMenuController.SetPlayerPrefab(_currentIndex, _currentPrefab, defaultMat);
+        Back();
     }
 
     public void Back()

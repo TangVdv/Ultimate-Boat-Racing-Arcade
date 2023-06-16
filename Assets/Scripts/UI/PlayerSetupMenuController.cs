@@ -12,7 +12,8 @@ public class PlayerSetupMenuController : MonoBehaviour
     [SerializeField] private GameObject globalObjectParentPreview;
     [SerializeField] private GameObject boatObjectParentPreview;
     [SerializeField] private GameObject cannonObjectParentPreview;
-
+    public bool debug;
+    
     private int _playerIndex;
     private bool _isCannonSet;
     private bool _isBoatSet;
@@ -82,9 +83,9 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     public void SetPlayerPrefab(int index, GameObject prefab, Material color)
     {
+        if(debug)Debug.Log("Prefab : "+prefab+" ; index : "+index+" ; color : "+color);
         if (index == 0)
         {
-            Debug.Log("set boat");
             PlayerConfigurationManager.Instance.SetPlayerBoat(_playerIndex, prefab);
             PlayerConfigurationManager.Instance.SetPlayerBoatColor(_playerIndex, color);
             _isBoatSet = true;
@@ -92,7 +93,6 @@ public class PlayerSetupMenuController : MonoBehaviour
 
         if (index == 1)
         {
-            Debug.Log("set cannon");
             PlayerConfigurationManager.Instance.SetPlayerCannon(_playerIndex, prefab);
             PlayerConfigurationManager.Instance.SetPlayerCannonColor(_playerIndex, color);
             _isCannonSet = true;

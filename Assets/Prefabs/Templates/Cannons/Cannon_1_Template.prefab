@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4321847406320623286}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.08, y: 1.42, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children:
   - {fileID: 1447242374948079742}
@@ -375,6 +375,7 @@ MonoBehaviour:
   - {fileID: 3996492905248974394}
   cannonBall: {fileID: 937852843518610473, guid: 3a065f26e79db0c4badc6808a3d84017, type: 3}
   boat: {fileID: 0}
+  boatRigidbody: {fileID: 0}
   initialVelocity: 20
   aimingManager: {fileID: 0}
 --- !u!1 &4604345901257659354

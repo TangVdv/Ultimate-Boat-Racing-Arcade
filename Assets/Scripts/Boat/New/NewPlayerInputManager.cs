@@ -11,7 +11,6 @@ namespace Boat.New
     public class NewPlayerInputManager : NewInputManagerInterface
     {
         [SerializeField] private ConfigScript config;
-        [SerializeField] private MeshRenderer[] playerMesh;
         [SerializeField] private RaceModeScript raceModeScript;
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
@@ -27,14 +26,11 @@ namespace Boat.New
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
-            if(debug)Debug.Log("Initialize");
+            if (debug) Debug.Log("Initialize"); 
+            buildBoat.Initiate(playerConfiguration);
             globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
-            foreach (MeshRenderer childMeshRenderer in playerMesh)
-            {
-                childMeshRenderer.material = playerConfiguration.PlayerBoatMaterial;
-            }
             if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
             
             _logger = FindObjectOfType<Logger>();

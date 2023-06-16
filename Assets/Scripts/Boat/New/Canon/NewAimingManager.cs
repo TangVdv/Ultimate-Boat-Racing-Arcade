@@ -101,11 +101,12 @@ namespace Boat.New.Canon
 
         public void LateUpdate()
         {
- 
-            Quaternion qt = Quaternion.Euler(0, _localRotation, 0);
+            if (pivot)
+            {
+                Quaternion qt = Quaternion.Euler(0, _localRotation, 0);
             
-            pivot.transform.localRotation = Quaternion.Lerp(pivot.transform.localRotation, qt, Time.deltaTime * orbitDampening);
-            
+                pivot.transform.localRotation = Quaternion.Lerp(pivot.transform.localRotation, qt, Time.deltaTime * orbitDampening);   
+            }
         }
 
         public void Fire()
