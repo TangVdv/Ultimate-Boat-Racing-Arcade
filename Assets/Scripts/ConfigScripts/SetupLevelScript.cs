@@ -28,7 +28,10 @@ public class SetupLevelScript : MonoBehaviour
     void Awake()
     {
         PlayerSetup();
-        AISetup();
+        if (config.AIAmount > 0)
+        {
+            AISetup();   
+        }
         SetupLevel();
     }
 
@@ -98,7 +101,6 @@ public class SetupLevelScript : MonoBehaviour
         
         // Instantiate AI
         var AIConfigs = aiConfigurationManager.AIConfigs;
-        Debug.Log(AIConfigs.Count);
         foreach (var AI in AIConfigs)
         {
             Debug.Log(AI);

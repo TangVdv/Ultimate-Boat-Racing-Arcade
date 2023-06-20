@@ -8,11 +8,6 @@ namespace Boat.New
         public NewFloatersManager Manager;
         private WaveManager _waveManager;
 
-        private void Start()
-        {
-            _waveManager = WaveManager.instance;
-        }
-
         private void FixedUpdate()
         {
             var position = transform.position;
@@ -39,7 +34,8 @@ namespace Boat.New
             }
             else
             {
-                Debug.Log("WaveManager not found !");
+                Debug.Log("WaveManager not found, trying to get instance !");
+                _waveManager = WaveManager.instance;
             }
         }
     }

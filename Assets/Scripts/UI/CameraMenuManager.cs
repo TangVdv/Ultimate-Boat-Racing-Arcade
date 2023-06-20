@@ -5,34 +5,33 @@ using UnityEngine;
 
 public class CameraMenuManager : MonoBehaviour
 {
-    private CameraMenuMotion _menuCameraMotion;
-    private void Awake()
-    {
-        _menuCameraMotion = Camera.main.GetComponent<CameraMenuMotion>();
-    }
+    [SerializeField] private CameraMenuMotion menuCameraMotion;
+    [SerializeField] private Camera camera;
 
     public void SettingsButton()
     {
-        _menuCameraMotion.SwitchPositionCamera(2);
+        menuCameraMotion.SwitchPositionCamera(2);
     }
 
     public void BackButton()
     {
-        _menuCameraMotion.SwitchPositionCamera(0);
+        menuCameraMotion.SwitchPositionCamera(0);
+        camera.orthographic = false;
     }
 
     public void PlayButton()
     {
-        _menuCameraMotion.SwitchPositionCamera(3);
+        menuCameraMotion.SwitchPositionCamera(3);
     }
 
     public void CustomButton()
     {
-        _menuCameraMotion.SwitchPositionCamera(1);
+        menuCameraMotion.SwitchPositionCamera(1);
+        camera.orthographic = true;
     }
 
     public void CreditButton()
     {
-        _menuCameraMotion.SwitchPositionCamera(2);
+        menuCameraMotion.SwitchPositionCamera(2);
     }
 }

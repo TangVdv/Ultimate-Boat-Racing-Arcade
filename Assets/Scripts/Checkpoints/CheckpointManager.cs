@@ -62,6 +62,7 @@ namespace Checkpoints
 
         public void Setup()
         {
+            Debug.Log("Setup checkpoint manager");
             // First time init
             if (checkpoints == null)
             {
@@ -101,6 +102,7 @@ namespace Checkpoints
             boats.Add(boat);
             playerProgress.Add(new PlayerProgress(player));
 
+            if(debug)Debug.Log("playerProgressCount : "+playerProgress.Count+" ; config.PlayerAmount : "+config.PlayerAmount+" ; config.AIAmount : "+config.AIAmount);
             if (playerProgress.Count == (config.PlayerAmount + config.AIAmount)) 
             {
                 if (debug)

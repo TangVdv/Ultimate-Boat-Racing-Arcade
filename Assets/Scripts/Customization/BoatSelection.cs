@@ -10,14 +10,7 @@ using Random = UnityEngine.Random;
 public class BoatSelection : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
-    [SerializeField] private GameObject[] boats;
-    [SerializeField] private GameObject[] boatsTemplate;
-    [SerializeField] private GameObject[] cannons;
-    [SerializeField] private GameObject[] cannonsTemplate;
-    [SerializeField] private GameObject boatPanel;
-    [SerializeField] private GameObject cannonPanel;
     [SerializeField] private GameObject playerSetupPanel;
-    [SerializeField] private GameObject buttonTemplate;
     [SerializeField] private PlayerSetupMenuController playerSetupMenuController;
     [SerializeField] private Button selectButton;
 
@@ -26,79 +19,46 @@ public class BoatSelection : MonoBehaviour
     private int _currentIndex;
     private UnityEngine.Color color;
     private string _layerName;
+    public string LayerName => _layerName;
+    
+    private GameObject[] _boats;
+    private GameObject[] _boatsTemplate;
+    private GameObject[] _cannons;
+    private GameObject[] _cannonsTemplate;
 
-    private void Start()
+
+    private void Awake()
     {
         _layerName = playerSetupMenuController.LayerName;
         selectButton.enabled = false;
-        if (boats.Length > 0)
-        {
-            SetupBoatMenu();
-            if (config.BoatTemplates.Length == 0)
-            {
-                config.BoatTemplates = boatsTemplate;
-            }
-        }
+    }
 
-        if (cannons.Length > 0)
-        {
-            SetupCannonMenu();
-            if (config.CannonTemplates.Length == 0)
-            {
-                config.CannonTemplates = cannonsTemplate;
-            }
-        }
+    public void SetTemplates(GameObject[] boats, GameObject[] boatsTemplate, GameObject[] cannons, GameObject[] cannonsTemplate)
+    {
+        _boats = boats;
+        _boatsTemplate = boatsTemplate;
+        _cannons = cannons;
+        _cannonsTemplate = cannonsTemplate;
     }
 
     public void RandomPrefab()
-    {
-        int randomIndex = Random.Range(0, boats.Length);
-        SetPrefab(boatsTemplate[randomIndex], boats[randomIndex], 0);
-        randomIndex = Random.Range(0, cannons.Length);
-        SetPrefab(cannonsTemplate[0], cannons[0], 1);
-    }
-
-    private void SetupBoatMenu()
-    {
-        foreach (GameObject boat in boats)
-        {
-            var button = Instantiate(buttonTemplate, boatPanel.transform);
-            button.transform.GetChild(0).GetComponent<Text>().text = boat.name;
-            var prefab = Instantiate(boat, button.transform.GetChild(1).transform);
-            prefab.layer = LayerMask.NameToLayer(_layerName);
-            prefab.transform.position = button.transform.GetChild(1).transform.position;
-            int index = System.Array.IndexOf(boats, boat);
-            UnityAction buttonClickHandler = () =>
-            {
-                SetPrefab(boatsTemplate[index], boat, 0);
-            };
-
-            button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
-        }
-    }
-    
-    private void SetupCannonMenu()
-    {
-        foreach (GameObject cannon in cannons)
-        {
-            var button = Instantiate(buttonTemplate, cannonPanel.transform);
-            button.transform.GetChild(0).GetComponent<Text>().text = cannon.name;
-            var prefab = Instantiate(cannon, button.transform.GetChild(1).transform);
-            prefab.layer = LayerMask.NameToLayer(_layerName);
-            ApplyLayerRecursively(prefab.transform);
-            prefab.transform.position = button.transform.GetChild(1).transform.position;
-            int index = System.Array.IndexOf(cannons, cannon);
-            UnityAction buttonClickHandler = () =>
-            {
-                SetPrefab(cannonsTemplate[index], cannon, 1);
-            };
-
-            button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
-        }
+    {   
+        //Random boat
+        int randomIndex = Random.Range(0, _boats.Length);
+        SetPrefab(_boatsTemplate[randomIndex], _boats[randomIndex], 0);
+        randomIndex = Random.Range(0, config.Colors.Count);
+        color = config.Colors[randomIndex];
+        Select();
         
+        //Random cannon
+        randomIndex = Random.Range(0, _cannons.Length);
+        SetPrefab(_cannonsTemplate[randomIndex], _cannons[randomIndex], 1);
+        randomIndex = Random.Range(0, config.Colors.Count);
+        color = config.Colors[randomIndex];
+        Select();
     }
-    
-    private void ApplyLayerRecursively(Transform parent)
+
+    public void ApplyLayerRecursively(Transform parent)
     {
         foreach (Transform child in parent)
         {
@@ -110,7 +70,7 @@ public class BoatSelection : MonoBehaviour
         }
     }
 
-    private void SetPrefab(GameObject prefab, GameObject prefabPreview, int index)
+    public void SetPrefab(GameObject prefab, GameObject prefabPreview, int index)
     {
         _currentPrefab = prefab;
         _currentPrefabPreview = prefabPreview;
@@ -142,8 +102,6 @@ public class BoatSelection : MonoBehaviour
 
     public void Back()
     {
-        boatPanel.SetActive(false);
-        cannonPanel.SetActive(false);
         gameObject.SetActive(false);
         playerSetupPanel.SetActive(true);
         selectButton.enabled = false;
