@@ -210,6 +210,9 @@ MonoBehaviour:
   lastCheckpoint: {fileID: 0}
   playerName: 
   score: 0
+  newBoatMovementManager: {fileID: 0}
+  rigidbody: {fileID: 0}
+  buildBoat: {fileID: 0}
   playerType: 0
   currentBulletType: 0
   currentBulletTypeInt: 0
@@ -488,6 +491,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8341459511806100284}
     - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: boatRigidbody
+      value: 
+      objectReference: {fileID: 7413920482512147655}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: initialVelocity
       value: 50
       objectReference: {fileID: 0}
@@ -671,6 +678,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8341459511806100284}
     - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: boatRigidbody
+      value: 
+      objectReference: {fileID: 7413920482512147655}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: initialVelocity
       value: 50
       objectReference: {fileID: 0}
@@ -771,6 +782,10 @@ PrefabInstance:
       propertyPath: aimingManager
       value: 
       objectReference: {fileID: 8341459511806100284}
+    - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+      propertyPath: boatRigidbody
+      value: 
+      objectReference: {fileID: 7413920482512147655}
     - target: {fileID: 3987928832720997027, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
       propertyPath: initialVelocity
       value: 50

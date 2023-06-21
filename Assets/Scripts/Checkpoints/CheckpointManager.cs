@@ -62,6 +62,7 @@ namespace Checkpoints
 
         public void Setup()
         {
+            Debug.Log("Setup checkpoint manager");
             // First time init
             if (checkpoints == null)
             {
@@ -88,8 +89,7 @@ namespace Checkpoints
                 progress.checkpointTime = new List<float>();
                 if(progress.playerUI) progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);
                 progress.newInputManagerInterface.checkpointManager = this;
-                
-                progress.player.GetComponent<NewBoatMovementManager>().frozen = false;
+                progress.newInputManagerInterface.newBoatMovementManager.frozen = false;
                 var aiInputManager = progress.player.GetComponent<NewAIInputManager>();
                 if (aiInputManager) aiInputManager.ResetPathing();
             }
@@ -97,10 +97,12 @@ namespace Checkpoints
 
         public void AddPlayer(GameObject player)
         {
+            var boat = player.transform.GetChild(2).gameObject;
             if(debug)Debug.Log("Add player : "+player); 
-            boats.Add(player);
+            boats.Add(boat);
             playerProgress.Add(new PlayerProgress(player));
 
+            if(debug)Debug.Log("playerProgressCount : "+playerProgress.Count+" ; config.PlayerAmount : "+config.PlayerAmount+" ; config.AIAmount : "+config.AIAmount);
             if (playerProgress.Count == (config.PlayerAmount + config.AIAmount)) 
             {
                 if (debug)
@@ -137,6 +139,7 @@ namespace Checkpoints
         public void CheckPointPassed(int checkpoint, GameObject player)
         {
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
+            Debug.Log(progress);
             if (progress.playerUI)
             {
                 race = progress.playerUI.RaceModeScript;
@@ -187,7 +190,7 @@ namespace Checkpoints
                 progress.lap++;
                 if (progress.lap > lapGoal)
                 {
-                    if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Bot)
+                    if (progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.AI)
                     {
                         progress.player.GetComponent<NewBoatMovementManager>().frozen = true; 
                         return;

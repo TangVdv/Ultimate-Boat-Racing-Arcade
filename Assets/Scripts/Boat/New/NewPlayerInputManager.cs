@@ -11,7 +11,6 @@ namespace Boat.New
     public class NewPlayerInputManager : NewInputManagerInterface
     {
         [SerializeField] private ConfigScript config;
-        [SerializeField] private MeshRenderer[] playerMesh;
         [SerializeField] private RaceModeScript raceModeScript;
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
@@ -27,13 +26,15 @@ namespace Boat.New
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
+            if (debug) Debug.Log("Initialize");
+            buildBoat.Initiate(
+                playerConfiguration.PlayerBoat, 
+                playerConfiguration.PlayerCannon,
+                playerConfiguration.PlayerBoatMaterial,
+                playerConfiguration.PlayerCannonMaterial);
             globalPlayerUI = playerUI;
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
-            foreach (MeshRenderer childMeshRenderer in playerMesh)
-            {
-                childMeshRenderer.material = playerConfiguration.PlayerMaterial;
-            }
             if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
             
             _logger = FindObjectOfType<Logger>();
@@ -86,7 +87,6 @@ namespace Boat.New
                 if (currentBulletTypeInt < 0) currentBulletTypeInt = BulletInventory.Count - 1;
 
                 currentBulletType = (BulletType) currentBulletTypeInt;
-                if(debug)Debug.Log("Current munition : " + currentBulletType);
                 playerUI.BulletSelection(currentBulletTypeInt);
             }
         }

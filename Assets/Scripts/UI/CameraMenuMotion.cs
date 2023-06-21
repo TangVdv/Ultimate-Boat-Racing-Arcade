@@ -5,53 +5,39 @@ using UnityEngine;
 
 public class CameraMenuMotion : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenuPoint;
-    [SerializeField] private GameObject boatMenuPoint;
-    [SerializeField] private GameObject settingsMenuPoint;
-    [SerializeField] private GameObject CircuitMenuPoint;
+    [SerializeField] private GameObject[] menuPoints;
 
-    private GameObject positions;
-    
+    private GameObject _positions;
+
     private void Awake()
     {
-        positions = mainMenuPoint;
+        _positions = menuPoints[0];
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         MoveToPosition();
     }
 
     private void MoveToPosition()
     {
-        if (positions)
+        if (_positions)
         {
-            if (transform.position != positions.transform.position ||
-                transform.rotation != positions.transform.rotation)
+            if (transform.position != _positions.transform.position ||
+                transform.rotation != _positions.transform.rotation)
             {
-                transform.position = Vector3.Lerp(transform.position, positions.transform.position, 1f * Time.deltaTime);
-                transform.rotation = Quaternion.Lerp(transform.rotation, positions.transform.rotation, 1f * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, _positions.transform.position, 1f * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, _positions.transform.rotation, 1f * Time.deltaTime);
+            }
+            else
+            {
+                _positions = null;
             }
         }
     }
 
     public void SwitchPositionCamera(int index)
     {
-        switch (index)
-        {
-            case 0:
-                positions = mainMenuPoint;
-                break;
-            case 1:
-                positions = boatMenuPoint;
-                break;
-            case 2:
-                positions = settingsMenuPoint;
-                break;
-            case 3:
-                positions = CircuitMenuPoint;
-                break;
-        }
+        _positions = menuPoints[index];
     }
 }

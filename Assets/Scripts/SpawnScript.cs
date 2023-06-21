@@ -52,8 +52,9 @@ public class SpawnScript : MonoBehaviour
             int i = 0;
             foreach (GameObject boat in _boats)
             {
-                boat.GetComponent<NewInputManagerInterface>().lastCheckpoint = transform;
-                boat.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                var boatManager = boat.GetComponent<NewInputManagerInterface>();
+                boatManager.lastCheckpoint = transform;
+                boatManager.rigidbody.velocity = Vector3.zero;
                 Vector3 pos = _start + i * distanceBetweenSpawn * transform.right;
                 if (_boats.Count == 1)
                 {

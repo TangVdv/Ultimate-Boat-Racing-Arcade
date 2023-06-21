@@ -23,7 +23,6 @@ public class PlayerConfigurationManager : MonoBehaviour
         else
         {
             Instance = this;
-            //DontDestroyOnLoad(Instance);
             _playerConfigs = new List<PlayerConfiguration>();
             _maxPlayers = config.PlayerAmount;
             if (_maxPlayers <= 0) _maxPlayers = 1;
@@ -55,14 +54,24 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerColor(int index, Material color)
+    public void SetPlayerBoatColor(int index, Material color)
     {
-        _playerConfigs[index].PlayerMaterial = color;
+        _playerConfigs[index].PlayerBoatMaterial = color;
+    }
+    
+    public void SetPlayerCannonColor(int index, Material color)
+    {
+        _playerConfigs[index].PlayerCannonMaterial = color;
     }
     
     public void SetPlayerBoat(int index, GameObject boat)
     {
         _playerConfigs[index].PlayerBoat = boat;
+    }
+
+    public void SetPlayerCannon(int index, GameObject cannon)
+    {
+        _playerConfigs[index].PlayerCannon = cannon;
     }
 
     public void SetPlayerName(int index, string playerName)
@@ -126,7 +135,11 @@ public class PlayerConfiguration
     
     public bool IsReady { get; set; } 
     
-    public Material PlayerMaterial { get; set; }
+    public Material PlayerBoatMaterial { get; set; }
+    
+    public Material PlayerCannonMaterial { get; set; }
     
     public GameObject PlayerBoat { get; set; }
+    
+    public GameObject PlayerCannon { get; set; }
 }
