@@ -436,7 +436,7 @@ MonoBehaviour:
   button: {fileID: 2084441365436127923}
   priceText: {fileID: 8670595839360263775}
   buyButton: {fileID: 1623082950968616143}
-  isLocked: 1
+  isLocked: 0
   prefabName: Test
   price: 10
 --- !u!1 &5363322407530741561

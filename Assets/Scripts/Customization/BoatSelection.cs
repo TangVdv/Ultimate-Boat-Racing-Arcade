@@ -13,6 +13,7 @@ public class BoatSelection : MonoBehaviour
     [SerializeField] private GameObject playerSetupPanel;
     [SerializeField] private PlayerSetupMenuController playerSetupMenuController;
     [SerializeField] private Button selectButton;
+    [SerializeField] private GameObject boatSetupMenu;
 
     private GameObject _currentPrefab;
     private GameObject _currentPrefabPreview;
@@ -78,9 +79,9 @@ public class BoatSelection : MonoBehaviour
         selectButton.enabled = true;
     }
     
-    public void SetColor(Image buttonImage)
+    public void SetColor(UnityEngine.Color buttonColor)
     {
-        color = buttonImage.color;
+        color = buttonColor;
     }
 
     public void Select()
@@ -88,7 +89,6 @@ public class BoatSelection : MonoBehaviour
         Material mat = CreateMaterial();
         playerSetupMenuController.SetPlayerPrefab(_currentIndex, _currentPrefab, mat);
         playerSetupMenuController.SetPreview(_currentIndex, _currentPrefabPreview, mat);
-        Back();
     }
 
     private Material CreateMaterial()
@@ -102,7 +102,7 @@ public class BoatSelection : MonoBehaviour
 
     public void Back()
     {
-        gameObject.SetActive(false);
+        boatSetupMenu.SetActive(false);
         playerSetupPanel.SetActive(true);
         selectButton.enabled = false;
     }

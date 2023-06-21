@@ -359,10 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab755531f9158fc4282def5465e06590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPoint: {fileID: 842969740}
-  boatMenuPoint: {fileID: 789474082}
-  settingsMenuPoint: {fileID: 1141850782}
-  CircuitMenuPoint: {fileID: 1148791373}
   menuPoints:
   - {fileID: 842969740}
   - {fileID: 789474082}
@@ -2497,7 +2493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904477804544509607, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5954798475521033139, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_RootOrder
@@ -2637,7 +2633,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7273081690775595455, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273081690775595455, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.845001
       objectReference: {fileID: 0}
     - target: {fileID: 7289185515575756178, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_RootOrder
@@ -2836,6 +2836,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7749383676099563346, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928754302312528185, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}

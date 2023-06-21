@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,6 +16,9 @@ public class DisplayPrefab : MonoBehaviour
     [SerializeField] private GameObject cannonPanel;
     [SerializeField] private GameObject buttonTemplate;
     [SerializeField] private BoatSelection boatSelection;
+    [SerializeField] private GameObject buttonColorTemplate;
+    [SerializeField] private GameObject colorPanel;
+    public float colorButtonScale = 70f;
 
     private string _layerName;
     private void Start()
@@ -40,6 +44,11 @@ public class DisplayPrefab : MonoBehaviour
             {
                 config.CannonTemplates = cannonsTemplate;
             }
+        }
+
+        if (config.Colors.Count > 0)
+        {
+            SetupColorPanel();
         }
     }
 
@@ -80,6 +89,23 @@ public class DisplayPrefab : MonoBehaviour
             if (boatSelection)
             {
                 UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(cannonsTemplate[index], cannon, 1); };
+
+                button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+            }
+        }
+    }
+
+    private void SetupColorPanel()
+    {
+        foreach (var color in config.Colors)
+        {
+            var button = Instantiate(buttonColorTemplate, colorPanel.transform);
+            RectTransform rectTransform = button.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
+            button.GetComponent<Image>().color = color;
+            if (boatSelection)
+            {
+                UnityAction buttonClickHandler = () => { boatSelection.SetColor(color); };
 
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }

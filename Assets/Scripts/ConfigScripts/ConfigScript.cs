@@ -10,7 +10,16 @@ public class ConfigScript : ScriptableObject
 
     public List<PlayerConfiguration> PlayerConfigurations { get; set; }
 
-    private List<Color> _colors = new List<Color>() { Color.red , Color.blue, Color.green, Color.black};
+    private List<Color> _colors = new List<Color>()
+    {
+        new Color(1f, .25f, .25f, 1f),
+        new Color(.25f, .5f, 1f, 1f),
+        new Color(.6f, .8f, .4f, 1f),
+        new Color(1f, 1f, .25f, 1f),
+        new Color(.25f, .14f, .18f, 1f),
+        new Color(.9f, .9f, .9f, 1f),
+        new Color(.13f, .13f, .13f, 1f)
+    };
 
     public List<Color> Colors => _colors;
     public GameObject[] BoatTemplates { get; set; }
