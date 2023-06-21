@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DisplayPrefab : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
+    [SerializeField] private ConfigAPI configAPI;
     [SerializeField] private GameObject[] boats;
     [SerializeField] private GameObject[] boatsTemplate;
     [SerializeField] private GameObject[] cannons;
@@ -21,8 +22,18 @@ public class DisplayPrefab : MonoBehaviour
     public float colorButtonScale = 70f;
 
     private string _layerName;
-    private void Start()
+    private async void Start()
     {
+        StartCoroutine(configAPI.GetDataTest(jsonData =>
+        {
+            Debug.Log(jsonData);
+        }));
+        
+        StartCoroutine(configAPI.GetSkins(jsonData =>
+        {
+            Debug.Log(jsonData);
+        }, "lul"));
+        
         if (boatSelection)
         {
             _layerName = boatSelection.LayerName;

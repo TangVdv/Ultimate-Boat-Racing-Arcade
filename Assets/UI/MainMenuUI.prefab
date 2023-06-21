@@ -3878,7 +3878,6 @@ GameObject:
   - component: {fileID: 4237581934577837170}
   - component: {fileID: 8220858293269991534}
   - component: {fileID: 3242674933442512084}
-  - component: {fileID: 3881916256165796581}
   m_Layer: 5
   m_Name: BoatSetupMenu
   m_TagString: Untagged
@@ -3932,6 +3931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  configAPI: {fileID: 11400000, guid: 9944e6e27af22b1418587f7eaba085ea, type: 2}
   boats:
   - {fileID: 713982562764439200, guid: ba43832a26eb528468a8fc50526e67d9, type: 3}
   boatsTemplate:
@@ -3946,18 +3946,7 @@ MonoBehaviour:
   boatSelection: {fileID: 0}
   buttonColorTemplate: {fileID: 1636254149212865087, guid: 1c3eace29d80c464ebd9119066981049, type: 3}
   colorPanel: {fileID: 7067937162614335190}
---- !u!114 &3881916256165796581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3184171157842708723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab0690f12f42b742b25344d3b28edf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  colorButtonScale: 70
 --- !u!1 &3317634729790918681
 GameObject:
   m_ObjectHideFlags: 0
@@ -12203,7 +12192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -28.845}
+  m_AnchoredPosition: {x: 0, y: -28.84497}
   m_SizeDelta: {x: 200, y: 57.690002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6128961954908297914
