@@ -2309,8 +2309,10 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   boats:
   - {fileID: 713982562764439200, guid: ba43832a26eb528468a8fc50526e67d9, type: 3}
+  - {fileID: 760773441553423983, guid: 77bf970b8c40efc4a91d4ba1998aa88e, type: 3}
   boatsTemplate:
   - {fileID: 1318464285736929688, guid: aa17196340870014fb9017a376c1158a, type: 3}
+  - {fileID: 760773441553423983, guid: 3e321f7093ecb844a9b6c4828f144f8e, type: 3}
   cannons:
   - {fileID: 4321847406320623286, guid: 87eee0c12ba0f1e41a9056a192ba8bea, type: 3}
   cannonsTemplate:
