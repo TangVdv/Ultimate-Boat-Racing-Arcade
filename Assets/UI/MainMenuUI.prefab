@@ -3931,19 +3931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d80ee06c3f4e3147ade31816855a7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  templatesDictionaryConfig: {fileID: 11400000, guid: 8939e367527d61b4ba217228b3289c66, type: 2}
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
-  boats:
-  - {fileID: 713982562764439200, guid: ba43832a26eb528468a8fc50526e67d9, type: 3}
-  - {fileID: 760773441553423983, guid: 77bf970b8c40efc4a91d4ba1998aa88e, type: 3}
-  boatsTemplate:
-  - {fileID: 1318464285736929688, guid: aa17196340870014fb9017a376c1158a, type: 3}
-  - {fileID: 760773441553423983, guid: 3e321f7093ecb844a9b6c4828f144f8e, type: 3}
-  cannons:
-  - {fileID: 4321847406320623286, guid: 87eee0c12ba0f1e41a9056a192ba8bea, type: 3}
-  - {fileID: 1814047473779402537, guid: 0f41700e7ee6d65419ecfdf916e2cdf9, type: 3}
-  cannonsTemplate:
-  - {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
-  - {fileID: 1814047473779402537, guid: 18a71778c1001f94293500c0a6e34eb9, type: 3}
   boatPanel: {fileID: 1413357485631916312}
   cannonPanel: {fileID: 2154381084585007905}
   buttonTemplate: {fileID: 5092216579711019605, guid: 0e5a610363593d84482e0a3cc6b3cc21, type: 3}

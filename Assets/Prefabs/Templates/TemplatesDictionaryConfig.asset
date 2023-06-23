@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4759ba0bba65ce54c8f36cffc1671648, type: 3}
+  m_Name: TemplatesDictionaryConfig
+  m_EditorClassIdentifier: 
+  boatPreview:
+  - {fileID: 713982562764439200, guid: ba43832a26eb528468a8fc50526e67d9, type: 3}
+  - {fileID: 760773441553423983, guid: 77bf970b8c40efc4a91d4ba1998aa88e, type: 3}
+  boatTemplate:
+  - {fileID: 1318464285736929688, guid: aa17196340870014fb9017a376c1158a, type: 3}
+  - {fileID: 760773441553423983, guid: 3e321f7093ecb844a9b6c4828f144f8e, type: 3}
+  cannonPreview:
+  - {fileID: 4321847406320623286, guid: 87eee0c12ba0f1e41a9056a192ba8bea, type: 3}
+  - {fileID: 1814047473779402537, guid: 0f41700e7ee6d65419ecfdf916e2cdf9, type: 3}
+  cannonTemplate:
+  - {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+  - {fileID: 1814047473779402537, guid: 18a71778c1001f94293500c0a6e34eb9, type: 3}

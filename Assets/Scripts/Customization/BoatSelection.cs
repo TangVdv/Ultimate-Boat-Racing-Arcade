@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class BoatSelection : MonoBehaviour
 {
+    [SerializeField] private TemplatesDictionary templatesDictionaryConfig;
     [SerializeField] private ConfigScript config;
     [SerializeField] private GameObject playerSetupPanel;
     [SerializeField] private PlayerSetupMenuController playerSetupMenuController;
@@ -22,38 +23,35 @@ public class BoatSelection : MonoBehaviour
     private string _layerName;
     public string LayerName => _layerName;
     
-    private GameObject[] _boats;
-    private GameObject[] _boatsTemplate;
-    private GameObject[] _cannons;
-    private GameObject[] _cannonsTemplate;
+    private List<GameObject> _boatPreview;
+    private List<GameObject> _boatTemplate;
+    private List<GameObject> _cannonPreview;
+    private List<GameObject> _cannonTemplate;
 
 
     private void Awake()
     {
+        _boatPreview = templatesDictionaryConfig.BoatPreview;
+        _boatTemplate = templatesDictionaryConfig.BoatTemplate;
+        _cannonPreview = templatesDictionaryConfig.CannonPreview;
+        _cannonTemplate = templatesDictionaryConfig.CannonTemplate;
+        
         _layerName = playerSetupMenuController.LayerName;
         selectButton.enabled = false;
-    }
-
-    public void SetTemplates(GameObject[] boats, GameObject[] boatsTemplate, GameObject[] cannons, GameObject[] cannonsTemplate)
-    {
-        _boats = boats;
-        _boatsTemplate = boatsTemplate;
-        _cannons = cannons;
-        _cannonsTemplate = cannonsTemplate;
     }
 
     public void RandomPrefab()
     {   
         //Random boat
-        int randomIndex = Random.Range(0, _boats.Length);
-        SetPrefab(_boatsTemplate[randomIndex], _boats[randomIndex], 0);
+        int randomIndex = Random.Range(0, _boatPreview.Count);
+        SetPrefab(_boatTemplate[randomIndex], _boatPreview[randomIndex], 0);
         randomIndex = Random.Range(0, config.Colors.Count);
         color = config.Colors[randomIndex];
         Select();
         
         //Random cannon
-        randomIndex = Random.Range(0, _cannons.Length);
-        SetPrefab(_cannonsTemplate[randomIndex], _cannons[randomIndex], 1);
+        randomIndex = Random.Range(0, _cannonPreview.Count);
+        SetPrefab(_cannonTemplate[randomIndex], _cannonPreview[randomIndex], 1);
         randomIndex = Random.Range(0, config.Colors.Count);
         color = config.Colors[randomIndex];
         Select();

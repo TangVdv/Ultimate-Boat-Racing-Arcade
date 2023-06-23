@@ -22,9 +22,9 @@ public class ConfigScript : ScriptableObject
     };
 
     public List<Color> Colors => _colors;
-    public GameObject[] BoatTemplates { get; set; }
+    public List<GameObject> BoatTemplate { get; set; }
     
-    public GameObject[] CannonTemplates { get; set; }
+    public List<GameObject> CannonTemplate { get; set; }
     public List<float>[] CheckpointTimes { get; set; } = new List<float>[5];
 
     public int Level { get; set; }

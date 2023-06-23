@@ -7,11 +7,8 @@ using UnityEngine.UI;
 
 public class DisplayPrefab : MonoBehaviour
 {
+    [SerializeField] private TemplatesDictionary templatesDictionaryConfig;
     [SerializeField] private ConfigScript config;
-    [SerializeField] private GameObject[] boats;
-    [SerializeField] private GameObject[] boatsTemplate;
-    [SerializeField] private GameObject[] cannons;
-    [SerializeField] private GameObject[] cannonsTemplate;
     [SerializeField] private GameObject boatPanel;
     [SerializeField] private GameObject cannonPanel;
     [SerializeField] private GameObject buttonTemplate;
@@ -21,28 +18,37 @@ public class DisplayPrefab : MonoBehaviour
     public float colorButtonScale = 70f;
 
     private string _layerName;
+    private List<GameObject> _boatPreview;
+    private List<GameObject> _boatTemplate;
+    private List<GameObject> _cannonPreview;
+    private List<GameObject> _cannonTemplate;
+    
     private void Start()
     {
+        _boatPreview = templatesDictionaryConfig.BoatPreview;
+        _boatTemplate = templatesDictionaryConfig.BoatTemplate;
+        _cannonPreview = templatesDictionaryConfig.CannonPreview;
+        _cannonTemplate = templatesDictionaryConfig.CannonTemplate;
+
         if (boatSelection)
         {
             _layerName = boatSelection.LayerName;
-            boatSelection.SetTemplates(boats, boatsTemplate, cannons, cannonsTemplate);
         }
-        if (boats.Length > 0)
+        if (_boatPreview.Count > 0)
         {
             SetupBoatMenu();
-            if (config.BoatTemplates.Length == 0)
+            if (config.BoatTemplate.Count == 0)
             {
-                config.BoatTemplates = boatsTemplate;
+                config.BoatTemplate = _boatTemplate;
             }
         }
 
-        if (cannons.Length > 0)
+        if (_cannonPreview.Count > 0)
         {
             SetupCannonMenu();
-            if (config.CannonTemplates.Length == 0)
+            if (config.CannonTemplate.Count == 0)
             {
-                config.CannonTemplates = cannonsTemplate;
+                config.CannonTemplate = _cannonTemplate;
             }
         }
 
@@ -54,17 +60,17 @@ public class DisplayPrefab : MonoBehaviour
 
     private void SetupBoatMenu()
     {
-        foreach (GameObject boat in boats)
+        foreach (GameObject boat in _boatPreview)
         {
             var button = Instantiate(buttonTemplate, boatPanel.transform);
             button.transform.GetChild(0).GetComponent<Text>().text = boat.name;
             var prefab = Instantiate(boat, button.transform.GetChild(1).transform);
             if(_layerName != "") prefab.layer = LayerMask.NameToLayer(_layerName);
             prefab.transform.position = button.transform.GetChild(1).transform.position;
-            int index = System.Array.IndexOf(boats, boat);
+            int index = _boatPreview.FindIndex(b => b.Equals(boat));
             if (boatSelection)
             {
-                UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(boatsTemplate[index], boat, 0); };
+                UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(_boatTemplate[index], boat, 0); };
 
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }
@@ -73,7 +79,7 @@ public class DisplayPrefab : MonoBehaviour
     
     private void SetupCannonMenu()
     {
-        foreach (GameObject cannon in cannons)
+        foreach (GameObject cannon in _cannonPreview)
         {
             var button = Instantiate(buttonTemplate, cannonPanel.transform);
             button.transform.GetChild(0).GetComponent<Text>().text = cannon.name;
@@ -85,10 +91,10 @@ public class DisplayPrefab : MonoBehaviour
             }
 
             prefab.transform.position = button.transform.GetChild(1).transform.position;
-            int index = System.Array.IndexOf(cannons, cannon);
+            int index = _cannonPreview.FindIndex(b => b.Equals(cannon));
             if (boatSelection)
             {
-                UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(cannonsTemplate[index], cannon, 1); };
+                UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(_cannonTemplate[index], cannon, 1); };
 
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }
