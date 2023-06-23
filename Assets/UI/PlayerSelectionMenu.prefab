@@ -2315,8 +2315,10 @@ MonoBehaviour:
   - {fileID: 760773441553423983, guid: 3e321f7093ecb844a9b6c4828f144f8e, type: 3}
   cannons:
   - {fileID: 4321847406320623286, guid: 87eee0c12ba0f1e41a9056a192ba8bea, type: 3}
+  - {fileID: 1814047473779402537, guid: 0f41700e7ee6d65419ecfdf916e2cdf9, type: 3}
   cannonsTemplate:
   - {fileID: 4321847406320623286, guid: 067fb90c296ee8a48a108de4bc1de699, type: 3}
+  - {fileID: 1814047473779402537, guid: 18a71778c1001f94293500c0a6e34eb9, type: 3}
   boatPanel: {fileID: 2471841196828290588}
   cannonPanel: {fileID: 117180432103187944}
   buttonTemplate: {fileID: 5092216579711019605, guid: 0e5a610363593d84482e0a3cc6b3cc21, type: 3}
