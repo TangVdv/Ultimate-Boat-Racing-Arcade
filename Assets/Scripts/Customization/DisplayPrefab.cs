@@ -22,18 +22,8 @@ public class DisplayPrefab : MonoBehaviour
     public float colorButtonScale = 70f;
 
     private string _layerName;
-    private async void Start()
+    private void Start()
     {
-        StartCoroutine(configAPI.GetDataTest(jsonData =>
-        {
-            Debug.Log(jsonData);
-        }));
-        
-        StartCoroutine(configAPI.GetSkins(jsonData =>
-        {
-            Debug.Log(jsonData);
-        }, "lul"));
-        
         if (boatSelection)
         {
             _layerName = boatSelection.LayerName;
