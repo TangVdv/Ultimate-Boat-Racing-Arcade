@@ -12,6 +12,7 @@ namespace Checkpoints
         public GameObject core;
 
         public int ID;
+        public bool isAlternative = false;
 
         private void OnTriggerEnter(Collider other)
         {
