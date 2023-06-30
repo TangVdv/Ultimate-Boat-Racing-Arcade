@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEditor.PackageManager;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Windows.Speech;
@@ -17,10 +18,13 @@ public class ConfigAPI : ScriptableObject
     
     public UserData UserData => _userData;
     public SkinsArray SkinsArray => _skinsArray;
+    
     public string IdCode
     {
         set => _idCode = value;
     }
+
+    public string GetApiUrl => APIUrl;
 
     public void ClearData()
     {
@@ -122,7 +126,9 @@ public class SkinsArray
 public class SkinData
 {
     public int id;
-    public string name;
     public int id_boat;
+    public string name;
+    public string identifier;
     public string boat_name;
+    public string boat_identifier;
 }

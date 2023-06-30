@@ -15,6 +15,7 @@ public class BoatConfigurationParameters : MonoBehaviour
     [SerializeField] private int rotationSpeed;
     [SerializeField] private Transform[] cannonPosition;
     [SerializeField] private NewFloatersManager newFloatersManager;
+    [SerializeField] private string identifier;
 
     public int Mass => mass;
     public float Drag => drag;
@@ -26,5 +27,6 @@ public class BoatConfigurationParameters : MonoBehaviour
     public int RotationSpeed => rotationSpeed;
     public Transform[] CannonPos => cannonPosition;
     public NewFloatersManager NewFloatersManager => newFloatersManager;
+    public string Identifier => identifier;
 
 }

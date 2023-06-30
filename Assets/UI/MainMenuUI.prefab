@@ -2976,7 +2976,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: -1919.9999, y: 340}
+  m_SizeDelta: {x: 0, y: 340}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8393929104596852626
 MonoBehaviour:
@@ -3693,7 +3693,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: -1920.0001, y: 340}
+  m_SizeDelta: {x: 0, y: 340}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &555050866062858730
 MonoBehaviour:
@@ -4445,7 +4445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4237581934577837170
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4505,7 +4505,8 @@ MonoBehaviour:
   cannonPanel: {fileID: 2154381084585007905}
   buttonTemplate: {fileID: 5092216579711019605, guid: 0e5a610363593d84482e0a3cc6b3cc21, type: 3}
   boatSelection: {fileID: 0}
-  buttonColorTemplate: {fileID: 1636254149212865087, guid: 1c3eace29d80c464ebd9119066981049, type: 3}
+  buttonColorLockedTemplate: {fileID: 1636254149212865087, guid: c09d352d5a65cfe4788dc53f38a901c9, type: 3}
+  buttonColorUnlockedTemplate: {fileID: 1636254149212865087, guid: 1c3eace29d80c464ebd9119066981049, type: 3}
   colorPanel: {fileID: 7067937162614335190}
   colorButtonScale: 70
 --- !u!1 &3186491393652821484
@@ -11031,7 +11032,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.000091553, y: 42}
-  m_SizeDelta: {x: 10, y: 83.94}
+  m_SizeDelta: {x: 0, y: 83.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2769897717865491202
 CanvasRenderer:
@@ -11383,6 +11384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configAPI: {fileID: 11400000, guid: 9944e6e27af22b1418587f7eaba085ea, type: 2}
+  config: {fileID: 0}
   codeInput: {fileID: 3157941514997364185}
   playerPanel: {fileID: 5060829269372721500}
   loginPanel: {fileID: 864311259362473980}
@@ -12039,7 +12041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7543907391784553828
 RectTransform:
   m_ObjectHideFlags: 0

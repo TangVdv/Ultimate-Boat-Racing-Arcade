@@ -17,7 +17,8 @@ public class DisplayPrefab : MonoBehaviour
     [SerializeField] private GameObject cannonPanel;
     [SerializeField] private GameObject buttonTemplate;
     [SerializeField] private BoatSelection boatSelection;
-    [SerializeField] private GameObject buttonColorTemplate;
+    [SerializeField] private GameObject buttonColorLockedTemplate;
+    [SerializeField] private GameObject buttonColorUnlockedTemplate;
     [SerializeField] private GameObject colorPanel;
     public float colorButtonScale = 70f;
 
@@ -46,11 +47,6 @@ public class DisplayPrefab : MonoBehaviour
                 config.CannonTemplates = cannonsTemplate;
             }
         }
-
-        if (config.Colors.Count > 0)
-        {
-            SetupColorPanel();
-        }
     }
 
     private void SetupBoatMenu()
@@ -65,10 +61,13 @@ public class DisplayPrefab : MonoBehaviour
             int index = System.Array.IndexOf(boats, boat);
             if (boatSelection)
             {
-                UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(boatsTemplate[index], boat, 0); };
-
-                button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                UnityAction setPrefabHandler = () => { boatSelection.SetPrefab(boatsTemplate[index], boat, 0); };
+                button.GetComponent<Button>().onClick.AddListener(setPrefabHandler);
             }
+            
+            BoatConfigurationParameters boatConfigurationParameters = boatsTemplate[index].GetComponent<BoatConfigurationParameters>();
+            UnityAction setColorHandler = () => { SetupColorPanel(boatConfigurationParameters.Identifier); };
+            button.GetComponent<Button>().onClick.AddListener(setColorHandler);
         }
     }
     
@@ -93,23 +92,69 @@ public class DisplayPrefab : MonoBehaviour
 
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }
+            
+            CannonConfigurationParameters cannonConfigurationParameters = cannonsTemplate[index].GetComponent<CannonConfigurationParameters>();
+            UnityAction setColorHandler = () => { SetupColorPanel(cannonConfigurationParameters.Identifier); };
+            button.GetComponent<Button>().onClick.AddListener(setColorHandler);
         }
     }
 
-    private void SetupColorPanel()
+    private void ClearColorPanel()
     {
-        foreach (var color in config.Colors)
+        foreach (Transform child in colorPanel.transform)
         {
-            var button = Instantiate(buttonColorTemplate, colorPanel.transform);
-            RectTransform rectTransform = button.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
-            button.GetComponent<Image>().color = color;
-            if (boatSelection)
-            {
-                UnityAction buttonClickHandler = () => { boatSelection.SetColor(color); };
+            Destroy(child.gameObject);
+        }
+    }
 
-                button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+    private void SetupColorPanel(string identifier)
+    {
+        ClearColorPanel();
+        if (string.IsNullOrEmpty(identifier)) return;
+        foreach (KeyValuePair<string, Color> color in config.ColorsByIdentifier)
+        {
+            GameObject templateColor;
+            UnityAction buttonClickHandler = null;
+            
+            if (config.ColorIdentifierByBoat.ContainsKey(color.Key))
+            {
+                if (config.ColorIdentifierByBoat[color.Key] == identifier)
+                {
+                    //Unlocked button
+                    templateColor = buttonColorUnlockedTemplate; 
+                    if(boatSelection) buttonClickHandler = () => { boatSelection.SetColor(color.Value); };
+                }
+                else
+                {
+                    //Locked button
+                    templateColor = buttonColorLockedTemplate;
+                    buttonClickHandler = ShopRedirectHandler;
+                }
+            }
+            else
+            {
+                //Locked button
+                templateColor = buttonColorLockedTemplate;
+                buttonClickHandler = ShopRedirectHandler;
+            }
+            var template =  Instantiate(templateColor, colorPanel.transform);
+            var button = template.transform.GetChild(0);
+            RectTransform rectTransform = button.GetComponent<RectTransform>();
+            Debug.Log(colorButtonScale);
+            rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
+            button.GetComponent<Image>().color = color.Value;
+            if (button.GetComponent<Button>() != null)
+            {
+                if (buttonClickHandler != null)
+                {
+                    button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                }
             }
         }
+    }
+
+    private void ShopRedirectHandler()
+    {
+        Application.OpenURL(configAPI.GetApiUrl+"/shop");
     }
 }

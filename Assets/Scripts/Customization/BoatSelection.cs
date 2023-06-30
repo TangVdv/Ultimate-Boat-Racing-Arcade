@@ -97,6 +97,7 @@ public class BoatSelection : MonoBehaviour
         {
             color = color
         };
+        color = UnityEngine.Color.clear;
         return newMaterial;
     }
 

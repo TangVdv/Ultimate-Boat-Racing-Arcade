@@ -9,7 +9,20 @@ public class ConfigScript : ScriptableObject
     public List<string> BestTimePlayerName { get; set; } = new List<string>(5);
 
     public List<PlayerConfiguration> PlayerConfigurations { get; set; }
+    
+    //Dictionary<color_identifier, color>
+    private Dictionary<string, Color> _colorsByIdentifier = new Dictionary<string, Color>()
+    {
+        { "fqisjb51n4", new Color(1f, .25f, .25f, 1f) },
+        { "dsgjoh231c", new Color(.25f, .5f, 1f, 1f) }
+    };
 
+    public Dictionary<string, Color> ColorsByIdentifier => _colorsByIdentifier;
+
+    //Dictionary<color_identifier, boat_identifier>
+    public Dictionary<string, string> ColorIdentifierByBoat { get; set; }
+
+    
     private List<Color> _colors = new List<Color>()
     {
         new Color(1f, .25f, .25f, 1f),

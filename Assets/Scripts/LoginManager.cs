@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LoginManager : MonoBehaviour
 {
     [SerializeField] private ConfigAPI configAPI;
+    [SerializeField] private ConfigScript config; 
     [SerializeField] private InputField codeInput;
     [SerializeField] private GameObject playerPanel;
     [SerializeField] private GameObject loginPanel;
@@ -38,7 +39,19 @@ public class LoginManager : MonoBehaviour
                 playerNameText.text = configAPI.UserData.username;
                 playerPanel.SetActive(true);
                 loginPanel.SetActive(false);
+
+                StartCoroutine(SetColorsByBoatId());
             }   
+        }
+    }
+
+    private IEnumerator SetColorsByBoatId()
+    {
+        yield return StartCoroutine(configAPI.GetAuth("skins"));
+        config.ColorIdentifierByBoat = new Dictionary<string, string>();
+        foreach (var skin in configAPI.SkinsArray.skins)
+        {
+            config.ColorIdentifierByBoat[skin.identifier] = skin.boat_identifier;
         }
     }
 
