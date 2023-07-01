@@ -39,6 +39,7 @@ namespace Checkpoints
         }
     
         private Checkpoint[] checkpoints;
+        private Dictionary<int, List<Checkpoint>> alternativeCheckpoints;
     
         public int grace = 3;
         public int lapGoal = 1;
@@ -66,11 +67,27 @@ namespace Checkpoints
             // First time init
             if (checkpoints == null)
             {
-                checkpoints = new Checkpoint[transform.childCount]; 
+                int regularCount = 0;
                 foreach (Transform child in transform)
                 {
                     Checkpoint checkpoint = child.GetComponent<Checkpoint>();
-                    checkpoints[checkpoint.ID] = checkpoint;
+                    if (!checkpoint.isAlternative) regularCount++;
+                }
+                
+                checkpoints = new Checkpoint[regularCount]; 
+                alternativeCheckpoints = new Dictionary<int, List<Checkpoint>>();
+                foreach (Transform child in transform)
+                {
+                    Checkpoint checkpoint = child.GetComponent<Checkpoint>();
+                    if(checkpoint.ID != -1) checkpoints[checkpoint.ID] = checkpoint;
+                    else
+                    {
+                        //If the list doesn't exist, create it
+                        if (!alternativeCheckpoints.ContainsKey(checkpoint.ID)) 
+                            alternativeCheckpoints.Add(checkpoint.ID, new List<Checkpoint>());
+                        
+                        alternativeCheckpoints[checkpoint.ID].Add(checkpoint);
+                    }
                     checkpoint.SetCheckpointManager(this);
                 }
             }
@@ -117,7 +134,7 @@ namespace Checkpoints
             }
         }
 
-        //Deprecated
+        // This function is Deprecated, only used by old AI
         public Vector3 GetNextCheckpointCoordinates(GameObject player){
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
             int index = progress.checkpoint + 1;
@@ -127,8 +144,23 @@ namespace Checkpoints
         
         public Collider GetNextCheckpointCollider(GameObject player, int i = 1){
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
-            if(lapGoal == progress.lap && progress.checkpoint+i >= checkpoints.Length) return checkpoints[0].core.GetComponent<Collider>();
-            int index = (progress.checkpoint + i) % checkpoints.Length;
+            int index;
+            
+            if(lapGoal == progress.lap && progress.checkpoint+i >= checkpoints.Length) index = 0;
+            else index = (progress.checkpoint + i) % checkpoints.Length;
+            
+            //Roll a dice to see if we take the alternative checkpoint if it exists
+            if (alternativeCheckpoints.ContainsKey(index) && UnityEngine.Random.Range(1, 5) <= i)
+            {
+                //Get the list of alternative checkpoints and its size
+                List<Checkpoint> alternativeCheckpointList = alternativeCheckpoints[index];
+                int alternativeCheckpointListSize = alternativeCheckpointList.Count;
+                
+                //Get a random index in the list
+                int randomIndex = UnityEngine.Random.Range(0, alternativeCheckpointListSize);
+                
+                return alternativeCheckpointList[randomIndex].core.GetComponent<Collider>();
+            }
             return checkpoints[index].core.GetComponent<Collider>();
         }
 
