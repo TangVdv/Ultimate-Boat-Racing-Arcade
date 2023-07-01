@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 1421162989906688412}
   - component: {fileID: 2054422668159704027}
   - component: {fileID: 3987928832720997027}
+  - component: {fileID: 5535314184100903769}
   m_Layer: 31
   m_Name: Cannon_1_Template
   m_TagString: Untagged
@@ -315,6 +316,19 @@ MonoBehaviour:
   boatRigidbody: {fileID: 0}
   initialVelocity: 20
   aimingManager: {fileID: 0}
+--- !u!114 &5535314184100903769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4321847406320623286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175ac03186e44914583d1fce33970fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: qsfqslk1341
 --- !u!1 &4604345901257659354
 GameObject:
   m_ObjectHideFlags: 0

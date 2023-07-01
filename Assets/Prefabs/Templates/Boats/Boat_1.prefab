@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  toggleRotator: 0
   rotation: {x: 0, y: 0, z: 1}
 --- !u!114 &388532695801524617
 MonoBehaviour:
@@ -237,3 +236,4 @@ MonoBehaviour:
   - {fileID: 8021801908572487529}
   - {fileID: 7690225819183610282}
   - {fileID: 1337811916297945992}
+  identifier: dt24Jdnc

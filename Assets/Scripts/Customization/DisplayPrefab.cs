@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DisplayPrefab : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
+    [SerializeField] private ConfigAPI configAPI;
     [SerializeField] private GameObject[] boats;
     [SerializeField] private GameObject[] boatsTemplate;
     [SerializeField] private GameObject[] cannons;
@@ -16,11 +17,13 @@ public class DisplayPrefab : MonoBehaviour
     [SerializeField] private GameObject cannonPanel;
     [SerializeField] private GameObject buttonTemplate;
     [SerializeField] private BoatSelection boatSelection;
-    [SerializeField] private GameObject buttonColorTemplate;
+    [SerializeField] private GameObject buttonColorLockedTemplate;
+    [SerializeField] private GameObject buttonColorUnlockedTemplate;
     [SerializeField] private GameObject colorPanel;
     public float colorButtonScale = 70f;
 
     private string _layerName;
+    private string _identifier;
     private void Start()
     {
         if (boatSelection)
@@ -45,11 +48,6 @@ public class DisplayPrefab : MonoBehaviour
                 config.CannonTemplates = cannonsTemplate;
             }
         }
-
-        if (config.Colors.Count > 0)
-        {
-            SetupColorPanel();
-        }
     }
 
     private void SetupBoatMenu()
@@ -64,10 +62,13 @@ public class DisplayPrefab : MonoBehaviour
             int index = System.Array.IndexOf(boats, boat);
             if (boatSelection)
             {
-                UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(boatsTemplate[index], boat, 0); };
-
-                button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                UnityAction setPrefabHandler = () => { boatSelection.SetPrefab(boatsTemplate[index], boat, 0); };
+                button.GetComponent<Button>().onClick.AddListener(setPrefabHandler);
             }
+            
+            BoatConfigurationParameters boatConfigurationParameters = boatsTemplate[index].GetComponent<BoatConfigurationParameters>();
+            UnityAction setColorHandler = () => { SetupColorPanel(boatConfigurationParameters.Identifier); };
+            button.GetComponent<Button>().onClick.AddListener(setColorHandler);
         }
     }
     
@@ -92,23 +93,102 @@ public class DisplayPrefab : MonoBehaviour
 
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }
+            
+            CannonConfigurationParameters cannonConfigurationParameters = cannonsTemplate[index].GetComponent<CannonConfigurationParameters>();
+            UnityAction setColorHandler = () => { SetupColorPanel(cannonConfigurationParameters.Identifier); };
+            button.GetComponent<Button>().onClick.AddListener(setColorHandler);
         }
     }
 
-    private void SetupColorPanel()
+    private void ClearColorPanel()
     {
-        foreach (var color in config.Colors)
+        foreach (Transform child in colorPanel.transform)
         {
-            var button = Instantiate(buttonColorTemplate, colorPanel.transform);
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void SetupColorPanel(string identifier)
+    {
+        ClearColorPanel();
+        if (string.IsNullOrEmpty(identifier)) return;
+        _identifier = identifier;
+        
+        // Create default color buttons
+        foreach (Color color in config.DefaultColors)
+        {
+            var template =  Instantiate(buttonColorUnlockedTemplate, colorPanel.transform);
+            var button = template.transform.GetChild(0);
             RectTransform rectTransform = button.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
             button.GetComponent<Image>().color = color;
-            if (boatSelection)
+            if (button.GetComponent<Button>() != null)
             {
-                UnityAction buttonClickHandler = () => { boatSelection.SetColor(color); };
-
-                button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                if(boatSelection)
+                {
+                    UnityAction buttonClickHandler = () => { boatSelection.SetColor(color); };
+                    button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                }
             }
         }
+
+        if (configAPI.IsConnected == false) return;
+        
+        // Create other color buttons
+        foreach (KeyValuePair<string, Color> color in config.ColorsByIdentifier)
+        {
+            GameObject templateColor;
+            UnityAction buttonClickHandler = null;
+
+            if (config.ColorIdentifierByBoat.ContainsKey(color.Key))
+            {
+                if (config.ColorIdentifierByBoat[color.Key] == identifier)
+                {
+                    //Unlocked button
+                    templateColor = buttonColorUnlockedTemplate; 
+                    if(boatSelection) buttonClickHandler = () => { boatSelection.SetColor(color.Value); };
+                }
+                else
+                {
+                    //Locked button
+                    templateColor = buttonColorLockedTemplate;
+                }
+            }
+            else
+            {
+                //Locked button
+                templateColor = buttonColorLockedTemplate;
+            }
+            var template =  Instantiate(templateColor, colorPanel.transform);
+            var button = template.transform.GetChild(0);
+            RectTransform rectTransform = button.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
+            button.GetComponent<Image>().color = color.Value;
+            if (button.GetComponent<Button>() != null)
+            {
+                if (buttonClickHandler != null)
+                {
+                    button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                }
+            }
+        }
+    }
+
+    public void ShopRedirection()
+    {
+        Application.OpenURL(configAPI.GetApiUrl+"/shop");
+    }
+
+    public void RefreshColorPanel()
+    {
+        if (!string.IsNullOrEmpty(_identifier))
+        {
+            SetupColorPanel(_identifier);
+        }
+    }
+
+    public void BackButton()
+    {
+        ClearColorPanel();
     }
 }

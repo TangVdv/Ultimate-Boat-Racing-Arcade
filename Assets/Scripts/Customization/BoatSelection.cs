@@ -47,15 +47,15 @@ public class BoatSelection : MonoBehaviour
         //Random boat
         int randomIndex = Random.Range(0, _boats.Length);
         SetPrefab(_boatsTemplate[randomIndex], _boats[randomIndex], 0);
-        randomIndex = Random.Range(0, config.Colors.Count);
-        color = config.Colors[randomIndex];
+        randomIndex = Random.Range(0, config.DefaultColors.Count);
+        color = config.DefaultColors[randomIndex];
         Select();
         
         //Random cannon
         randomIndex = Random.Range(0, _cannons.Length);
         SetPrefab(_cannonsTemplate[randomIndex], _cannons[randomIndex], 1);
-        randomIndex = Random.Range(0, config.Colors.Count);
-        color = config.Colors[randomIndex];
+        randomIndex = Random.Range(0, config.DefaultColors.Count);
+        color = config.DefaultColors[randomIndex];
         Select();
     }
 
@@ -97,6 +97,7 @@ public class BoatSelection : MonoBehaviour
         {
             color = color
         };
+        color = UnityEngine.Color.clear;
         return newMaterial;
     }
 

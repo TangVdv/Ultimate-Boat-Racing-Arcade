@@ -78,7 +78,7 @@ public class SetupLevelScript : MonoBehaviour
     {
         var boats = config.BoatTemplates;
         var cannons = config.CannonTemplates;
-        var colors = config.Colors;
+        var colors = config.DefaultColors;
         // Create AI
         for (int i = 0; i < config.AIAmount; i++)
         {

@@ -168,6 +168,7 @@ MonoBehaviour:
   - {fileID: 4818406820595359415}
   - {fileID: 4561998355619366790}
   newFloatersManager: {fileID: 3525095021420174061}
+  identifier: dt24Jdnc
 --- !u!1 &1989573075104212860
 GameObject:
   m_ObjectHideFlags: 0
