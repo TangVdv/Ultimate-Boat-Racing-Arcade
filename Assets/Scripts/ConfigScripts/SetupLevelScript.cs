@@ -94,8 +94,8 @@ public class SetupLevelScript : MonoBehaviour
                 i,
                 boatMat,
                 cannonMat,
-                boats[Random.Range(0, boats.Length)],
-                cannons[Random.Range(0, cannons.Length)]
+                boats[Random.Range(0, boats.Count)],
+                cannons[Random.Range(0, cannons.Count)]
             );
         }
         

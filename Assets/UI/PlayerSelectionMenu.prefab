@@ -2289,6 +2289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fce17ff443151c438b274bdd7f3da95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  templatesDictionaryConfig: {fileID: 11400000, guid: 8939e367527d61b4ba217228b3289c66, type: 2}
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   playerSetupPanel: {fileID: 2230208377578286300}
   playerSetupMenuController: {fileID: 5898828616544038494}
@@ -2306,6 +2307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d80ee06c3f4e3147ade31816855a7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  templatesDictionaryConfig: {fileID: 11400000, guid: 8939e367527d61b4ba217228b3289c66, type: 2}
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   configAPI: {fileID: 11400000, guid: 9944e6e27af22b1418587f7eaba085ea, type: 2}
   boats:
