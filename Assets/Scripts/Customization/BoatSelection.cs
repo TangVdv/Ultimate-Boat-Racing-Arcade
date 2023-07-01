@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -43,15 +44,15 @@ public class BoatSelection : MonoBehaviour
     public void RandomPrefab()
     {   
         //Random boat
-        int randomIndex = Random.Range(0, _boats.Length);
-        SetPrefab(_boatsTemplate[randomIndex], _boats[randomIndex], 0);
+        int randomIndex = Random.Range(0, _boatPreview.Count);
+        SetPrefab(_boatTemplate[randomIndex], _boatPreview[randomIndex], 0);
         randomIndex = Random.Range(0, config.DefaultColors.Count);
         color = config.DefaultColors[randomIndex];
         Select();
         
         //Random cannon
-        randomIndex = Random.Range(0, _cannons.Length);
-        SetPrefab(_cannonsTemplate[randomIndex], _cannons[randomIndex], 1);
+        randomIndex = Random.Range(0, _cannonPreview.Count());
+        SetPrefab(_cannonTemplate[randomIndex], _cannonPreview[randomIndex], 1);
         randomIndex = Random.Range(0, config.DefaultColors.Count);
         color = config.DefaultColors[randomIndex];
         Select();

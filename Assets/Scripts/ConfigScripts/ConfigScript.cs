@@ -34,7 +34,7 @@ public class ConfigScript : ScriptableObject
     //Dictionary<color_identifier, boat_identifier>
     public Dictionary<string, string> ColorIdentifierByBoat { get; set; }
     
-    public GameObject[] BoatTemplates { get; set; }
+    public List<GameObject> BoatTemplates { get; set; }
     
     public List<GameObject> CannonTemplate { get; set; }
     public List<float>[] CheckpointTimes { get; set; } = new List<float>[5];

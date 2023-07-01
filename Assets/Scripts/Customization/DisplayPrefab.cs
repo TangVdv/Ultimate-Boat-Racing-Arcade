@@ -40,9 +40,9 @@ public class DisplayPrefab : MonoBehaviour
         if (_boatPreview.Count > 0)
         {
             SetupBoatMenu();
-            if (config.BoatTemplate.Count == 0)
+            if (config.BoatTemplates.Count == 0)
             {
-                config.BoatTemplate = _boatTemplate;
+                config.BoatTemplates = _boatTemplate;
             }
         }
 
@@ -71,11 +71,11 @@ public class DisplayPrefab : MonoBehaviour
                 UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(_boatTemplate[index], boat, 0); };
 
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
-                UnityAction setPrefabHandler = () => { boatSelection.SetPrefab(boatsTemplate[index], boat, 0); };
+                UnityAction setPrefabHandler = () => { boatSelection.SetPrefab(_boatTemplate[index], boat, 0); };
                 button.GetComponent<Button>().onClick.AddListener(setPrefabHandler);
             }
             
-            BoatConfigurationParameters boatConfigurationParameters = boatsTemplate[index].GetComponent<BoatConfigurationParameters>();
+            BoatConfigurationParameters boatConfigurationParameters = _boatTemplate[index].GetComponent<BoatConfigurationParameters>();
             UnityAction setColorHandler = () => { SetupColorPanel(boatConfigurationParameters.Identifier); };
             button.GetComponent<Button>().onClick.AddListener(setColorHandler);
         }
@@ -103,7 +103,7 @@ public class DisplayPrefab : MonoBehaviour
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }
             
-            CannonConfigurationParameters cannonConfigurationParameters = cannonsTemplate[index].GetComponent<CannonConfigurationParameters>();
+            CannonConfigurationParameters cannonConfigurationParameters = _cannonTemplate[index].GetComponent<CannonConfigurationParameters>();
             UnityAction setColorHandler = () => { SetupColorPanel(cannonConfigurationParameters.Identifier); };
             button.GetComponent<Button>().onClick.AddListener(setColorHandler);
         }

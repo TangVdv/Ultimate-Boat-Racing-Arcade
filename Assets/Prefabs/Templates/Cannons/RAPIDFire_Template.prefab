@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7864399915246209273}
   - component: {fileID: 3248094701140941442}
   - component: {fileID: 6028334630500718194}
+  - component: {fileID: -5485651708953188960}
   m_Layer: 0
   m_Name: RAPIDFire_Template
   m_TagString: Untagged
@@ -133,6 +134,19 @@ MonoBehaviour:
   boatRigidbody: {fileID: 0}
   initialVelocity: 50
   aimingManager: {fileID: 0}
+--- !u!114 &-5485651708953188960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814047473779402537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175ac03186e44914583d1fce33970fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: gsdhsd51
 --- !u!1 &4081133052672209821
 GameObject:
   m_ObjectHideFlags: 0
