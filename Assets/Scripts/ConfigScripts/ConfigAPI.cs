@@ -15,14 +15,16 @@ public class ConfigAPI : ScriptableObject
     private const string APIUrl = "http://localhost";
     private UserData _userData;
     private SkinsArray _skinsArray;
+    private bool _isConnected;
     
+    public bool IsConnected
+    {
+        get => _isConnected;
+        set => _isConnected = value;
+    }
+
     public UserData UserData => _userData;
     public SkinsArray SkinsArray => _skinsArray;
-    
-    public string IdCode
-    {
-        set => _idCode = value;
-    }
 
     public string GetApiUrl => APIUrl;
 
@@ -57,7 +59,7 @@ public class ConfigAPI : ScriptableObject
      *      id_code = string
      *      data = string (user, skins)
      */
-    public IEnumerator GetAuth(string data)
+    public IEnumerator GetAuth(string idCode, string data)
     {
         string url = $"{APIUrl}/auth?id_code={_idCode}&data={data}";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
@@ -67,23 +69,23 @@ public class ConfigAPI : ScriptableObject
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError($"Erreur de connexion : {request.error}");
-                yield break;
+                yield return request.error;
             }
 
             if (request.responseCode == 400)
             {
                 Debug.LogError("Requête incorrecte. Voir Format Erreurs 400");
-                yield break;
+                yield return request.responseCode;
             }
             else if (request.responseCode == 403)
             {
                 Debug.LogError("Token invalide");
-                yield break;
+                yield return request.responseCode;
             }
             else if (request.responseCode == 500)
             {
                 Debug.LogError("Erreur interne. Voir Format Erreurs 500");
-                yield break;
+                yield return request.responseCode;;
             }
             else if (request.responseCode == 200)
             {

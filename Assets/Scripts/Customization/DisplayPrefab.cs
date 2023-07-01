@@ -23,6 +23,7 @@ public class DisplayPrefab : MonoBehaviour
     public float colorButtonScale = 70f;
 
     private string _layerName;
+    private string _identifier;
     private void Start()
     {
         if (boatSelection)
@@ -111,11 +112,34 @@ public class DisplayPrefab : MonoBehaviour
     {
         ClearColorPanel();
         if (string.IsNullOrEmpty(identifier)) return;
+        _identifier = identifier;
+        
+        // Create default color buttons
+        foreach (Color color in config.DefaultColors)
+        {
+            var template =  Instantiate(buttonColorUnlockedTemplate, colorPanel.transform);
+            var button = template.transform.GetChild(0);
+            RectTransform rectTransform = button.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
+            button.GetComponent<Image>().color = color;
+            if (button.GetComponent<Button>() != null)
+            {
+                if(boatSelection)
+                {
+                    UnityAction buttonClickHandler = () => { boatSelection.SetColor(color); };
+                    button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
+                }
+            }
+        }
+
+        if (configAPI.IsConnected == false) return;
+        
+        // Create other color buttons
         foreach (KeyValuePair<string, Color> color in config.ColorsByIdentifier)
         {
             GameObject templateColor;
             UnityAction buttonClickHandler = null;
-            
+
             if (config.ColorIdentifierByBoat.ContainsKey(color.Key))
             {
                 if (config.ColorIdentifierByBoat[color.Key] == identifier)
@@ -128,19 +152,16 @@ public class DisplayPrefab : MonoBehaviour
                 {
                     //Locked button
                     templateColor = buttonColorLockedTemplate;
-                    buttonClickHandler = ShopRedirectHandler;
                 }
             }
             else
             {
                 //Locked button
                 templateColor = buttonColorLockedTemplate;
-                buttonClickHandler = ShopRedirectHandler;
             }
             var template =  Instantiate(templateColor, colorPanel.transform);
             var button = template.transform.GetChild(0);
             RectTransform rectTransform = button.GetComponent<RectTransform>();
-            Debug.Log(colorButtonScale);
             rectTransform.sizeDelta = new Vector2(colorButtonScale, colorButtonScale);
             button.GetComponent<Image>().color = color.Value;
             if (button.GetComponent<Button>() != null)
@@ -153,8 +174,21 @@ public class DisplayPrefab : MonoBehaviour
         }
     }
 
-    private void ShopRedirectHandler()
+    public void ShopRedirection()
     {
         Application.OpenURL(configAPI.GetApiUrl+"/shop");
+    }
+
+    public void RefreshColorPanel()
+    {
+        if (!string.IsNullOrEmpty(_identifier))
+        {
+            SetupColorPanel(_identifier);
+        }
+    }
+
+    public void BackButton()
+    {
+        ClearColorPanel();
     }
 }

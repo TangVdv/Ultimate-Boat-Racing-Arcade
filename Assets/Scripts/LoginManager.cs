@@ -13,8 +13,14 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private GameObject loginPanel;
     [SerializeField] private Text playerNameText;
 
-    private bool _isConnected;
-    
+    private void Start()
+    {
+        if (configAPI.IsConnected == true)
+        {
+            ConnectionHandler();
+        }
+    }
+
     public void Login()
     {
         StartCoroutine(LoginHandler());
@@ -22,32 +28,39 @@ public class LoginManager : MonoBehaviour
 
     private IEnumerator LoginHandler()
     {
-        if (_isConnected == false)
+        if (configAPI.IsConnected == false)
         {
-            string code = codeInput.text;
-            if (string.IsNullOrEmpty(code))
+            string idCode = codeInput.text;
+            if (string.IsNullOrEmpty(idCode))
             {
                 Debug.LogError("Code input is empty");
+                yield return null;
             }
             else
             {
-                codeInput.text = "";
-                configAPI.IdCode = code;
-                _isConnected = true;
-
-                yield return StartCoroutine(configAPI.GetAuth("user"));
-                playerNameText.text = configAPI.UserData.username;
-                playerPanel.SetActive(true);
-                loginPanel.SetActive(false);
-
-                StartCoroutine(SetColorsByBoatId());
+                var coroutine =  StartCoroutine(configAPI.GetAuth(idCode, "user"));
+                if (coroutine != null) yield return null;
+                yield return coroutine;
+                ConnectionHandler();
             }   
         }
     }
 
-    private IEnumerator SetColorsByBoatId()
+    private void ConnectionHandler()
     {
-        yield return StartCoroutine(configAPI.GetAuth("skins"));
+        codeInput.text = "";
+        configAPI.IsConnected = true;
+                
+        playerNameText.text = configAPI.UserData.username;
+        playerPanel.SetActive(true);
+        loginPanel.SetActive(false);
+
+        StartCoroutine(GetUserData());
+    }
+
+    private IEnumerator GetUserData()
+    {
+        yield return StartCoroutine(configAPI.GetAuth(configAPI.UserData.id_code,"skins"));
         config.ColorIdentifierByBoat = new Dictionary<string, string>();
         foreach (var skin in configAPI.SkinsArray.skins)
         {
@@ -57,11 +70,10 @@ public class LoginManager : MonoBehaviour
 
     public void Logout()
     {
-        if (_isConnected == true)
+        if (configAPI.IsConnected == true)
         {
             configAPI.ClearData();
-            configAPI.IdCode = null;
-            _isConnected = false;
+            configAPI.IsConnected = false;
             playerPanel.SetActive(false);
             loginPanel.SetActive(true);
         }

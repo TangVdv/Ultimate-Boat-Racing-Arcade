@@ -10,31 +10,30 @@ public class ConfigScript : ScriptableObject
 
     public List<PlayerConfiguration> PlayerConfigurations { get; set; }
     
+    private List<Color> _defaultColors = new List<Color>()
+    {
+        new Color(1f, .25f, .25f, 1f),
+        new Color(.25f, .5f, 1f, 1f),
+        new Color(.6f, .8f, .4f, 1f),
+        new Color(1f, 1f, .25f, 1f)
+    };
+    
+    public List<Color> DefaultColors => _defaultColors;
+    
     //Dictionary<color_identifier, color>
     private Dictionary<string, Color> _colorsByIdentifier = new Dictionary<string, Color>()
     {
-        { "fqisjb51n4", new Color(1f, .25f, .25f, 1f) },
-        { "dsgjoh231c", new Color(.25f, .5f, 1f, 1f) }
+        { "brown-mat",  new Color(.25f, .14f, .18f, 1f)},
+        { "white-mat",  new Color(.9f, .9f, .9f, 1f)},
+        { "black-mat",  new Color(.13f, .13f, .13f, 1f)},
+        
     };
 
     public Dictionary<string, Color> ColorsByIdentifier => _colorsByIdentifier;
 
     //Dictionary<color_identifier, boat_identifier>
     public Dictionary<string, string> ColorIdentifierByBoat { get; set; }
-
     
-    private List<Color> _colors = new List<Color>()
-    {
-        new Color(1f, .25f, .25f, 1f),
-        new Color(.25f, .5f, 1f, 1f),
-        new Color(.6f, .8f, .4f, 1f),
-        new Color(1f, 1f, .25f, 1f),
-        new Color(.25f, .14f, .18f, 1f),
-        new Color(.9f, .9f, .9f, 1f),
-        new Color(.13f, .13f, .13f, 1f)
-    };
-
-    public List<Color> Colors => _colors;
     public GameObject[] BoatTemplates { get; set; }
     
     public GameObject[] CannonTemplates { get; set; }
