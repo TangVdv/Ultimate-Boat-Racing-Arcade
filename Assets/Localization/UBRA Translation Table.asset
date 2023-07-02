@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: UBRA Translation Table
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 5d3c4ff3e17e52f468f7e14ea463beee, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 63d125d128542c94fb8e440fa92371d7, type: 2}
+  - {fileID: 11400000, guid: c1ad50f32bed2104082689495ff681b6, type: 2}
+  - {fileID: 11400000, guid: 7971353e71fc0354180c31da8bcee0a2, type: 2}
+  - {fileID: 11400000, guid: e6f7cb021f9827e47a2bbee5966a75e5, type: 2}
+  - {fileID: 11400000, guid: 8baaeae92f0e3a344b883ecaa023aa76, type: 2}
+  - {fileID: 11400000, guid: a99a581d9a2c2ce4f8e46754bedec562, type: 2}
+  - {fileID: 11400000, guid: 0b6dec3bc2ba8c545be4fee50306836b, type: 2}
+  - {fileID: 11400000, guid: 8402f1179df4c0546881c91684b7b151, type: 2}
+  - {fileID: 11400000, guid: c73481afd4d46c24c939bbc4e010478c, type: 2}
+  - {fileID: 11400000, guid: 3a8180e9bb1744d47a2d9651f1970c01, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

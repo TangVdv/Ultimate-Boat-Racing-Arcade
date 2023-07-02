@@ -1,0 +1,243 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UBRA Translation Table_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: 5d3c4ff3e17e52f468f7e14ea463beee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 46224506880
+    m_Localized: SPIELEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46291615744
+    m_Localized: ANPASSUNG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810048
+    m_Localized: "GESCH\xC4FT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810049
+    m_Localized: EINSTELLUNGEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004352
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004353
+    m_Localized: AUSFAHRT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004354
+    m_Localized: "ZUR\xDCCK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004355
+    m_Localized: ANMELDUNG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004356
+    m_Localized: CODE EINGEBEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004357
+    m_Localized: EINGEBEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004358
+    m_Localized: SCHLIESSEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004359
+    m_Localized: AUSLOGGEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004360
+    m_Localized: SPIELWEISE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004361
+    m_Localized: AUDIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004362
+    m_Localized: GRAFIK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004363
+    m_Localized: ZEIGE BILDFREQUENZ
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198656
+    m_Localized: SPRACHE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198657
+    m_Localized: MEISTERVOLUMEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198658
+    m_Localized: EFFEKTVOLUMEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198659
+    m_Localized: "MUSIKLAUTST\xC4RKE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198660
+    m_Localized: FENSTERMODUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198661
+    m_Localized: "AUFL\xD6SUNG"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198662
+    m_Localized: AKTUALISIERUNGSRATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198663
+    m_Localized: GANZER BILDSCHIRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198664
+    m_Localized: FENSTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198665
+    m_Localized: ANWENDEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198666
+    m_Localized: KANONE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392960
+    m_Localized: BOOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392961
+    m_Localized: FARBE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162370889580544
+    m_Localized: SCHWIERIGKEIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392963
+    m_Localized: "W\xC4HLEN"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392964
+    m_Localized: RENNMODUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392965
+    m_Localized: CHRONO -MODUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392966
+    m_Localized: Spieler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392967
+    m_Localized: AI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392968
+    m_Localized: EINFACH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392969
+    m_Localized: MITTEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392970
+    m_Localized: HART
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392971
+    m_Localized: Schaltkreis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587264
+    m_Localized: Beste Zeit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587265
+    m_Localized: "WILLK\xDCRLICH"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587266
+    m_Localized: BEREIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587268
+    m_Localized: Position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587269
+    m_Localized: RANGFOLGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587270
+    m_Localized: FORTSETZEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587271
+    m_Localized: NEU STARTEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587272
+    m_Localized: SPEISEKARTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587273
+    m_Localized: WEITERMACHEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587274
+    m_Localized: NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587275
+    m_Localized: ZEIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587276
+    m_Localized: PUNKTZAHL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587277
+    m_Localized: 'Deine Zeit :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587278
+    m_Localized: KONTROLLPUNKT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587279
+    m_Localized: UNTERSCHIED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: Name eingeben
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

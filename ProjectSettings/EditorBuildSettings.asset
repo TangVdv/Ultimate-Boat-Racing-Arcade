@@ -15,4 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AlphaSceneNew.unity
     guid: 836abbe641738ed408a7154473715aff
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 560592e2c60b17a47811e3b91efccfeb, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 3b26adca797219a4f8ccf0795ddeb3fe, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 5e9c1fa328c3a3f4cb8813d6b3e59779, type: 2}
