@@ -112,7 +112,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46304198664
-    m_Key: text-windowmode-window
+    m_Key: label-windowmode-window
     m_Metadata:
       m_Items: []
   - m_Id: 46304198665
@@ -129,10 +129,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46308392961
     m_Key: label-color
-    m_Metadata:
-      m_Items: []
-  - m_Id: 46308392962
-    m_Key: btn-refresh
     m_Metadata:
       m_Items: []
   - m_Id: 46308392963
@@ -183,10 +179,6 @@ MonoBehaviour:
     m_Key: btn-ready
     m_Metadata:
       m_Items: []
-  - m_Id: 46312587267
-    m_Key: label-lap
-    m_Metadata:
-      m_Items: []
   - m_Id: 46312587268
     m_Key: label-position
     m_Metadata:
@@ -233,6 +225,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46312587279
     m_Key: label-difference
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162370889580544
+    m_Key: panel-difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Key: input-entername
     m_Metadata:
       m_Items: []
   m_Metadata:

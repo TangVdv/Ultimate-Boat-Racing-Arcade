@@ -39,11 +39,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46300004353
-    m_Localized: SORTIE
+    m_Localized: QUITTER
     m_Metadata:
       m_Items: []
   - m_Id: 46300004354
-    m_Localized: DOS
+    m_Localized: RETOUR
     m_Metadata:
       m_Items: []
   - m_Id: 46300004355
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46300004361
-    m_Localized: L'AUDIO
+    m_Localized: SONS
     m_Metadata:
       m_Items: []
   - m_Id: 46300004362
@@ -91,7 +91,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46304198658
-    m_Localized: VOLUME D'EFFETS
+    m_Localized: VOLUME DES EFFETS
     m_Metadata:
       m_Items: []
   - m_Id: 46304198659
@@ -134,8 +134,8 @@ MonoBehaviour:
     m_Localized: COULEUR
     m_Metadata:
       m_Items: []
-  - m_Id: 46308392962
-    m_Localized: "RAFRA\xCECHIR"
+  - m_Id: 162370889580544
+    m_Localized: "DIFFICULT\xC9"
     m_Metadata:
       m_Items: []
   - m_Id: 46308392963
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392966
-    m_Localized: JOUEUR
+    m_Localized: Joueur
     m_Metadata:
       m_Items: []
   - m_Id: 46308392967
@@ -167,15 +167,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392970
-    m_Localized: DUR
+    m_Localized: DIFFICILE
     m_Metadata:
       m_Items: []
   - m_Id: 46308392971
-    m_Localized: CIRCUIT
+    m_Localized: Circuit
     m_Metadata:
       m_Items: []
   - m_Id: 46312587264
-    m_Localized: JOUEUR
+    m_Localized: Meilleur temps
     m_Metadata:
       m_Items: []
   - m_Id: 46312587265
@@ -186,12 +186,8 @@ MonoBehaviour:
     m_Localized: "PR\xCAT"
     m_Metadata:
       m_Items: []
-  - m_Id: 46312587267
-    m_Localized: GENOUX
-    m_Metadata:
-      m_Items: []
   - m_Id: 46312587268
-    m_Localized: POSITION
+    m_Localized: Position
     m_Metadata:
       m_Items: []
   - m_Id: 46312587269
@@ -203,7 +199,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587271
-    m_Localized: "RED\xC9MARRAGE"
+    m_Localized: "RED\xC9MARRER"
     m_Metadata:
       m_Items: []
   - m_Id: 46312587272
@@ -227,7 +223,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587277
-    m_Localized: TON TEMPS
+    m_Localized: 'Votre temps :'
     m_Metadata:
       m_Items: []
   - m_Id: 46312587278
@@ -236,6 +232,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46312587279
     m_Localized: "DIFF\xC9RENCE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: Entrez un nom
     m_Metadata:
       m_Items: []
   references:

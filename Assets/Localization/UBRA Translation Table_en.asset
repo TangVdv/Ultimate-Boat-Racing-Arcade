@@ -134,8 +134,8 @@ MonoBehaviour:
     m_Localized: COLOR
     m_Metadata:
       m_Items: []
-  - m_Id: 46308392962
-    m_Localized: REFRESH
+  - m_Id: 162370889580544
+    m_Localized: DIFFICULTY
     m_Metadata:
       m_Items: []
   - m_Id: 46308392963
@@ -175,7 +175,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587264
-    m_Localized: Player
+    m_Localized: Best time
     m_Metadata:
       m_Items: []
   - m_Id: 46312587265
@@ -186,12 +186,8 @@ MonoBehaviour:
     m_Localized: READY
     m_Metadata:
       m_Items: []
-  - m_Id: 46312587267
-    m_Localized: LAP
-    m_Metadata:
-      m_Items: []
   - m_Id: 46312587268
-    m_Localized: POSITION
+    m_Localized: Position
     m_Metadata:
       m_Items: []
   - m_Id: 46312587269
@@ -227,7 +223,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587277
-    m_Localized: Your time
+    m_Localized: 'Your time :'
     m_Metadata:
       m_Items: []
   - m_Id: 46312587278
@@ -236,6 +232,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46312587279
     m_Localized: Difference
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: Enter name
     m_Metadata:
       m_Items: []
   references:

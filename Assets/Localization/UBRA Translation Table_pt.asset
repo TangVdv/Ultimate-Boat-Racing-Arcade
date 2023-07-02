@@ -134,8 +134,8 @@ MonoBehaviour:
     m_Localized: COR
     m_Metadata:
       m_Items: []
-  - m_Id: 46308392962
-    m_Localized: ATUALIZAR
+  - m_Id: 162370889580544
+    m_Localized: DIFICULDADE
     m_Metadata:
       m_Items: []
   - m_Id: 46308392963
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392966
-    m_Localized: JOGADOR
+    m_Localized: Jogador
     m_Metadata:
       m_Items: []
   - m_Id: 46308392967
@@ -171,11 +171,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392971
-    m_Localized: O CIRCUITO
+    m_Localized: O circuito
     m_Metadata:
       m_Items: []
   - m_Id: 46312587264
-    m_Localized: JOGADOR
+    m_Localized: Melhor tempo
     m_Metadata:
       m_Items: []
   - m_Id: 46312587265
@@ -186,12 +186,8 @@ MonoBehaviour:
     m_Localized: PREPARAR
     m_Metadata:
       m_Items: []
-  - m_Id: 46312587267
-    m_Localized: COLO
-    m_Metadata:
-      m_Items: []
   - m_Id: 46312587268
-    m_Localized: "POSI\xC7\xC3O"
+    m_Localized: "Posi\xE7\xE3o"
     m_Metadata:
       m_Items: []
   - m_Id: 46312587269
@@ -227,7 +223,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587277
-    m_Localized: SEU TEMPO
+    m_Localized: 'Seu tempo :'
     m_Metadata:
       m_Items: []
   - m_Id: 46312587278
@@ -236,6 +232,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46312587279
     m_Localized: "DIFEREN\xC7A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: Insira o nome
     m_Metadata:
       m_Items: []
   references:

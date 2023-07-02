@@ -134,8 +134,8 @@ MonoBehaviour:
     m_Localized: COLOR
     m_Metadata:
       m_Items: []
-  - m_Id: 46308392962
-    m_Localized: ACTUALIZAR
+  - m_Id: 162370889580544
+    m_Localized: DIFICULTAD
     m_Metadata:
       m_Items: []
   - m_Id: 46308392963
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392966
-    m_Localized: JUGADOR
+    m_Localized: Jugador
     m_Metadata:
       m_Items: []
   - m_Id: 46308392967
@@ -171,11 +171,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392971
-    m_Localized: CIRCUITO
+    m_Localized: Circuito
     m_Metadata:
       m_Items: []
   - m_Id: 46312587264
-    m_Localized: JUGADOR
+    m_Localized: Mejor tiempo
     m_Metadata:
       m_Items: []
   - m_Id: 46312587265
@@ -186,12 +186,8 @@ MonoBehaviour:
     m_Localized: LISTO
     m_Metadata:
       m_Items: []
-  - m_Id: 46312587267
-    m_Localized: REGAZO
-    m_Metadata:
-      m_Items: []
   - m_Id: 46312587268
-    m_Localized: "POSICI\xD3N"
+    m_Localized: "Posici\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 46312587269
@@ -227,7 +223,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587277
-    m_Localized: SU TIEMPO
+    m_Localized: 'Su tiempo :'
     m_Metadata:
       m_Items: []
   - m_Id: 46312587278
@@ -236,6 +232,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46312587279
     m_Localized: DIFERENCIA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: Ingrese su nombre
     m_Metadata:
       m_Items: []
   references:

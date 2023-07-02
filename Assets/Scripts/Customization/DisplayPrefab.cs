@@ -188,14 +188,6 @@ public class DisplayPrefab : MonoBehaviour
         Application.OpenURL(configAPI.GetApiUrl+"/shop");
     }
 
-    public void RefreshColorPanel()
-    {
-        if (!string.IsNullOrEmpty(_identifier))
-        {
-            SetupColorPanel(_identifier);
-        }
-    }
-
     public void BackButton()
     {
         ClearColorPanel();

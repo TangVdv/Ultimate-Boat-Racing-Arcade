@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
@@ -14,16 +17,26 @@ public class ModeSelectionUI : MonoBehaviour
     [SerializeField] private GameObject detailsPanel;
     [SerializeField] private Text playerAmountText;
     [SerializeField] private Text aiAmountText;
-    [SerializeField] private Text difficultyText;
     [SerializeField] private GameObject[] maps;
     [SerializeField] private GameObject mapContainer;
+    [SerializeField] private LocalizeStringEvent difficultyStringEvent;
+    [SerializeField] private Text circuitNameText;
+    [SerializeField] private Text circuitBestTimeText;
+    [SerializeField] private Text playerNameText;
 
     private int _modeSelect;
     private int _levelIndex = 0;
     private int _playerAmount = 1;
+    private int _maxPlayerAmount = 2;
+    private int _maxAIAmount = 5;
     private int _aiAmount = 2;
     private int _difficultyIndex = 1;
-    private string[] _difficulty = {"EASY", "MEDIUM", "HARD"};
+    private string[] _difficulty = new []
+    {
+        "label-difficulty-easy",
+        "label-difficulty-medium",
+        "label-difficulty-hard"
+    };
 
     private void Start()
     {
@@ -50,9 +63,9 @@ public class ModeSelectionUI : MonoBehaviour
 
     private void SetText()
     {
+        difficultyStringEvent.StringReference = new LocalizedString("UBRA Translation Table", _difficulty[_difficultyIndex]);
         playerAmountText.text = _playerAmount.ToString();
         aiAmountText.text = _aiAmount.ToString();
-        difficultyText.text = _difficulty[_difficultyIndex];
     }
 
     public void ModeSelection()
@@ -83,8 +96,8 @@ public class ModeSelectionUI : MonoBehaviour
     private void SetChronoLevelInfo(int value)
     {
         detailsPanel.SetActive(true);
-        detailsPanel.transform.GetChild(0).GetComponent<Text>().text = "Circuit : " + (value+1);
-        string text;
+        circuitNameText.text = (value + 1).ToString();
+        string text = "";
         if (config.CheckpointTimes.ElementAtOrDefault(value) != null)
         {
             int lastIndex = config.CheckpointTimes[value].Count - 1;
@@ -92,18 +105,14 @@ public class ModeSelectionUI : MonoBehaviour
             int minutes = Mathf.FloorToInt(timer / 60);
             int seconds = Mathf.FloorToInt(timer % 60);
             int milliseconds = Mathf.FloorToInt((timer * 1000) % 1000);
-            text = $"Best time : {minutes:00}:{seconds:00}:{milliseconds:000}";
+            text = $"{minutes:00}:{seconds:00}:{milliseconds:000}";
         }
-        else
-            text = "Best time :";
-        detailsPanel.transform.GetChild(1).GetComponent<Text>().text = text;
         
+        circuitBestTimeText.text = text;
+        text = "";
         if (config.BestTimePlayerName.ElementAtOrDefault(value) != null)
-            text = "Player : "+config.BestTimePlayerName[value];
-        else
-            text = "Player :";
-        
-        detailsPanel.transform.GetChild(2).GetComponent<Text>().text = text;
+            text = config.BestTimePlayerName[value];
+        playerNameText.text = text;
     }
 
     public void DisableButton()
@@ -130,13 +139,17 @@ public class ModeSelectionUI : MonoBehaviour
 
     public void LeftPlayerAmountCarousel()
     {
-        _playerAmount = Mathf.Clamp(_playerAmount - 1, 1, 2);
+        _playerAmount = _playerAmount == 1 
+            ? _maxPlayerAmount 
+            : Mathf.Clamp(_playerAmount - 1, 1, _maxPlayerAmount);
         SetText();
     }
     
     public void RightPlayerAmountCarousel()
     {
-        _playerAmount = Mathf.Clamp(_playerAmount + 1, 1, 2);
+        _playerAmount = _playerAmount == _maxPlayerAmount 
+            ? 1 
+            : Mathf.Clamp(_playerAmount + 1, 1, _maxPlayerAmount);
         SetText();
     }
     
@@ -144,13 +157,17 @@ public class ModeSelectionUI : MonoBehaviour
     
     public void LeftAIAmountCarousel()
     {
-        _aiAmount = Mathf.Clamp(_aiAmount - 1, 0, 5);
+        _aiAmount = _aiAmount == 0 
+            ? _maxAIAmount 
+            : Mathf.Clamp(_aiAmount - 1, 0, _maxAIAmount);
         SetText();
     }
     
     public void RightAIAmountCarousel()
     {
-        _aiAmount = Mathf.Clamp(_aiAmount + 1, 2, 5);
+        _aiAmount = _aiAmount == _maxAIAmount
+            ? 0 
+            : Mathf.Clamp(_aiAmount + 1, 0, _maxAIAmount);
         SetText();
     }
     
@@ -158,13 +175,17 @@ public class ModeSelectionUI : MonoBehaviour
     
     public void LeftDifficultyCarousel()
     {
-        _difficultyIndex = Mathf.Clamp(_difficultyIndex - 1, 0, _difficulty.Length-1);
+        _difficultyIndex = _difficultyIndex == 0 
+            ? _difficulty.Length-1 
+            : Mathf.Clamp(_difficultyIndex - 1, 0, _difficulty.Length-1);
         SetText();
     }
     
     public void RightDifficultyCarousel()
     {
-        _difficultyIndex = Mathf.Clamp(_difficultyIndex + 1, 0, _difficulty.Length-1);
+        _difficultyIndex = _difficultyIndex == _difficulty.Length-1 
+            ? 0 
+            : Mathf.Clamp(_difficultyIndex + 1, 0, _difficulty.Length-1);
         SetText();
     }
 }

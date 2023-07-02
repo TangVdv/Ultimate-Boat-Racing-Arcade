@@ -134,8 +134,8 @@ MonoBehaviour:
     m_Localized: KOLOR
     m_Metadata:
       m_Items: []
-  - m_Id: 46308392962
-    m_Localized: "OD\u015AWIE\u017BA\u0106"
+  - m_Id: 162370889580544
+    m_Localized: "TRUDNO\u015A\u0106"
     m_Metadata:
       m_Items: []
   - m_Id: 46308392963
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392966
-    m_Localized: GRACZ
+    m_Localized: Gracz
     m_Metadata:
       m_Items: []
   - m_Id: 46308392967
@@ -171,11 +171,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46308392971
-    m_Localized: "OKR\u0104\u017BENIE"
+    m_Localized: "Okr\u0105\u017Cenie"
     m_Metadata:
       m_Items: []
   - m_Id: 46312587264
-    m_Localized: GRACZ
+    m_Localized: Najlepszy czas
     m_Metadata:
       m_Items: []
   - m_Id: 46312587265
@@ -186,12 +186,8 @@ MonoBehaviour:
     m_Localized: GOTOWY
     m_Metadata:
       m_Items: []
-  - m_Id: 46312587267
-    m_Localized: "OKR\u0104\u017BENIE"
-    m_Metadata:
-      m_Items: []
   - m_Id: 46312587268
-    m_Localized: POZYCJA
+    m_Localized: Pozycja
     m_Metadata:
       m_Items: []
   - m_Id: 46312587269
@@ -227,7 +223,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46312587277
-    m_Localized: "TW\xD3J CZAS"
+    m_Localized: "Tw\xF3j czas :"
     m_Metadata:
       m_Items: []
   - m_Id: 46312587278
@@ -236,6 +232,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46312587279
     m_Localized: "R\xD3\u017BNICA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: "Wprowad\u017A imi\u0119"
     m_Metadata:
       m_Items: []
   references:

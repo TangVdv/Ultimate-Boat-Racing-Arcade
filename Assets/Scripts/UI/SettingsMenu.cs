@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
@@ -10,20 +13,23 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private ConfigScript config;
     [SerializeField] private Text languageText;
     [SerializeField] private Text resolutionText;
-    [SerializeField] private Text windowModeText;
     [SerializeField] private Text fpsText;
-    [SerializeField] private Text currentFPSText;
     [SerializeField] private Toggle fpsToggle;
-    [SerializeField] private Toggle hudToggle;
     [SerializeField] private Slider masterVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider effectVolumeSlider;
-    [SerializeField] private Slider lookSensitivitySlider;
+    [SerializeField] private LocalizeStringEvent localStringWindowMode;
 
-    private int _languageIndex = 0;
-    private string[] _languageArray = {"FRANÇAIS", "ENGLISH"};
+    private int _languageIndex = 1;
+    private string[] _languageArray = {"English", "Français", "Español", "Deutsch", "Polski", "Português", "Русский", "日本", "中国人", "Türkçe"};
     
     private bool _windowModeBool = true; // FULLSCREEN
+
+    private string[] _windowModeArray = new[]
+    {
+        "label-windowmode-fullscreen",
+        "label-windowmode-window"
+    };
     
     private int _resolutionIndex = 28; // 1920x1080
     private int[] _resolutionWidthArray = {800, 1020, 1280, 1600, 1920, 2560};
@@ -33,14 +39,11 @@ public class SettingsMenu : MonoBehaviour
     private int _fpsIndex = 1;
     private int[] _fpsArray = {30, 60, 120};
 
-    private bool _showHUD = true;
     private bool _showFPS = false;
 
     private int _masterVolume = 50;
     private int _musicVolume = 50;
     private int _effectVolume = 50;
-
-    private float _lookSensitivity = 5;
 
     private float timer, timelapse, avgFramerate;
 
@@ -66,13 +69,6 @@ public class SettingsMenu : MonoBehaviour
         {
             _effectVolume = (int)v;
         });
-        
-        /** CONTROL **/
-        
-        lookSensitivitySlider.onValueChanged.AddListener(v =>
-        {
-            _lookSensitivity = (int)v;
-        });
     }
 
     public void Apply()
@@ -93,41 +89,56 @@ public class SettingsMenu : MonoBehaviour
 
     private void SetText()
     {
-        languageText.text = _languageArray[_languageIndex];
+        languageText.text = _languageArray[_languageIndex].ToUpper();
         resolutionText.text = _resolutions[_resolutionIndex].x + "x" + _resolutions[_resolutionIndex].y;
         fpsText.text = _fpsArray[_fpsIndex].ToString();
         if(_windowModeBool)
-            windowModeText.text = "FULLSCREEN";
+            localStringWindowMode.StringReference = new LocalizedString("UBRA Translation Table", _windowModeArray[0]);
         else
-            windowModeText.text = "WINDOW";
-        
+            localStringWindowMode.StringReference = new LocalizedString("UBRA Translation Table", _windowModeArray[1]);
+
         fpsToggle.isOn = _showFPS;
-        hudToggle.isOn = _showHUD;
     }
 
     /** LANGUAGE **/
     public void LeftLanguageCarousel()
     {
-        _languageIndex = Mathf.Clamp(_languageIndex-1, 0, _languageArray.Length-1);
+        _languageIndex = _languageIndex == 0 
+            ? _languageArray.Length-1 
+            : Mathf.Clamp(_languageIndex-1, 0, _languageArray.Length-1);
+        StartCoroutine(SetLocale());
         SetText();
     }
     
     public void RightLanguageCarousel()
     {
-        _languageIndex = Mathf.Clamp(_languageIndex+1, 0, _languageArray.Length-1);
+        _languageIndex = _languageIndex == _languageArray.Length-1 
+            ? 0
+            : Mathf.Clamp(_languageIndex+1, 0, _languageArray.Length-1);
+        StartCoroutine(SetLocale());
         SetText();
+    }
+
+    private IEnumerator SetLocale()
+    {
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_languageIndex];
     }
 
     /** RESOLUTION **/
     public void LeftResolutionCarousel()
     {
-        _resolutionIndex = Mathf.Clamp(_resolutionIndex - 1, 0, _resolutions.Length - 1);
+        _resolutionIndex = _resolutionIndex == 0
+            ? _resolutions.Length - 1
+            : Mathf.Clamp(_resolutionIndex - 1, 0, _resolutions.Length - 1);
         SetText();
     }
 
     public void RightResolutionCarousel()
     {
-        _resolutionIndex = Mathf.Clamp(_resolutionIndex + 1, 0, _resolutions.Length - 1);
+        _resolutionIndex = _resolutionIndex == _resolutions.Length - 1 
+            ? 0 
+            : Mathf.Clamp(_resolutionIndex + 1, 0, _resolutions.Length - 1);
         SetText();
     }
 
@@ -147,15 +158,9 @@ public class SettingsMenu : MonoBehaviour
     
     /** WINDOW MODE **/
     
-    public void LeftWindowModeCarousel()
+    public void WindowModeCarousel()
     {
-        _windowModeBool = true;
-        SetText();
-    }
-
-    public void RightWindowModeCarousel()
-    {
-        _windowModeBool = false;
+        _windowModeBool = !_windowModeBool;
         SetText();
     }
 
@@ -163,13 +168,17 @@ public class SettingsMenu : MonoBehaviour
     
     public void LeftFPSCarousel()
     {
-        _fpsIndex = Mathf.Clamp(_fpsIndex - 1, 0, _fpsArray.Length - 1);
+        _fpsIndex = _fpsIndex == 0 
+            ? _fpsArray.Length-1 
+            : Mathf.Clamp(_fpsIndex - 1, 0, _fpsArray.Length - 1);
         SetText();
     }
 
     public void RightFPSCarousel()
     {
-        _fpsIndex = Mathf.Clamp(_fpsIndex + 1, 0, _fpsArray.Length - 1);
+        _fpsIndex = _fpsIndex == _fpsArray.Length - 1
+            ? 0
+            : Mathf.Clamp(_fpsIndex + 1, 0, _fpsArray.Length - 1);
         SetText();
     }
 
