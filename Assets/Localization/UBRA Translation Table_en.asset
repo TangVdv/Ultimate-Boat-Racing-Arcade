@@ -1,0 +1,243 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UBRA Translation Table_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 5d3c4ff3e17e52f468f7e14ea463beee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 46224506880
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46291615744
+    m_Localized: CUSTOMIZATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810048
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810049
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004352
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004353
+    m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004354
+    m_Localized: BACK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004355
+    m_Localized: LOGIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004356
+    m_Localized: Enter code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004357
+    m_Localized: ENTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004358
+    m_Localized: CLOSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004359
+    m_Localized: LOGOUT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004360
+    m_Localized: GAMEPLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004361
+    m_Localized: AUDIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004362
+    m_Localized: GRAPHICS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004363
+    m_Localized: SHOW FRAME RATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198656
+    m_Localized: LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198657
+    m_Localized: MASTER VOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198658
+    m_Localized: EFFECTS VOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198659
+    m_Localized: MUSIC VOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198660
+    m_Localized: WINDOW MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198661
+    m_Localized: RESOLUTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198662
+    m_Localized: REFRESH RATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198663
+    m_Localized: FULLSCREEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198664
+    m_Localized: WINDOW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198665
+    m_Localized: APPLY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198666
+    m_Localized: CANNON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392960
+    m_Localized: BOAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392961
+    m_Localized: COLOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392962
+    m_Localized: REFRESH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392963
+    m_Localized: SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392964
+    m_Localized: RACE MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392965
+    m_Localized: CHRONO MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392966
+    m_Localized: PLAYER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392967
+    m_Localized: AI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392968
+    m_Localized: EASY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392969
+    m_Localized: MEDIUM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392970
+    m_Localized: HARD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392971
+    m_Localized: Circuit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587264
+    m_Localized: Player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587265
+    m_Localized: RANDOM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587266
+    m_Localized: READY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587267
+    m_Localized: LAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587268
+    m_Localized: POSITION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587269
+    m_Localized: RANKING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587270
+    m_Localized: RESUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587271
+    m_Localized: RESTART
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587272
+    m_Localized: MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587273
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587274
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587275
+    m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587276
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587277
+    m_Localized: Your time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587278
+    m_Localized: Checkpoint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587279
+    m_Localized: Difference
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

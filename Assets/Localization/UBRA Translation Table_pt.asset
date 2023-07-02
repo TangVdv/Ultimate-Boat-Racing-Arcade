@@ -1,0 +1,243 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UBRA Translation Table_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: 5d3c4ff3e17e52f468f7e14ea463beee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 46224506880
+    m_Localized: JOGAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46291615744
+    m_Localized: "COSTUMIZA\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810048
+    m_Localized: COMPRAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810049
+    m_Localized: "CONFIGURA\xC7\xD5ES"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004352
+    m_Localized: "CR\xC9DITOS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004353
+    m_Localized: "SA\xCDDA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004354
+    m_Localized: VOLTAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004355
+    m_Localized: CONECTE-SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004356
+    m_Localized: "COLOQUE O C\xD3DIGO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004357
+    m_Localized: DIGITAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004358
+    m_Localized: FECHAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004359
+    m_Localized: SAIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004360
+    m_Localized: JOGABILIDADE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004361
+    m_Localized: "\xC1UDIO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004362
+    m_Localized: "GR\xC1FICOS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004363
+    m_Localized: MOSTRAR FRAMERATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198656
+    m_Localized: LINGUAGEM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198657
+    m_Localized: VOLUME PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198658
+    m_Localized: VOLUME DE EFEITOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198659
+    m_Localized: "VOLUME DA M\xDASICA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198660
+    m_Localized: MODO JANELA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198661
+    m_Localized: "RESOLU\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198662
+    m_Localized: "TAXA DE ATUALIZA\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198663
+    m_Localized: TELA CHEIA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198664
+    m_Localized: JANELA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198665
+    m_Localized: APLICAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198666
+    m_Localized: "CANH\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392960
+    m_Localized: BARCO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392961
+    m_Localized: COR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392962
+    m_Localized: ATUALIZAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392963
+    m_Localized: SELECIONE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392964
+    m_Localized: MODO DE CORRIDA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392965
+    m_Localized: MODO CRONO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392966
+    m_Localized: JOGADOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392967
+    m_Localized: AI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392968
+    m_Localized: "F\xC1CIL"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392969
+    m_Localized: "M\xC9DIO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392970
+    m_Localized: DURO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392971
+    m_Localized: O CIRCUITO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587264
+    m_Localized: JOGADOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587265
+    m_Localized: "ALEAT\xD3RIO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587266
+    m_Localized: PREPARAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587267
+    m_Localized: COLO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587268
+    m_Localized: "POSI\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587269
+    m_Localized: RANKING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587270
+    m_Localized: RETOMAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587271
+    m_Localized: REINICIAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587272
+    m_Localized: "CARD\xC1PIO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587273
+    m_Localized: CONTINUAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587274
+    m_Localized: NOME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587275
+    m_Localized: TEMPO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587276
+    m_Localized: "PONTUA\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587277
+    m_Localized: SEU TEMPO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587278
+    m_Localized: "PONTO DE VERIFICA\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587279
+    m_Localized: "DIFEREN\xC7A"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

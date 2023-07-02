@@ -1,0 +1,243 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UBRA Translation Table_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 5d3c4ff3e17e52f468f7e14ea463beee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 46224506880
+    m_Localized: JOUER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46291615744
+    m_Localized: PERSONNALISATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810048
+    m_Localized: BOUTIQUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810049
+    m_Localized: "PARAM\xC8TRES"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004352
+    m_Localized: "CR\xC9DITS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004353
+    m_Localized: SORTIE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004354
+    m_Localized: DOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004355
+    m_Localized: CONNEXION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004356
+    m_Localized: ENTREZ LE CODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004357
+    m_Localized: ENTRER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004358
+    m_Localized: FERMER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004359
+    m_Localized: "SE D\xC9CONNECTER"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004360
+    m_Localized: GAMEPLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004361
+    m_Localized: L'AUDIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004362
+    m_Localized: GRAPHIQUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004363
+    m_Localized: "MONTRER LA FR\xC9QUENCE D'IMAGES"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198656
+    m_Localized: LANGUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198657
+    m_Localized: VOLUME PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198658
+    m_Localized: VOLUME D'EFFETS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198659
+    m_Localized: VOLUME DE LA MUSIQUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198660
+    m_Localized: "MODE FEN\xCATRE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198661
+    m_Localized: "R\xC9SOLUTION"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198662
+    m_Localized: "FR\xC9QUENCE DE RAFRA\xCECHISSEMENT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198663
+    m_Localized: "PLEIN \xC9CRAN"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198664
+    m_Localized: "FEN\xCATRE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198665
+    m_Localized: APPLIQUER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198666
+    m_Localized: CANON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392960
+    m_Localized: BATEAU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392961
+    m_Localized: COULEUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392962
+    m_Localized: "RAFRA\xCECHIR"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392963
+    m_Localized: "S\xC9LECTIONNER"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392964
+    m_Localized: MODE DE COURSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392965
+    m_Localized: MODE CHRONO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392966
+    m_Localized: JOUEUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392967
+    m_Localized: IA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392968
+    m_Localized: FACILE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392969
+    m_Localized: MOYEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392970
+    m_Localized: DUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392971
+    m_Localized: CIRCUIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587264
+    m_Localized: JOUEUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587265
+    m_Localized: "AL\xC9ATOIRE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587266
+    m_Localized: "PR\xCAT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587267
+    m_Localized: GENOUX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587268
+    m_Localized: POSITION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587269
+    m_Localized: CLASSEMENT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587270
+    m_Localized: CONTINUER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587271
+    m_Localized: "RED\xC9MARRAGE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587272
+    m_Localized: MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587273
+    m_Localized: CONTINUER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587274
+    m_Localized: NOM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587275
+    m_Localized: TEMPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587276
+    m_Localized: SCORE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587277
+    m_Localized: TON TEMPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587278
+    m_Localized: "POINT DE CONTR\xD4LE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587279
+    m_Localized: "DIFF\xC9RENCE"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -8,11 +8,6 @@ public class CameraMenuManager : MonoBehaviour
     [SerializeField] private CameraMenuMotion menuCameraMotion;
     [SerializeField] private Camera camera;
 
-    public void SettingsButton()
-    {
-        menuCameraMotion.SwitchPositionCamera(2);
-    }
-
     public void BackButton()
     {
         menuCameraMotion.SwitchPositionCamera(0);
@@ -21,17 +16,12 @@ public class CameraMenuManager : MonoBehaviour
 
     public void PlayButton()
     {
-        menuCameraMotion.SwitchPositionCamera(3);
+        menuCameraMotion.SwitchPositionCamera(2);
     }
 
     public void CustomButton()
     {
         menuCameraMotion.SwitchPositionCamera(1);
         camera.orthographic = true;
-    }
-
-    public void CreditButton()
-    {
-        menuCameraMotion.SwitchPositionCamera(2);
     }
 }
