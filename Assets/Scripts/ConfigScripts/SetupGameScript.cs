@@ -25,13 +25,6 @@ public class SetupGameScript : MonoBehaviour
     {
         if(debug)Debug.Log("SetupGame");
         spawner.SpawnSetup(boats);
-        WaveManager waveManager = water.GetComponent<WaveManager>();
-        if (!waveManager)
-        {
-            if(debug)Debug.Log("Add Wave Manager");
-            waveManager = water.AddComponent<WaveManager>();
-            if(debug)Debug.Log(waveManager);
-        }
         foreach (var boat in boats)
         {
             if(debug)Debug.Log(boat);
