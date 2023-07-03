@@ -17,16 +17,69 @@ public class BoatConfigurationParameters : MonoBehaviour
     [SerializeField] private NewFloatersManager newFloatersManager;
     [SerializeField] private string identifier;
 
-    public int Mass => mass;
-    public float Drag => drag;
-    public float AngularDrag => angularDrag;
-    public int ForwardAcceleration => forwardAcceleration;
-    public int BackwardAcceleration => backwardAcceleration;
-    public float SlowModifier => slowModifier;
-    public float FastModifier => fastModifier;
-    public int RotationSpeed => rotationSpeed;
-    public Transform[] CannonPos => cannonPosition;
-    public NewFloatersManager NewFloatersManager => newFloatersManager;
-    public string Identifier => identifier;
+    public int Mass
+    {
+        get => mass;
+        set => mass = value;
+    }
 
+    public float Drag
+    {
+        get => drag;
+        set => drag = value;
+    }
+
+    public float AngularDrag
+    {
+        get => angularDrag;
+        set => angularDrag = value;
+    }
+
+    public int ForwardAcceleration
+    {
+        get => forwardAcceleration;
+        set => forwardAcceleration = value;
+    }
+
+    public int BackwardAcceleration
+    {
+        get => backwardAcceleration;
+        set => backwardAcceleration = value;
+    }
+
+    public float SlowModifier
+    {
+        get => slowModifier;
+        set => slowModifier = value;
+    }
+
+    public float FastModifier
+    {
+        get => fastModifier;
+        set => fastModifier = value;
+    }
+
+    public int RotationSpeed
+    {
+        get => rotationSpeed;
+        set => rotationSpeed = value;
+    }
+
+    public Transform[] CannonPos
+    {
+        get => cannonPosition;
+        set => cannonPosition = value;
+    }
+
+    public NewFloatersManager NewFloatersManager
+    {
+        get => newFloatersManager;
+        set => newFloatersManager = value;
+    }
+
+    public string Identifier
+    {
+        get => identifier;
+        set => identifier = value;
+    }
 }
