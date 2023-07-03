@@ -10,14 +10,15 @@ namespace PowerUps.Effects
         public float force = 10f;
 
         public float lifeCycle = 1f;
+
+        public LayerMask affectedLayer;
         
         private void Start()
         {
-            Collider[] colliders = new Collider[100];
-            var size = Physics.OverlapSphereNonAlloc(transform.position, radius, colliders);
-            for (int i = 0; i < size; i++)
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, 100.0f, affectedLayer);
+            foreach (var hit in hits)
             {
-                var rb = colliders[i].GetComponent<Rigidbody>();
+                var rb = hit.collider.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.AddExplosionForce(force, transform.position, radius);

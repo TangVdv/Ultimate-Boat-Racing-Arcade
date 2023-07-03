@@ -6,13 +6,13 @@ namespace Boat.New.Canon
     public class NewBulletManager: MonoBehaviour
     {
         private BulletType _bulletType = BulletType.Basic;
-        public Rigidbody rigidBody;
         public NewAimingManager manager;
 
         public GameObject smokeScreenPrefab;
         public GameObject explosionPrefab;
         
         public GameObject originBoat;
+        public LayerMask affectedLayer;
         
         public void SetBulletType(BulletType type)
         {
@@ -21,19 +21,20 @@ namespace Boat.New.Canon
 
         public void Update()
         {
-            if (transform.position.y < 0) Destroy(gameObject);
+            if (transform.position.y < 0) Apply();
         }
 
         private void OnCollisionEnter(Collision other)
         {
+            if (other.gameObject.layer != affectedLayer) Destroy(gameObject);
             
             //if other is origin boat, do nothing
-            if (other.gameObject == originBoat)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            
+            if (other.gameObject == originBoat) Destroy(gameObject);
+            else Apply();
+        }
+
+        public void Apply()
+        {
             switch (_bulletType)
             {
                 case BulletType.Explosive:

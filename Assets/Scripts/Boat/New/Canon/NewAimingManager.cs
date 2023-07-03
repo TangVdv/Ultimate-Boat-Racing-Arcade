@@ -8,7 +8,7 @@ namespace Boat.New.Canon
     {
 
         public NewInputManagerInterface manager;
-        public NewFiringManager[] canons;
+        public List<NewFiringManager> canons = new List<NewFiringManager>();
         public GameObject pivot;
         
         public float mouseSensitivity = 3.0f;
@@ -24,8 +24,6 @@ namespace Boat.New.Canon
         
         private bool _isReloading;
         private bool _isLoaded;
-
-
 
 
         public void Start()
