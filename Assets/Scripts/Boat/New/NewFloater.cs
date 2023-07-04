@@ -29,8 +29,7 @@ namespace Boat.New
                     Manager.rigidBody.AddTorque(
                         -Manager.rigidBody.angularVelocity * (displacementMultiplier * Manager.waterAngularDrag * Time.fixedDeltaTime),
                         ForceMode.VelocityChange);
-
-                }   
+                }
             }
             else
             {
