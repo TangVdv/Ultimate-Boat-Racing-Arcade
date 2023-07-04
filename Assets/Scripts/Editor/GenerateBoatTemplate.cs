@@ -75,9 +75,13 @@ public class GenerateBoatTemplate : EditorWindow
         }
 
         Transform[] cannonPos = new Transform[_cannonAmount];
-        
+
+        TemplatesDictionary templatesDictionaryConfig =
+            AssetDatabase.LoadAssetAtPath<TemplatesDictionary>("Assets/Prefabs/Templates/TemplatesDictionaryConfig.asset");
+
         // Create prefab template preview
         GameObject prefabInstancePreview = PrefabUtility.SaveAsPrefabAsset(_object ,"Assets/Prefabs/Templates/Boats/" + _object.name + ".prefab");
+        templatesDictionaryConfig.AddBoatPreview(prefabInstancePreview);
         prefabInstancePreview = PrefabUtility.InstantiatePrefab(prefabInstancePreview) as GameObject;
         
         BuildBoatPreview buildBoatPreview = prefabInstancePreview.AddComponent<BuildBoatPreview>();
@@ -100,6 +104,7 @@ public class GenerateBoatTemplate : EditorWindow
         
         // Create prefab template preview
         GameObject prefabInstanceTemplate = PrefabUtility.SaveAsPrefabAsset(_object, "Assets/Prefabs/Templates/Boats/" + _object.name + "_Template.prefab");
+        templatesDictionaryConfig.AddBoatTemplate(prefabInstanceTemplate);
         prefabInstanceTemplate = PrefabUtility.InstantiatePrefab(prefabInstanceTemplate) as GameObject;
         
         switch (_collider)
@@ -109,7 +114,7 @@ public class GenerateBoatTemplate : EditorWindow
                 break;
             case BoatColliders.Mesh:
                 MeshCollider collider = prefabInstanceTemplate.AddComponent<MeshCollider>();
-                collider.sharedMesh = _object.GetComponent<MeshFilter>().mesh;
+                collider.sharedMesh = _object.GetComponent<MeshFilter>().sharedMesh;
                 break;
         }
         

@@ -52,8 +52,12 @@ public class GenerateCannonTemplate : EditorWindow
             Debug.LogError("Error : Please assign an object");
         }
         
+        TemplatesDictionary templatesDictionaryConfig =
+            AssetDatabase.LoadAssetAtPath<TemplatesDictionary>("Assets/Prefabs/Templates/TemplatesDictionaryConfig.asset");
+
         // Create prefab template preview
         GameObject prefabInstancePreview = PrefabUtility.SaveAsPrefabAsset(_object,"Assets/Prefabs/Templates/Cannons/" + _object.name + ".prefab");
+        templatesDictionaryConfig.AddCannonPreview(prefabInstancePreview);
         prefabInstancePreview = PrefabUtility.InstantiatePrefab(prefabInstancePreview) as GameObject;
         
         Rotator rotator = prefabInstancePreview.AddComponent<Rotator>();
@@ -65,6 +69,7 @@ public class GenerateCannonTemplate : EditorWindow
         
         // Create prefab template preview
         GameObject prefabInstanceTemplate = PrefabUtility.SaveAsPrefabAsset(_object, "Assets/Prefabs/Templates/Cannons/" + _object.name + "_Template.prefab");
+        templatesDictionaryConfig.AddCannonTemplate(prefabInstanceTemplate);
         prefabInstanceTemplate = PrefabUtility.InstantiatePrefab(prefabInstanceTemplate) as GameObject;
         
         switch (_collider)
