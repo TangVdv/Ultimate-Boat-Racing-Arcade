@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public enum Colliders
+public enum BoatColliders
 {
     Mesh, 
     Box
@@ -17,7 +17,7 @@ public class GenerateBoatTemplate : EditorWindow
     private int _cannonAmount;
     private int _floaterAmount;
     private GameObject _object;
-    private Colliders _collider;
+    private BoatColliders _collider;
     
     private int _mass;
     private float _drag;
@@ -44,7 +44,7 @@ public class GenerateBoatTemplate : EditorWindow
         _object = EditorGUILayout.ObjectField("", _object, typeof(GameObject), false) as GameObject;
         GUILayout.Space(20);
         GUILayout.Label("Components", EditorStyles.boldLabel);
-        _collider = (Colliders)EditorGUILayout.EnumPopup("Collider", _collider);
+        _collider = (BoatColliders)EditorGUILayout.EnumPopup("Collider", _collider);
         GUILayout.Space(20);
         GUILayout.Label("Parameters", EditorStyles.boldLabel);
         _cannonAmount = EditorGUILayout.IntField("Cannon amount", _cannonAmount);
@@ -77,8 +77,7 @@ public class GenerateBoatTemplate : EditorWindow
         Transform[] cannonPos = new Transform[_cannonAmount];
         
         // Create prefab template preview
-        Object boatPrefabPreview = EditorUtility.CreateEmptyPrefab("Assets/Prefabs/Templates/Boats/" + _object.name + ".prefab");
-        GameObject prefabInstancePreview = PrefabUtility.ReplacePrefab(_object, boatPrefabPreview);
+        GameObject prefabInstancePreview = PrefabUtility.SaveAsPrefabAsset(_object ,"Assets/Prefabs/Templates/Boats/" + _object.name + ".prefab");
         prefabInstancePreview = PrefabUtility.InstantiatePrefab(prefabInstancePreview) as GameObject;
         
         BuildBoatPreview buildBoatPreview = prefabInstancePreview.AddComponent<BuildBoatPreview>();
@@ -100,16 +99,15 @@ public class GenerateBoatTemplate : EditorWindow
         DestroyImmediate(prefabInstancePreview);
         
         // Create prefab template preview
-        Object boatPrefabTemplate = EditorUtility.CreateEmptyPrefab("Assets/Prefabs/Templates/Boats/" + _object.name + "_Template.prefab");
-        GameObject prefabInstanceTemplate = PrefabUtility.ReplacePrefab(_object, boatPrefabTemplate);
+        GameObject prefabInstanceTemplate = PrefabUtility.SaveAsPrefabAsset(_object, "Assets/Prefabs/Templates/Boats/" + _object.name + "_Template.prefab");
         prefabInstanceTemplate = PrefabUtility.InstantiatePrefab(prefabInstanceTemplate) as GameObject;
         
         switch (_collider)
         {
-            case Colliders.Box:
+            case BoatColliders.Box:
                 prefabInstanceTemplate.AddComponent<BoxCollider>();
                 break;
-            case Colliders.Mesh:
+            case BoatColliders.Mesh:
                 MeshCollider collider = prefabInstanceTemplate.AddComponent<MeshCollider>();
                 collider.sharedMesh = _object.GetComponent<MeshFilter>().mesh;
                 break;

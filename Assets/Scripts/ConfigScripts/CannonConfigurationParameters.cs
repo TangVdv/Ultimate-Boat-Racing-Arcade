@@ -6,7 +6,11 @@ using UnityEngine;
 public class CannonConfigurationParameters : MonoBehaviour
 {
     [SerializeField] private string identifier;
-    
-    public string Identifier => identifier;
+
+    public string Identifier
+    {
+        get => identifier; 
+        set => identifier = value;
+    }
 
 }
