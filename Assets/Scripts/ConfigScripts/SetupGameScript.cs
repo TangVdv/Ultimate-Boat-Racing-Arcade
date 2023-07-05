@@ -14,12 +14,21 @@ public class SetupGameScript : MonoBehaviour
 {
     [SerializeField] private SpawnScript spawner;
     [SerializeField] private CheckpointManager checkpointManager;
-    [SerializeField] private GameObject water;
-    
+
     public bool debug;
 
     private SpawnScript _spawnScript;
     private GameObject _currentLevel;
+
+    public void SetSpawner(SpawnScript spawnScript)
+    {
+        spawner = spawnScript;
+    }
+
+    public void SetCheckpointManager(CheckpointManager checkpointManager)
+    {
+        this.checkpointManager = checkpointManager;
+    }
     
     public void SetupGame(List<GameObject> boats)
     {
@@ -35,7 +44,7 @@ public class SetupGameScript : MonoBehaviour
 
     public void Reset()
     {
-        spawner.Spawn();
-        checkpointManager.Setup();
+        if(spawner) spawner.Spawn();
+        if(checkpointManager) checkpointManager.Setup();
     }
 }

@@ -61,6 +61,11 @@ namespace Checkpoints
             _finishUI = GameObject.Find("FinishUI").GetComponent<FinishUI>();
         }
 
+        public void SetConfigScript(ConfigScript configScript)
+        {
+            config = configScript;
+        }
+
         public void Setup()
         {
             Debug.Log("Setup checkpoint manager");

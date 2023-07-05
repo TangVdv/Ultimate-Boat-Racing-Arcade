@@ -12,7 +12,7 @@ public class SpawnScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
 
-    public float size = 10f;
+    public float size = 50f;
     public bool debug;
 
     private List<GameObject> _boats = new List<GameObject>();
