@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEditor.PackageManager;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+//using System.Collections.Generic;
+//using System.Threading.Tasks;
+//using UnityEditor.PackageManager;
+//using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Windows.Speech;
+//using UnityEngine.Windows.Speech;
 
 [CreateAssetMenu(fileName = "API", menuName = "ConfigAPI", order = 0)]
 public class ConfigAPI : ScriptableObject

@@ -51,7 +51,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Camera",
+                    "name": "MoveCamera",
                     "type": "PassThrough",
                     "id": "fdf84694-4ba2-4289-97d4-5c634e4630b2",
                     "expectedControlType": "Vector2",
@@ -81,6 +81,15 @@
                     "name": "StartGame",
                     "type": "Button",
                     "id": "74e08d5f-fb36-48f3-944e-cab01f76b56d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeCamera",
+                    "type": "Button",
+                    "id": "e3be61f8-342a-4ccf-b458-c4387443ed0c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -293,7 +302,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Camera",
+                    "action": "MoveCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -304,7 +313,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Camera",
+                    "action": "MoveCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -406,6 +415,72 @@
                     "action": "StartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "ChangeCamera Keyboard",
+                    "id": "42adf408-a520-4c1a-abd2-d2d51a83e327",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeCamera",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ad5b9c48-41f1-4a7e-8e9d-9cca53205020",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "1d0191b7-6354-43a6-8174-69469b5becdd",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "ChangeCamera Controller",
+                    "id": "4d97aacd-2b2e-49e6-899a-7465a69c48e6",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeCamera",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ed868902-c011-44f6-a71a-899d1710f37f",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4153cbb9-e41c-445d-83f0-0bccfd652323",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -632,7 +707,7 @@
                     "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick;Controller",
+                    "groups": "Controller",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -643,7 +718,7 @@
                     "path": "<Joystick>/stick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick;Controller",
+                    "groups": "Controller",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -654,7 +729,7 @@
                     "path": "<Joystick>/stick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick;Controller",
+                    "groups": "Controller",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -665,7 +740,7 @@
                     "path": "<Joystick>/stick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick;Controller",
+                    "groups": "Controller",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true

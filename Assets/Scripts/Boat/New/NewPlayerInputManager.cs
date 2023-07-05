@@ -14,6 +14,9 @@ namespace Boat.New
         [SerializeField] private RaceModeScript raceModeScript;
         [SerializeField] private ChronoScript chronoScript;
         [SerializeField] private PlayerUI playerUI;
+        private PlayerInput _playerInput;
+        [SerializeField] private List<Camera> cameras;
+        [SerializeField] private int currentCamera;
 
         public PlayerUI PlayerUI
         {
@@ -27,15 +30,22 @@ namespace Boat.New
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
             if (debug) Debug.Log("Initialize");
+            _playerInput = this.gameObject.GetComponent<PlayerInput>();
+            currentCamera = 0;
+            cameras = new List<Camera>();
+            cameras.Add(this.gameObject.GetComponentInChildren<Camera>());
             buildBoat.Initiate(
                 playerConfiguration.PlayerBoat, 
                 playerConfiguration.PlayerCannon,
                 playerConfiguration.PlayerBoatMaterial,
-                playerConfiguration.PlayerCannonMaterial);
+                playerConfiguration.PlayerCannonMaterial,
+                cameras);
             globalPlayerUI = playerUI;
+            
             playerType = PlayerType.Player;
             playerName = playerConfiguration.Name;
             if(BulletInventory != null) playerUI.HotbarManager(BulletInventory);
+            _playerInput.camera = cameras[currentCamera];
             
             _logger = FindObjectOfType<Logger>();
             ResetPlayerProgress();
@@ -56,7 +66,7 @@ namespace Boat.New
             else
                 if(debug)Debug.Log("No GameMode found, couldn't reset");
         }
-
+        
         // INPUTS
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -99,6 +109,21 @@ namespace Boat.New
             if (context.performed)
             {
                 _logger.ToggleConsole();
+            }
+        }
+        public void OnChangeCamera(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                cameras[currentCamera].enabled = false;
+                
+                currentCamera += (int)context.ReadValue<float>();
+
+                if (currentCamera < 0) currentCamera += cameras.Count;
+                if (currentCamera >= cameras.Count) currentCamera %= cameras.Count;
+
+                _playerInput.camera = cameras[currentCamera];
+                cameras[currentCamera].enabled = true;
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Boat.New;
 using Boat.New.Canon;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,8 +18,9 @@ public class BuildBoat : MonoBehaviour
     private BoatConfigurationParameters _boatConfigurationParameters;
     private NewFloatersManager _newFloatersManager;
 
-    public void Initiate(GameObject boat, GameObject cannon, Material boatMat, Material cannonMat)
+    public void Initiate(GameObject boat, GameObject cannon, Material boatMat, Material cannonMat, List<Camera> cameras = null)
     {
+        
         CreateBoat(boat, boatMat);
         if (_boatConfigurationParameters)
         {
@@ -26,7 +28,14 @@ public class BuildBoat : MonoBehaviour
             {
                 foreach (Transform pos in _boatConfigurationParameters.CannonPos)
                 {
-                    CreateCannon(cannon, pos, cannonMat);   
+                    var cannonInstance = CreateCannon(cannon, pos, cannonMat);
+                    if (cameras is not null)
+                    {
+                        var cannonCamera = cannonInstance.GetComponentInChildren<Camera>();
+                        if(cannonCamera is not null)
+                            cameras.Add(cannonCamera);
+                    }
+                    
                 }
             }   
         }
@@ -40,7 +49,7 @@ public class BuildBoat : MonoBehaviour
         ApplyColor(color, _boatTemplate.GetComponent<MeshRenderer>());
     }
 
-    private void CreateCannon(GameObject template, Transform pos, Material color)
+    private GameObject CreateCannon(GameObject template, Transform pos, Material color)
     {
         _cannonTemplate = Instantiate(template, pos);
         NewFiringManager newFiringManager = _cannonTemplate.GetComponent<NewFiringManager>();
@@ -50,6 +59,7 @@ public class BuildBoat : MonoBehaviour
         newAimingManager.canons.Append(newFiringManager);
         ApplyColor(color, _cannonTemplate.GetComponent<MeshRenderer>());
         ApplyMaterialRecursively(_cannonTemplate.transform, color);
+        return _cannonTemplate;
     }
     
     private void ApplyMaterialRecursively(Transform parent, Material color)
