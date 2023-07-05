@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4554535269767329252}
   - {fileID: 2017760561223465136}
@@ -55,6 +56,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -94,9 +96,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760773441553423983}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.1, y: 0.22, z: 0.08}
   m_Center: {x: 0, y: -0.04, z: 0}
 --- !u!114 &613492564238973161
@@ -112,13 +122,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 500
-  drag: 0.05
-  angularDrag: 0.05
-  forwardAcceleration: 45000
-  backwardAcceleration: 10000
+  drag: 0.1
+  angularDrag: 0.1
+  forwardAcceleration: 240
+  backwardAcceleration: 55
   slowModifier: 0.6
   fastModifier: 1.5
-  rotationSpeed: 50000
+  rotationSpeed: 6
   cannonPosition:
   - {fileID: 2058476388474409339}
   newFloatersManager: {fileID: 7137488231243292453}
@@ -149,6 +159,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2058476388474409339}
   m_Father: {fileID: 127543102010787029}
@@ -181,6 +192,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.3000002, y: -4.1399994, z: 2.5699964}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2017760561223465136}
   m_RootOrder: 3
@@ -225,6 +237,7 @@ Transform:
   m_LocalRotation: {x: 0.7071069, y: 0.000000053385072, z: 0.00000005338509, w: 0.70710665}
   m_LocalPosition: {x: 0, y: 0, z: 0.026}
   m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7710416198308565909}
   - {fileID: 7635512552910711338}
@@ -251,8 +264,8 @@ MonoBehaviour:
   depthBeforeSubmission: 1
   displacementAmount: 3
   floaterCount: 4
-  waterDrag: 0.4
-  waterAngularDrag: 2.8
+  waterDrag: 0.2
+  waterAngularDrag: 0.7
   movementManager: {fileID: 0}
 --- !u!1 &4876485306301119431
 GameObject:
@@ -281,6 +294,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.1999998, y: -4.140001, z: -2.930001}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2017760561223465136}
   m_RootOrder: 0
@@ -325,6 +339,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.3000002, y: -4.140001, z: -2.930001}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2017760561223465136}
   m_RootOrder: 2
@@ -369,6 +384,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.1999998, y: -4.14, z: 2.569996}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2017760561223465136}
   m_RootOrder: 1
@@ -413,6 +429,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.2, y: -3.139998, z: 12.819993}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2017760561223465136}
   m_RootOrder: 5
@@ -456,6 +473,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: -0.7071067}
   m_LocalPosition: {x: 0, y: -0.0000000047683715, z: 0.029999997}
   m_LocalScale: {x: 0.008, y: 0.008, z: 0.008}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4554535269767329252}
   m_RootOrder: 0
@@ -487,6 +505,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.3, y: -3.139998, z: 12.819993}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2017760561223465136}
   m_RootOrder: 4

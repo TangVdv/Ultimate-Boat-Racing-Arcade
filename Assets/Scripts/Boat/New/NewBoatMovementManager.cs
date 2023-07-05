@@ -42,7 +42,7 @@ namespace Boat.New
             //if (forwardSpeed < maxSpeed) rigidBody.AddForce(transform.forward * _speedModifier);
             // NB : Moved to Floaters
             
-            rigidBody.AddTorque(rigidBody.transform.up * (manager.movementX * rotationSpeed));
+            rigidBody.AddTorque(rigidBody.transform.up * (manager.movementX * rotationSpeed), ForceMode.Acceleration);
             
         }
 
