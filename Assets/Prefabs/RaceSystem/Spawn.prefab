@@ -24,13 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6218301055634948071}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &6218301055634948072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
-  playerPrefab: {fileID: 2157788149339898319, guid: 9d5601e53dc3e5d488a5b2d1320a3fea, type: 3}
-  botPrefab: {fileID: 2157788149339898319, guid: 4ef8385f2faa2194f929b17f8bb3323b, type: 3}
-  size: 10
+  size: 50
   debug: 1

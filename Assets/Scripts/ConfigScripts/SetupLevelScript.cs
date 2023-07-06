@@ -9,6 +9,7 @@ using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 public class SetupLevelScript : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
+    [SerializeField] private TerrainDictionary terrainDictionary;
     [SerializeField] private TimerScript timerScript;
     
     [SerializeField] private GameObject playerPrefab;
@@ -16,9 +17,6 @@ public class SetupLevelScript : MonoBehaviour
 
     [SerializeField] private AIConfigurationManager aiConfigurationManager;
     
-    public List<GameObject> mapTemplates;
-    
-    public List<NavMeshData> navMeshes;
     private NavMeshDataInstance _currentNavMesh;
 
     private SetupGameScript _setupGameScript;
@@ -47,9 +45,9 @@ public class SetupLevelScript : MonoBehaviour
     public void SetupLevel()
     {
         ClearLevel();
-        _currentMap = Instantiate(mapTemplates[config.Level]);
+        _currentMap = Instantiate(terrainDictionary.TerrainPrefab[config.Level]);
         _setupGameScript = _currentMap.GetComponent<SetupGameScript>();
-        _currentNavMesh = NavMesh.AddNavMeshData(navMeshes[config.Level]);
+        _currentNavMesh = NavMesh.AddNavMeshData(terrainDictionary.TerrainNavmesh[config.Level]);
         _setupGameScript.SetupGame(_boats);
         timerScript.ResetTimer();
         timerScript.StartTimer();

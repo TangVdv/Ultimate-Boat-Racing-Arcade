@@ -8,7 +8,7 @@ namespace Boat.New.Canon
         public GameObject body;
         public GameObject barrels;
         public Transform[] barrelOutputs;
-        [SerializeField] private GameObject cannonBall;
+        public GameObject cannonBall;
         public GameObject boat;
         public Rigidbody boatRigidbody;
 
