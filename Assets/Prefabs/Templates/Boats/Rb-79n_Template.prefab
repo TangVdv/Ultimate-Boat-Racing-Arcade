@@ -122,13 +122,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 500
-  drag: 0.05
-  angularDrag: 0.05
-  forwardAcceleration: 45000
-  backwardAcceleration: 10000
+  drag: 0.1
+  angularDrag: 0.1
+  forwardAcceleration: 240
+  backwardAcceleration: 55
   slowModifier: 0.6
   fastModifier: 1.5
-  rotationSpeed: 50000
+  rotationSpeed: 6
   cannonPosition:
   - {fileID: 2058476388474409339}
   newFloatersManager: {fileID: 7137488231243292453}
@@ -264,8 +264,8 @@ MonoBehaviour:
   depthBeforeSubmission: 1
   displacementAmount: 3
   floaterCount: 4
-  waterDrag: 0.4
-  waterAngularDrag: 2.8
+  waterDrag: 0.2
+  waterAngularDrag: 0.7
   movementManager: {fileID: 0}
 --- !u!1 &4876485306301119431
 GameObject:
