@@ -314,7 +314,7 @@ MonoBehaviour:
   cannonBall: {fileID: 937852843518610473, guid: 3a065f26e79db0c4badc6808a3d84017, type: 3}
   boat: {fileID: 0}
   boatRigidbody: {fileID: 0}
-  initialVelocity: 20
+  initialVelocity: 100
   aimingManager: {fileID: 0}
 --- !u!114 &5535314184100903769
 MonoBehaviour:

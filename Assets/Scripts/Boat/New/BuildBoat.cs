@@ -24,6 +24,7 @@ public class BuildBoat : MonoBehaviour
         {
             if (_boatConfigurationParameters.CannonPos.Length > 0)
             {
+                
                 foreach (Transform pos in _boatConfigurationParameters.CannonPos)
                 {
                     CreateCannon(cannon, pos, cannonMat);   
@@ -47,7 +48,7 @@ public class BuildBoat : MonoBehaviour
         newFiringManager.boat = _boatTemplate;
         newFiringManager.boatRigidbody = rigidbody;
         newFiringManager.aimingManager = newAimingManager;
-        newAimingManager.canons.Append(newFiringManager);
+        newAimingManager.canons.Add(newFiringManager);
         ApplyColor(color, _cannonTemplate.GetComponent<MeshRenderer>());
         ApplyMaterialRecursively(_cannonTemplate.transform, color);
     }
