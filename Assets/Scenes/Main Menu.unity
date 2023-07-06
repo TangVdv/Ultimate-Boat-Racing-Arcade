@@ -2017,6 +2017,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6454414661187369515, guid: dea3b8e5ef61f7b4a81f6523d31188a6, type: 3}
     - target: {fileID: 5400378941000570563, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
+      propertyPath: terrainDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d57f7ae413d6d740935e709662c974b, type: 2}
+    - target: {fileID: 5400378941000570563, guid: 946f32eaca129a249a8b6d3a98b0d5ae, type: 3}
       propertyPath: maps.Array.data[0]
       value: 
       objectReference: {fileID: 919132149155446097, guid: f741555d088b48a4a8bba3e1782e1094, type: 3}

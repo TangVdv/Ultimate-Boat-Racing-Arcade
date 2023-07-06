@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Checkpoints;
 using Unity.AI.Navigation.Editor;
 using UnityEditor;
@@ -12,6 +13,7 @@ public class GenerateMapPrefab : EditorWindow
     private GameObject _object;
     private string _mapName;
     private int _graceAmount;
+    private bool _addToDictionary = true;
 
     [MenuItem("Tools/Generate Map Prefab")]
     public static void ShowWindow()
@@ -24,14 +26,12 @@ public class GenerateMapPrefab : EditorWindow
         GUILayout.BeginVertical("box");
         GUILayout.Label("Object", EditorStyles.boldLabel);
         _object = EditorGUILayout.ObjectField("", _object, typeof(GameObject), false) as GameObject;
-        
-        GUILayout.Space(20);
-        GUILayout.Label("Components", EditorStyles.boldLabel);
        
         GUILayout.Space(20);
         GUILayout.Label("Parameters", EditorStyles.boldLabel);
         _mapName = EditorGUILayout.TextField("Map Name", _mapName);
         _graceAmount = EditorGUILayout.IntField("Grace Amount", _graceAmount);
+        _addToDictionary = EditorGUILayout.Toggle("Add to terrain dictionary", _addToDictionary);
         
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Generate Template"))
@@ -59,13 +59,24 @@ public class GenerateMapPrefab : EditorWindow
         //For every mesh in imported map, check its name and save it
         foreach (Transform child in _object.transform)
         {
-            if (child.name == "Goal") goal = child.gameObject;
-            if (child.name == "Start") start = child.gameObject;
-            if (child.name == "Checkpoint_1") checkpointsArray.Add(child.gameObject);
-            if (child.name == "PowerupZone_1") powerupZonesArray.Add(child.gameObject);
-            if (child.name == "Obstacle") obstacle = child.gameObject;
-        }
+            if (Regex.IsMatch(child.name, "goal", RegexOptions.IgnoreCase)) goal = child.gameObject;
+            if (Regex.IsMatch(child.name, "start", RegexOptions.IgnoreCase)) start = child.gameObject;
 
+            var regex = new Regex(@"(?i)checkpoint([0-9]+)");
+            var match = regex.Match(child.name);
+            if(match.Success) checkpointsArray.Add(child.gameObject);
+            
+            regex = new Regex(@"(?i)powerupzone([0-9]+)");
+            match = regex.Match(child.name);
+            if(match.Success) powerupZonesArray.Add(child.gameObject);
+            
+            if (Regex.IsMatch(child.name, "obstacle", RegexOptions.IgnoreCase)) obstacle = child.gameObject;
+        }
+        
+        //Load TerrainDictionary
+        TerrainDictionary terrainDictionary = 
+            AssetDatabase.LoadAssetAtPath<TerrainDictionary>("Assets/Prefabs/Terrain/TerrainDictionaryConfig.asset");
+        
         //Load ConfigScript
         ConfigScript configScript =
             AssetDatabase.LoadAssetAtPath<ConfigScript>("Assets/Scripts/ConfigScripts/Config.asset");
@@ -74,6 +85,11 @@ public class GenerateMapPrefab : EditorWindow
         GameObject root = new GameObject("root");
         GameObject prefabInstance = PrefabUtility.SaveAsPrefabAsset(root, "Assets/Prefabs/Terrain/"+ _mapName +"/" + _mapName + "Prefab.prefab");
         DestroyImmediate(root);
+        if (_addToDictionary)
+        {
+            terrainDictionary.AddTerrainPrefab(prefabInstance);
+            terrainDictionary.AddTerrainPreview(_object);
+        }
         prefabInstance = PrefabUtility.InstantiatePrefab(prefabInstance) as GameObject;
 
         // Add SetupGameScript to the root prefab 
@@ -109,11 +125,13 @@ public class GenerateMapPrefab : EditorWindow
             if (goal)
             {
                 GameObject checkpointInstance = Instantiate(checkpoint, checkpoints.transform, true);
-                Checkpoint checkpointScript = checkpointInstance.AddComponent<Checkpoint>();
+                Checkpoint checkpointScript = checkpointInstance.GetComponent<Checkpoint>();
                 checkpointScript.ID = 0;
-                checkpointInstance.name = "Goal"; 
+                checkpointInstance.name = "Goal";
                 checkpointInstance.transform.position = goal.transform.position;
-                checkpointInstance.transform.rotation = goal.transform.rotation;
+                var transformRotation = checkpointInstance.transform.rotation;
+                transformRotation.y -= goal.transform.rotation.z;
+                checkpointInstance.transform.rotation = transformRotation;
             }
             else
             {
@@ -124,10 +142,13 @@ public class GenerateMapPrefab : EditorWindow
             foreach (var cp in checkpointsArray)
             {
                 GameObject checkpointInstance = Instantiate(checkpoint, checkpoints.transform, true);
-                Checkpoint checkpointScript = checkpointInstance.AddComponent<Checkpoint>();
+                Checkpoint checkpointScript = checkpointInstance.GetComponent<Checkpoint>();
+                checkpointInstance.name = "Checkpoint-" + i;
                 checkpointScript.ID = i;
                 checkpointInstance.transform.position = cp.transform.position;
-                checkpointInstance.transform.rotation = cp.transform.rotation;
+                var transformRotation = checkpointInstance.transform.rotation;
+                transformRotation.y -= cp.transform.rotation.z;
+                checkpointInstance.transform.rotation = transformRotation;
                 i++;
             }
         }
@@ -166,7 +187,11 @@ public class GenerateMapPrefab : EditorWindow
             {
                 GameObject spawnInstance = Instantiate(spawn, levelContainer.transform, true);
                 spawnInstance.transform.position = start.transform.position;
-                spawnInstance.transform.rotation = start.transform.rotation;
+                
+                var transformRotation = spawnInstance.transform.rotation;
+                transformRotation.y -= start.transform.rotation.z;
+                spawnInstance.transform.rotation = transformRotation;
+                
                 setupGameScript.SetSpawner(spawnInstance.GetComponent<SpawnScript>());
             }
             else

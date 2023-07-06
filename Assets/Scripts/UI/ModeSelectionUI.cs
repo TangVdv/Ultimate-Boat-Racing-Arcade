@@ -13,11 +13,11 @@ using Button = UnityEngine.UI.Button;
 public class ModeSelectionUI : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
+    [SerializeField] private TerrainDictionary terrainDictionary;
     [SerializeField] private Button selectButton;
     [SerializeField] private GameObject detailsPanel;
     [SerializeField] private Text playerAmountText;
     [SerializeField] private Text aiAmountText;
-    [SerializeField] private GameObject[] maps;
     [SerializeField] private GameObject mapContainer;
     [SerializeField] private LocalizeStringEvent difficultyStringEvent;
     [SerializeField] private Text circuitNameText;
@@ -47,7 +47,7 @@ public class ModeSelectionUI : MonoBehaviour
 
     private void InstantiateMap()
     {
-        if (maps.Length > _levelIndex)
+        if (terrainDictionary.TerrainPreview.Count > _levelIndex)
         {
             if (mapContainer.transform.childCount > 0)
             {
@@ -56,7 +56,7 @@ public class ModeSelectionUI : MonoBehaviour
                     Destroy(child.gameObject);
                 } 
             }
-            Instantiate(maps[_levelIndex], mapContainer.transform);
+            Instantiate(terrainDictionary.TerrainPreview[_levelIndex], mapContainer.transform);
         }
 
     }
@@ -77,7 +77,7 @@ public class ModeSelectionUI : MonoBehaviour
             _playerAmount = 1;
         }
 
-        config.LastLevelIndex = maps.Length - 1;
+        config.LastLevelIndex = terrainDictionary.TerrainPreview.Count - 1;
         config.AIAmount = _aiAmount;
         config.PlayerAmount = _playerAmount;
         config.GameMode = _modeSelect;
