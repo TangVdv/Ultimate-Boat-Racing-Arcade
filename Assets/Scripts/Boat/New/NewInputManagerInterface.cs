@@ -71,7 +71,7 @@ namespace Boat.New
             BulletInventory = new Dictionary<BulletType, int>()
             {
                 {BulletType.Basic, 2000000},
-                {BulletType.Explosive, 100},
+                {BulletType.Explosive, 0},
                 {BulletType.SmokeScreen, 0}
             };
             currentBulletType = BulletType.Basic;
