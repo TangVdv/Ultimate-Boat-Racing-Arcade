@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 8427463236868687268}
   - component: {fileID: 1260949780114711088}
   m_Layer: 0
-  m_Name: Map-1
+  m_Name: Map1Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +258,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8427463236868687269}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -281,7 +281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 8427463236769681781}
   checkpointManager: {fileID: 8427463235666284203}
-  water: {fileID: 8427463236829634509}
   debug: 0
 --- !u!1 &8427463237147644839
 GameObject:
