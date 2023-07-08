@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -908,6 +908,10 @@ PrefabInstance:
       propertyPath: pauseAction.m_Id
       value: 35f57d77-07fb-47f5-8c1e-257fa6832470
       objectReference: {fileID: 0}
+    - target: {fileID: 6533681500781516150, guid: 9a48e1ba03825d042be6f7a40ead56bf, type: 3}
+      propertyPath: setupLevelScript
+      value: 
+      objectReference: {fileID: 952903658}
     - target: {fileID: 6533681500781516150, guid: 9a48e1ba03825d042be6f7a40ead56bf, type: 3}
       propertyPath: pauseAction.m_Name
       value: Pause

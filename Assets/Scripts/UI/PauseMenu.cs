@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private InputAction pauseAction;
     [SerializeField] private TimerScript timer;
+    [SerializeField] private SetupLevelScript setupLevelScript;
 
     private bool _isGamePaused;
 
@@ -57,5 +58,11 @@ public class PauseMenu : MonoBehaviour
     {
         Resume();
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void Restart()
+    {
+        Resume();
+        setupLevelScript.ResetCurrentMap();
     }
 }
