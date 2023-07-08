@@ -235,6 +235,34 @@ MonoBehaviour:
     m_Key: input-entername
     m_Metadata:
       m_Items: []
+  - m_Id: 2422037850226688
+    m_Key: panel-quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Key: label-quality-verylow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Key: label-quality-low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Key: label-quality-medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Key: label-quality-high
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Key: label-quality-veryhigh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Key: label-quality-ultra
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

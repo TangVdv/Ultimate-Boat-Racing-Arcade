@@ -19,6 +19,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider effectVolumeSlider;
     [SerializeField] private LocalizeStringEvent localStringWindowMode;
+    [SerializeField] private LocalizeStringEvent localStringQuality;
 
     private int _languageIndex = 1;
     private string[] _languageArray = {"English", "Français", "Español", "Deutsch", "Polski", "Português", "Русский", "日本", "中国人", "Türkçe"};
@@ -30,7 +31,18 @@ public class SettingsMenu : MonoBehaviour
         "label-windowmode-fullscreen",
         "label-windowmode-window"
     };
-    
+
+    private string[] _qualityArray = new[]
+    {
+        "label-quality-verylow",
+        "label-quality-low",
+        "label-quality-medium",
+        "label-quality-high",
+        "label-quality-veryhigh",
+        "label-quality-ultra"
+    };
+
+    private int _qualityIndex = 2;
     private int _resolutionIndex = 28; // 1920x1080
     private int[] _resolutionWidthArray = {800, 1020, 1280, 1600, 1920, 2560};
     private int[] _resolutionHeightArray = {600, 720, 800, 900, 1080, 1440};
@@ -85,6 +97,9 @@ public class SettingsMenu : MonoBehaviour
         masterVolumeSlider.value = _masterVolume;
         musicVolumeSlider.value = _musicVolume;
         effectVolumeSlider.value = _effectVolume;
+        
+        // set quality
+        QualitySettings.SetQualityLevel(_qualityIndex);
     }
 
     private void SetText()
@@ -97,6 +112,8 @@ public class SettingsMenu : MonoBehaviour
         else
             localStringWindowMode.StringReference = new LocalizedString("UBRA Translation Table", _windowModeArray[1]);
 
+        localStringQuality.StringReference =
+            new LocalizedString("UBRA Translation Table", _qualityArray[_qualityIndex]);
         fpsToggle.isOn = _showFPS;
     }
 
@@ -188,5 +205,23 @@ public class SettingsMenu : MonoBehaviour
     {
         _showFPS = value;
         config.ShowFPS = value;
+    }
+    
+    /** REFRESH RATE **/
+    
+    public void LeftQualityCarousel()
+    {
+        _qualityIndex = _qualityIndex == 0 
+            ? _qualityArray.Length-1 
+            : Mathf.Clamp(_qualityIndex - 1, 0, _qualityArray.Length - 1);
+        SetText();
+    }
+
+    public void RightQualityCarousel()
+    {
+        _qualityIndex = _qualityIndex == _qualityArray.Length - 1
+            ? 0
+            : Mathf.Clamp(_qualityIndex + 1, 0, _qualityArray.Length - 1);
+        SetText();
     }
 }

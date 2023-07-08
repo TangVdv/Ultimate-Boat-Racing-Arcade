@@ -238,6 +238,34 @@ MonoBehaviour:
     m_Localized: "\u0130sim giriniz"
     m_Metadata:
       m_Items: []
+  - m_Id: 2422037850226688
+    m_Localized: "KAL\u0130TE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Localized: "\xC7OK D\xDC\u015E\xDCK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Localized: "D\xDC\u015E\xDCK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Localized: ORTA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Localized: "Y\xDCKSEK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Localized: "\xC7OK Y\xDCKSEK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Localized: ULTRA
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

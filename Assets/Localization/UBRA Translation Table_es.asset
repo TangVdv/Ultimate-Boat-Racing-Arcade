@@ -238,6 +238,34 @@ MonoBehaviour:
     m_Localized: Ingrese su nombre
     m_Metadata:
       m_Items: []
+  - m_Id: 2422037850226688
+    m_Localized: CALIDAD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Localized: MUY BAJO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Localized: BAJO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Localized: MEDIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Localized: ALTO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Localized: MUY ALTO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Localized: ULTRA
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
