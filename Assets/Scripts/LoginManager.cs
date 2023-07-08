@@ -41,6 +41,8 @@ public class LoginManager : MonoBehaviour
                 var coroutine =  StartCoroutine(configAPI.GetAuth(idCode, "user"));
                 if (coroutine != null) yield return null;
                 yield return coroutine;
+                configAPI.UserData.points += 100;
+                StartCoroutine(configAPI.PostAuth());
                 ConnectionHandler();
             }   
         }

@@ -12,6 +12,7 @@ namespace Checkpoints
     public class CheckpointManager : MonoBehaviour
     {
         [SerializeField] private ConfigScript config;
+        [SerializeField] private ConfigAPI configAPI;
         private TimerScript _timerScript;
         private FinishUI _finishUI;
         
@@ -24,6 +25,7 @@ namespace Checkpoints
             public int lap;
             public int checkpoint;
             public int pos;
+            public int points;
             public List<float> checkpointTime = new List<float>();
             public NewInputManagerInterface newInputManagerInterface;
             public PlayerUI playerUI;
@@ -33,6 +35,7 @@ namespace Checkpoints
                 this.lap = 1;
                 this.checkpoint = 0;
                 this.pos = 1;
+                this.points = 0;
                 this.newInputManagerInterface = player.GetComponent<NewInputManagerInterface>();
                 this.playerUI = player.GetComponent<NewInputManagerInterface>().globalPlayerUI;
             }
@@ -52,7 +55,7 @@ namespace Checkpoints
         private ChronoScript chrono;
         private RaceModeScript race;
         
-        private int[] pointsTable = {15, 12, 10, 8, 6, 4, 2};
+        private int[] _pointsTable = {15, 12, 10, 8, 6, 4, 2};
 
         private void Awake()
         {
@@ -302,6 +305,14 @@ namespace Checkpoints
                     CalculateFinalScoreboard();
                     _finishUI.FinalScoreboardPanel.SetActive(true);
                     Time.timeScale = 0f;
+                    if (configAPI.UserData != null)
+                    {
+                        if(progress.newInputManagerInterface.name == configAPI.UserData.username)
+                        {
+                            configAPI.UserData.points += progress.points;
+                            StartCoroutine(configAPI.PostAuth());
+                        }
+                    }
                 }
                 else
                 {
@@ -317,7 +328,8 @@ namespace Checkpoints
         {
             foreach (var progress in playerProgress)
             {
-                progress.newInputManagerInterface.score += pointsTable[progress.pos - 1];   
+                progress.newInputManagerInterface.score += _pointsTable[progress.pos - 1];
+                progress.points += _pointsTable[progress.pos - 1] * 10;
             }
         }
 

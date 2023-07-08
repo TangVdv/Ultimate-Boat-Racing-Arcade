@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerSetupMenuController : MonoBehaviour
 {
@@ -153,5 +154,10 @@ public class PlayerSetupMenuController : MonoBehaviour
         {
             readyButton.enabled = true;
         }
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }
