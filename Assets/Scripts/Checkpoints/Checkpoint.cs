@@ -13,19 +13,21 @@ namespace Checkpoints
 
         public int ID;
         public bool isAlternative = false;
+        public bool debug = false;
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(_checkpointManager.boats);
+            if(debug) Debug.Log(_checkpointManager.boats);
             if (_checkpointManager.boats.Contains(other.gameObject))
             {
+                if(debug) Debug.Log("Checkpoint passed");
                 _checkpointManager.CheckPointPassed(ID, other.transform.parent.gameObject);
             }
         }
     
         public void SetCheckpointManager(CheckpointManager checkpointManager)
         {
-            Debug.Log("Set checkpoint manager");
+            if(debug) Debug.Log("Set checkpoint manager");
             _checkpointManager = checkpointManager;
         }
         

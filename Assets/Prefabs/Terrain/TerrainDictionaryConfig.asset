@@ -27,3 +27,4 @@ MonoBehaviour:
   terrainNavmesh:
   - {fileID: 23800000, guid: 537e555ad510b23449e8a1965fc426dd, type: 2}
   - {fileID: 23800000, guid: af1a24079a95e7247b974b7d8f9745a3, type: 2}
+  - {fileID: 23800000, guid: c7271684c3b3e934d830d6eb1016b291, type: 2}

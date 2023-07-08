@@ -310,6 +310,7 @@ MonoBehaviour:
   core: {fileID: 7327382676783290315}
   ID: 2
   isAlternative: 0
+  debug: 0
 --- !u!1 &1087578762013597575
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +743,7 @@ MonoBehaviour:
   core: {fileID: 493794181705672995}
   ID: 4
   isAlternative: 1
+  debug: 0
 --- !u!1 &2508507825369488144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,6 +1530,7 @@ MonoBehaviour:
   core: {fileID: 3904436983056493663}
   ID: 5
   isAlternative: 0
+  debug: 0
 --- !u!1 &4590112620370126134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,6 +1653,7 @@ MonoBehaviour:
   core: {fileID: 5107116412950342491}
   ID: 3
   isAlternative: 0
+  debug: 0
 --- !u!1 &4908624809471796520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,6 +1776,7 @@ MonoBehaviour:
   core: {fileID: 2955368776916878974}
   ID: 5
   isAlternative: 1
+  debug: 0
 --- !u!1 &5107116412950342491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2004,7 @@ MonoBehaviour:
   core: {fileID: 1087578762013597575}
   ID: 4
   isAlternative: 0
+  debug: 0
 --- !u!1 &5366450342530806313
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,7 +2097,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
   boats: []
   debug: 0
-  grace: 1
+  grace: 3
   lapGoal: 1
 --- !u!1 &7157161386964864297
 GameObject:
@@ -2442,6 +2448,7 @@ MonoBehaviour:
   core: {fileID: 2508507825369488144}
   ID: 1
   isAlternative: 0
+  debug: 0
 --- !u!1 &7983282798868005234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,6 +2571,7 @@ MonoBehaviour:
   core: {fileID: 2689859653265062747}
   ID: 0
   isAlternative: 0
+  debug: 0
 --- !u!1 &8215400314609326444
 GameObject:
   m_ObjectHideFlags: 0
