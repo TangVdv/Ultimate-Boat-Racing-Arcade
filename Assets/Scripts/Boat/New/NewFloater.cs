@@ -17,6 +17,7 @@ namespace Boat.New
                 float waveHeight = _waveManager.GetWaveHeight(position.x);
                 if (transform.position.y < waveHeight)
                 {
+                    Manager.rigidBody.constraints = RigidbodyConstraints.None;
                     Manager.rigidBody.AddForce(Manager.movementManager.GetSpeedModifier() * Manager.rigidBody.transform.forward / Manager.floaterCount, ForceMode.Acceleration);
                 
                     var position1 = transform.position;
@@ -30,6 +31,10 @@ namespace Boat.New
                     Manager.rigidBody.AddTorque(
                         -Manager.rigidBody.angularVelocity * (displacementMultiplier * Manager.waterAngularDrag * Time.fixedDeltaTime),
                         ForceMode.VelocityChange);
+                }
+                else if(transform.position.y > waveHeight + 20)
+                {
+                    Manager.rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
             else

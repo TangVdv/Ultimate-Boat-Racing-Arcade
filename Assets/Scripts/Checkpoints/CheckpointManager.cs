@@ -68,7 +68,7 @@ namespace Checkpoints
 
         public void Setup()
         {
-            Debug.Log("Setup checkpoint manager");
+            if(debug)Debug.Log("Setup checkpoint manager");
             // First time init
             if (checkpoints == null)
             {
@@ -176,7 +176,7 @@ namespace Checkpoints
         public void CheckPointPassed(int checkpoint, GameObject player)
         {
             PlayerProgress progress = playerProgress.Find(x => x.player == player);
-            Debug.Log(progress);
+            if(debug)Debug.Log(progress);
             if (progress.playerUI)
             {
                 race = progress.playerUI.RaceModeScript;

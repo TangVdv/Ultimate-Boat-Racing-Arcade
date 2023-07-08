@@ -56,8 +56,8 @@ GameObject:
   - component: {fileID: 1803675041365480226}
   - component: {fileID: 3361984888660876423}
   - component: {fileID: 670152579774949453}
-  - component: {fileID: 7866181315698063783}
   - component: {fileID: 5048714192519636141}
+  - component: {fileID: 1996348773897610721}
   m_Layer: 31
   m_Name: Boat_1_Template
   m_TagString: Untagged
@@ -132,8 +132,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7866181315698063783
-MeshCollider:
+--- !u!114 &5048714192519636141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318464285736929688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b259f58737b4a3e488641c13160fb608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 500
+  drag: 0.1
+  angularDrag: 0.1
+  forwardAcceleration: 160
+  backwardAcceleration: 55
+  slowModifier: 0.6
+  fastModifier: 1.5
+  rotationSpeed: 12
+  cannonPosition:
+  - {fileID: 551748780359196599}
+  - {fileID: 4818406820595359415}
+  - {fileID: 4561998355619366790}
+  newFloatersManager: {fileID: 3525095021420174061}
+  identifier: dt24Jdnc
+--- !u!136 &1996348773897610721
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,36 +176,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1920431207705393571, guid: 540a9f8b4afe5e443bc19a5ee97508df, type: 3}
---- !u!114 &5048714192519636141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318464285736929688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b259f58737b4a3e488641c13160fb608, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mass: 800
-  drag: 0.1
-  angularDrag: 0.1
-  forwardAcceleration: 160
-  backwardAcceleration: 55
-  slowModifier: 0.6
-  fastModifier: 1.5
-  rotationSpeed: 12
-  cannonPosition:
-  - {fileID: 551748780359196599}
-  - {fileID: 4818406820595359415}
-  - {fileID: 4561998355619366790}
-  newFloatersManager: {fileID: 3525095021420174061}
-  identifier: dt24Jdnc
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Height: 0.19344516
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0.02}
 --- !u!1 &1989573075104212860
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,17 +58,17 @@ public class SpawnScript : MonoBehaviour
                 Vector3 pos = _start + i * distanceBetweenSpawn * transform.right;
                 if (_boats.Count == 1)
                 {
-                    pos = transform.localPosition;
+                    pos = transform.position;
                 }
-            
                 Vector3 spawnPosition = pos;
                 boat.transform.position = spawnPosition;
             
                 Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
                 Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
                 boat.transform.rotation = boatRotation;
-            
-
+                
+                if(debug)Debug.Log(boat.name+" spawned");
+                
                 i++;
             }   
         }

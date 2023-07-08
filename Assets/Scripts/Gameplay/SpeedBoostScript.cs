@@ -8,11 +8,10 @@ public class SpeedBoostScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody rigidbody = other.GetComponent<Rigidbody>();
+        Rigidbody rigidbody = other.GetComponentInParent<Rigidbody>();
         if (rigidbody)
         {
-            rigidbody.AddForce(rigidbody.transform.forward * boostForce, ForceMode.Impulse);
-            Debug.Log("Add force");
+            rigidbody.AddForce(rigidbody.transform.forward * boostForce, ForceMode.VelocityChange);
         }
     }
 }

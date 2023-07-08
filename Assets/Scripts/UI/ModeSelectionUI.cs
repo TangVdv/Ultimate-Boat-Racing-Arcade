@@ -87,6 +87,7 @@ public class ModeSelectionUI : MonoBehaviour
 
     public void CircuitSelection(int value)
     {
+        _modeSelect = 1;
         _levelIndex = value;
         selectButton.enabled = true;
         SetChronoLevelInfo(value);
