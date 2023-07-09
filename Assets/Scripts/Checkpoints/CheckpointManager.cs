@@ -24,7 +24,7 @@ namespace Checkpoints
             public int lap;
             public int checkpoint;
             public int pos;
-            public List<float> checkpointTime = new List<float>();
+            public List<float> checkpointTime;
             public NewInputManagerInterface newInputManagerInterface;
             public PlayerUI playerUI;
             public PlayerProgress(GameObject player)
@@ -35,6 +35,7 @@ namespace Checkpoints
                 this.pos = 1;
                 this.newInputManagerInterface = player.GetComponent<NewInputManagerInterface>();
                 this.playerUI = player.GetComponent<NewInputManagerInterface>().globalPlayerUI;
+                this.checkpointTime = new List<float>();
             }
         }
     
@@ -327,10 +328,11 @@ namespace Checkpoints
             _finishUI.ClearPlayerScoreboard();
             foreach (var progress in playerProgress)
             {
+                ;
                 _finishUI.InstantiatePlayerScore(
                     progress.pos,
                     progress.newInputManagerInterface.playerName,
-                    _timerScript.ConvertTimerToString(progress.checkpointTime[progress.checkpointTime.Count - 1]), 
+                    _timerScript.ConvertTimerToString(progress.checkpointTime.LastOrDefault()), 
                     progress.newInputManagerInterface.score, 
                     progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player);
             }

@@ -48,7 +48,7 @@ namespace Boat.New
         private int pathCornerIndex = 0;
         public float pathReSamplingInterval = 0.2f;
         private float reSamplingTimer;
-        public float pathCornerDistanceThreshold = 5.0f;
+        public float pathCornerDistanceThreshold = 15.0f;
         private Collider botTargetCollider; 
         
         public LayerMask checkPointMask;
@@ -113,7 +113,6 @@ namespace Boat.New
 		        if (hit.transform.gameObject == gameObject) continue;
 		        filteredHits.Add(hit);
 	        }
-	        Debug.Log("Filtered hits: " + filteredHits.Count);
 	        if(filteredHits.Count <= 0) return;
 	        
 	        
@@ -197,7 +196,7 @@ namespace Boat.New
         {
 	        movementZ = 0;
 	        movementX = 0;
-	        
+
 	        Vector3 position = transform.position;
 
 	        int passedCheckpoint = checkpointManager.GetPlayerProgress(gameObject).Item2;
@@ -266,8 +265,8 @@ namespace Boat.New
 	        float angularSpeed = 0.5f * rigidBody.angularVelocity.y;
 	        float steer = Mathf.Clamp(angularDifference - angularSpeed, -1.0f, 1.0f);
 	        
-	        if (steer >= 0.25f) movementX = -1;
-			else if (steer <= -0.25f) movementX = 1;
+	        if (steer >= 0.50f) movementX = -1;
+			else if (steer <= -0.50f) movementX = 1;
 	        
 	        //If has effect Blind, change movementX randomly
 	        if (State.IsBlinded) movementX = (short)UnityEngine.Random.Range(-1, 1);
@@ -312,6 +311,13 @@ namespace Boat.New
 
         private void Update()
         {
+	        //If world position is too low, respawn
+	        if (transform.position.y < -5.0f)
+	        {
+		        Respawn();
+		        return;
+	        }
+
 	        if(TakeRespawnDecision()) return;
 	        
 	        TakeAmmoDecision();
