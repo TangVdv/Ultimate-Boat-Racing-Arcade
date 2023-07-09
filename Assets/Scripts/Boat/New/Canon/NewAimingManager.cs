@@ -75,7 +75,8 @@ namespace Boat.New.Canon
 
         public void AddRandomMunition()
         {
-            manager.BulletInventory[(BulletType) Random.Range(1, manager.BulletInventory.Count)] += 1;
+            int bullet = Random.Range(1, manager.BulletInventory.Count);
+            manager.BulletInventory[(BulletType) bullet] += 1;
             if (debug)
             {
                 foreach (var bulletType in manager.BulletInventory)
@@ -83,7 +84,7 @@ namespace Boat.New.Canon
                     Debug.Log(bulletType.Key + " : " + bulletType.Value);
                 } 
             }  
-            if(manager.globalPlayerUI != null) manager.globalPlayerUI.UpdateBulletAmount(manager.BulletInventory[manager.currentBulletType]);
+            if(manager.globalPlayerUI != null) manager.globalPlayerUI.IncreaseBulletAmount(bullet, manager.BulletInventory[(BulletType) bullet]);
         }
 
         public void SwitchMunition()

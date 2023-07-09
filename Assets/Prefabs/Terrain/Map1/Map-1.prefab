@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  configAPI: {fileID: 11400000, guid: 9944e6e27af22b1418587f7eaba085ea, type: 2}
   boats: []
   debug: 0
   grace: 1
@@ -281,7 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 8427463236769681781}
   checkpointManager: {fileID: 8427463235666284203}
-  water: {fileID: 8427463236829634509}
   debug: 0
 --- !u!1 &8427463237147644839
 GameObject:

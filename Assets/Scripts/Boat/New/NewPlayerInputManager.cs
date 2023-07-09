@@ -67,7 +67,7 @@ namespace Boat.New
         public void OnFire(InputAction.CallbackContext context)
         {
             wantsToFire = context.ReadValue<float>() > 0 ? true : false;
-            playerUI.UpdateBulletAmount(BulletInventory[currentBulletType]);
+            playerUI.DecreaseBulletAmount(BulletInventory[currentBulletType]);
         }
         public void OnCamera(InputAction.CallbackContext context)
         {
