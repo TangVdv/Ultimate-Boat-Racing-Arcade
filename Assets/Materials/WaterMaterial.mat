@@ -84,7 +84,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     - _amplitude: 2
-    - _length: 20
+    - _length: 50
     - _offset: 0
     - _speed: 1
     m_Colors:

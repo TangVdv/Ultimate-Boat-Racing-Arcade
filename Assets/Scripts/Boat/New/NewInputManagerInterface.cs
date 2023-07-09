@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Boat.New.Canon;
 using Checkpoints;
@@ -32,7 +33,7 @@ namespace Boat.New
             if (lastCheckpoint)
             {
                 transform.position = lastCheckpoint.position;
-                transform.rotation = lastCheckpoint.rotation;
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                 rigidbody.velocity = Vector3.zero;
             }
         }

@@ -47,7 +47,10 @@ public class SetupLevelScript : MonoBehaviour
         ClearLevel();
         _currentMap = Instantiate(terrainDictionary.TerrainPrefab[config.Level]);
         _setupGameScript = _currentMap.GetComponent<SetupGameScript>();
-        _currentNavMesh = NavMesh.AddNavMeshData(terrainDictionary.TerrainNavmesh[config.Level]);
+        if (config.GameMode == 0)
+        {
+            _currentNavMesh = NavMesh.AddNavMeshData(terrainDictionary.TerrainNavmesh[config.Level]);   
+        }
         _setupGameScript.SetupGame(_boats);
         timerScript.ResetTimer();
         timerScript.StartTimer();
