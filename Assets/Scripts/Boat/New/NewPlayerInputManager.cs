@@ -23,6 +23,7 @@ namespace Boat.New
         public bool debug;
 
         private Logger _logger;
+        private PlayerInput _playerInput;
         
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
@@ -67,11 +68,11 @@ namespace Boat.New
         public void OnFire(InputAction.CallbackContext context)
         {
             wantsToFire = context.ReadValue<float>() > 0 ? true : false;
-            playerUI.UpdateBulletAmount(BulletInventory[currentBulletType]);
+            playerUI.DecreaseBulletAmount(BulletInventory[currentBulletType]);
         }
         public void OnCamera(InputAction.CallbackContext context)
         {
-            movementCam = context.ReadValue<float>();
+            movementCam = context.ReadValue<Vector2>().x;
         }
         public void OnAim(InputAction.CallbackContext context)
         {

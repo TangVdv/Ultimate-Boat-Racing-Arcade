@@ -82,8 +82,20 @@ public class PlayerUI : MonoBehaviour
         _bulletsPanelText[_selectedBullet].color = Color.white;
     }
 
-    public void UpdateBulletAmount(int bulletAmount)
+    public void IncreaseBulletAmount(int bullet, int bulletAmount)
     {
-        _bulletsPanelText[_selectedBullet].text = bulletAmount.ToString();
+        _bulletsPanelText[bullet].text = bulletAmount.ToString();
+    }
+
+    public void DecreaseBulletAmount(int bulletAmount)
+    {
+        if (bulletAmount > 9999)
+        {
+            _bulletsPanelText[_selectedBullet].text = "∞";
+        }
+        else
+        {
+            _bulletsPanelText[_selectedBullet].text = bulletAmount.ToString();   
+        }
     }
 }

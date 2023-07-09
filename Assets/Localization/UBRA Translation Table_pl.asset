@@ -238,6 +238,38 @@ MonoBehaviour:
     m_Localized: "Wprowad\u017A imi\u0119"
     m_Metadata:
       m_Items: []
+  - m_Id: 2422037850226688
+    m_Localized: "JAKO\u015A\u0106"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Localized: Bardzo niski
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Localized: NISKI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Localized: "\u015AREDNI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Localized: WYSOKI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Localized: BARDZO WYSOKO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Localized: ULTRA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2428001366179840
+    m_Localized: "NACI\u015ANIJ DOWOLNY PRZYCISK"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

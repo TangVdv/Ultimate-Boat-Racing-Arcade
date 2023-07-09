@@ -5,6 +5,8 @@ namespace Boat.New.Canon
 {
     public class NewFiringManager: MonoBehaviour
     {
+        public Vector3 bodyRotation;
+        public Vector3 barrelRotation;
         public GameObject body;
         public GameObject barrels;
         public Transform[] barrelOutputs;

@@ -238,6 +238,38 @@ MonoBehaviour:
     m_Localized: Enter name
     m_Metadata:
       m_Items: []
+  - m_Id: 2422037850226688
+    m_Localized: QUALITY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Localized: VERY LOW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Localized: LOW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Localized: MEDIUM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Localized: HIGH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Localized: VERY HIGH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Localized: ULTRA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2428001366179840
+    m_Localized: PRESS ANY BUTTON
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

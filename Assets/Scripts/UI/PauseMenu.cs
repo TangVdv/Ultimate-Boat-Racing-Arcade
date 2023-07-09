@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private InputAction pauseAction;
     [SerializeField] private TimerScript timer;
+    [SerializeField] private SetupLevelScript setupLevelScript;
 
     private bool _isGamePaused;
 
@@ -43,6 +44,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         timer.ResumeTimer();
         _isGamePaused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Pause()
@@ -51,11 +54,19 @@ public class PauseMenu : MonoBehaviour
         timer.PauseTimer();
         Time.timeScale = 0f;
         _isGamePaused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void BackToMenu()
     {
         Resume();
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void Restart()
+    {
+        Resume();
+        setupLevelScript.ResetCurrentMap();
     }
 }

@@ -909,6 +909,10 @@ PrefabInstance:
       value: 35f57d77-07fb-47f5-8c1e-257fa6832470
       objectReference: {fileID: 0}
     - target: {fileID: 6533681500781516150, guid: 9a48e1ba03825d042be6f7a40ead56bf, type: 3}
+      propertyPath: setupLevelScript
+      value: 
+      objectReference: {fileID: 952903658}
+    - target: {fileID: 6533681500781516150, guid: 9a48e1ba03825d042be6f7a40ead56bf, type: 3}
       propertyPath: pauseAction.m_Name
       value: Pause
       objectReference: {fileID: 0}

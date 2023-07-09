@@ -30,6 +30,7 @@ public class TimerScript : MonoBehaviour
     {
         timerText.text = "00:00:000";
         _timerChrono = 0f;
+        _totalPausedTime = 0f;
         PauseTimer();
     }
 

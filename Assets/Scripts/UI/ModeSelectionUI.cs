@@ -13,6 +13,7 @@ using Button = UnityEngine.UI.Button;
 public class ModeSelectionUI : MonoBehaviour
 {
     [SerializeField] private ConfigScript config;
+    [SerializeField] private SaveDataScript saveData;
     [SerializeField] private TerrainDictionary terrainDictionary;
     [SerializeField] private Button selectButton;
     [SerializeField] private GameObject detailsPanel;
@@ -40,6 +41,7 @@ public class ModeSelectionUI : MonoBehaviour
 
     private void Start()
     {
+        saveData.LoadData();
         InstantiateMap();
         DisableButton();
         SetText();

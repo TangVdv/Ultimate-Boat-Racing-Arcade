@@ -11,7 +11,6 @@ using UnityEngine.Windows.Speech;
 [CreateAssetMenu(fileName = "API", menuName = "ConfigAPI", order = 0)]
 public class ConfigAPI : ScriptableObject
 {
-    private string _idCode;
     private const string APIUrl = "http://localhost";
     private UserData _userData;
     private SkinsArray _skinsArray;
@@ -61,7 +60,7 @@ public class ConfigAPI : ScriptableObject
      */
     public IEnumerator GetAuth(string idCode, string data)
     {
-        string url = $"{APIUrl}/auth?id_code={_idCode}&data={data}";
+        string url = $"{APIUrl}/auth?id_code={idCode}&data={data}";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -105,6 +104,52 @@ public class ConfigAPI : ScriptableObject
         }
 
         yield return null;
+    }
+
+    /*
+     *      POST /auth
+     *      id_code = string
+     *      points = int
+     */
+    public IEnumerator AddPointsToUser(int points)
+    {
+        if (_userData == null) yield return null;
+        string idCode = _userData.id_code;
+        string url = $"{APIUrl}/auth";
+        using (UnityWebRequest request = UnityWebRequest.Post(url, $"{{ \"id_code\": \"{idCode}\", \"points\": {points} }}", "application/json"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError ||
+                request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError($"Erreur de connexion : {request.error}");
+                yield return request.error;
+            }
+
+            if (request.responseCode == 400)
+            {
+                Debug.LogError("Requête incorrecte. Voir Format Erreurs 400");
+                yield return request.responseCode;
+            }
+            else if (request.responseCode == 403)
+            {
+                Debug.LogError("Token invalide");
+                yield return request.responseCode;
+            }
+            else if (request.responseCode == 500)
+            {
+                Debug.LogError("Erreur interne. Voir Format Erreurs 500");
+                yield return request.responseCode;
+                ;
+            }
+            else if (request.responseCode == 200)
+            {
+                string jsonResponse = request.downloadHandler.text;
+                Debug.Log("Points ajoutés");
+                _userData.points = JsonUtility.FromJson<int>(jsonResponse);
+            }
+        }
     }
 }
 

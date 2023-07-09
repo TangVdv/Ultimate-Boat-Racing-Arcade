@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class SetupGameScript : MonoBehaviour
 {
@@ -40,11 +41,19 @@ public class SetupGameScript : MonoBehaviour
             checkpointManager.AddPlayer(boat);   
         }
         spawner.Spawn();
+        DisableMouse();
     }
 
     public void Reset()
     {
         if(spawner) spawner.Spawn();
         if(checkpointManager) checkpointManager.Setup();
+        DisableMouse();
+    }
+
+    private void DisableMouse()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

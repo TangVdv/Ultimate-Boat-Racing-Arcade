@@ -238,6 +238,38 @@ MonoBehaviour:
     m_Localized: Entrez un nom
     m_Metadata:
       m_Items: []
+  - m_Id: 2422037850226688
+    m_Localized: "QUALIT\xC9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Localized: "TR\xC8S FAIBLE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Localized: FAIBLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Localized: MOYEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Localized: HAUT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Localized: "TR\xC8S HAUT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Localized: ULTRA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2428001366179840
+    m_Localized: APPUYER SUR UN BOUTON
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

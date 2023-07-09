@@ -12,5 +12,4 @@ public class CannonConfigurationParameters : MonoBehaviour
         get => identifier; 
         set => identifier = value;
     }
-
 }

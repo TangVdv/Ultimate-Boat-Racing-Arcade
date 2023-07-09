@@ -44,7 +44,11 @@ namespace Boat.New.Canon
 
             foreach (var canon in canons)
             {
-                Quaternion qt = Quaternion.Euler(0, _localRotation, 0);
+                Quaternion qt = Quaternion.Euler(
+                     canon.bodyRotation.x != 0 ? _localRotation : 0, 
+                     canon.bodyRotation.y != 0 ? _localRotation : 0,
+                     canon.bodyRotation.z != 0 ? _localRotation : 0
+                     );
                 canon.body.transform.localRotation =  Quaternion.Lerp(canon.body.transform.localRotation, qt, Time.deltaTime * orbitDampening);
 
                 if (manager.movementBarrels != 0)
@@ -52,7 +56,11 @@ namespace Boat.New.Canon
                     _scrollAmount += manager.movementBarrels * scrollSensitivity;
                     _scrollAmount = Mathf.Clamp(_scrollAmount, 0, topClamp);
                     
-                    qt = Quaternion.Euler(_scrollAmount, 0, 0);
+                    qt = Quaternion.Euler(
+                        canon.barrelRotation.x != 0 ? _scrollAmount : 0, 
+                        canon.barrelRotation.y != 0 ? _scrollAmount : 0, 
+                        canon.barrelRotation.z != 0 ? _scrollAmount : 0
+                        );
                     canon.barrels.transform.localRotation = Quaternion.Lerp(canon.barrels.transform.localRotation, qt, Time.deltaTime * orbitDampening);
                 }
             }
@@ -75,7 +83,8 @@ namespace Boat.New.Canon
 
         public void AddRandomMunition()
         {
-            manager.BulletInventory[(BulletType) Random.Range(1, manager.BulletInventory.Count)] += 1;
+            int bullet = Random.Range(1, manager.BulletInventory.Count);
+            manager.BulletInventory[(BulletType) bullet] += 1;
             if (debug)
             {
                 foreach (var bulletType in manager.BulletInventory)
@@ -83,7 +92,7 @@ namespace Boat.New.Canon
                     Debug.Log(bulletType.Key + " : " + bulletType.Value);
                 } 
             }  
-            if(manager.globalPlayerUI != null) manager.globalPlayerUI.UpdateBulletAmount(manager.BulletInventory[manager.currentBulletType]);
+            if(manager.globalPlayerUI != null) manager.globalPlayerUI.IncreaseBulletAmount(bullet, manager.BulletInventory[(BulletType) bullet]);
         }
 
         public void SwitchMunition()

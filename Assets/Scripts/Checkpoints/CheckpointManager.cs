@@ -4,6 +4,7 @@ using System.Linq;
 using Boat.New;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //Use tuples
 
@@ -12,6 +13,8 @@ namespace Checkpoints
     public class CheckpointManager : MonoBehaviour
     {
         [SerializeField] private ConfigScript config;
+        [SerializeField] private ConfigAPI configAPI;
+        [SerializeField] private SaveDataScript saveData;
         private TimerScript _timerScript;
         private FinishUI _finishUI;
         
@@ -24,6 +27,7 @@ namespace Checkpoints
             public int lap;
             public int checkpoint;
             public int pos;
+            public int points;
             public List<float> checkpointTime;
             public NewInputManagerInterface newInputManagerInterface;
             public PlayerUI playerUI;
@@ -33,6 +37,7 @@ namespace Checkpoints
                 this.lap = 1;
                 this.checkpoint = 0;
                 this.pos = 1;
+                this.points = 0;
                 this.newInputManagerInterface = player.GetComponent<NewInputManagerInterface>();
                 this.playerUI = player.GetComponent<NewInputManagerInterface>().globalPlayerUI;
                 this.checkpointTime = new List<float>();
@@ -53,7 +58,7 @@ namespace Checkpoints
         private ChronoScript chrono;
         private RaceModeScript race;
         
-        private int[] pointsTable = {15, 12, 10, 8, 6, 4, 2};
+        private int[] _pointsTable = {15, 12, 10, 8, 6, 4, 2};
 
         private void Awake()
         {
@@ -236,6 +241,7 @@ namespace Checkpoints
                     
                     if(progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
                     {
+                        progress.player.GetComponent<PlayerInput>().enabled = false;
                         _playerFinishedAmount++;
                     }
 
@@ -260,6 +266,8 @@ namespace Checkpoints
 
         private void HandleFinishUI(PlayerProgress progress)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             if (config.GameMode == 1)
             {
                 //CHRONO MODE
@@ -289,6 +297,7 @@ namespace Checkpoints
                 {
                     config.BestTimePlayerName.Insert(config.Level, progress.newInputManagerInterface.playerName);
                     config.CheckpointTimes[config.Level] = progress.checkpointTime;
+                    saveData.SaveMapData(config.Level);
                 }
                             
             }
@@ -303,6 +312,13 @@ namespace Checkpoints
                     CalculateFinalScoreboard();
                     _finishUI.FinalScoreboardPanel.SetActive(true);
                     Time.timeScale = 0f;
+                    if (configAPI.UserData != null)
+                    {
+                        if(progress.newInputManagerInterface.name == configAPI.UserData.username)
+                        {
+                            StartCoroutine(configAPI.AddPointsToUser(progress.points));
+                        }
+                    }
                 }
                 else
                 {
@@ -318,7 +334,8 @@ namespace Checkpoints
         {
             foreach (var progress in playerProgress)
             {
-                progress.newInputManagerInterface.score += pointsTable[progress.pos - 1];   
+                progress.newInputManagerInterface.score += _pointsTable[progress.pos - 1];
+                progress.points += _pointsTable[progress.pos - 1] * 10;
             }
         }
 
