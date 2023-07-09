@@ -20,10 +20,10 @@ public class DisplayPrefab : MonoBehaviour
     public float colorButtonScale = 70f;
 
     private string _layerName;
-    private List<GameObject> _boatPreview;
-    private List<GameObject> _boatTemplate;
-    private List<GameObject> _cannonPreview;
-    private List<GameObject> _cannonTemplate;
+    private List<GameObject> _boatPreview = new List<GameObject>();
+    private List<GameObject> _boatTemplate = new List<GameObject>();
+    private List<GameObject> _cannonPreview = new List<GameObject>();
+    private List<GameObject> _cannonTemplate = new List<GameObject>();
     
     private string _identifier;
     private void Start()
@@ -32,7 +32,6 @@ public class DisplayPrefab : MonoBehaviour
         _boatTemplate = templatesDictionaryConfig.BoatTemplate;
         _cannonPreview = templatesDictionaryConfig.CannonPreview;
         _cannonTemplate = templatesDictionaryConfig.CannonTemplate;
-
         if (boatSelection)
         {
             _layerName = boatSelection.LayerName;
@@ -99,7 +98,6 @@ public class DisplayPrefab : MonoBehaviour
             if (boatSelection)
             {
                 UnityAction buttonClickHandler = () => { boatSelection.SetPrefab(_cannonTemplate[index], cannon, 1); };
-
                 button.GetComponent<Button>().onClick.AddListener(buttonClickHandler);
             }
             

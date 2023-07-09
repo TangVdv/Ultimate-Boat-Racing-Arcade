@@ -303,7 +303,7 @@ MonoBehaviour:
     m_ActionId: 74e08d5f-fb36-48f3-944e-cab01f76b56d
     m_ActionName: BoatController/StartGame[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: BoatController
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 3570467281397709440}
@@ -322,7 +322,7 @@ MonoBehaviour:
   manager: {fileID: 6076377763760968102}
   canons: []
   pivot: {fileID: 632071242455043269}
-  mouseSensitivity: 1
+  mouseSensitivity: 0.3
   scrollSensitivity: 20
   orbitDampening: 10
   topClamp: 25
@@ -375,6 +375,7 @@ MonoBehaviour:
   slowModifier: 0.6
   fastModifier: 1.5
   rotationSpeed: 100000
+  boostMultiplier: 0
 --- !u!114 &3779526080161754913
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Text resolutionText;
     [SerializeField] private Text fpsText;
     [SerializeField] private Toggle fpsToggle;
+    [SerializeField] private Toggle vsyncToggle;
     [SerializeField] private Slider masterVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider effectVolumeSlider;
@@ -56,6 +57,8 @@ public class SettingsMenu : MonoBehaviour
     private int _masterVolume = 50;
     private int _musicVolume = 50;
     private int _effectVolume = 50;
+
+    private int _vsync;
 
     private float timer, timelapse, avgFramerate;
 
@@ -100,6 +103,9 @@ public class SettingsMenu : MonoBehaviour
         
         // set quality
         QualitySettings.SetQualityLevel(_qualityIndex);
+        
+        // set vsync
+        QualitySettings.vSyncCount = _vsync;
     }
 
     private void SetText()
@@ -205,6 +211,12 @@ public class SettingsMenu : MonoBehaviour
     {
         _showFPS = value;
         config.ShowFPS = value;
+    }
+    
+    /** VSYNC */
+    public void VsyncToggle(bool value)
+    {
+        _vsync = value ? 1 : 0;
     }
     
     /** REFRESH RATE **/

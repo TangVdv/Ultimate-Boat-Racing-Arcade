@@ -23,7 +23,6 @@ public class ModeSelectionUI : MonoBehaviour
     [SerializeField] private LocalizeStringEvent difficultyStringEvent;
     [SerializeField] private Text circuitNameText;
     [SerializeField] private Text circuitBestTimeText;
-    [SerializeField] private Text playerNameText;
 
     private int _modeSelect;
     private int _levelIndex = 0;
@@ -112,10 +111,6 @@ public class ModeSelectionUI : MonoBehaviour
         }
         
         circuitBestTimeText.text = text;
-        text = "";
-        if (config.BestTimePlayerName.ElementAtOrDefault(value) != null)
-            text = config.BestTimePlayerName[value];
-        playerNameText.text = text;
     }
 
     public void DisableButton()

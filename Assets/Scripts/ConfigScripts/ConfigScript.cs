@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Config", menuName = "ConfigScript", order = 0)]
 public class ConfigScript : ScriptableObject
 {
-    public List<string> BestTimePlayerName { get; set; } = new List<string>(5);
-
     public List<PlayerConfiguration> PlayerConfigurations { get; set; }
     
     private List<Color> _defaultColors = new List<Color>()
@@ -33,10 +31,10 @@ public class ConfigScript : ScriptableObject
 
     //Dictionary<color_identifier, boat_identifier>
     public Dictionary<string, string> ColorIdentifierByBoat { get; set; }
-    
-    public List<GameObject> BoatTemplates { get; set; }
-    
-    public List<GameObject> CannonTemplate { get; set; }
+
+    public List<GameObject> BoatTemplates { get; set; } = new List<GameObject>();
+
+    public List<GameObject> CannonTemplate { get; set; } = new List<GameObject>();
     public List<float>[] CheckpointTimes { get; set; } = new List<float>[5];
 
     public int Level { get; set; }

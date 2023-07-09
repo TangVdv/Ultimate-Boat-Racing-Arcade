@@ -31,41 +31,13 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         SetPlayerIndex(GetComponentInParent<PlayerInput>().playerIndex);
         readyButton.enabled = false;
-        CreateNewLayer();
         playerCamera.cullingMask |= (1 << LayerMask.NameToLayer(_layerName));
     }
     
-    private static void CreateNewLayer()
-    {
-        SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
-        SerializedProperty layersProperty = tagManager.FindProperty("layers");
-        int emptyLayerIndex = -1;
-        for (int i = 8; i < layersProperty.arraySize; i++)
-        {
-            SerializedProperty layerProperty = layersProperty.GetArrayElementAtIndex(i);
-            if (string.IsNullOrEmpty(layerProperty.stringValue))
-            {
-                emptyLayerIndex = i;
-                break;
-            }
-        }
-            
-        if (emptyLayerIndex != -1)
-        {
-            SerializedProperty newLayer = layersProperty.GetArrayElementAtIndex(emptyLayerIndex);
-            newLayer.stringValue = _staticLayerName;
-            tagManager.ApplyModifiedProperties();
-            Debug.Log("New layer created: "+_staticLayerName);
-        }
-        else
-        {
-            Debug.LogError("No empty layer slot available. Please free up a layer and try again.");
-        }
-    }
     private void SetPlayerIndex(int pi)
     {
         _playerIndex = pi;
-        _layerName = "Player " + (pi + 1);
+        _layerName = "Player" + (pi + 1);
         _staticLayerName = _layerName;
         playerName.text = _layerName;
     }

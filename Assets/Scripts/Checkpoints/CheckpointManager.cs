@@ -286,7 +286,8 @@ namespace Checkpoints
                 // Save checkpoint times to config
                 if (timerDiff < 0 || config.CheckpointTimes[config.Level] == null)
                 {
-                    config.BestTimePlayerName.Insert(config.Level, progress.newInputManagerInterface.playerName);
+                    Debug.Log(config.Level);
+                    Debug.Log(progress.newInputManagerInterface.playerName);
                     config.CheckpointTimes[config.Level] = progress.checkpointTime;
                     saveData.SaveMapData(config.Level);
                 }
@@ -305,10 +306,7 @@ namespace Checkpoints
                     Time.timeScale = 0f;
                     if (configAPI.UserData != null)
                     {
-                        if(progress.newInputManagerInterface.name == configAPI.UserData.username)
-                        {
-                            StartCoroutine(configAPI.AddPointsToUser(progress.points));
-                        }
+                        StartCoroutine(configAPI.AddPointsToUser(progress.points));
                     }
                 }
                 else

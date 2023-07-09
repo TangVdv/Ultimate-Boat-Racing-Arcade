@@ -36,7 +36,7 @@ public class Logger : MonoBehaviour
         {
             _myLog = _myLog.Substring(_myLog.Length - kChars);
         }
- 
+
         // for the file ...
         if (_filename == "")
         {

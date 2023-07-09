@@ -395,7 +395,7 @@ Transform:
   m_GameObject: {fileID: 3801853768087537984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1671704562973019930}
@@ -1370,6 +1370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  configAPI: {fileID: 11400000, guid: 9944e6e27af22b1418587f7eaba085ea, type: 2}
+  saveData: {fileID: 11400000, guid: d20143da26a18154aa6dde6262d12954, type: 2}
   boats: []
   debug: 0
   grace: 3
@@ -2438,7 +2440,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 921542227842563767, guid: bdac55d69075779469856edabea8c9a3, type: 3}
       propertyPath: boostForce
-      value: 45
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: bdac55d69075779469856edabea8c9a3, type: 3}
       propertyPath: m_RootOrder

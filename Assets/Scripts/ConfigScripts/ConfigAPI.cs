@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEditor.PackageManager;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Windows.Speech;
@@ -12,8 +10,8 @@ using UnityEngine.Windows.Speech;
 public class ConfigAPI : ScriptableObject
 {
     private const string APIUrl = "http://localhost";
-    private UserData _userData;
-    private SkinsArray _skinsArray;
+    private UserData _userData = new UserData();
+    private SkinsArray _skinsArray = new SkinsArray();
     private bool _isConnected;
     
     public bool IsConnected
