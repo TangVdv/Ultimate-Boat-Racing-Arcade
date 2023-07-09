@@ -322,7 +322,7 @@ MonoBehaviour:
   manager: {fileID: 6076377763760968102}
   canons: []
   pivot: {fileID: 632071242455043269}
-  mouseSensitivity: 0.3
+  mouseSensitivity: 1
   scrollSensitivity: 20
   orbitDampening: 10
   topClamp: 25

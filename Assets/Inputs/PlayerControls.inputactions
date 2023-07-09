@@ -300,7 +300,7 @@
                 {
                     "name": "",
                     "id": "e7c47db6-2454-430a-839e-227de8cec91e",
-                    "path": "<Gamepad>/rightStick/x",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -949,7 +949,7 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 }
             ]
