@@ -13,6 +13,7 @@ namespace Checkpoints
     {
         [SerializeField] private ConfigScript config;
         [SerializeField] private ConfigAPI configAPI;
+        [SerializeField] private SaveDataScript saveData;
         private TimerScript _timerScript;
         private FinishUI _finishUI;
         
@@ -291,6 +292,7 @@ namespace Checkpoints
                 {
                     config.BestTimePlayerName.Insert(config.Level, progress.newInputManagerInterface.playerName);
                     config.CheckpointTimes[config.Level] = progress.checkpointTime;
+                    saveData.SaveMapData(config.Level);
                 }
                             
             }
