@@ -18,7 +18,8 @@ public class PlayerSetupMenuController : MonoBehaviour
     public bool debug;
     
     private int _playerIndex;
-    private static string _layerName;
+    private static string _staticLayerName;
+    private string _layerName;
     public string LayerName => _layerName;
     private bool _isCannonSet;
     private bool _isBoatSet;
@@ -52,9 +53,9 @@ public class PlayerSetupMenuController : MonoBehaviour
         if (emptyLayerIndex != -1)
         {
             SerializedProperty newLayer = layersProperty.GetArrayElementAtIndex(emptyLayerIndex);
-            newLayer.stringValue = _layerName;
+            newLayer.stringValue = _staticLayerName;
             tagManager.ApplyModifiedProperties();
-            Debug.Log("New layer created: "+_layerName);
+            Debug.Log("New layer created: "+_staticLayerName);
         }
         else
         {
@@ -65,6 +66,7 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         _playerIndex = pi;
         _layerName = "Player " + (pi + 1);
+        _staticLayerName = _layerName;
         playerName.text = _layerName;
     }
 
