@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50124f2a46c4e63bd606c862ffcfcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyRotation: {x: 0, y: 0, z: 1}
+  barrelRotation: {x: 0, y: 1, z: 0}
   body: {fileID: 7871114330698848872}
   barrels: {fileID: 8229700782025351949}
   barrelOutputs:
