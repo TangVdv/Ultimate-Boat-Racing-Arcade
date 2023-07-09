@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: "PRESSIONE QUALQUER BOT\xC3O"
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: Limpe todos os dados
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

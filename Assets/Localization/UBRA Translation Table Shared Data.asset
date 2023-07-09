@@ -267,6 +267,10 @@ MonoBehaviour:
     m_Key: label-pressbutton
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Key: btn-cleardata
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

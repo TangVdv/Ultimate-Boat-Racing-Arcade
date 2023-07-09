@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: "PRESIONE CUALQUIER BOT\xD3N"
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: Borrar todos los datos
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

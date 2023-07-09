@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: "HERHANG\u0130 B\u0130R TU\u015EA BASIN"
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: "T\xFCm verileri temizleyin"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

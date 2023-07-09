@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: APPUYER SUR UN BOUTON
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: "Effacer toutes les donn\xE9es"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

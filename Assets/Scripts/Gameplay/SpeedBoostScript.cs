@@ -13,7 +13,7 @@ public class SpeedBoostScript : MonoBehaviour
         NewBoatMovementManager boatMovementManager = other.GetComponentInParent<NewBoatMovementManager>();
         if (rigidbody && boatMovementManager)
         {
-            rigidbody.AddForce(rigidbody.transform.forward * boostForce * boatMovementManager.boostMultiplier, ForceMode.VelocityChange);
+            rigidbody.AddForce(transform.forward * boostForce * boatMovementManager.boostMultiplier, ForceMode.VelocityChange);
         }
     }
 }

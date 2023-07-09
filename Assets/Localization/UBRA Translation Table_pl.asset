@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: "NACI\u015ANIJ DOWOLNY PRZYCISK"
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: "Wyczy\u015B\u0107 wszystkie dane"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

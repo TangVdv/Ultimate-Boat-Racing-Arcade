@@ -29,6 +29,12 @@ public class SaveDataScript : ScriptableObject
         }
     }
 
+    public void ClearAllData()
+    {
+        Debug.Log("Clear all data");
+        PlayerPrefs.DeleteAll();
+    }
+
     public void SaveAllData()
     {
         Debug.Log("Save all data");

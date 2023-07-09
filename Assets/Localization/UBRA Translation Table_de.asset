@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: "DR\xDCCKE IRGEND EINEN KNOPF"
     m_Metadata:
       m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: "Alle Daten l\xF6schen"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
