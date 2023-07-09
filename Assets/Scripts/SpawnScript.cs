@@ -6,6 +6,7 @@ using Boat.New;
 using Checkpoints;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class SpawnScript : MonoBehaviour
@@ -67,8 +68,10 @@ public class SpawnScript : MonoBehaviour
                 Quaternion spawnerRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
                 Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
                 boat.transform.rotation = boatRotation;
-            
-
+                
+                PlayerInput playerInput = boat.GetComponent<PlayerInput>();
+                if (playerInput) playerInput.enabled = true;
+                
                 i++;
             }   
         }

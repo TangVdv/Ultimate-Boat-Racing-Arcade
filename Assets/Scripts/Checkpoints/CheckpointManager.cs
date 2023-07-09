@@ -4,6 +4,7 @@ using System.Linq;
 using Boat.New;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //Use tuples
 
@@ -239,6 +240,7 @@ namespace Checkpoints
                     
                     if(progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
                     {
+                        progress.player.GetComponent<PlayerInput>().enabled = false;
                         _playerFinishedAmount++;
                     }
 
@@ -263,6 +265,8 @@ namespace Checkpoints
 
         private void HandleFinishUI(PlayerProgress progress)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             if (config.GameMode == 1)
             {
                 //CHRONO MODE
