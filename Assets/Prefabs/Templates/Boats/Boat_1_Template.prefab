@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5089271285911362125}
   - component: {fileID: 6700162043534751865}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Floater (3)
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -151,12 +151,13 @@ MonoBehaviour:
   backwardAcceleration: 55
   slowModifier: 0.6
   fastModifier: 1.5
-  rotationSpeed: 12
+  rotationSpeed: 5
   cannonPosition:
   - {fileID: 551748780359196599}
   - {fileID: 4818406820595359415}
   - {fileID: 4561998355619366790}
   newFloatersManager: {fileID: 3525095021420174061}
+  boostModifier: 1
   identifier: dt24Jdnc
 --- !u!136 &1996348773897610721
 CapsuleCollider:
@@ -190,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551748780359196599}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Pos1
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -221,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5976405045792897862}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Cannons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2315294457104599836}
   - component: {fileID: 3525095021420174061}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Floaters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830906216540612477}
   - component: {fileID: 3191924050809602172}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Floater (2)
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -356,7 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1210801341235608531}
   - component: {fileID: 3910385561361341749}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Floater (1)
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -400,7 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4818406820595359415}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Pos2
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -432,7 +433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 60102626607390144}
   - component: {fileID: 5104779065298963103}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Floater
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -476,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4561998355619366790}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Pos3
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}

@@ -311,22 +311,27 @@ namespace Boat.New
 
         private void Update()
         {
-	        //If world position is too low, respawn
-	        if (transform.position.y < -5.0f)
-	        {
-		        Respawn();
-		        return;
-	        }
-
 	        if(TakeRespawnDecision()) return;
 	        
 	        TakeAmmoDecision();
 	        
-	        if(checkpointManager) TakeMovementDecision();
 	        TakeAimingDecision();
 
 	        UpdateCanonAngle();
         }
 
+        private void FixedUpdate()
+        {
+	        //If world position is too low, respawn
+	        if (transform.position.y < -5.0f)
+	        {
+		        movementX = 0;
+		        movementZ = 0;
+		        return;
+	        }
+
+	        if(checkpointManager) TakeMovementDecision();
+	        
+        }
     }
 }

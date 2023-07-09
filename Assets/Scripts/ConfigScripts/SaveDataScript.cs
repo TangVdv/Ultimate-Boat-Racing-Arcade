@@ -7,7 +7,7 @@ using UnityEngine;
 public class SaveDataScript : ScriptableObject
 {
     [SerializeField] private ConfigScript config;
-
+    
     public void LoadData()
     {
         Debug.Log("Load data");

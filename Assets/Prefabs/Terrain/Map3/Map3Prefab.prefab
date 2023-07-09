@@ -1819,6 +1819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
+  configAPI: {fileID: 0}
+  saveData: {fileID: 0}
   boats: []
   debug: 0
   grace: 3
@@ -1973,7 +1975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: d9df77178067f57429417ee9d87df81e, type: 2}
-  size: 150
+  size: 50
   debug: 1
 --- !u!1 &5566922894718926954
 GameObject:

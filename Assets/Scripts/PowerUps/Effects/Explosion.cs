@@ -15,17 +15,17 @@ namespace PowerUps.Effects
         
         private void Start()
         {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, 100.0f, affectedLayer);
+            Collider[] hits = Physics.OverlapSphere(transform.position, radius, affectedLayer);
             foreach (var hit in hits)
             {
-                var rb = hit.collider.GetComponent<Rigidbody>();
+                var rb = hit.GetComponentInParent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.AddExplosionForce(force, transform.position, radius);
+                    rb.AddForce((hit.transform.position - transform.position) * force, ForceMode.Impulse);
                 }
             }
         }
-        
+
         private void Update()
         {
             lifeCycle -= Time.deltaTime;

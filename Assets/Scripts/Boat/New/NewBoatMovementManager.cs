@@ -16,6 +16,8 @@ namespace Boat.New
         public float fastModifier = 1.5f;
 
         public float rotationSpeed = 5f;
+
+        public float boostMultiplier;
         
         private float _speedModifier;
 

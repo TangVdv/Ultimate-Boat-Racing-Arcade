@@ -15,8 +15,15 @@ public class BoatConfigurationParameters : MonoBehaviour
     [SerializeField] private int rotationSpeed;
     [SerializeField] private Transform[] cannonPosition;
     [SerializeField] private NewFloatersManager newFloatersManager;
+    [SerializeField] private float boostModifier;
     [SerializeField] private string identifier;
 
+    public float BoostModifier
+    {
+        get => boostModifier;
+        set => boostModifier = value;
+    }
+    
     public int Mass
     {
         get => mass;

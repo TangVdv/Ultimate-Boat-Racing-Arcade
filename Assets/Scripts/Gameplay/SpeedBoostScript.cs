@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Boat.New;
 using UnityEngine;
 
 public class SpeedBoostScript : MonoBehaviour
@@ -9,9 +10,10 @@ public class SpeedBoostScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody rigidbody = other.GetComponentInParent<Rigidbody>();
-        if (rigidbody)
+        NewBoatMovementManager boatMovementManager = other.GetComponentInParent<NewBoatMovementManager>();
+        if (rigidbody && boatMovementManager)
         {
-            rigidbody.AddForce(rigidbody.transform.forward * boostForce, ForceMode.VelocityChange);
+            rigidbody.AddForce(rigidbody.transform.forward * boostForce * boatMovementManager.boostMultiplier, ForceMode.VelocityChange);
         }
     }
 }

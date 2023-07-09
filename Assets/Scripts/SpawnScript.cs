@@ -37,12 +37,11 @@ public class SpawnScript : MonoBehaviour
     public void SpawnSetup(List<GameObject> boats)
     {
         _boats = boats;
-        var transform1 = transform;
-        var localPosition = transform1.localPosition;
-        var right = transform1.right;
+        var position = transform.position;
+        var right = transform.right;
         
-        _start = localPosition - right * size;
-        _end = localPosition + right * size;
+        _start = position - right * size;
+        _end = position + right * size;
     }
     
     public void Spawn()

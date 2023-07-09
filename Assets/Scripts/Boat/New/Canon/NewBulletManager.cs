@@ -26,11 +26,12 @@ namespace Boat.New.Canon
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.layer != affectedLayer) Destroy(gameObject);
+            if (other.gameObject.layer != affectedLayer) return;
             
             //if other is origin boat, do nothing
-            if (other.gameObject == originBoat) Destroy(gameObject);
-            else Apply();
+            if (other.gameObject == originBoat) return;
+            
+            Apply();
         }
 
         public void Apply()

@@ -38,7 +38,8 @@ public class SetupGameScript : MonoBehaviour
         foreach (var boat in boats)
         {
             if(debug)Debug.Log(boat);
-            checkpointManager.AddPlayer(boat);   
+            checkpointManager.AddPlayer(boat);
+            boat.GetComponent<NewInputManagerInterface>().Respawn();
         }
         spawner.Spawn();
         DisableMouse();

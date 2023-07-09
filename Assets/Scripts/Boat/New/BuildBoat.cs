@@ -88,6 +88,7 @@ public class BuildBoat : MonoBehaviour
         newBoatMovementManager.slowModifier = _boatConfigurationParameters.SlowModifier;
         newBoatMovementManager.fastModifier = _boatConfigurationParameters.FastModifier;
         newBoatMovementManager.rotationSpeed = _boatConfigurationParameters.RotationSpeed;
+        newBoatMovementManager.boostMultiplier = _boatConfigurationParameters.BoostModifier;
 
         _newFloatersManager = _boatConfigurationParameters.NewFloatersManager;
         _newFloatersManager.rigidBody = rigidbody;

@@ -115,7 +115,6 @@ namespace Checkpoints
                 progress.lap = 1;
                 progress.checkpoint = 0;
                 progress.checkpointTime = new List<float>();
-                if(progress.playerUI) progress.playerUI.RaceModeScript.SetMaxLapText(lapGoal);
                 progress.newInputManagerInterface.checkpointManager = this;
                 progress.newInputManagerInterface.newBoatMovementManager.frozen = false;
                 var aiInputManager = progress.player.GetComponent<NewAIInputManager>();
@@ -252,14 +251,6 @@ namespace Checkpoints
                         return;
                     }
                 }
-                else
-                {
-                    // Next lap
-                    if (config.GameMode == 0)
-                    {
-                        race.SetCurrentLapText(progress.lap);
-                    }
-                }
             }
             if(debug) UpdateVisuals(progress);
         }
@@ -378,7 +369,7 @@ namespace Checkpoints
                 _finishUI.InstantiatePlayerScore(
                     progress.pos,
                     progress.newInputManagerInterface.playerName,
-                    _timerScript.ConvertTimerToString(progress.checkpointTime[progress.checkpointTime.Count - 1]), 
+                    _timerScript.ConvertTimerToString(progress.checkpointTime.LastOrDefault()), 
                     progress.newInputManagerInterface.score, 
                     progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player);
                 index++;

@@ -24,7 +24,7 @@ namespace Boat.New
 
         private Logger _logger;
         private PlayerInput _playerInput;
-        
+
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
             if (debug) Debug.Log("Initialize");

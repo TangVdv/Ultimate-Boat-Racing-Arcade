@@ -33,7 +33,7 @@ namespace Boat.New
             if (lastCheckpoint)
             {
                 transform.position = lastCheckpoint.position;
-                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+                transform.rotation = lastCheckpoint.rotation;
                 rigidbody.velocity = Vector3.zero;
             }
         }

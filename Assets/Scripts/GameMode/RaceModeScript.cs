@@ -15,9 +15,7 @@ public class RaceModeScript : MonoBehaviour
     [SerializeField] private GameObject rankingTemplate;
     [SerializeField] private Text currentPosText;
     [SerializeField] private Text maxPosText;
-    [SerializeField] private Text currentLapText;
-    [SerializeField] private Text maxLapText;
-    
+
     private int _index = 0;
     
     public void ResetRace()
@@ -27,7 +25,6 @@ public class RaceModeScript : MonoBehaviour
             raceModeUI.SetActive(true);
         }
         maxPosText.text = "/"+(config.AIAmount + config.PlayerAmount);
-        currentLapText.text = "1";
         currentPosText.text = "1";
         ResetRanking();
     }
@@ -63,15 +60,5 @@ public class RaceModeScript : MonoBehaviour
     public void SetCurrentPosText(int value)
     {
         currentPosText.text = value.ToString();
-    }
-
-    public void SetCurrentLapText(int value)
-    {
-        currentLapText.text = value.ToString();
-    }
-    
-    public void SetMaxLapText(int value)
-    {
-        maxLapText.text = "/"+value;
     }
 }

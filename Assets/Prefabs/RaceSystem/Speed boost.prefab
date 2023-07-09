@@ -118,3 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e7956b94c78345bd4a55b0098ab6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boostForce: 
+  templatesDictionary: {fileID: 11400000, guid: 8939e367527d61b4ba217228b3289c66, type: 2}
