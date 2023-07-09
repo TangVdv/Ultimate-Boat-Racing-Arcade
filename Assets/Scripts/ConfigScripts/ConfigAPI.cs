@@ -109,14 +109,14 @@ public class ConfigAPI : ScriptableObject
     /*
      *      POST /auth
      *      id_code = string
+     *      points = int
      */
-    public IEnumerator PostAuth()
+    public IEnumerator AddPointsToUser(int points)
     {
+        if (_userData == null) yield return null;
         string idCode = _userData.id_code;
-        int points = _userData.points;
-        string url = $"{APIUrl}/auth?id_code={idCode}&points={points}";
+        string url = $"{APIUrl}/auth";
         using (UnityWebRequest request = UnityWebRequest.Post(url, $"{{ \"id_code\": \"{idCode}\", \"points\": {points} }}", "application/json"))
-        //using (UnityWebRequest request = UnityWebRequest.Post(url, "application/json"))
         {
             yield return request.SendWebRequest();
 
@@ -142,6 +142,12 @@ public class ConfigAPI : ScriptableObject
                 Debug.LogError("Erreur interne. Voir Format Erreurs 500");
                 yield return request.responseCode;
                 ;
+            }
+            else if (request.responseCode == 200)
+            {
+                string jsonResponse = request.downloadHandler.text;
+                Debug.Log("Points ajoutés");
+                _userData.points = JsonUtility.FromJson<int>(jsonResponse);
             }
         }
     }

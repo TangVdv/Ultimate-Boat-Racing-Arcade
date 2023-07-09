@@ -309,8 +309,7 @@ namespace Checkpoints
                     {
                         if(progress.newInputManagerInterface.name == configAPI.UserData.username)
                         {
-                            configAPI.UserData.points += progress.points;
-                            StartCoroutine(configAPI.PostAuth());
+                            StartCoroutine(configAPI.AddPointsToUser(progress.points));
                         }
                     }
                 }
