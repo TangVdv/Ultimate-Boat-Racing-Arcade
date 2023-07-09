@@ -1,0 +1,279 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UBRA Translation Table_tr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: tr
+  m_SharedData: {fileID: 11400000, guid: 5d3c4ff3e17e52f468f7e14ea463beee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 46224506880
+    m_Localized: OYNAMAK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46291615744
+    m_Localized: "\xD6ZELLE\u015ETIRME"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810048
+    m_Localized: "MA\u011EAZA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810049
+    m_Localized: AYARLAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004352
+    m_Localized: "KRED\u0130"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004353
+    m_Localized: "\xC7IKI\u015E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004354
+    m_Localized: "GER\u0130"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004355
+    m_Localized: "G\u0130R\u0130\u015E YAPMAK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004356
+    m_Localized: KODU GIRIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004357
+    m_Localized: "G\u0130RMEK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004358
+    m_Localized: KAPALI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004359
+    m_Localized: "\xC7IKI\u015E YAP"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004360
+    m_Localized: "OYNANI\u015E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004361
+    m_Localized: SES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004362
+    m_Localized: GRAFIKLER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004363
+    m_Localized: "KARE SAYISINI G\xD6STER"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198656
+    m_Localized: "D\u0130L"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198657
+    m_Localized: ANA SES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198658
+    m_Localized: EFEKT HACMI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198659
+    m_Localized: "M\xDCZ\u0130K SES\u0130"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198660
+    m_Localized: PENCERE MODU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198661
+    m_Localized: "\xC7\xD6Z\xDCN\xDCRL\xDCK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198662
+    m_Localized: "YEN\u0130LEME HIZI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198663
+    m_Localized: TAM EKRAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198664
+    m_Localized: PENCERE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198665
+    m_Localized: UYGULA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198666
+    m_Localized: TOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392960
+    m_Localized: BOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392961
+    m_Localized: RENK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162370889580544
+    m_Localized: ZORLUK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392963
+    m_Localized: "SE\xC7ME"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392964
+    m_Localized: "YARI\u015E MODU"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392965
+    m_Localized: CHRONO MODU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392966
+    m_Localized: oyuncu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392967
+    m_Localized: AI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392968
+    m_Localized: KOLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392969
+    m_Localized: ORTA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392970
+    m_Localized: ZOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392971
+    m_Localized: Devre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587264
+    m_Localized: En iyi zaman
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587265
+    m_Localized: RASTGELE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587266
+    m_Localized: HAZIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587268
+    m_Localized: Konum
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587269
+    m_Localized: SIRALAMA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587270
+    m_Localized: "S\xDCRD\xDCRMEK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587271
+    m_Localized: "TEKRAR BA\u015ELAT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587272
+    m_Localized: "MEN\xDC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587273
+    m_Localized: DEVAM ETMEK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587274
+    m_Localized: "\u0130SIM"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587275
+    m_Localized: ZAMAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587276
+    m_Localized: GOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587277
+    m_Localized: 'Senin zaman :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587278
+    m_Localized: KONTROL NOKTASI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587279
+    m_Localized: FARK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Localized: "\u0130sim giriniz"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422037850226688
+    m_Localized: "KAL\u0130TE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Localized: "\xC7OK D\xDC\u015E\xDCK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Localized: "D\xDC\u015E\xDCK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Localized: ORTA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Localized: "Y\xDCKSEK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Localized: "\xC7OK Y\xDCKSEK"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Localized: ULTRA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2428001366179840
+    m_Localized: "HERHANG\u0130 B\u0130R TU\u015EA BASIN"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2822354861424640
+    m_Localized: "T\xFCm verileri temizleyin"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

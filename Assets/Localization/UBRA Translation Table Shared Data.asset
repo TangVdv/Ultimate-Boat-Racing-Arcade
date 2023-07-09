@@ -1,0 +1,284 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UBRA Translation Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UBRA Translation Table
+  m_TableCollectionNameGuidString: 5d3c4ff3e17e52f468f7e14ea463beee
+  m_Entries:
+  - m_Id: 46224506880
+    m_Key: btn-play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46291615744
+    m_Key: btn-customization
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810048
+    m_Key: btn-shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46295810049
+    m_Key: btn-settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004352
+    m_Key: btn-credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004353
+    m_Key: btn-exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004354
+    m_Key: btn-back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004355
+    m_Key: btn-login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004356
+    m_Key: input-code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004357
+    m_Key: btn-enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004358
+    m_Key: btn-close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004359
+    m_Key: btn-logout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004360
+    m_Key: btn-gameplay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004361
+    m_Key: btn-audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004362
+    m_Key: btn-graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46300004363
+    m_Key: panel-fps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198656
+    m_Key: panel-language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198657
+    m_Key: panel-mastervolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198658
+    m_Key: panel-effectvolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198659
+    m_Key: panel-musicvolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198660
+    m_Key: panel-windowmode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198661
+    m_Key: panel-resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198662
+    m_Key: panel-refreshrate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198663
+    m_Key: label-windowmode-fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198664
+    m_Key: label-windowmode-window
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198665
+    m_Key: btn-apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46304198666
+    m_Key: label-cannon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392960
+    m_Key: label-boat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392961
+    m_Key: label-color
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392963
+    m_Key: btn-select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392964
+    m_Key: btn-racemode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392965
+    m_Key: btn-chronomode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392966
+    m_Key: label-player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392967
+    m_Key: panel-ai
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392968
+    m_Key: label-difficulty-easy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392969
+    m_Key: label-difficulty-medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392970
+    m_Key: label-difficulty-hard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46308392971
+    m_Key: label-circuit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587264
+    m_Key: label-besttime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587265
+    m_Key: btn-random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587266
+    m_Key: btn-ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587268
+    m_Key: label-position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587269
+    m_Key: label-ranking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587270
+    m_Key: btn-resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587271
+    m_Key: btn-restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587272
+    m_Key: btn-menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587273
+    m_Key: btn-continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587274
+    m_Key: label-name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587275
+    m_Key: label-time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587276
+    m_Key: label-score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587277
+    m_Key: label-yourtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587278
+    m_Key: label-checkpoint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46312587279
+    m_Key: label-difference
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162370889580544
+    m_Key: panel-difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237715483394048
+    m_Key: input-entername
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422037850226688
+    m_Key: panel-quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422179953246208
+    m_Key: label-quality-verylow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422376783544320
+    m_Key: label-quality-low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422579351650304
+    m_Key: label-quality-medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422719131025408
+    m_Key: label-quality-high
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2422913365049344
+    m_Key: label-quality-veryhigh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2423065043664896
+    m_Key: label-quality-ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2428001366179840
+    m_Key: label-pressbutton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2822354861424640
+    m_Key: btn-cleardata
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4494390162662096952
+  references:
+    version: 2
+    RefIds:
+    - rid: 4494390162662096952
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1688258272928

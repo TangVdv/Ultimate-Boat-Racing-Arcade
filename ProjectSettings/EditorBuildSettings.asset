@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ProtoScene.unity
-    guid: 7afe9df9a9907b949b28e2892b8780d6
-  m_configObjects: {}
+    path: Assets/Scenes/Main Menu.unity
+    guid: b128fdaad8c4ab648ad12ccc42aa696a
+  - enabled: 1
+    path: Assets/Scenes/SetupPlayersMenu.unity
+    guid: 5e00b1b93b8bba244a72f1132a9fcd12
+  - enabled: 1
+    path: Assets/Scenes/AlphaSceneNew.unity
+    guid: 836abbe641738ed408a7154473715aff
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 560592e2c60b17a47811e3b91efccfeb, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 3b26adca797219a4f8ccf0795ddeb3fe, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 5e9c1fa328c3a3f4cb8813d6b3e59779, type: 2}

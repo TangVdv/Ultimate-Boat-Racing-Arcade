@@ -9,6 +9,7 @@ TagManager:
   - Boat
   - CheckpointController
   - Crate
+  - Hightlight
   layers:
   - Default
   - TransparentFX
@@ -16,6 +17,8 @@ TagManager:
   - 
   - Water
   - UI
+  - Player1
+  - Player2
   - 
   - 
   - 
@@ -37,11 +40,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Checkpoints
+  - Targetting
+  - Targetable
   m_SortingLayers:
   - name: Default
     uniqueID: 0
