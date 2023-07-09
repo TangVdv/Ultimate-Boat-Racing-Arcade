@@ -266,7 +266,7 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   depthBeforeSubmission: 1
   displacementAmount: 3
-  floaterCount: 4
+  floaterCount: 6
   waterDrag: 0.2
   waterAngularDrag: 0.7
   movementManager: {fileID: 0}
