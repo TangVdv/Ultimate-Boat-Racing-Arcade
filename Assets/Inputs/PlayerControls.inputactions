@@ -344,7 +344,7 @@
                 {
                     "name": "",
                     "id": "e129f47b-c6b5-4b88-86a5-f03c313b428b",
-                    "path": "<Gamepad>/start",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "Controller",
