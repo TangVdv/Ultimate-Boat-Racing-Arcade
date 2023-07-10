@@ -17,9 +17,9 @@ public class SetupGameScript : MonoBehaviour
     [SerializeField] private CheckpointManager checkpointManager;
 
     public bool debug;
-
-    private SpawnScript _spawnScript;
+    
     private GameObject _currentLevel;
+    private List<Transform> _checkpointsList = new List<Transform>();
 
     public void SetSpawner(SpawnScript spawnScript)
     {
@@ -30,16 +30,30 @@ public class SetupGameScript : MonoBehaviour
     {
         this.checkpointManager = checkpointManager;
     }
+
+    private void SetCheckpointsList()
+    {
+        _checkpointsList.Add(spawner.transform);
+        foreach (Transform child in checkpointManager.transform)
+        {
+            _checkpointsList.Add(child);
+        }
+    }
     
     public void SetupGame(List<GameObject> boats)
     {
         if(debug)Debug.Log("SetupGame");
         spawner.SpawnSetup(boats);
+        SetCheckpointsList();
         foreach (var boat in boats)
         {
             if(debug)Debug.Log(boat);
-            checkpointManager.AddPlayer(boat);
-            boat.GetComponent<NewInputManagerInterface>().Respawn();
+            checkpointManager.AddPlayer(boat); 
+            NewPlayerInputManager newPlayerInputManager = boat.GetComponent<NewPlayerInputManager>();
+            if (newPlayerInputManager)
+            {
+                newPlayerInputManager.CheatUI.SetupCheatPanel(_checkpointsList);
+            }
         }
         spawner.Spawn();
         DisableMouse();

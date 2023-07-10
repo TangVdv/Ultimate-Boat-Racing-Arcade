@@ -170,20 +170,20 @@ Transform:
   m_LocalScale: {x: 1, y: 2.7848, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6239396416532196245}
   - {fileID: 2694445518881511175}
+  - {fileID: 539724171354505604}
   - {fileID: 2694445517062439071}
   - {fileID: 2694445517778806173}
+  - {fileID: 3682285049352180974}
   - {fileID: 2694445517233367318}
   - {fileID: 2694445517915099121}
   - {fileID: 2694445517350658469}
+  - {fileID: 2392262220082724411}
   - {fileID: 2694445518731603152}
   - {fileID: 2694445518085425968}
-  - {fileID: 2694445517723589643}
-  - {fileID: 539724171354505604}
   - {fileID: 2518286687104794061}
-  - {fileID: 2392262220082724411}
-  - {fileID: 3682285049352180974}
+  - {fileID: 2694445517723589643}
+  - {fileID: 6239396416532196245}
   m_Father: {fileID: 9034161430090046230}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,23 +336,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalScale.x
-      value: 200
+      value: 199.99998
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalScale.y
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1549
+      value: -1548.9999
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 785.4
+      value: 785.4001
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalPosition.z
@@ -368,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7166653
+      value: -0.7166654
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_LocalRotation.z
@@ -633,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049279, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_Name
-      value: Checkpoint-6
+      value: Checkpoint-8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -897,7 +901,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5678042328517049272, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: ID
-      value: 5
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678042328517049272, guid: 2acbb02deb49530419281657db7e5145, type: 3}
+      propertyPath: isAlternative
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049276, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_RootOrder
@@ -953,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049279, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_Name
-      value: Checkpoint-5
+      value: Checkpoint-7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1433,7 +1441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049279, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_Name
-      value: Checkpoint-7
+      value: Checkpoint-10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1761,7 +1769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678042328517049279, guid: 2acbb02deb49530419281657db7e5145, type: 3}
       propertyPath: m_Name
-      value: Checkpoint-1 (2)
+      value: Checkpoint-12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

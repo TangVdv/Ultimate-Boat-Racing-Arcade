@@ -124,7 +124,7 @@ namespace Checkpoints
 
         public void AddPlayer(GameObject player)
         {
-            var boat = player.transform.GetChild(2).gameObject;
+            var boat = player.transform.GetChild(3).gameObject;
             if(debug)Debug.Log("Add player : "+player); 
             boats.Add(boat);
             playerProgress.Add(new PlayerProgress(player));
@@ -334,7 +334,6 @@ namespace Checkpoints
             _finishUI.ClearPlayerScoreboard();
             foreach (var progress in playerProgress)
             {
-                ;
                 _finishUI.InstantiatePlayerScore(
                     progress.pos,
                     progress.newInputManagerInterface.playerName,
