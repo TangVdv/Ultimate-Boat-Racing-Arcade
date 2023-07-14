@@ -30,13 +30,7 @@ namespace Boat.New
         public bool debug;
 
         private Logger _logger;
-        private bool _frozen = false;
-
-        public bool Frozen
-        {
-            set => _frozen = value;
-        }
-
+        
         public void InitializePlayer(PlayerConfiguration playerConfiguration)
         {
             if (debug) Debug.Log("Initialize");
@@ -73,7 +67,7 @@ namespace Boat.New
         // INPUTS
         public void OnMovement(InputAction.CallbackContext context)
         {
-            if (!_frozen)
+            if (!frozen)
             {
                 Vector2 value = context.ReadValue<Vector2>();
                 movementX = value.x;
@@ -82,7 +76,7 @@ namespace Boat.New
         }
         public void OnFire(InputAction.CallbackContext context)
         {
-            if (!_frozen)
+            if (!frozen)
             {
                 wantsToFire = context.ReadValue<float>() > 0 ? true : false;
                 playerUI.DecreaseBulletAmount(BulletInventory[currentBulletType]);   
@@ -90,14 +84,14 @@ namespace Boat.New
         }
         public void OnCamera(InputAction.CallbackContext context)
         {
-            if (!_frozen)
+            if (!frozen)
             {
                 movementCam = context.ReadValue<Vector2>().x;   
             }
         }
         public void OnAim(InputAction.CallbackContext context)
         {
-            if (!_frozen)
+            if (!frozen)
             {
                 movementBarrels = context.ReadValue<float>();   
             }
@@ -106,7 +100,7 @@ namespace Boat.New
         {
             if (context.started)
             {
-                if (!_frozen)
+                if (!frozen)
                 {
                     int currentBulletTypeInt = (int) currentBulletType;
                     currentBulletTypeInt += (int)context.ReadValue<float>();
@@ -120,7 +114,10 @@ namespace Boat.New
         }
         public void Respawn(InputAction.CallbackContext context)
         {
-            if (context.performed) Respawn();
+            if (!frozen)
+            {
+                if (context.performed) Respawn();   
+            }
         }
         public void Logger(InputAction.CallbackContext context)
         {
@@ -138,17 +135,22 @@ namespace Boat.New
                 {
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Confined;
-                    _frozen = false;
+                    frozen = false;
                     cheatUI.gameObject.SetActive(false);
                 }
                 else
                 {
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
-                    _frozen = true;
+                    frozen = true;
                     cheatUI.gameObject.SetActive(true);
                 }
             }
+        }
+
+        private void Update()
+        {
+            Debug.Log(frozen);
         }
     }
 }

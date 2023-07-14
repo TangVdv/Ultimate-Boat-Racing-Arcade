@@ -68,11 +68,6 @@ public class CheatUIScript : MonoBehaviour
         if (checkpoint)
         {
             _newInputManagerInterface.checkpointManager.CheckPointPassed(checkpoint.ID, transform.parent.gameObject);
-            if (checkpoint.ID == 0)
-            {
-                gameObject.SetActive(false);
-                transform.parent.GetComponent<NewPlayerInputManager>().Frozen = false;
-            };
         }
         _newInputManagerInterface.Respawn(_currentCheckpoint);
         SetCurrentCheckpointText();

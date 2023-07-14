@@ -61,6 +61,8 @@ namespace Boat.New
         
         public CheckpointManager checkpointManager;
 
+        public bool frozen;
+
         public void Awake()
         {
             State.IsBlinded = false;

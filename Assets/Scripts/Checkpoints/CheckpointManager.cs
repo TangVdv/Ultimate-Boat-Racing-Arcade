@@ -240,7 +240,7 @@ namespace Checkpoints
                     
                     if(progress.newInputManagerInterface.playerType == NewInputManagerInterface.PlayerType.Player)
                     {
-                        progress.player.GetComponent<PlayerInput>().enabled = false;
+                        progress.newInputManagerInterface.frozen = true;
                         _playerFinishedAmount++;
                     }
 
