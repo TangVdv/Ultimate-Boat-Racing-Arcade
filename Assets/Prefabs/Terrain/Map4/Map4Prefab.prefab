@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 7560538296669679640}
   - component: {fileID: 3187280043129822671}
   m_Layer: 0
-  m_Name: Checkpoint-7
+  m_Name: Checkpoint-5-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1116,14 +1116,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7940932958231815118}
   - {fileID: 7569702986795762131}
   - {fileID: 6990479946686408257}
   - {fileID: 7774150601129054824}
   - {fileID: 8432669969531533350}
-  - {fileID: 3017693144461493222}
   - {fileID: 323355357398272923}
+  - {fileID: 3017693144461493222}
   - {fileID: 8202665238455126283}
+  - {fileID: 7940932958231815118}
   m_Father: {fileID: 6252643745431209545}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 2055414730743556295}
   - component: {fileID: 4214314503838038387}
   m_Layer: 0
-  m_Name: Checkpoint-6
+  m_Name: Checkpoint-4-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1402,7 +1402,7 @@ Transform:
   m_GameObject: {fileID: 3751969937047276140}
   m_LocalRotation: {x: -0, y: 0.900701, z: -0, w: -0.43443978}
   m_LocalPosition: {x: 809, y: 5.7654114, z: 1826}
-  m_LocalScale: {x: 398.2449, y: 20, z: 3.0000002}
+  m_LocalScale: {x: 398.2449, y: 20, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7733258829512788619}
@@ -1510,7 +1510,7 @@ GameObject:
   - component: {fileID: 8713526485559495113}
   - component: {fileID: 3215424246911623955}
   m_Layer: 0
-  m_Name: Checkpoint-5
+  m_Name: Checkpoint-5-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2349,7 +2349,7 @@ GameObject:
   - component: {fileID: 4055284906758566768}
   - component: {fileID: 7451274576326429914}
   m_Layer: 0
-  m_Name: Checkpoint-4
+  m_Name: Checkpoint-4-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

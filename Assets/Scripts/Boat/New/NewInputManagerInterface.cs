@@ -28,13 +28,16 @@ namespace Boat.New
             AI,
             Player
         }
-        public void Respawn()
+        
+        public void Respawn(Transform checkpoint = null)
         {
+            if (checkpoint) lastCheckpoint = checkpoint;
             if (lastCheckpoint)
             {
                 transform.position = lastCheckpoint.position;
                 transform.rotation = lastCheckpoint.rotation;
                 rigidbody.velocity = Vector3.zero;
+                Debug.Log("Respawn to "+lastCheckpoint.name);
             }
         }
         
@@ -57,6 +60,8 @@ namespace Boat.New
         public PlayerUI globalPlayerUI;
         
         public CheckpointManager checkpointManager;
+
+        public bool frozen;
 
         public void Awake()
         {

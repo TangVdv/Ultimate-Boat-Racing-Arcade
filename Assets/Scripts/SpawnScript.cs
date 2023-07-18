@@ -67,8 +67,7 @@ public class SpawnScript : MonoBehaviour
                 Quaternion boatRotation = Quaternion.Euler(0f, spawnerRotation.eulerAngles.y, 0f);
                 boat.transform.rotation = boatRotation;
                 
-                PlayerInput playerInput = boat.GetComponent<PlayerInput>();
-                if (playerInput) playerInput.enabled = true;
+                boatManager.frozen = false;
                 
                 i++;
             }   

@@ -39,7 +39,6 @@ namespace Boat.New
             }
             else
             {
-                Debug.Log("WaveManager not found, trying to get instance !");
                 _waveManager = WaveManager.instance;
             }
         }

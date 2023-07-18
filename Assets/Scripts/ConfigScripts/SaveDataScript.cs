@@ -33,6 +33,7 @@ public class SaveDataScript : ScriptableObject
     {
         Debug.Log("Clear all data");
         PlayerPrefs.DeleteAll();
+        config.CheckpointTimes = new List<float>[5];
     }
 
     public void SaveAllData()

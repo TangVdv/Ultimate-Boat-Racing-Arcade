@@ -555,7 +555,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 98, y: 30}
+  m_SizeDelta: {x: 96, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &528114112812002048
 CanvasRenderer:
@@ -1091,7 +1091,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 95, y: 40}
-  m_SizeDelta: {x: 80, y: 36.5}
+  m_SizeDelta: {x: 80, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6258141619814282328
 CanvasRenderer:
@@ -1935,8 +1935,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 49, y: -15}
-  m_SizeDelta: {x: 88, y: 30}
+  m_AnchoredPosition: {x: 48, y: -15}
+  m_SizeDelta: {x: 86, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7245627560527051513
 CanvasRenderer:
@@ -2870,7 +2870,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 110, y: 30}
+  m_SizeDelta: {x: 109, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6089660099276887910
 CanvasRenderer:
@@ -4667,8 +4667,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 36, y: -15}
-  m_SizeDelta: {x: 62, y: 30}
+  m_AnchoredPosition: {x: 36.5, y: -15}
+  m_SizeDelta: {x: 63, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4424481595331862904
 CanvasRenderer:
@@ -7108,7 +7108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2956263809220277318
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8953,7 +8953,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 67, y: 30}
+  m_SizeDelta: {x: 66, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4194818341528284762
 CanvasRenderer:
@@ -12475,7 +12475,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.535841, y: 77.940674}
-  m_SizeDelta: {x: 72, y: 30}
+  m_SizeDelta: {x: 73, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &475771405945465233
 CanvasRenderer:
@@ -12647,8 +12647,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 55, y: -15}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchoredPosition: {x: 54.5, y: -15}
+  m_SizeDelta: {x: 99, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6195475660818551439
 CanvasRenderer:
@@ -13444,8 +13444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 33.5, y: -15}
-  m_SizeDelta: {x: 57, y: 30}
+  m_AnchoredPosition: {x: 33, y: -15}
+  m_SizeDelta: {x: 56, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1613402154127793945
 CanvasRenderer:
@@ -14929,8 +14929,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30.75, y: -15}
-  m_SizeDelta: {x: 51.5, y: 30}
+  m_AnchoredPosition: {x: 30, y: -15}
+  m_SizeDelta: {x: 50, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7543907391678603885
 CanvasRenderer:
@@ -15113,7 +15113,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 61.5, y: 30}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7543907392149299381
 CanvasRenderer:
@@ -18500,8 +18500,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -18.25}
-  m_SizeDelta: {x: 76, y: 20.5}
+  m_AnchoredPosition: {x: 40, y: -18}
+  m_SizeDelta: {x: 76, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5087327037322528266
 CanvasRenderer:

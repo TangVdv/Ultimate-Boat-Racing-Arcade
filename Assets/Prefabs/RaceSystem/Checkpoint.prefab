@@ -227,3 +227,4 @@ MonoBehaviour:
   core: {fileID: 2650492895408163197}
   ID: 1
   isAlternative: 0
+  debug: 0
